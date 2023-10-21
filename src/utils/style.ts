@@ -92,8 +92,17 @@ const ButtonScale: FontSize = {
   button6: ["12px", { fontWeight: "medium" }],
 };
 
+const colors = {
+  grey: {
+    "01": "rgba(240, 240, 240, 1)",
+    "02": "rgba(217, 217, 217, 1)",
+    "03": "rgba(176, 176, 176, 1)",
+    "04": "rgba(176, 176, 176, 1)",
+  },
+};
+
 export type TypographyVariant = keyof typeof TypographyScale;
 
 export type ButtonVariant = keyof typeof ButtonScale;
 
-export { TypographyScale, ButtonScale };
+export { TypographyScale, ButtonScale, colors };
