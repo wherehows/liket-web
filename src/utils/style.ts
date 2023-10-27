@@ -99,6 +99,14 @@ const colors = {
     "03": "rgba(176, 176, 176, 1)",
     "04": "rgba(176, 176, 176, 1)",
   },
+  skyblue: {
+    "01": "#00C2FF",
+    "02": "#00A6DB",
+    "03": "#0088B4",
+  },
+  rosepink: {
+    "01": "#FF005C",
+  },
 };
 
 export type TypographyVariant = keyof typeof TypographyScale;
