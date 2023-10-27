@@ -43,6 +43,7 @@ const config: StorybookConfig = {
         "@/utils": path.resolve(__dirname, "../src/utils"),
         "@/components": path.resolve(__dirname, "../src/components"),
         "@/icons": path.resolve(__dirname, "../public/icons"),
+        "@/hooks": path.resolve(__dirname, "../src/hooks"),
       };
     }
 
