@@ -10,10 +10,19 @@ interface IconButtonGroup {
 
 const IconButtonGroup = ({ icons, iconSize, onClickIcon }: IconButtonGroup) => {
   return (
-    <ul className="flex" onClick={onClickIcon}>
+    <ul
+      className="flex justify-between overflow-x-scroll w-[100%] h-[100%]"
+      onClick={onClickIcon}
+    >
       {icons.map((icon: IconName) => (
-        <li key={icon}>
-          <button data-icon={icon}>
+        <li key={icon} className={`flex justify-center items-center`}>
+          <button
+            data-icon={icon}
+            style={{
+              width: `${iconSize}px`,
+              height: `${iconSize}px`,
+            }}
+          >
             <Image
               alt={`${icon} 아이콘`}
               width={iconSize}
