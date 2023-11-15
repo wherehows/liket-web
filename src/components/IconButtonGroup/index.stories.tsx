@@ -33,7 +33,7 @@ export const Index: Index = {
     },
   },
   args: {
-    icons: ["back", "setting"],
+    icons: ["별1", "별2", "리본끈2"],
     iconSize: 24,
   },
 };
