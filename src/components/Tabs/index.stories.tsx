@@ -11,13 +11,25 @@ export default meta;
 type Index = StoryObj<typeof Tabs>;
 
 export const Index: Index = {
-  render: () => {
+  render: ({ isImageExist }) => {
     return (
-      <Tabs>
-        <Tabs.Tab onClickTab={() => {}}>사이즈</Tabs.Tab>
-        <Tabs.Tab onClickTab={() => {}}>텍스트</Tabs.Tab>
-        <Tabs.Tab onClickTab={() => {}}>스티커</Tabs.Tab>
+      <Tabs isImageExist={isImageExist}>
+        <Tabs.TabPanels>
+          <Tabs.SizeTabPanel onClickChangeSize={() => {}} />
+          <Tabs.TextTabPanel onClickAddTextTab={() => {}} />
+          <Tabs.StickerTabPanel onClickAddSticker={() => {}} />
+        </Tabs.TabPanels>
+        <Tabs.TabList>
+          <Tabs.Tab>사이즈</Tabs.Tab>
+          <Tabs.Tab>텍스트</Tabs.Tab>
+          <Tabs.Tab>스티커</Tabs.Tab>
+        </Tabs.TabList>
       </Tabs>
     );
+  },
+  argTypes: {
+    isImageExist: {
+      control: "boolean",
+    },
   },
 };
