@@ -2,36 +2,67 @@ import { IconName } from "@/utils/icons";
 import Image from "next/image";
 import { MouseEvent } from "react";
 
+type IconType =
+  | IconName
+  | { name: IconName; isDisabled?: boolean; isActive?: boolean };
+
 interface IconButtonGroup {
-  icons: IconName[];
+  icons: IconType[];
   iconSize: number;
+  iconGap?: string;
   onClickIcon: (e: MouseEvent<HTMLUListElement>) => void;
 }
 
-const IconButtonGroup = ({ icons, iconSize, onClickIcon }: IconButtonGroup) => {
+const IconButtonGroup = ({
+  icons,
+  iconGap,
+  iconSize,
+  onClickIcon,
+}: IconButtonGroup) => {
   return (
     <ul
-      className="flex justify-between overflow-x-scroll w-[100%] h-[100%]"
+      style={{
+        gap: iconGap,
+      }}
+      className={`flex justify-between overflow-x-auto x-[100%] h-[100%]`}
       onClick={onClickIcon}
     >
-      {icons.map((icon: IconName) => (
-        <li key={icon} className={`flex justify-center items-center`}>
-          <button
-            data-icon={icon}
-            style={{
-              width: `${iconSize}px`,
-              height: `${iconSize}px`,
-            }}
-          >
-            <Image
-              alt={`${icon} 아이콘`}
-              width={iconSize}
-              height={iconSize}
-              src={`/icons/${icon}.svg`}
-            />
-          </button>
-        </li>
-      ))}
+      {icons.map((icon: IconType) => {
+        let iconName = null;
+        let status = {
+          isDisabled: false,
+          isActive: false,
+        };
+
+        if (typeof icon === "string") {
+          iconName = icon;
+        } else {
+          const { name, isDisabled, isActive } = icon;
+          status.isActive = !!isActive;
+          status.isDisabled = !!isDisabled;
+          iconName = name;
+        }
+
+        return (
+          <li key={iconName} className={`flex justify-center items-center`}>
+            <button
+              data-icon={iconName}
+              disabled={status.isDisabled}
+              style={{
+                width: `${iconSize}px`,
+                height: `${iconSize}px`,
+              }}
+            >
+              <Image
+                alt={`${iconName} 아이콘`}
+                width={iconSize}
+                height={iconSize}
+                src={`/icons/${iconName}.svg`}
+              />
+            </button>
+          </li>
+        );
+      })}
     </ul>
   );
 };
