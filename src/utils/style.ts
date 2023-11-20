@@ -81,6 +81,12 @@ const TypographyScale: FontSize = {
       fontWeight: "extrabold",
     },
   ],
+  numbering3: [
+    "12px",
+    {
+      fontWeight: 400,
+    },
+  ],
 };
 
 const ButtonScale: FontSize = {
