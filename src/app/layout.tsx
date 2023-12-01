@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import localFont from "next/font/local";
 
-const pretendardFont = localFont({
+export const appleGothic = localFont({
   src: [
     {
       path: "../../public/fonts/100_AppleSDGothicNeo-Thin.woff2",
@@ -54,8 +54,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ko">
-      <body className={pretendardFont.className}>{children}</body>
+    <html lang="en">
+      <body className={appleGothic.className}>{children}</body>
     </html>
   );
 }
