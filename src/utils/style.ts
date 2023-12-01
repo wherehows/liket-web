@@ -20,65 +20,65 @@ const TypographyScale: FontSize = {
   h1: [
     "18px",
     {
-      fontWeight: "bold",
+      fontWeight: 700,
     },
   ],
   h2: [
     "16px",
     {
       lineHeight: "20px",
-      fontWeight: "bold",
+      fontWeight: 700,
     },
   ],
   body1: [
     "14px",
     {
       lineHeight: "20px",
-      fontWeight: "bold",
+      fontWeight: 700,
     },
   ],
   body2: [
     "14px",
     {
-      fontWeight: "medium",
+      fontWeight: 400,
     },
   ],
   body3: [
     "12px",
     {
       lineHeight: "20px",
-      fontWeight: "medium",
+      fontWeight: 400,
     },
   ],
   body4: [
     "12px",
     {
-      fontWeight: "bold",
+      fontWeight: 700,
     },
   ],
-  body5: ["12px", { lineHeight: "16px", fontWeight: "medium" }],
+  body5: ["12px", { lineHeight: "16px", fontWeight: 400 }],
   caption: [
     "12px",
     {
-      fontWeight: "bold",
+      fontWeight: 700,
     },
   ],
   flag: [
     "12px",
     {
-      fontWeight: "bold",
+      fontWeight: 700,
     },
   ],
   numbering1: [
     "16px",
     {
-      fontWeight: "extrabold",
+      fontWeight: 800,
     },
   ],
   numbering2: [
     "12px",
     {
-      fontWeight: "extrabold",
+      fontWeight: 800,
     },
   ],
   numbering3: [
@@ -90,12 +90,12 @@ const TypographyScale: FontSize = {
 };
 
 const ButtonScale: FontSize = {
-  button1: ["16px", { fontWeight: "bold" }],
-  button2: ["16px", { fontWeight: "medium" }],
-  button3: ["14px", { fontWeight: "bold" }],
-  button4: ["14px", { fontWeight: "medium" }],
-  button5: ["12px", { fontWeight: "bold" }],
-  button6: ["12px", { fontWeight: "medium" }],
+  button1: ["16px", { fontWeight: 700 }],
+  button2: ["16px", { fontWeight: 400 }],
+  button3: ["14px", { fontWeight: 700 }],
+  button4: ["14px", { fontWeight: 400 }],
+  button5: ["12px", { fontWeight: 700 }],
+  button6: ["12px", { fontWeight: 400 }],
 };
 
 const colors = {
