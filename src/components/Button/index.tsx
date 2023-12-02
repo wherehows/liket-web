@@ -25,7 +25,7 @@ const variantWithDisabledStyleMap = {
 };
 
 const Button = ({
-  disabled = true,
+  disabled = false,
   variant = "primary",
   children,
 }: ButtonProps) => {
