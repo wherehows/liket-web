@@ -56,7 +56,7 @@ const Tabs = ({ children, isImageExist }: TabsProps) => {
 
   return (
     <TabsContext.Provider value={providerValue}>
-      <div className="fixed bottom-0 w-[100%]">{children}</div>
+      <div className="bottom-tab">{children}</div>
     </TabsContext.Provider>
   );
 };
@@ -66,7 +66,7 @@ const TabList = ({ children }: StrictPropsWithChildren) => {
     <ul
       role="tablist"
       aria-orientation="horizontal"
-      className="w-[100%] h-[98px] flex pl-[24px] pr-[24px] pb-[72px] shadow-[0px_-8px_16px_0px_rgba(0,0,0,0.04)]"
+      className="w-[100%] h-[100%] flex  pl-[24px] pr-[24px] pb-[72px]"
     >
       {children}
     </ul>
