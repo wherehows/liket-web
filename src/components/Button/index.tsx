@@ -5,6 +5,8 @@ type ButtonProps = StrictPropsWithChildren<
   {
     disabled?: boolean;
     variant?: keyof typeof variantToStyleMap;
+    fullWidth?: boolean;
+    margin?: string;
   },
   string
 >;
@@ -27,16 +29,22 @@ const variantWithDisabledStyleMap = {
 const Button = ({
   disabled = false,
   variant = "primary",
+  fullWidth = false,
+  margin,
   children,
 }: ButtonProps) => {
   return (
     <button
       disabled={disabled}
+      style={{
+        margin,
+      }}
       className={classNames(
         "leading-[16.8px] rounded-[28px] text-button4 h-[48px] pt-[16px] pr-[16px] pl-[16px] pb-[15px]",
         disabled
           ? `${variantWithDisabledStyleMap[variant]}`
-          : `${variantToStyleMap[variant]}`
+          : `${variantToStyleMap[variant]}`,
+        fullWidth && "flex-1"
       )}
     >
       {children}
