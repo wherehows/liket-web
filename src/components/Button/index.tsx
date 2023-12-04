@@ -46,7 +46,7 @@ const Button = ({
         height,
       }}
       className={classNames(
-        "leading-[16.8px] rounded-[28px] text-button4 h-[48px] pt-[16px] pr-[16px] pl-[16px] pb-[15px]",
+        "center rounded-[28px] text-button4",
         disabled
           ? `${variantWithDisabledStyleMap[variant]}`
           : `${variantToStyleMap[variant]}`,
