@@ -6,9 +6,8 @@ type ButtonProps = StrictPropsWithChildren<
     disabled?: boolean;
     variant?: keyof typeof variantToStyleMap;
     fullWidth?: boolean;
-    margin?: string;
     onClick: () => void;
-    height: "48px" | "40px";
+    height: 48 | 40;
   },
   string
 >;
@@ -33,7 +32,6 @@ const Button = ({
   variant = "primary",
   height,
   fullWidth = false,
-  margin,
   children,
   onClick,
 }: ButtonProps) => {
@@ -42,7 +40,6 @@ const Button = ({
       onClick={onClick}
       disabled={disabled}
       style={{
-        margin,
         height,
       }}
       className={classNames(
