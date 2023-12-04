@@ -14,9 +14,15 @@ export default meta;
 type CommonType = StoryObj<typeof Button>;
 
 export const Primary: CommonType = {
-  render: ({ variant, children, disabled }) => {
+  render: ({ variant, children, disabled, height }) => {
     return (
-      <Button variant={variant} disabled={disabled}>
+      <Button
+        fullWidth
+        variant={variant}
+        disabled={disabled}
+        height={height}
+        onClick={() => {}}
+      >
         {children}
       </Button>
     );
@@ -25,13 +31,20 @@ export const Primary: CommonType = {
     variant: "primary",
     disabled: false,
     children: "버튼 텍스트",
+    height: 48,
   },
 };
 
 export const Secondary: CommonType = {
-  render: ({ variant, children, disabled }) => {
+  render: ({ variant, children, disabled, height }) => {
     return (
-      <Button variant={variant} disabled={disabled}>
+      <Button
+        fullWidth
+        variant={variant}
+        disabled={disabled}
+        height={height}
+        onClick={() => {}}
+      >
         {children}
       </Button>
     );
@@ -40,13 +53,20 @@ export const Secondary: CommonType = {
     variant: "secondary",
     disabled: false,
     children: "버튼 텍스트",
+    height: 48,
   },
 };
 
 export const Ghost: CommonType = {
-  render: ({ variant, children, disabled }) => {
+  render: ({ variant, children, disabled, height }) => {
     return (
-      <Button variant={variant} disabled={disabled}>
+      <Button
+        fullWidth
+        variant={variant}
+        disabled={disabled}
+        height={height}
+        onClick={() => {}}
+      >
         {children}
       </Button>
     );
@@ -55,5 +75,6 @@ export const Ghost: CommonType = {
     variant: "ghost",
     disabled: false,
     children: "버튼 텍스트",
+    height: 48,
   },
 };
