@@ -8,7 +8,7 @@ type FocusKeeperProps = StrictPropsWithChildren<{
 }>;
 
 const FocusKeeper = ({ children, ariaLabel, onEscape }: FocusKeeperProps) => {
-  const wrapperRef = useRef(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const returnElementRef = useRef<Element | null>(null);
 
   const handleTab = (e: KeyboardEvent<HTMLDivElement>) => {
@@ -44,6 +44,10 @@ const FocusKeeper = ({ children, ariaLabel, onEscape }: FocusKeeperProps) => {
       returnElementRef.current &&
         (returnElementRef.current as HTMLElement).focus();
     };
+  }, []);
+
+  useEffect(() => {
+    wrapperRef.current && wrapperRef.current.focus();
   }, []);
 
   return (
