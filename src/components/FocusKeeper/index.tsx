@@ -4,16 +4,10 @@ import type { KeyboardEvent } from "react";
 
 type FocusKeeperProps = StrictPropsWithChildren<{
   ariaLabel: string;
-  className: string;
   onEscape: () => void;
 }>;
 
-const FocusKeeper = ({
-  children,
-  ariaLabel,
-  className,
-  onEscape,
-}: FocusKeeperProps) => {
+const FocusKeeper = ({ children, ariaLabel, onEscape }: FocusKeeperProps) => {
   const wrapperRef = useRef(null);
   const returnElementRef = useRef<Element | null>(null);
 
@@ -59,7 +53,6 @@ const FocusKeeper = ({
       tabIndex={-1}
       aria-label={ariaLabel}
       role="dialog"
-      className={className}
     >
       {children}
     </div>
