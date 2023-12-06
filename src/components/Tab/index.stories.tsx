@@ -20,9 +20,9 @@ export const Index: Index = {
           <Tabs.StickerTabPanel onClickAddSticker={() => {}} />
         </Tabs.TabPanels>
         <Tabs.TabList>
-          <Tabs.Tab>사이즈</Tabs.Tab>
-          <Tabs.Tab>텍스트</Tabs.Tab>
-          <Tabs.Tab>스티커</Tabs.Tab>
+          <Tabs.Tab id="size">사이즈</Tabs.Tab>
+          <Tabs.Tab id="text">텍스트</Tabs.Tab>
+          <Tabs.Tab id="sticker">스티커</Tabs.Tab>
         </Tabs.TabList>
       </Tabs>
     );
