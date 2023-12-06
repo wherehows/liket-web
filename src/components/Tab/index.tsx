@@ -32,7 +32,12 @@ type UnionCOLOR_TOKENS = (typeof COLOR_TOKENS)[number];
 
 type TabsProps = StrictPropsWithChildren<{ isImageExist: boolean }>;
 
-type TabProps = StrictPropsWithChildren<unknown, string>;
+type TabProps = StrictPropsWithChildren<
+  {
+    id: string;
+  },
+  string
+>;
 
 interface SizeTabPanelProps {
   onClickChangeSize: (size: UnionSIZE) => void;
@@ -73,7 +78,7 @@ const TabList = ({ children }: StrictPropsWithChildren) => {
   );
 };
 
-const Tab = ({ children }: TabProps) => {
+const Tab = ({ children, id }: TabProps) => {
   const { selectedTab, isImageExist, setSelectedTab } = useTabsContext();
 
   return (
@@ -88,6 +93,9 @@ const Tab = ({ children }: TabProps) => {
     >
       <button
         role="tab"
+        aria-controls={`${id}-panel`}
+        aria-selected={selectedTab === children}
+        id={`${id}-tab`}
         disabled={!isImageExist}
         onClick={() => {
           setSelectedTab(children as UnionTABS);
@@ -111,7 +119,7 @@ const TabPanels = ({ children }: StrictPropsWithChildren) => {
 const commonPanelStyle =
   "absolute left-[24px] right-[24px] border-grey-01 border-solid border-t-[1px] min-w-[342px]";
 
-const commonSizeButtonStyle =
+const commonButtonStyle =
   "w-[36px] h-[56px] rounded-[1px] border-solid border-[1px]";
 
 const SizeTabPanel = ({ onClickChangeSize }: SizeTabPanelProps) => {
@@ -120,6 +128,9 @@ const SizeTabPanel = ({ onClickChangeSize }: SizeTabPanelProps) => {
 
   return (
     <section
+      role="tabpanel"
+      aria-labelledby="size-tab"
+      id="size-panel"
       aria-hidden={!isImageExist || selectedTab !== TAB.SIZE}
       className={classNames(
         "top-[-80px] h-[80px]",
@@ -142,7 +153,7 @@ const SizeTabPanel = ({ onClickChangeSize }: SizeTabPanelProps) => {
         <li data-size={SIZE.large}>
           <button
             className={classNames(
-              commonSizeButtonStyle,
+              commonButtonStyle,
               selectedSize === "large"
                 ? "border-skyblue-01 bg-skyblue-01"
                 : "border-grey-01 bg-grey-01"
@@ -153,7 +164,7 @@ const SizeTabPanel = ({ onClickChangeSize }: SizeTabPanelProps) => {
           <button
             className={classNames(
               "relative",
-              commonSizeButtonStyle,
+              commonButtonStyle,
               selectedSize === "medium" ? "border-skyblue-01" : "border-grey-01"
             )}
           >
@@ -169,7 +180,7 @@ const SizeTabPanel = ({ onClickChangeSize }: SizeTabPanelProps) => {
           <button
             className={classNames(
               "relative",
-              commonSizeButtonStyle,
+              commonButtonStyle,
               selectedSize === "small" ? "border-skyblue-01" : "border-grey-01"
             )}
           >
@@ -191,6 +202,9 @@ const TextTabPanel = ({ onClickAddTextTab }: TextTabPanelProps) => {
 
   return (
     <section
+      role="tabpanel"
+      aria-labelledby="text-tab"
+      id="text-panel"
       aria-hidden={!isImageExist || selectedTab !== TAB.TEXT}
       className={classNames(
         "h-[40px] top-[-40px]",
@@ -235,6 +249,9 @@ const StickerTabPanel = ({ onClickAddSticker }: StickerTabPanelProps) => {
 
   return (
     <section
+      role="tabpanel"
+      aria-labelledby="sticker-tab"
+      id="sticker-panel"
       aria-hidden={!isImageExist || selectedTab !== TAB.STICKER}
       className={classNames(
         "top-[-80px] h-[80px]",
