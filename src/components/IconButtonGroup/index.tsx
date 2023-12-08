@@ -2,7 +2,7 @@ import { IconName } from "@/utils/icons";
 import Image from "next/image";
 import { MouseEvent } from "react";
 
-type IconType =
+export type IconType =
   | IconName
   | { name: IconName; isDisabled?: boolean; isActive?: boolean };
 

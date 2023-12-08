@@ -1,4 +1,4 @@
-import IconButtonGroup from "@/components/IconButtonGroup";
+import IconButtonGroup, { IconType } from "@/components/IconButtonGroup";
 import { XOR } from "@/types/common";
 import { IconName } from "@/utils/icons";
 import { MouseEvent } from "react";
@@ -8,7 +8,7 @@ type LeftOptionProps = XOR<
     isTownSelection: boolean;
   },
   {
-    icons: IconName[];
+    icons: IconType[];
     onClickIcon: (e: MouseEvent<HTMLUListElement>) => void;
   }
 > & {

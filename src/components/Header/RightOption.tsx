@@ -1,14 +1,14 @@
 import { XOR } from "@/types/common";
 import { MouseEvent } from "react";
 import { IconName } from "@/utils/icons";
-import IconButtonGroup from "../IconButtonGroup";
+import IconButtonGroup, { IconType } from "../IconButtonGroup";
 
 type RightOptionProps = XOR<
   {
     text: string;
   },
   {
-    icons: IconName[];
+    icons: IconType[];
     onClickIcon: (e: MouseEvent<HTMLUListElement>) => void;
   }
 > & {
