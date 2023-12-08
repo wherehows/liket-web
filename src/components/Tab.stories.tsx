@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Tabs from "@/components/Tab";
+import Tabs from "@/components/WriteTab";
 import Button from "./Button";
 import BottomButtonTab from "./ButtonTab";
 
