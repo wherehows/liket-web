@@ -31,90 +31,52 @@ type GeneralHeader = StoryObj<
 >;
 
 export const GeneralHeader: GeneralHeader = {
-  render: ({
-    text,
-    textSize,
-    isTownSelection,
-    iconGap,
-    iconSize,
-    leftIcons,
-    rightIcons,
-  }) => {
-    const HeaderLeft = (() => {
-      if (isTownSelection) {
-        return (
-          <Header.LeftOption
-            isTownSelection
-            iconGap={iconGap}
-            iconSize={iconSize}
-          />
-        );
-      }
-
-      if (leftIcons) {
-        return (
-          <Header.LeftOption
-            icons={leftIcons}
-            iconSize={iconSize}
-            iconGap={iconGap}
-            onClickIcon={() => {
-              //
-            }}
-          />
-        );
-      }
-
-      return null;
-    })();
-
-    const HeaderRight = (() => {
-      if (rightIcons) {
-        return (
-          <Header.RightOption
-            icons={rightIcons}
-            iconGap={iconGap}
-            iconSize={iconSize}
-            onClickIcon={() => {
-              //
-            }}
-          />
-        );
-      }
-
-      return null;
-    })();
-
+  render: () => {
     return (
-      <Header>
-        {HeaderLeft}
-        <Header.MiddleText text={text} textSize={textSize} />
-        {HeaderRight}
-      </Header>
+      <>
+        <div className="relative h-[48px]">
+          <Header>
+            <Header.LeftOption icons={["back"]} onClickIcon={() => {}} />
+            <Header.MiddleText text="프로필" />
+          </Header>
+        </div>
+        <div className="relative h-[48px]">
+          <Header>
+            <Header.LeftOption icons={["back"]} onClickIcon={() => {}} />
+            <Header.MiddleText text="리뷰 작성" />
+            <Header.RightOption icons={["save"]} onClickIcon={() => {}} />
+          </Header>
+        </div>
+        <div className="relative h-[48px]">
+          <Header>
+            <Header.LeftOption icons={["back"]} onClickIcon={() => {}} />
+            <Header.MiddleText text="리뷰 작성" />
+            <Header.RightOption
+              icons={[{ name: "save", isDisabled: true }]}
+              onClickIcon={() => {}}
+            />
+          </Header>
+        </div>
+        <div className="relative h-[48px]">
+          <Header>
+            <Header.LeftOption icons={["back"]} onClickIcon={() => {}} />
+            <Header.MiddleText text="리뷰 작성" />
+            <Header.RightOption
+              icons={[{ name: "save", isDisabled: true }]}
+              onClickIcon={() => {}}
+            />
+          </Header>
+        </div>
+        <div className="relative h-[48px]">
+          <Header>
+            <Header.LeftOption icons={["back"]} onClickIcon={() => {}} />
+            <Header.RightOption
+              icons={["search", "like"]}
+              onClickIcon={() => {}}
+            />
+          </Header>
+        </div>
+      </>
     );
-  },
-  argTypes: {
-    isTownSelection: {
-      control: "boolean",
-    },
-    leftIcons: {
-      options: Icons,
-      control: "multi-select",
-      description: "2개 이상의 아이콘 선택이 가능합니다",
-      if: { arg: "isTownSelection", truthy: false },
-    },
-    rightIcons: {
-      options: Icons,
-      control: "multi-select",
-      description: "2개 이상의 아이콘 선택이 가능합니다",
-    },
-  },
-  args: {
-    text: "육아 · 교육",
-    iconGap: "8px",
-    isTownSelection: false,
-    textSize: 16,
-    iconSize: 24,
-    leftIcons: ["꽃", "리본", "무지개"],
-    rightIcons: ["별1", "무지개", "선글라스"],
   },
 };
