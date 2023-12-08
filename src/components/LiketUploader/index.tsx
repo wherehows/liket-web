@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { useRef, useState } from "react";
 
-const PhotoCardUploader = () => {
+const LiketUploader = () => {
   const [file, setFile] = useState<File | undefined>();
   const inputRef = useRef<HTMLInputElement>(null);
   const url = file && URL.createObjectURL(file);
@@ -45,4 +45,4 @@ const PhotoCardUploader = () => {
   );
 };
 
-export default PhotoCardUploader;
+export default LiketUploader;
