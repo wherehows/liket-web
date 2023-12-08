@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Tabs from ".";
+import Tabs from "@/components/WriteTab";
+import Button from "./Button";
+import BottomButtonTab from "./ButtonTab";
 
 const meta: Meta<typeof Tabs> = {
   title: "Tabs",
@@ -8,9 +10,9 @@ const meta: Meta<typeof Tabs> = {
 
 export default meta;
 
-type Index = StoryObj<typeof Tabs>;
+type WriteTab = StoryObj<typeof Tabs>;
 
-export const Index: Index = {
+export const WriteTab: WriteTab = {
   render: ({ isImageExist }) => {
     return (
       <Tabs isImageExist={isImageExist}>
@@ -31,5 +33,30 @@ export const Index: Index = {
     isImageExist: {
       control: "boolean",
     },
+  },
+};
+
+export const OneButtonBottomTab = {
+  render: () => {
+    return (
+      <BottomButtonTab>
+        <Button fullWidth>저장</Button>
+      </BottomButtonTab>
+    );
+  },
+};
+
+export const TwoButtonBottomTab = {
+  render: () => {
+    return (
+      <BottomButtonTab>
+        <Button variant="ghost" fullWidth margin="0 8px 0 0">
+          이전 페이지
+        </Button>
+        <Button fullWidth margin="0 0 0 8px">
+          메인으로 가기
+        </Button>
+      </BottomButtonTab>
+    );
   },
 };
