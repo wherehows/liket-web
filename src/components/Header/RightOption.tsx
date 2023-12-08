@@ -1,26 +1,25 @@
 import { XOR } from "@/types/common";
 import { MouseEvent } from "react";
-import { IconName } from "@/utils/icons";
-import IconButtonGroup from "../IconButtonGroup";
+import IconButtonGroup, { IconType } from "../IconButtonGroup";
 
 type RightOptionProps = XOR<
   {
     text: string;
   },
   {
-    icons: IconName[];
+    icons: IconType[];
     onClickIcon: (e: MouseEvent<HTMLUListElement>) => void;
   }
 > & {
-  iconGap?: string;
-  iconSize: number;
+  iconGap?: number;
+  iconSize?: number;
 };
 
 const RightOption = ({
   text,
   icons,
-  iconGap,
-  iconSize,
+  iconGap = 8,
+  iconSize = 24,
   onClickIcon,
 }: RightOptionProps) => {
   if (text) {

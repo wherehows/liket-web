@@ -6,6 +6,10 @@
   input:focus {
     @apply outline-none;
   }
+
+  h1 {
+    @apply text-h1;
+  }
 }
 
 @layer components {

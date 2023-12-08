@@ -7,7 +7,7 @@ const LiketUploader = () => {
   const url = file && URL.createObjectURL(file);
 
   return (
-    <div className="bg-[url(/icons/upload.svg)] bg-[center_193px] bg-no-repeat flex justify-center items-center w-[294px] h-[468px] rounded-[8px] border-[2px] border-solid divide-gray-01 relative">
+    <div className="bg-[url(/icons/create.svg)] bg-[center_193px] bg-no-repeat flex justify-center items-center w-[294px] h-[468px] rounded-[8px] border-[2px] border-solid divide-gray-01 relative">
       {url ? (
         <Image
           src={url}

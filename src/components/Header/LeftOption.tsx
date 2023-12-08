@@ -1,6 +1,5 @@
-import IconButtonGroup from "@/components/IconButtonGroup";
+import IconButtonGroup, { IconType } from "@/components/IconButtonGroup";
 import { XOR } from "@/types/common";
-import { IconName } from "@/utils/icons";
 import { MouseEvent } from "react";
 
 type LeftOptionProps = XOR<
@@ -8,19 +7,19 @@ type LeftOptionProps = XOR<
     isTownSelection: boolean;
   },
   {
-    icons: IconName[];
+    icons: IconType[];
     onClickIcon: (e: MouseEvent<HTMLUListElement>) => void;
   }
 > & {
   iconSize?: number;
-  iconGap?: string;
+  iconGap?: number;
 };
 
 const LeftOption = ({
   isTownSelection,
   icons,
-  iconGap,
-  iconSize,
+  iconGap = 8,
+  iconSize = 24,
   onClickIcon,
 }: LeftOptionProps) => {
   if (isTownSelection) {
