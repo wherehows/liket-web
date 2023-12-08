@@ -13,6 +13,12 @@ export const Icons = [
   "음표2",
   "클로버",
   "하트",
+  "back",
+  "like",
+  "meatball",
+  "save",
+  "search",
+  "create",
 ] as const;
 
 export type IconName = (typeof Icons)[number];
