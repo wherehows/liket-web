@@ -1,9 +1,9 @@
 import { StrictPropsWithChildren } from "@/types/common";
 import { classNames } from "@/utils/helpers";
 
-type BottomButtonTab = StrictPropsWithChildren<{ shadow?: boolean }>;
+type ButtonTab = StrictPropsWithChildren<{ shadow?: boolean }>;
 
-const BottomButtonTab = ({ children, shadow = false }: BottomButtonTab) => {
+const ButtonTab = ({ children, shadow = false }: ButtonTab) => {
   return (
     <div
       className={classNames(
@@ -16,4 +16,4 @@ const BottomButtonTab = ({ children, shadow = false }: BottomButtonTab) => {
   );
 };
 
-export default BottomButtonTab;
+export default ButtonTab;

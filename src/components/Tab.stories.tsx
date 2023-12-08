@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Tabs from "@/components/Tab";
 import Button from "./Button";
-import BottomButtonTab from "./BottomButtonTab";
+import BottomButtonTab from "./ButtonTab";
 
 const meta: Meta<typeof Tabs> = {
   title: "Tabs",
