@@ -1,3 +1,4 @@
+import customToast from "@/utils/customToast";
 import type { Meta } from "@storybook/react";
 import toast, { Toaster } from "react-hot-toast";
 
@@ -11,19 +12,7 @@ export const Index = {
   render: () => {
     return (
       <>
-        <button
-          onClick={() => {
-            toast("Hi", {
-              style: {
-                borderRadius: "28px",
-                fontSize: "14px",
-                fontWeight: 400,
-                background: "#000",
-                color: "#fff",
-              },
-            });
-          }}
-        >
+        <button onClick={() => customToast("로그인이 필요합니다")}>
           테스트
         </button>
         <Toaster
