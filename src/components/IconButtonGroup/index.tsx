@@ -9,7 +9,7 @@ export type IconType =
 interface IconButtonGroup {
   icons: IconType[];
   iconSize: number;
-  iconGap?: string;
+  iconGap?: number;
   onClickIcon: (e: MouseEvent<HTMLUListElement>) => void;
 }
 
