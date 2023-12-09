@@ -1,39 +1,64 @@
 import { XOR } from "@/types/common";
-import { MouseEvent } from "react";
-import IconButtonGroup, { IconType } from "../IconButtonGroup";
+
+import SearchIcon from "@/icons/search.svg";
+import LikeIcon from "@/icons/like.svg";
+import CreateIcon from "@/icons/create.svg";
+import MenuIcon from "@/icons/menu.svg";
+import SaveIcon from "@/icons/save.svg";
 
 type RightOptionProps = XOR<
   {
     text: string;
   },
   {
-    icons: IconType[];
-    onClickIcon: (e: MouseEvent<HTMLUListElement>) => void;
+    option: {
+      search?: boolean;
+      like?: boolean;
+      create?: boolean;
+      menu?: boolean;
+      save?: {
+        disabled?: boolean;
+      };
+    };
   }
-> & {
-  iconGap?: number;
-  iconSize?: number;
-};
+>;
 
-const RightOption = ({
-  text,
-  icons,
-  iconGap = 8,
-  iconSize = 24,
-  onClickIcon,
-}: RightOptionProps) => {
+const RightOption = ({ text, option }: RightOptionProps) => {
   if (text) {
     return <button>{text}</button>;
   }
 
-  if (icons) {
+  if (option) {
+    const Search = option.search && (
+      <button>
+        <SearchIcon />
+      </button>
+    );
+    const Like = option.like && (
+      <button>
+        <LikeIcon />
+      </button>
+    );
+    const Create = option.create && (
+      <button>
+        <CreateIcon></CreateIcon>
+      </button>
+    );
+    const Menu = option.menu && (
+      <button>
+        <MenuIcon />
+      </button>
+    );
+    const Save = option.save && (
+      <button>
+        <SaveIcon />
+      </button>
+    );
+
     return (
-      <IconButtonGroup
-        icons={icons}
-        iconGap={iconGap}
-        iconSize={iconSize}
-        onClickIcon={onClickIcon}
-      />
+      <div className="flex gap-[18px]">
+        {[Search, Like, Create, Menu, Save]}
+      </div>
     );
   }
 };
