@@ -37,7 +37,9 @@ const LeftOption = ({ logo, townSelection, option }: LeftOptionProps) => {
   }
 
   if (option) {
-    const Back = option.back && (
+    const { back, close } = option;
+
+    const Back = back && (
       <button
         onClick={() => {
           router.back();
@@ -47,7 +49,7 @@ const LeftOption = ({ logo, townSelection, option }: LeftOptionProps) => {
       </button>
     );
 
-    const Close = option.close && (
+    const Close = close && (
       <button
         onClick={() => {
           router.back();

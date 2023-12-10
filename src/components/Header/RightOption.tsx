@@ -27,27 +27,29 @@ const RightOption = ({ text, option }: RightOptionProps) => {
   }
 
   if (option) {
-    const Search = option.search && (
+    const { search, like, create, menu, save } = option;
+
+    const Search = search && (
       <button>
         <SearchIcon />
       </button>
     );
-    const Like = option.like && (
+    const Like = like && (
       <button>
         <LikeIcon />
       </button>
     );
-    const Create = option.create && (
+    const Create = create && (
       <button>
-        <CreateIcon></CreateIcon>
+        <CreateIcon />
       </button>
     );
-    const Menu = option.menu && (
+    const Menu = menu && (
       <button>
         <MenuIcon />
       </button>
     );
-    const Save = option.save && (
+    const Save = save && (
       <button>
         <SaveIcon />
       </button>
