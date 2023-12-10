@@ -5,6 +5,7 @@ import LikeIcon from "@/icons/like.svg";
 import CreateIcon from "@/icons/create.svg";
 import MenuIcon from "@/icons/menu.svg";
 import SaveIcon from "@/icons/save.svg";
+import { colors } from "@/utils/style";
 
 type RightOptionProps = XOR<
   {
@@ -49,9 +50,13 @@ const RightOption = ({ text, option }: RightOptionProps) => {
         <MenuIcon />
       </button>
     );
+
+    const saveDisabled = save && typeof save !== "boolean" && !!save.disabled;
     const Save = save && (
-      <button>
-        <SaveIcon />
+      <button disabled={saveDisabled}>
+        <SaveIcon
+          fill={saveDisabled ? colors.grey["01"] : colors.skyblue["01"]}
+        />
       </button>
     );
 

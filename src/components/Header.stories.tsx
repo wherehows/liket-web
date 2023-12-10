@@ -55,6 +55,38 @@ export const GeneralHeader = {
             />
           </Header>
         </div>
+        <div className="relative h-[48px]">
+          <Header>
+            <Header.LeftOption
+              option={{
+                back: true,
+              }}
+            />
+            <Header.RightOption
+              option={{
+                save: {
+                  disabled: true,
+                },
+              }}
+            />
+          </Header>
+        </div>
+        <div className="relative h-[48px]">
+          <Header>
+            <Header.LeftOption
+              option={{
+                back: true,
+              }}
+            />
+            <Header.RightOption
+              option={{
+                save: {
+                  disabled: false,
+                },
+              }}
+            />
+          </Header>
+        </div>
       </>
     );
   },
