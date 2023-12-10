@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { Icons } from "@/utils/icons";
 import Header from "./Header";
 
 const meta: Meta<typeof Header> = {
@@ -10,69 +9,81 @@ const meta: Meta<typeof Header> = {
 
 export default meta;
 
-type GeneralHeader = StoryObj<
-  ({
-    text,
-    iconGap,
-    isTownSelection,
-    textSize,
-    iconSize,
-    leftIcons,
-    rightIcons,
-  }: {
-    text: string;
-    iconGap: string;
-    textSize: number;
-    isTownSelection: boolean;
-    iconSize: number;
-    leftIcons: Parameters<typeof Header.LeftOption>[0]["icons"];
-    rightIcons: Parameters<typeof Header.RightOption>[0]["icons"];
-  }) => JSX.Element
->;
-
-export const GeneralHeader: GeneralHeader = {
+export const GeneralHeader = {
   render: () => {
     return (
       <>
         <div className="relative h-[48px]">
           <Header>
-            <Header.LeftOption icons={["back"]} onClickIcon={() => {}} />
+            <Header.LeftOption logo />
             <Header.MiddleText text="프로필" />
           </Header>
         </div>
         <div className="relative h-[48px]">
           <Header>
-            <Header.LeftOption icons={["back"]} onClickIcon={() => {}} />
-            <Header.MiddleText text="리뷰 작성" />
-            <Header.RightOption icons={["save"]} onClickIcon={() => {}} />
+            <Header.LeftOption
+              option={{
+                close: true,
+              }}
+            />
+            <Header.MiddleText text="필터" />
           </Header>
         </div>
         <div className="relative h-[48px]">
           <Header>
-            <Header.LeftOption icons={["back"]} onClickIcon={() => {}} />
-            <Header.MiddleText text="리뷰 작성" />
+            <Header.LeftOption townSelection />
             <Header.RightOption
-              icons={[{ name: "save", isDisabled: true }]}
-              onClickIcon={() => {}}
+              option={{
+                search: true,
+                like: true,
+              }}
             />
           </Header>
         </div>
         <div className="relative h-[48px]">
           <Header>
-            <Header.LeftOption icons={["back"]} onClickIcon={() => {}} />
-            <Header.MiddleText text="리뷰 작성" />
+            <Header.LeftOption
+              option={{
+                back: true,
+              }}
+            />
             <Header.RightOption
-              icons={[{ name: "save", isDisabled: true }]}
-              onClickIcon={() => {}}
+              option={{
+                search: true,
+                like: true,
+              }}
             />
           </Header>
         </div>
         <div className="relative h-[48px]">
           <Header>
-            <Header.LeftOption icons={["back"]} onClickIcon={() => {}} />
+            <Header.LeftOption
+              option={{
+                back: true,
+              }}
+            />
             <Header.RightOption
-              icons={["search", "like"]}
-              onClickIcon={() => {}}
+              option={{
+                save: {
+                  disabled: true,
+                },
+              }}
+            />
+          </Header>
+        </div>
+        <div className="relative h-[48px]">
+          <Header>
+            <Header.LeftOption
+              option={{
+                back: true,
+              }}
+            />
+            <Header.RightOption
+              option={{
+                save: {
+                  disabled: false,
+                },
+              }}
             />
           </Header>
         </div>

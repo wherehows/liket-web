@@ -1,40 +1,65 @@
-import IconButtonGroup, { IconType } from "@/components/IconButtonGroup";
-import { XOR } from "@/types/common";
-import { MouseEvent } from "react";
+import { IconButtonOption, XOR } from "@/types/common";
+import Logo from "@/icons/logo.svg";
+import Link from "next/link";
+
+import BackIcon from "@/icons/back.svg";
+import CloseIcon from "@/icons/close.svg";
+import { useRouter } from "next/router";
 
 type LeftOptionProps = XOR<
   {
-    isTownSelection: boolean;
+    townSelection: boolean;
   },
-  {
-    icons: IconType[];
-    onClickIcon: (e: MouseEvent<HTMLUListElement>) => void;
-  }
-> & {
-  iconSize?: number;
-  iconGap?: number;
-};
+  XOR<
+    {
+      option: {
+        back?: IconButtonOption;
+        close?: IconButtonOption;
+      };
+    },
+    { logo: boolean }
+  >
+>;
 
-const LeftOption = ({
-  isTownSelection,
-  icons,
-  iconGap = 8,
-  iconSize = 24,
-  onClickIcon,
-}: LeftOptionProps) => {
-  if (isTownSelection) {
-    return <div>동네 선택 컴포넌트</div>;
-  }
+const LeftOption = ({ logo, townSelection, option }: LeftOptionProps) => {
+  const router = useRouter();
 
-  if (icons && iconSize && onClickIcon) {
+  if (logo) {
     return (
-      <IconButtonGroup
-        icons={icons}
-        iconGap={iconGap}
-        iconSize={iconSize}
-        onClickIcon={onClickIcon}
-      />
+      <Link href="/">
+        <Logo />
+      </Link>
     );
+  }
+
+  if (townSelection) {
+    return <div>동네 선택 컴포넌트(미완)</div>;
+  }
+
+  if (option) {
+    const { back, close } = option;
+
+    const Back = back && (
+      <button
+        onClick={() => {
+          router.back();
+        }}
+      >
+        <BackIcon />
+      </button>
+    );
+
+    const Close = close && (
+      <button
+        onClick={() => {
+          router.back();
+        }}
+      >
+        <CloseIcon />
+      </button>
+    );
+
+    return <div>{[Back, Close]}</div>;
   }
 };
 
