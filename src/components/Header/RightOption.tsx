@@ -1,4 +1,4 @@
-import { XOR } from "@/types/common";
+import { IconButtonOption, XOR } from "@/types/common";
 
 import SearchIcon from "@/icons/search.svg";
 import LikeIcon from "@/icons/like.svg";
@@ -12,13 +12,11 @@ type RightOptionProps = XOR<
   },
   {
     option: {
-      search?: boolean;
-      like?: boolean;
-      create?: boolean;
-      menu?: boolean;
-      save?: {
-        disabled?: boolean;
-      };
+      search?: IconButtonOption;
+      like?: IconButtonOption;
+      create?: IconButtonOption;
+      menu?: IconButtonOption;
+      save?: IconButtonOption;
     };
   }
 >;

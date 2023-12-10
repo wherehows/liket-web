@@ -1,4 +1,4 @@
-import { XOR } from "@/types/common";
+import { IconButtonOption, XOR } from "@/types/common";
 import Logo from "@/icons/logo.svg";
 import Link from "next/link";
 
@@ -13,8 +13,8 @@ type LeftOptionProps = XOR<
   XOR<
     {
       option: {
-        back?: boolean;
-        close?: boolean;
+        back?: IconButtonOption;
+        close?: IconButtonOption;
       };
     },
     { logo: boolean }
