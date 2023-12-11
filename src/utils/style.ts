@@ -44,7 +44,7 @@ const TypographyScale: FontSize = {
     },
   ],
   body3: [
-    "12px",
+    "14px",
     {
       lineHeight: "20px",
       fontWeight: 400,
