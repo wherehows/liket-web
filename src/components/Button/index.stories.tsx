@@ -14,46 +14,73 @@ export default meta;
 type CommonType = StoryObj<typeof Button>;
 
 export const Primary: CommonType = {
-  render: ({ variant, children, disabled }) => {
+  render: ({ variant, children, height, disabled }) => {
     return (
-      <Button variant={variant} disabled={disabled}>
-        {children}
-      </Button>
+      <div className="w-[200px] flex">
+        <Button
+          fullWidth
+          height={height}
+          variant={variant}
+          disabled={disabled}
+          onClick={() => {}}
+        >
+          {children}
+        </Button>
+      </div>
     );
   },
   args: {
     variant: "primary",
     disabled: false,
     children: "버튼 텍스트",
+    height: 48,
   },
 };
 
 export const Secondary: CommonType = {
-  render: ({ variant, children, disabled }) => {
+  render: ({ variant, children, height, disabled }) => {
     return (
-      <Button variant={variant} disabled={disabled}>
-        {children}
-      </Button>
+      <div className="w-[200px] flex">
+        <Button
+          fullWidth
+          height={height}
+          variant={variant}
+          disabled={disabled}
+          onClick={() => {}}
+        >
+          {children}
+        </Button>
+      </div>
     );
   },
   args: {
     variant: "secondary",
     disabled: false,
     children: "버튼 텍스트",
+    height: 48,
   },
 };
 
 export const Ghost: CommonType = {
-  render: ({ variant, children, disabled }) => {
+  render: ({ variant, height, children, disabled }) => {
     return (
-      <Button variant={variant} disabled={disabled}>
-        {children}
-      </Button>
+      <div className="w-[200px] flex">
+        <Button
+          fullWidth
+          height={height}
+          variant={variant}
+          disabled={disabled}
+          onClick={() => {}}
+        >
+          {children}
+        </Button>
+      </div>
     );
   },
   args: {
     variant: "ghost",
     disabled: false,
     children: "버튼 텍스트",
+    height: 48,
   },
 };
