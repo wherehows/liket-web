@@ -5,7 +5,7 @@ import MiddleText from "./MiddleText";
 
 const Header = ({ children }: StrictPropsWithChildren<object>) => {
   return (
-    <header className="fixed flex justify-between w-[100%] h-[48px] pl-[24px] pr-[24px] pt-[12px] pb-[12px]">
+    <header className="sticky flex justify-between w-[100%] h-[48px] pl-[24px] pr-[24px] pt-[12px] pb-[12px]">
       {children}
     </header>
   );
