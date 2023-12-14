@@ -1,3 +1,5 @@
+"use client";
+
 import useStateRef from "@/hooks/useRefState";
 import { getTouchEventData } from "@/utils/dom";
 import { classNames, getRefValue } from "@/utils/helpers";

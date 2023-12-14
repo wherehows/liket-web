@@ -1,5 +1,21 @@
-import Image from "next/image";
+import Carousel from "@/components/Carousel";
+import Header from "@/components/Header";
 
 export default function Home() {
-  return <h1 className="text-lgs">124214</h1>;
+  const imgs = [
+    "https://picsum.photos/seed/picsum/390/280",
+    "https://picsum.photos/seed/picsum/390/280",
+    "https://picsum.photos/seed/picsum/390/280",
+    "https://picsum.photos/seed/picsum/390/280",
+  ];
+
+  return (
+    <>
+      <Header>
+        <Header.LeftOption logo />
+        <Header.RightOption option={{ search: true, like: true }} />
+      </Header>
+      <Carousel imgs={imgs} />
+    </>
+  );
 }

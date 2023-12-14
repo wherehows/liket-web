@@ -1,10 +1,12 @@
+"use client";
+
 import { IconButtonOption, XOR } from "@/types/common";
 import Logo from "@/icons/logo.svg";
 import Link from "next/link";
 
 import BackIcon from "@/icons/back.svg";
 import CloseIcon from "@/icons/close.svg";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 type LeftOptionProps = XOR<
   {
