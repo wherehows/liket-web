@@ -15,7 +15,7 @@ export const Icons = [
   "하트",
   "back",
   "like",
-  "meatball",
+  "menu",
   "save",
   "search",
   "create",
