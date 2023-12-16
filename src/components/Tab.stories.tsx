@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import Tabs from "@/components/WriteTab";
 import Button from "./Button";
 import BottomButtonTabWrapper from "./BottomButtonTabWrapper";
+import LinkableTab from "./LinkableTab";
 
 const meta: Meta<typeof Tabs> = {
   title: "Tabs",
@@ -33,6 +34,12 @@ export const WriteTab: WriteTab = {
     isImageExist: {
       control: "boolean",
     },
+  },
+};
+
+export const LinkableTabIndex = {
+  render: () => {
+    return <LinkableTab />;
   },
 };
 
