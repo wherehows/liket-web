@@ -33,7 +33,7 @@ const LinkableTab = () => {
   const [isWriteModalOpen, setIsWriteModalOpen] = useState(false);
 
   return (
-    <div role="tablist" className="bottom-tab justify-around h-[74px] pt-[8px]">
+    <div role="tablist" className="bottom-tab justify-around pt-[8px]">
       <LinkTab
         href="/"
         isSelected={pathname === "/" && !isWriteModalOpen}

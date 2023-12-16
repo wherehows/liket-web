@@ -71,7 +71,7 @@ const TabList = ({ children }: StrictPropsWithChildren) => {
     <ul
       role="tablist"
       aria-orientation="horizontal"
-      className="w-[100%] h-[100%] flex  pl-[24px] pr-[24px] pb-[72px]"
+      className="w-[100%] h-[100%] flex  pl-[24px] pr-[24px]"
     >
       {children}
     </ul>
