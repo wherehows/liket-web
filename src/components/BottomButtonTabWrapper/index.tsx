@@ -1,9 +1,16 @@
 import { StrictPropsWithChildren } from "@/types/common";
 import { classNames } from "@/utils/helpers";
 
-type ButtonTab = StrictPropsWithChildren<{ shadow?: boolean; gap?: string }>;
+type BottomButtonTabWrapperProps = StrictPropsWithChildren<{
+  shadow?: boolean;
+  gap?: string;
+}>;
 
-const ButtonTab = ({ children, shadow = false, gap }: ButtonTab) => {
+const BottomButtonTabWrapper = ({
+  children,
+  shadow = false,
+  gap,
+}: BottomButtonTabWrapperProps) => {
   return (
     <div
       style={{
@@ -19,4 +26,4 @@ const ButtonTab = ({ children, shadow = false, gap }: ButtonTab) => {
   );
 };
 
-export default ButtonTab;
+export default BottomButtonTabWrapper;
