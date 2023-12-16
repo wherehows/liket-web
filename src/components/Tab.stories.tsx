@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Tabs from "@/components/WriteTab";
 import Button from "./Button";
-import BottomButtonTab from "./ButtonTab";
+import BottomButtonTabWrapper from "./BottomButtonTabWrapper";
 
 const meta: Meta<typeof Tabs> = {
   title: "Tabs",
@@ -39,9 +39,17 @@ export const WriteTab: WriteTab = {
 export const OneButtonBottomTab = {
   render: () => {
     return (
-      <BottomButtonTab>
-        <Button fullWidth>저장</Button>
-      </BottomButtonTab>
+      <BottomButtonTabWrapper>
+        <Button
+          fullWidth
+          height={48}
+          onClick={() => {
+            //
+          }}
+        >
+          저장
+        </Button>
+      </BottomButtonTabWrapper>
     );
   },
 };
@@ -49,14 +57,27 @@ export const OneButtonBottomTab = {
 export const TwoButtonBottomTab = {
   render: () => {
     return (
-      <BottomButtonTab>
-        <Button variant="ghost" fullWidth margin="0 8px 0 0">
+      <BottomButtonTabWrapper gap="16px">
+        <Button
+          height={48}
+          variant="ghost"
+          fullWidth
+          onClick={() => {
+            //
+          }}
+        >
           이전 페이지
         </Button>
-        <Button fullWidth margin="0 0 0 8px">
+        <Button
+          height={48}
+          fullWidth
+          onClick={() => {
+            //
+          }}
+        >
           메인으로 가기
         </Button>
-      </BottomButtonTab>
+      </BottomButtonTabWrapper>
     );
   },
 };
