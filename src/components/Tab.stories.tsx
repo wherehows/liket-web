@@ -1,33 +1,27 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import Tabs from "@/components/WriteTab";
 import Button from "./Button";
 import BottomButtonTabWrapper from "./BottomButtonTabWrapper";
 import LinkableTab from "./LinkableTab";
+import WriteTab from "./WriteTab";
 
-const meta: Meta<typeof Tabs> = {
+const meta = {
   title: "Tabs",
-  component: Tabs,
 };
 
 export default meta;
 
-type WriteTab = StoryObj<typeof Tabs>;
+interface WriteTabProps {
+  isImageExist: boolean;
+}
 
-export const WriteTab: WriteTab = {
-  render: ({ isImageExist }) => {
+export const WriteTWriteTabbIndex = {
+  render: ({ isImageExist }: WriteTabProps) => {
     return (
-      <Tabs isImageExist={isImageExist}>
-        <Tabs.TabPanels>
-          <Tabs.SizeTabPanel onClickChangeSize={() => {}} />
-          <Tabs.TextTabPanel onClickAddTextTab={() => {}} />
-          <Tabs.StickerTabPanel onClickAddSticker={() => {}} />
-        </Tabs.TabPanels>
-        <Tabs.TabList>
-          <Tabs.Tab id="size">사이즈</Tabs.Tab>
-          <Tabs.Tab id="text">텍스트</Tabs.Tab>
-          <Tabs.Tab id="sticker">스티커</Tabs.Tab>
-        </Tabs.TabList>
-      </Tabs>
+      <WriteTab
+        enabled={isImageExist}
+        onClickChangeSize={() => {}}
+        onClickColor={() => {}}
+        onClickSticker={() => {}}
+      />
     );
   },
   argTypes: {
