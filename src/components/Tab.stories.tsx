@@ -13,7 +13,7 @@ interface WriteTabProps {
   isImageExist: boolean;
 }
 
-export const WriteTWriteTabbIndex = {
+export const WriteTabIndex = {
   render: ({ isImageExist }: WriteTabProps) => {
     return (
       <WriteTab
