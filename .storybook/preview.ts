@@ -14,6 +14,9 @@ const preview: Preview = {
     },
   ],
   parameters: {
+    nextjs: {
+      appDirectory: true,
+    },
     layout: "fullscreen",
     actions: { argTypesRegex: "^on[A-Z].*" },
     controls: {
