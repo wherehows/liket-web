@@ -4,12 +4,17 @@ declare const window: {
   kakao: any;
 } & Window;
 
+interface MapProps {
+  width: number;
+  height: number;
+}
+
 const { lng, lat } = {
   lng: 127.0495556,
   lat: 37.514575,
 };
 
-const Map = () => {
+const Map = ({ width, height }: MapProps) => {
   useEffect(() => {
     const $mapScript = document.createElement("script");
     $mapScript.async = false;
@@ -31,7 +36,7 @@ const Map = () => {
     $mapScript.addEventListener("load", onLoadMap);
   }, []);
 
-  return <div id="map" style={{ width: "400px", height: "400px" }}></div>;
+  return <div id="map" style={{ width, height }}></div>;
 };
 
 export default Map;
