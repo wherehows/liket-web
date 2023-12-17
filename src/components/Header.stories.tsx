@@ -1,6 +1,7 @@
 import type { Meta } from "@storybook/react";
 
 import Header from "./Header";
+import SearchHeader from "./SearchHeader";
 
 const meta: Meta<typeof Header> = {
   title: "Header",
@@ -89,5 +90,11 @@ export const GeneralHeader = {
         </div>
       </>
     );
+  },
+};
+
+export const SearchHeaderIndex = {
+  render: () => {
+    return <SearchHeader />;
   },
 };
