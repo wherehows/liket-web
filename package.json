@@ -8,9 +8,10 @@
     "start": "next start",
     "lint": "next lint",
     "sb": "storybook dev -p 6006",
-    "build-sb": "storybook build",
+    "build-storybook": "storybook build",
     "test": "jest --watch --coverage",
-    "test:ci": "jest --ci"
+    "test:ci": "jest --ci",
+    "chromatic": "dotenv -e .env.local npx chromatic --project-token=%CHROMATIC_PROJECT_TOKEN%"
   },
   "dependencies": {
     "@testing-library/react-hooks": "^8.0.1",
