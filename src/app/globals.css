@@ -7,6 +7,14 @@
     display: none !important;
   }
 
+  html {
+    @apply h-[100%];
+  }
+
+  body {
+    @apply h-[100%];
+  }
+
   input:focus {
     @apply outline-none;
   }
@@ -29,7 +37,7 @@
   }
 
   .bottom-tab {
-    @apply flex fixed bottom-0 w-[100%] h-[74px] shadow-[0px_-8px_16px_0px_rgba(0,0,0,0.04)];
+    @apply flex sticky bottom-0 w-[100%] h-[74px] shadow-[0px_-8px_16px_0px_rgba(0,0,0,0.04)];
   }
 
   .center {
