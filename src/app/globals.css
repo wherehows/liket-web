@@ -14,9 +14,20 @@
   h1 {
     @apply text-h1;
   }
+
+  input[type="search"]::-webkit-search-cancel-button,
+  input[type="search"]::-webkit-search-decoration,
+  input[type="search"]::-webkit-search-results-button,
+  input[type="search"]::-webkit-search-results-decoration {
+    display: none;
+  }
 }
 
 @layer components {
+  .header {
+    @apply sticky flex justify-between items-center w-[100%] h-[48px] pl-[24px] pr-[24px];
+  }
+
   .bottom-tab {
     @apply flex fixed bottom-0 w-[100%] h-[74px] shadow-[0px_-8px_16px_0px_rgba(0,0,0,0.04)];
   }
