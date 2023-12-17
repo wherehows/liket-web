@@ -19,7 +19,7 @@ export const Index: IndexType = {
     );
   },
   args: {
-    width: 400,
-    height: 400,
+    width: "400px",
+    height: "400px",
   },
 };

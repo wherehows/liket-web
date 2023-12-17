@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect } from "react";
 
 declare const window: {
@@ -5,8 +7,8 @@ declare const window: {
 } & Window;
 
 interface MapProps {
-  width: number;
-  height: number;
+  width: string;
+  height: string;
 }
 
 const { lng, lat } = {
