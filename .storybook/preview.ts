@@ -8,7 +8,7 @@ const preview: Preview = {
     (Story) => {
       return React.createElement(
         "div",
-        { className: appleGothic.className },
+        { className: `${appleGothic.className} h-[100%]` },
         React.createElement(Story)
       );
     },
