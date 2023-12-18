@@ -39,7 +39,7 @@ export const ReadOnly: StarRatingType = {
 };
 
 export const Selectable: StarRatingType = {
-  render: () => {
+  render: function Render() {
     const [rating, setRating] = useState(0);
 
     return (
