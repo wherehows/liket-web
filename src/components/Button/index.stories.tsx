@@ -4,9 +4,6 @@ import type { Meta, StoryObj } from "@storybook/react";
 const meta: Meta<typeof Button> = {
   title: "components/Button",
   component: Button,
-  parameters: {
-    layout: "centered",
-  },
 };
 
 export default meta;

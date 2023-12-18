@@ -5,9 +5,6 @@ import Button from "../Button";
 const meta: Meta<typeof ButtonGroup> = {
   title: "components/ButtonGroup",
   component: ButtonGroup,
-  parameters: {
-    layout: "centered",
-  },
 };
 
 export default meta;
