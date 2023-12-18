@@ -6,7 +6,7 @@ declare const window: {
   kakao: any;
 } & Window;
 
-interface MapProps {
+interface KaKaoMapProps {
   width: string;
   height: string;
 }
@@ -16,7 +16,7 @@ const { lng, lat } = {
   lat: 37.514575,
 };
 
-const Map = ({ width, height }: MapProps) => {
+const KaKaoMap = ({ width, height }: KaKaoMapProps) => {
   useEffect(() => {
     const $mapScript = document.createElement("script");
     $mapScript.async = false;
@@ -41,4 +41,4 @@ const Map = ({ width, height }: MapProps) => {
   return <div id="map" style={{ width, height }}></div>;
 };
 
-export default Map;
+export default KaKaoMap;
