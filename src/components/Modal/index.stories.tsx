@@ -7,7 +7,7 @@ import Button from "../Button";
 import ButtonGroup from "../ButtonGroup";
 
 const meta: Meta<typeof Modal> = {
-  title: "Modal",
+  title: "components/Modal",
   component: Modal,
 };
 

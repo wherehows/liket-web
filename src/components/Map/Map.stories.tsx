@@ -2,7 +2,7 @@ import { StoryObj } from "@storybook/react";
 import Map from ".";
 
 const meta = {
-  title: "Map",
+  title: "components/Map",
 };
 
 export default meta;

@@ -24,7 +24,7 @@ export const BottomSheet = {
 };
 
 const meta = {
-  title: "BottomSheet",
+  title: "components/BottomSheet",
 };
 
 export default meta;
