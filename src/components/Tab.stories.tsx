@@ -37,11 +37,12 @@ export const WriteTabIndex = {
 
 export const LinkableTabIndex = {
   render: () => {
-    return;
-    <div className="flex flex-col h-[100%]">
-      <div className="flex-1"></div>
-      <LinkableTab />
-    </div>;
+    return (
+      <div className="flex flex-col h-[100%]">
+        <div className="flex-1"></div>
+        <LinkableTab />
+      </div>
+    );
   },
 };
 
