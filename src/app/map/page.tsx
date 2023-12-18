@@ -1,6 +1,6 @@
 import Header from "@/components/Header";
 import LinkableTab from "@/components/LinkableTab";
-import Map from "@/components/Map";
+import Map from "@/components/KaKaoMap";
 
 export default function MapPage() {
   return (
