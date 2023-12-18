@@ -1,6 +1,7 @@
 import React from "react";
 import type { Preview } from "@storybook/react";
 import "../src/app/globals.css";
+import "@smastrom/react-rating/style.css";
 import { appleGothic } from "../src/app/layout";
 
 const preview: Preview = {
