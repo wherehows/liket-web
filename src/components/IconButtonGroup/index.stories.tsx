@@ -4,7 +4,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Icons } from "@/utils/icons";
 
 const meta: Meta<typeof IconButtonGroup> = {
-  title: "IconButtonGroup",
+  title: "components/IconButtonGroup",
   component: IconButtonGroup,
 };
 

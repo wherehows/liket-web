@@ -27,6 +27,23 @@ const preview: Preview = {
         date: /Date$/i,
       },
     },
+    options: {
+      storySort: {
+        order: [
+          "components",
+          [
+            "Button",
+            "ButtonGroup",
+            "IconButtonGroup",
+            "Header",
+            "FrontBackSwitch",
+            "Toast",
+            "Input",
+            "BottomSheet",
+          ],
+        ],
+      },
+    },
   },
 };
 

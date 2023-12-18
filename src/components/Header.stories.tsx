@@ -4,7 +4,7 @@ import Header from "./Header";
 import SearchHeader from "./SearchHeader";
 
 const meta: Meta<typeof Header> = {
-  title: "Header",
+  title: "components/Header",
   component: Header,
 };
 

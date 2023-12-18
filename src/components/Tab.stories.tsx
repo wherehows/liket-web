@@ -5,7 +5,7 @@ import WriteTab from "./WriteTab";
 import { Meta } from "@storybook/react";
 
 const meta: Meta = {
-  title: "Tabs",
+  title: "components/Tabs",
 };
 
 export default meta;

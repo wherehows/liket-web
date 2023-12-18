@@ -2,7 +2,7 @@ import FrontBackSwitch from "@/components/FrontBackSwitch";
 import type { Meta, StoryObj } from "@storybook/react";
 
 const meta: Meta<typeof FrontBackSwitch> = {
-  title: "FrontBackSwitch",
+  title: "components/FrontBackSwitch",
   component: FrontBackSwitch,
 };
 

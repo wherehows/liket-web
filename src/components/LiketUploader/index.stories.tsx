@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import LiketUploader from ".";
 
 const meta: Meta<typeof LiketUploader> = {
-  title: "LiketUploader",
+  title: "components/LiketUploader",
   component: LiketUploader,
   parameters: {
     layout: "centered",

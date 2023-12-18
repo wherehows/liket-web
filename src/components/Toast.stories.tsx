@@ -1,9 +1,9 @@
 import customToast from "@/utils/customToast";
 import type { Meta } from "@storybook/react";
-import toast, { Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 
 const meta: Meta = {
-  title: "Toast",
+  title: "components/Toast",
 };
 
 export default meta;

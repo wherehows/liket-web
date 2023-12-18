@@ -2,7 +2,7 @@ import { GENRES } from "@/utils/const";
 import CustomBottomSheet from ".";
 import "react-spring-bottom-sheet/dist/style.css";
 
-export const BottomSheet = {
+export const Index = {
   render: () => {
     return (
       <CustomBottomSheet title="장르" open={true}>
@@ -24,7 +24,7 @@ export const BottomSheet = {
 };
 
 const meta = {
-  title: "BottomSheet",
+  title: "components/BottomSheet",
 };
 
 export default meta;
