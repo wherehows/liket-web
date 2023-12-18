@@ -5,9 +5,6 @@ import LiketUploader from ".";
 const meta: Meta<typeof LiketUploader> = {
   title: "components/LiketUploader",
   component: LiketUploader,
-  parameters: {
-    layout: "centered",
-  },
 };
 
 export default meta;
