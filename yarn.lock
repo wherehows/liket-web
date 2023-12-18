@@ -3312,6 +3312,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@smastrom/react-rating@npm:^1.4.0":
+  version: 1.4.0
+  resolution: "@smastrom/react-rating@npm:1.4.0"
+  peerDependencies:
+    react: ">=18"
+    react-dom: ">=18"
+  checksum: b213f7c19aa4b4d1fde2241213e9097fba61b5c04777ec4a456cea9c3240f6c83cea49285b71bb4f7616a40b863000d6ffcac4ab384e45e3739ca5c3b1a832fa
+  languageName: node
+  linkType: hard
+
 "@storybook/addon-actions@npm:7.5.3":
   version: 7.5.3
   resolution: "@storybook/addon-actions@npm:7.5.3"
@@ -11228,6 +11238,7 @@ __metadata:
   resolution: "liket@workspace:."
   dependencies:
     "@faker-js/faker": "npm:^8.3.1"
+    "@smastrom/react-rating": "npm:^1.4.0"
     "@storybook/addon-essentials": "npm:^7.5.1"
     "@storybook/addon-interactions": "npm:^7.5.1"
     "@storybook/addon-links": "npm:^7.5.1"
