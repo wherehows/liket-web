@@ -11,7 +11,7 @@ export default meta;
 export const Map = {
   render: () => {
     return (
-      <div className="max-w-[490px] h-[100%] mx-[auto]">
+      <div className="max-w-[600px] h-[100%] mx-[auto]">
         <Header>
           <Header.LeftOption townSelection />
           <Header.RightOption option={{ search: true, like: true }} />
