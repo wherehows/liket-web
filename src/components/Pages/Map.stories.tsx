@@ -11,14 +11,14 @@ export default meta;
 export const Map = {
   render: () => {
     return (
-      <div className="max-w-[600px] h-[100%] mx-[auto]">
+      <>
         <Header>
           <Header.LeftOption townSelection />
           <Header.RightOption option={{ search: true, like: true }} />
         </Header>
         <KaKaoMap width="100%" height="calc(100% - 48px - 74px)" />
         <LinkableTab />
-      </div>
+      </>
     );
   },
 };
