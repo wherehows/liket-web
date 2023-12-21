@@ -1,9 +1,2 @@
-
-
-### Commit Rules
-말머리 분류
-
-1. style(global) - 스타일에 영향을 끼치는 setup 
-2. feat - 컴포넌트 생성 / 기능 추가
-3. chore(naming) - 패키지 추가, 수정, 삭제 / config 파일들의 설정 변경 / 이미지, 폰트등의 파일 등의 파일 추가
-   
+## Built With
+<img src="https://img.shields.io/badge/nextjs-000000?style=for-the-badge&logo=Next.js&logoColor=white"> <img src="https://img.shields.io/badge/Typescript-3178C6?style=for-the-badge&logo=Typescript&logoColor=white"> <img src="https://img.shields.io/badge/gatsby-663399?style=for-the-badge&logo=gatsby&logoColor=white"> <img src="https://img.shields.io/badge/gatsby-F03E2F?style=for-the-badge&logo=sanity&logoColor=white"> <img src="https://img.shields.io/badge/gatsby-FFCA28?style=for-the-badge&logo=firebase&logoColor=white">
