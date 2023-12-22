@@ -44,3 +44,10 @@
     @apply flex justify-center items-center;
   }
 }
+
+/* react-spring-bottom-sheet */
+div[data-rsbs-overlay],
+div[data-rsbs-backdrop] {
+  margin: 0 auto;
+  max-width: 600px;
+}
