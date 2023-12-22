@@ -61,7 +61,7 @@ const LeftOption = ({ logo, townSelection, option }: LeftOptionProps) => {
       </button>
     );
 
-    return <div>{[Back, Close]}</div>;
+    return <div className="center">{[Back, Close]}</div>;
   }
 };
 

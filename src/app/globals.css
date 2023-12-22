@@ -12,7 +12,7 @@
   }
 
   body {
-    @apply h-[100%];
+    @apply h-[100%] mx-auto max-w-[600px] flex flex-col;
   }
 
   input:focus {
@@ -33,14 +33,21 @@
 
 @layer components {
   .header {
-    @apply sticky top-0 z-[1] bg-white flex justify-between items-center w-[100%] h-[48px] pl-[24px] pr-[24px];
+    @apply sticky top-0 bg-white flex justify-between items-center w-[100%] h-[48px] min-h-[48px] pl-[24px] pr-[24px];
   }
 
   .bottom-tab {
-    @apply flex sticky bottom-0 w-[100%] h-[74px] shadow-[0px_-8px_16px_0px_rgba(0,0,0,0.04)];
+    @apply flex sticky bottom-0 bg-white w-[100%] h-[74px] min-h-[74px] shadow-[0px_-8px_16px_0px_rgba(0,0,0,0.04)];
   }
 
   .center {
     @apply flex justify-center items-center;
   }
+}
+
+/* react-spring-bottom-sheet */
+div[data-rsbs-overlay],
+div[data-rsbs-backdrop] {
+  margin: 0 auto;
+  max-width: 600px;
 }
