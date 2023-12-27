@@ -40,8 +40,8 @@ const ContentCard = ({
           height={232}
           alt={`${title}에 대한 포스터`}
         />
-        <Chip variant="willActive" style={ChipStyle}>
-          오픈예정
+        <Chip variant={status} style={ChipStyle}>
+          진행중
         </Chip>
         <button className="absolute bottom-[8px] right-[8px]">
           {isLike ? (

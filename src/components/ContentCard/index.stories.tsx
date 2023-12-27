@@ -30,13 +30,13 @@ export const Index: IndexType = {
       control: "select",
     },
     status: {
-      option: CONTENT_STATUS,
+      options: CONTENT_STATUS,
       control: "select",
     },
   },
   args: {
     genre: "팝업 스토어",
-    status: "active",
+    status: "inactive",
     title: "성수 디올 팝업 스토어",
     location: "서울 성동구",
     startDate: "2023.08.01",
