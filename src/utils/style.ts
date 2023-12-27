@@ -40,7 +40,7 @@ const TypographyScale: FontSize = {
   body2: [
     "14px",
     {
-      fontWeight: 400,
+      fontWeight: 700,
     },
   ],
   body3: [
