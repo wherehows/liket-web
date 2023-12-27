@@ -17,7 +17,7 @@ const variantToStyleMap = {
 type ChipProps = StrictPropsWithChildren<
   {
     variant: CONTENT_STATUSType;
-    style: CSSProperties;
+    style?: CSSProperties;
   },
   string
 >;
