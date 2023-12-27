@@ -1,5 +1,7 @@
 import { StrictPropsWithChildren } from "@/types/common";
+import { CONTENT_STATUSType } from "@/utils/const";
 import { classNames } from "@/utils/helpers";
+import { CSSProperties } from "react";
 
 const variantToStyleMap = {
   active: "bg-skyblue-01 text-white",
@@ -8,18 +10,22 @@ const variantToStyleMap = {
   waiting: "bg-grey-01 text-grey-03",
   willActive: "bg-grey-01 text-grey-04",
   willClosed: "bg-rosepink-01 text-white",
+} as {
+  [key in CONTENT_STATUSType]: string;
 };
 
 type ChipProps = StrictPropsWithChildren<
   {
-    variant: keyof typeof variantToStyleMap;
+    variant: CONTENT_STATUSType;
+    style?: CSSProperties;
   },
   string
 >;
 
-const Chip = ({ variant, children }: ChipProps) => {
+const Chip = ({ variant, children, style }: ChipProps) => {
   return (
     <span
+      style={style}
       className={classNames(
         "text-flag rounded-[4px] pl-[4px] pr-[4px] h-[21px] inline-block leading-[21px]",
         variantToStyleMap[variant]
