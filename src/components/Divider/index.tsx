@@ -1,3 +1,5 @@
+import { colors } from "@/utils/style";
+
 interface DividerProps {
   height: string;
   width: string;
@@ -9,14 +11,23 @@ const Divider = ({
   width,
   orientation = "horizontal",
 }: DividerProps) => {
+  if (orientation === "vertical") {
+    return (
+      <div
+        style={{
+          borderLeft: `${width} solid ${colors.grey["01"]}`,
+          height,
+        }}
+      />
+    );
+  }
+
   return (
     <hr
       style={{
         width,
-        height,
+        borderTop: `${height} solid ${colors.grey["01"]}`,
       }}
-      className="border-none bg-grey-01"
-      aria-orientation={orientation}
     />
   );
 };
