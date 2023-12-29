@@ -34,13 +34,13 @@ const Page = () => {
           <Divider height="1px" width="48px" />
         </div>
         <div className="flex items-center">
-          <span className="text-grey-03 text-button6 mr-[16px]">
+          <button className="text-grey-03 text-button6 mr-[16px]">
             이메일로 로그인
-          </span>
+          </button>
           <Divider height="8px" width="1px" orientation="vertical" />
-          <span className="text-grey-03 text-button6 ml-[16px]">
+          <button className="text-grey-03 text-button6 ml-[16px]">
             이메일로 회원가입
-          </span>
+          </button>
         </div>
       </div>
     </>
