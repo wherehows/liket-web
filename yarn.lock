@@ -2127,6 +2127,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@hookform/resolvers@npm:^3.3.3":
+  version: 3.3.3
+  resolution: "@hookform/resolvers@npm:3.3.3"
+  peerDependencies:
+    react-hook-form: ^7.0.0
+  checksum: 3d86b8226a82bc58b8190d97b5f8ffa8f8f497163f90a6794d605a20eb709068eca4c65014b95f4376f4543ccc3289a4c295c71fc41cbd3b8557fd2711d33e98
+  languageName: node
+  linkType: hard
+
 "@humanwhocodes/config-array@npm:^0.11.13":
   version: 0.11.13
   resolution: "@humanwhocodes/config-array@npm:0.11.13"
@@ -11238,6 +11247,7 @@ __metadata:
   resolution: "liket@workspace:."
   dependencies:
     "@faker-js/faker": "npm:^8.3.1"
+    "@hookform/resolvers": "npm:^3.3.3"
     "@smastrom/react-rating": "npm:^1.4.0"
     "@storybook/addon-essentials": "npm:^7.5.1"
     "@storybook/addon-interactions": "npm:^7.5.1"
