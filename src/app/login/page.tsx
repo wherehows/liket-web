@@ -26,18 +26,18 @@ const Page = () => {
         <button className="mb-[29px]">
           <NaverLogin />
         </button>
-        <div className="flex mb-[38px]">
-          <Divider height="1px" width="48px" centered />
+        <div className="flex items-center mb-[38px]">
+          <Divider height="1px" width="48px" />
           <span className="text-body5 text-grey-04 ml-[16px] mr-[16px]">
             또는
           </span>
-          <Divider height="1px" width="48px" centered />
+          <Divider height="1px" width="48px" />
         </div>
-        <div className="flex">
+        <div className="flex items-center">
           <span className="text-grey-03 text-button6 mr-[16px]">
             이메일로 로그인
           </span>
-          <Divider height="8px" width="1px" orientation="vertical" centered />
+          <Divider height="8px" width="1px" orientation="vertical" />
           <span className="text-grey-03 text-button6 ml-[16px]">
             이메일로 회원가입
           </span>
