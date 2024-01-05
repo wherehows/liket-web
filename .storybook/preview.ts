@@ -9,7 +9,7 @@ const preview: Preview = {
     (Story) => {
       return React.createElement(
         "div",
-        { className: `${appleGothic.className} h-[100%]` },
+        { className: `${appleGothic.className} h-[100%] flex flex-col` },
         React.createElement(Story)
       );
     },
