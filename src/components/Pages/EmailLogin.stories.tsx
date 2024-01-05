@@ -51,18 +51,18 @@ export const EmailLogin = {
             onSubmit={handleSubmit(onSubmit)}
           >
             <div className="grow">
-              <div className="flex flex-col mb-[34px]">
+              <Input margin="0 0 34px 0">
                 <Input.Label htmlFor="email">이메일</Input.Label>
                 <Input.Content id="email" placeholder="이메일 입력" />
-              </div>
-              <div className="flex flex-col mb-[47px]">
+              </Input>
+              <Input margin="0 0 47px 0">
                 <Input.Label htmlFor="password">비밀번호</Input.Label>
                 <Input.Content
                   id="password"
                   type="passwor"
                   placeholder="비밀번호 입력"
                 />
-              </div>
+              </Input>
               <div className="flex flex-row-reverse">
                 <button className="text-button5 text-grey-02">
                   비밀번호 찾기
