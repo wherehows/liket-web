@@ -1,12 +1,24 @@
-import { StrictPropsWithChildren } from "@/types/common";
+import { EmptyFunction, StrictPropsWithChildren } from "@/types/common";
 import { classNames } from "@/utils/helpers";
+import { variantToStyleMap, variantWithDisabledStyleMap } from "@/utils/style";
 import { HTMLInputTypeAttribute } from "react";
 import { useFormContext } from "react-hook-form";
 
-type InputProps = StrictPropsWithChildren<unknown>;
+type InputProps = StrictPropsWithChildren<{
+  margin?: string;
+}>;
 
-const Input = ({ children }: InputProps) => {
-  return <div className="flex flex-col">{children}</div>;
+const Input = ({ children, margin = "" }: InputProps) => {
+  return (
+    <div
+      style={{
+        margin,
+      }}
+      className="relative flex flex-col"
+    >
+      {children}
+    </div>
+  );
 };
 
 interface LabelProps {
@@ -61,7 +73,7 @@ const Content = ({
     <>
       <input
         className={classNames(
-          "pl-[8px] pr-[8px] pt-[16px] pb-[15px] mb-[4px] text-body3 border-b-[1px] border-b-grey-01 focus:border-b-[2px] placeholder:text-button4 placeholder:text-grey-02",
+          "box-border pl-[8px] pr-[8px] pt-[16px] pb-[15px] mb-[4px] text-body3 border-b-[1px] border-b-grey-01 focus:border-b-[2px] placeholder:text-button4 placeholder:text-grey-02",
           isErrorExist
             ? "border-b-[2px] border-b-rosepink-01 focus:border-b-rosepink-01"
             : "focus:border-b-skyblue-01"
@@ -74,7 +86,7 @@ const Content = ({
         {...register(id)}
       />
       <strong
-        className="text-button6 text-rosepink-01"
+        className="transform translate-y-[100%] absolute bottom-0 text-button6 text-rosepink-01"
         hidden={isErrorExist ? false : true}
         aria-live="assertive"
       >
@@ -84,7 +96,54 @@ const Content = ({
   );
 };
 
+type ButtonProps = StrictPropsWithChildren<
+  {
+    disabled: boolean;
+    isShown: boolean;
+    onClick: EmptyFunction;
+  },
+  string
+>;
+
+const Button = ({ children, isShown, disabled, onClick }: ButtonProps) => {
+  return (
+    <>
+      {isShown && (
+        <button
+          className={classNames(
+            "px-[8px] text-button4 rounded-[12px] h-[24px] absolute bottom-0 right-0 mb-[12px]",
+            disabled
+              ? variantWithDisabledStyleMap["primary"]
+              : variantToStyleMap["primary"]
+          )}
+          disabled={disabled}
+          onClick={onClick}
+          type="button"
+        >
+          {children}
+        </button>
+      )}
+    </>
+  );
+};
+
+type TextProps = StrictPropsWithChildren<{ isShown: boolean }, string>;
+
+const Text = ({ children, isShown }: TextProps) => {
+  return (
+    <>
+      {isShown && (
+        <div className="absolute text-button6 bottom-0 right-0 mb-[17px] text-rosepink-01">
+          {children}
+        </div>
+      )}
+    </>
+  );
+};
+
 Input.Label = Label;
 Input.Content = Content;
+Input.Button = Button;
+Input.Text = Text;
 
 export default Input;
