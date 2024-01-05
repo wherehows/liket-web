@@ -18,7 +18,7 @@ const meta = {
 export default meta;
 
 export const EmailLogin = {
-  render: () => {
+  render: function Render() {
     const methods = useForm({
       mode: "onBlur",
       defaultValues: {
@@ -30,7 +30,7 @@ export const EmailLogin = {
 
     const {
       handleSubmit,
-      formState: { errors, isValid },
+      formState: { isValid },
     } = methods;
 
     const onSubmit = () => {};
