@@ -15,6 +15,10 @@
     @apply h-[100%] mx-auto max-w-[600px] flex flex-col;
   }
 
+  main {
+    @apply flex flex-col grow;
+  }
+
   input:focus {
     @apply outline-none;
   }
@@ -42,6 +46,10 @@
 
   .center {
     @apply flex justify-center items-center;
+  }
+
+  .col-expanded {
+    @apply flex flex-col grow;
   }
 }
 

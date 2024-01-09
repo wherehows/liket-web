@@ -99,31 +99,26 @@ const Content = ({
 type ButtonProps = StrictPropsWithChildren<
   {
     disabled: boolean;
-    isShown: boolean;
     onClick: EmptyFunction;
   },
   string
 >;
 
-const Button = ({ children, isShown, disabled, onClick }: ButtonProps) => {
+const Button = ({ children, disabled, onClick }: ButtonProps) => {
   return (
-    <>
-      {isShown && (
-        <button
-          className={classNames(
-            "px-[8px] text-button4 rounded-[12px] h-[24px] absolute bottom-0 right-0 mb-[12px]",
-            disabled
-              ? variantWithDisabledStyleMap["primary"]
-              : variantToStyleMap["primary"]
-          )}
-          disabled={disabled}
-          onClick={onClick}
-          type="button"
-        >
-          {children}
-        </button>
+    <button
+      className={classNames(
+        "px-[8px] text-button4 rounded-[12px] h-[24px] absolute bottom-0 right-0 mb-[12px]",
+        disabled
+          ? variantWithDisabledStyleMap["primary"]
+          : variantToStyleMap["primary"]
       )}
-    </>
+      disabled={disabled}
+      onClick={onClick}
+      type="button"
+    >
+      {children}
+    </button>
   );
 };
 
