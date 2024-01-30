@@ -3,7 +3,7 @@ import { colors } from "@/utils/style";
 interface DividerProps {
   height: string;
   width: string;
-  margin: string;
+  margin?: string;
   orientation?: "horizontal" | "vertical";
 }
 
