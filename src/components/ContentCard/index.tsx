@@ -6,7 +6,7 @@ import Like from "@/icons/like.svg";
 import ActiveLike from "@/icons/like-filled.svg";
 import { colors } from "@/utils/style";
 
-interface ContentCardProps {
+export interface ContentCardProps {
   status: CONTENT_STATUSType;
   genre: GENRESType;
   title: string;
@@ -32,14 +32,15 @@ const ContentCard = ({
   isLike,
 }: ContentCardProps) => {
   return (
-    <article className="w-[164px] h-[232px]">
+    <article className="w-[164px]">
       <div className="relative mb-[8px]">
-        <Image
-          src="https://picsum.photos/seed/picsum/164/232"
-          width={164}
-          height={232}
-          alt={`${title}에 대한 포스터`}
-        />
+        <div className="relative w-[164px] h-[232px]">
+          <Image
+            src="https://picsum.photos/seed/picsum/164/232"
+            fill={true}
+            alt={`${title}에 대한 포스터`}
+          />
+        </div>
         <Chip variant={status} style={ChipStyle}>
           진행중
         </Chip>
