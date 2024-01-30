@@ -20,7 +20,7 @@ export const Vertical: VerticalType = {
           <span className="text-grey-03 text-button6 mr-[16px]">
             이메일로 로그인
           </span>
-          <Divider height="8px" width="1px" orientation="vertical" />
+          <Divider height="8px" margin="0" width="1px" orientation="vertical" />
           <span className="text-grey-03 text-button6 ml-[16px]">
             이메일로 회원가입
           </span>
@@ -28,6 +28,7 @@ export const Vertical: VerticalType = {
         <Divider
           width={`${width}px`}
           height={`${height}px`}
+          margin="0"
           orientation="vertical"
         />
       </>
@@ -49,15 +50,16 @@ export const Horizontal: HorizontalType = {
     return (
       <>
         <div className="flex items-center">
-          <Divider width="30px" height="1px" />
+          <Divider width="30px" height="1px" margin="0" />
           <span className="text-body5 text-grey-04 ml-[16px] mr-[16px]">
             또는
           </span>
-          <Divider width="30px" height="1px" />
+          <Divider width="30px" height="1px" margin="0" />
         </div>
         <Divider
           width={`${width}px`}
           height={`${height}px`}
+          margin="0"
           orientation="vertical"
         />
       </>
