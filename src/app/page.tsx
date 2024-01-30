@@ -19,8 +19,8 @@ export default function Home() {
           좋은 곳 🍁
         </h2>
         <div className="flex flex-row overflow-x-scroll gap-[8px] overflow-y-hidden w-[100%]">
-          {CONTENT_CARDS.map((data) => {
-            return <ContentCard {...data} />;
+          {CONTENT_CARDS.map((data, index) => {
+            return <ContentCard key={index} {...data} />;
           })}
         </div>
       </section>
@@ -30,8 +30,8 @@ export default function Home() {
           곳 ✨
         </h2>
         <div className="flex flex-row overflow-x-scroll gap-[8px] overflow-y-hidden w-[100%]">
-          {CONTENT_CARDS.map((data) => {
-            return <ContentCard {...data} />;
+          {CONTENT_CARDS.map((data, index) => {
+            return <ContentCard key={index} {...data} />;
           })}
         </div>
       </section>
@@ -46,16 +46,16 @@ export default function Home() {
       <section className="pl-[24px] mb-[48px]">
         <h2>오픈 예정 컨텐츠</h2>
         <div className="flex flex-row overflow-x-scroll gap-[8px] overflow-y-hidden w-[100%]">
-          {CONTENT_CARDS.map((data) => {
-            return <ContentCard {...data} />;
+          {CONTENT_CARDS.map((data, index) => {
+            return <ContentCard key={index} {...data} />;
           })}
         </div>
       </section>
       <section className="pl-[24px]">
         <h2>종료 예정 컨텐츠</h2>
         <div className="flex flex-row overflow-x-scroll gap-[8px] overflow-y-hidden w-[100%]">
-          {CONTENT_CARDS.map((data) => {
-            return <ContentCard {...data} />;
+          {CONTENT_CARDS.map((data, index) => {
+            return <ContentCard key={index} {...data} />;
           })}
         </div>
       </section>
