@@ -40,7 +40,9 @@ const ReviewCard = ({
           <div className="text-body2 text-white ml-[4px]">{nickname}</div>
         </div>
         <div className="absolute bottom-0 mb-[12px] ml-[12px]">
-          <div className="text-body3 text-white">{description}</div>
+          <div className="text-body3 text-white w-[140px] line-clamp-2">
+            {description}
+          </div>
           <div className="text-body5 text-grey-02">{`${title} >`}</div>
         </div>
       </article>
