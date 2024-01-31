@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-interface ReviewCardProps {
+export interface ReviewCardProps {
   index: string;
   profileImgPath: string;
   thumbnail: string;
@@ -20,7 +20,7 @@ const ReviewCard = ({
 }: ReviewCardProps) => {
   return (
     <Link href={`/review/${index}`} className="w-[164px] h-[232px]">
-      <article className="w-[100%] h-[100%] relative">
+      <article className="w-[164px] h-[232px] relative">
         <Image
           alt={`${title} 썸네일 이미지`}
           src={thumbnail}
