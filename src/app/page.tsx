@@ -1,8 +1,10 @@
 import Carousel from "@/components/Carousel";
 import ContentCard, { ContentCardProps } from "@/components/ContentCard";
 import Divider from "@/components/Divider";
+import GenreTile from "@/components/GenreTile";
 import Header from "@/components/Header";
 import LinkableTab from "@/components/LinkableTab";
+import { GENRES } from "@/utils/const";
 
 export default function Home() {
   return (
@@ -12,6 +14,13 @@ export default function Home() {
         <Header.RightOption option={{ search: true, like: true }} />
       </Header>
       <Carousel imgs={imgs} />
+      <section className="pl-[24px] mt-[24px]">
+        <div className="flex flex-row w-[100%] justify-between overflow-x-scroll overflow-y-hidden">
+          {(["전체", ...GENRES] as const).map((genre) => {
+            return <GenreTile key={genre} genre={genre} />;
+          })}
+        </div>
+      </section>
       <Divider height="8px" width="100%" margin="24px 0" />
       <section className="pl-[24px] mb-[48px]">
         <h2>
