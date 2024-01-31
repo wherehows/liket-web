@@ -35,7 +35,7 @@ export const Index: IndexType = {
     },
   },
   args: {
-    genre: "팝업 스토어",
+    genre: "팝업스토어",
     status: "inactive",
     title: "성수 디올 팝업 스토어",
     location: "서울 성동구",
