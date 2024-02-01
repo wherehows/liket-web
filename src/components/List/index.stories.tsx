@@ -8,8 +8,8 @@ export const HotPlaceIndex = {
   render: () => {
     return (
       <>
-        {HOT_PLACE_DUMMY_1.map((data) => (
-          <HotPlaceItem {...data} />
+        {HOT_PLACE_DUMMY_1.map((data, index) => (
+          <HotPlaceItem {...data} key={index} />
         ))}
       </>
     );

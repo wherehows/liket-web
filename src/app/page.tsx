@@ -65,7 +65,7 @@ export default function Home() {
             <div>
               {HOT_PLACE_DUMMY_1.map((dummy, index) => {
                 return (
-                  <div className="flex my-[13px] w-[256px]">
+                  <div className="flex my-[13px] w-[256px]" key={dummy.idx}>
                     <div className="text-numbering1 mr-[18px] center align-middle">
                       {index + 1}
                     </div>
@@ -81,7 +81,7 @@ export default function Home() {
               {HOT_PLACE_DUMMY_2.map((dummy, index) => {
                 const { idx, thumbnail } = dummy;
                 return (
-                  <div className="flex my-[13px] w-[256px]">
+                  <div className="flex my-[13px] w-[256px]" key={dummy.idx}>
                     <div className="text-numbering1 mr-[18px] center align-middle">
                       {index + 1}
                     </div>
@@ -97,7 +97,7 @@ export default function Home() {
               {HOT_PLACE_DUMMY_3.map((dummy, index) => {
                 const { idx, thumbnail } = dummy;
                 return (
-                  <div className="flex my-[13px] w-[256px]">
+                  <div className="flex my-[13px] w-[256px]" key={dummy.idx}>
                     <div className="text-numbering1 mr-[18px] center align-middle">
                       {index + 1}
                     </div>
@@ -113,7 +113,7 @@ export default function Home() {
               {HOT_PLACE_DUMMY_4.map((dummy, index) => {
                 const { idx, thumbnail } = dummy;
                 return (
-                  <div className="flex my-[13px] w-[256px]">
+                  <div className="flex my-[13px] w-[256px]" key={dummy.idx}>
                     <div className="text-numbering1 mr-[18px] center align-middle">
                       {index + 1}
                     </div>
@@ -129,7 +129,7 @@ export default function Home() {
               {HOT_PLACE_DUMMY_5.map((dummy, index) => {
                 const { idx, thumbnail } = dummy;
                 return (
-                  <div className="flex my-[13px] w-[256px]">
+                  <div className="flex my-[13px] w-[256px]" key={dummy.idx}>
                     <div className="text-numbering1 mr-[18px] center align-middle">
                       {index + 1}
                     </div>
@@ -145,7 +145,7 @@ export default function Home() {
               {HOT_PLACE_DUMMY_6.map((dummy, index) => {
                 const { idx, thumbnail } = dummy;
                 return (
-                  <div className="flex my-[13px] w-[256px]">
+                  <div className="flex my-[13px] w-[256px]" key={dummy.idx}>
                     <div className="text-numbering1 mr-[18px] center align-middle">
                       {index + 1}
                     </div>
