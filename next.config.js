@@ -1,9 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    remotePatterns: [
-      { protocol: "https", hostname: "picsum.photos", pathname: "/seed/**" },
-    ],
+    remotePatterns: [{ protocol: "https", hostname: "picsum.photos" }],
   },
   webpack(config) {
     // Grab the existing rule that handles SVG imports
