@@ -1,8 +1,6 @@
 import Carousel from "@/components/Carousel";
-import ContentCard, { ContentCardProps } from "@/components/ContentCard";
-import ReviewCard, {
-  ReviewCardProps,
-} from "@/components/ContentCard/ReviewCard";
+import ContentCard, { ContentCardProps } from "@/components/Card/ContentCard";
+import ReviewCard, { ReviewCardProps } from "@/components/Card/ReviewCard";
 import Divider from "@/components/Divider";
 import GenreTile from "@/components/GenreTile";
 import Header from "@/components/Header";

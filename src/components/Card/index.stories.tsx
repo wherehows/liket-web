@@ -1,5 +1,5 @@
 import { StoryObj } from "@storybook/react";
-import ContentCard from ".";
+import ContentCard from "./ContentCard";
 import { CONTENT_STATUS, GENRES } from "@/utils/const";
 import ReviewCard from "./ReviewCard";
 
@@ -11,7 +11,7 @@ export default meta;
 
 type IndexType = StoryObj<typeof ContentCard>;
 
-export const Index: IndexType = {
+export const ContentCardIndex: IndexType = {
   render: ({ genre, status, title, isLike, location, startDate, endDate }) => {
     return (
       <ContentCard
