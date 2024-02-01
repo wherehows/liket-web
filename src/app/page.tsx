@@ -1,13 +1,19 @@
 import Carousel from "@/components/Carousel";
-import ContentCard, { ContentCardProps } from "@/components/ContentCard";
-import ReviewCard, {
-  ReviewCardProps,
-} from "@/components/ContentCard/ReviewCard";
+import ContentCard, { ContentCardProps } from "@/components/Card/ContentCard";
+import ReviewCard, { ReviewCardProps } from "@/components/Card/ReviewCard";
 import Divider from "@/components/Divider";
 import GenreTile from "@/components/GenreTile";
 import Header from "@/components/Header";
 import LinkableTab from "@/components/LinkableTab";
 import { GENRES } from "@/utils/const";
+import HotPlaceItem, {
+  HOT_PLACE_DUMMY_1,
+  HOT_PLACE_DUMMY_2,
+  HOT_PLACE_DUMMY_3,
+  HOT_PLACE_DUMMY_4,
+  HOT_PLACE_DUMMY_5,
+  HOT_PLACE_DUMMY_6,
+} from "@/components/List/Hotplace";
 
 export default function Home() {
   return (
@@ -49,9 +55,106 @@ export default function Home() {
       </section>
       <Divider height="8px" width="100%" margin="24px 0" />
       <section className="pl-[24px]">
-        <h2>핫플차트</h2>
+        <div className="flex flex-row mb-[8px]">
+          <h2>핫플차트</h2>
+          <div className="text-body5 text-grey-04 flex flex-col-reverse ml-[8px]">{`업로드 Date`}</div>
+        </div>
         <div className="flex flex-row overflow-x-scroll gap-[8px] overflow-y-hidden w-[100%]">
-          To be insterted
+          <div>
+            <div className="text-skyblue-01 text-body4">{`팝업 스토어 >`}</div>
+            <div>
+              {HOT_PLACE_DUMMY_1.map((dummy, index) => {
+                return (
+                  <div className="flex my-[13px] w-[256px]" key={dummy.idx}>
+                    <div className="text-numbering1 mr-[18px] center align-middle">
+                      {index + 1}
+                    </div>
+                    <HotPlaceItem {...dummy} />
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+          <div>
+            <div className="text-skyblue-01 text-body4">{`전시회 >`}</div>
+            <div>
+              {HOT_PLACE_DUMMY_2.map((dummy, index) => {
+                const { idx, thumbnail } = dummy;
+                return (
+                  <div className="flex my-[13px] w-[256px]" key={dummy.idx}>
+                    <div className="text-numbering1 mr-[18px] center align-middle">
+                      {index + 1}
+                    </div>
+                    <HotPlaceItem {...dummy} thumbnail={thumbnail + idx} />
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+          <div>
+            <div className="text-skyblue-01 text-body4">{`연극 >`}</div>
+            <div>
+              {HOT_PLACE_DUMMY_3.map((dummy, index) => {
+                const { idx, thumbnail } = dummy;
+                return (
+                  <div className="flex my-[13px] w-[256px]" key={dummy.idx}>
+                    <div className="text-numbering1 mr-[18px] center align-middle">
+                      {index + 1}
+                    </div>
+                    <HotPlaceItem {...dummy} thumbnail={thumbnail + idx} />
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+          <div>
+            <div className="text-skyblue-01 text-body4">{`뮤지컬 >`}</div>
+            <div>
+              {HOT_PLACE_DUMMY_4.map((dummy, index) => {
+                const { idx, thumbnail } = dummy;
+                return (
+                  <div className="flex my-[13px] w-[256px]" key={dummy.idx}>
+                    <div className="text-numbering1 mr-[18px] center align-middle">
+                      {index + 1}
+                    </div>
+                    <HotPlaceItem {...dummy} thumbnail={thumbnail + idx} />
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+          <div>
+            <div className="text-skyblue-01 text-body4">{`콘서트 >`}</div>
+            <div>
+              {HOT_PLACE_DUMMY_5.map((dummy, index) => {
+                const { idx, thumbnail } = dummy;
+                return (
+                  <div className="flex my-[13px] w-[256px]" key={dummy.idx}>
+                    <div className="text-numbering1 mr-[18px] center align-middle">
+                      {index + 1}
+                    </div>
+                    <HotPlaceItem {...dummy} thumbnail={thumbnail + idx} />
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+          <div>
+            <div className="text-skyblue-01 text-body4">{`페스티벌 >`}</div>
+            <div>
+              {HOT_PLACE_DUMMY_6.map((dummy, index) => {
+                const { idx, thumbnail } = dummy;
+                return (
+                  <div className="flex my-[13px] w-[256px]" key={dummy.idx}>
+                    <div className="text-numbering1 mr-[18px] center align-middle">
+                      {index + 1}
+                    </div>
+                    <HotPlaceItem {...dummy} thumbnail={thumbnail + idx} />
+                  </div>
+                );
+              })}
+            </div>
+          </div>
         </div>
       </section>
       <Divider height="8px" width="100%" margin="24px 0" />
