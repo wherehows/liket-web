@@ -74,18 +74,18 @@ export default function Home() {
                 }}
               />
             </div>
-            <div>
+            <ul>
               {HOT_PLACE_DUMMY_1.map((dummy, index) => {
                 return (
-                  <div className="flex my-[13px] w-[256px]" key={dummy.idx}>
+                  <li className="flex my-[13px] w-[256px]" key={dummy.idx}>
                     <div className="text-numbering1 mr-[18px] center align-middle">
                       {index + 1}
                     </div>
                     <HotPlaceItem {...dummy} />
-                  </div>
+                  </li>
                 );
               })}
-            </div>
+            </ul>
           </div>
           <div>
             <div className="flex item-center">
@@ -97,19 +97,19 @@ export default function Home() {
                 }}
               />
             </div>
-            <div>
+            <ul>
               {HOT_PLACE_DUMMY_2.map((dummy, index) => {
                 const { idx, thumbnail } = dummy;
                 return (
-                  <div className="flex my-[13px] w-[256px]" key={dummy.idx}>
+                  <li className="flex my-[13px] w-[256px]" key={dummy.idx}>
                     <div className="text-numbering1 mr-[18px] center align-middle">
                       {index + 1}
                     </div>
                     <HotPlaceItem {...dummy} thumbnail={thumbnail + idx} />
-                  </div>
+                  </li>
                 );
               })}
-            </div>
+            </ul>
           </div>
           <div>
             <div className="flex item-center">
@@ -121,19 +121,19 @@ export default function Home() {
                 }}
               />
             </div>
-            <div>
+            <ul>
               {HOT_PLACE_DUMMY_3.map((dummy, index) => {
                 const { idx, thumbnail } = dummy;
                 return (
-                  <div className="flex my-[13px] w-[256px]" key={dummy.idx}>
+                  <li className="flex my-[13px] w-[256px]" key={dummy.idx}>
                     <div className="text-numbering1 mr-[18px] center align-middle">
                       {index + 1}
                     </div>
                     <HotPlaceItem {...dummy} thumbnail={thumbnail + idx} />
-                  </div>
+                  </li>
                 );
               })}
-            </div>
+            </ul>
           </div>
           <div>
             <div className="flex item-center">
@@ -145,19 +145,19 @@ export default function Home() {
                 }}
               />
             </div>
-            <div>
+            <ul>
               {HOT_PLACE_DUMMY_4.map((dummy, index) => {
                 const { idx, thumbnail } = dummy;
                 return (
-                  <div className="flex my-[13px] w-[256px]" key={dummy.idx}>
+                  <li className="flex my-[13px] w-[256px]" key={dummy.idx}>
                     <div className="text-numbering1 mr-[18px] center align-middle">
                       {index + 1}
                     </div>
                     <HotPlaceItem {...dummy} thumbnail={thumbnail + idx} />
-                  </div>
+                  </li>
                 );
               })}
-            </div>
+            </ul>
           </div>
           <div>
             <div className="flex item-center">
@@ -169,19 +169,19 @@ export default function Home() {
                 }}
               />
             </div>
-            <div>
+            <ul>
               {HOT_PLACE_DUMMY_5.map((dummy, index) => {
                 const { idx, thumbnail } = dummy;
                 return (
-                  <div className="flex my-[13px] w-[256px]" key={dummy.idx}>
+                  <li className="flex my-[13px] w-[256px]" key={dummy.idx}>
                     <div className="text-numbering1 mr-[18px] center align-middle">
                       {index + 1}
                     </div>
                     <HotPlaceItem {...dummy} thumbnail={thumbnail + idx} />
-                  </div>
+                  </li>
                 );
               })}
-            </div>
+            </ul>
           </div>
           <div>
             <div className="flex item-center">
@@ -193,19 +193,19 @@ export default function Home() {
                 }}
               />
             </div>
-            <div>
+            <ul>
               {HOT_PLACE_DUMMY_6.map((dummy, index) => {
                 const { idx, thumbnail } = dummy;
                 return (
-                  <div className="flex my-[13px] w-[256px]" key={dummy.idx}>
+                  <li className="flex my-[13px] w-[256px]" key={dummy.idx}>
                     <div className="text-numbering1 mr-[18px] center align-middle">
                       {index + 1}
                     </div>
                     <HotPlaceItem {...dummy} thumbnail={thumbnail + idx} />
-                  </div>
+                  </li>
                 );
               })}
-            </div>
+            </ul>
           </div>
         </div>
       </section>

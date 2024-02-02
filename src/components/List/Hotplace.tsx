@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export interface HotPlaceItemProps {
   idx: number;
@@ -201,19 +202,21 @@ const HotPlaceItem = ({
   startDate,
   endDate,
 }: HotPlaceItemProps) => (
-  <div className="flex flex-row">
-    <div className="w-[48px] h-[48px] relative">
-      <Image src={thumbnail} fill alt={`${title} thumbnail`} />
-    </div>
-    <div className="flex flex-col justify-around ml-[12px]">
-      <div className="text-body2 w-[150px] overflow-hidden truncate">
-        {title}
+  <Link href={`/contents/${idx}`}>
+    <div className="flex flex-row">
+      <div className="w-[48px] h-[48px] relative">
+        <Image src={thumbnail} fill alt={`${title} thumbnail`} />
       </div>
-      <div className="text-body5 text-grey-04">
-        {startDate} ~ {endDate}
+      <div className="flex flex-col justify-around ml-[12px]">
+        <div className="text-body2 w-[150px] overflow-hidden truncate">
+          {title}
+        </div>
+        <div className="text-body5 text-grey-04">
+          {startDate} ~ {endDate}
+        </div>
       </div>
     </div>
-  </div>
+  </Link>
 );
 
 export default HotPlaceItem;
