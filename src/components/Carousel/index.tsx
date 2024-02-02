@@ -13,10 +13,10 @@ interface CarouselProps {
 }
 
 export const CAROUSEL_DUMMY = [
-  "https://picsum.photos/seed/picsum/390/280",
-  "https://picsum.photos/seed/picsum/390/280",
-  "https://picsum.photos/seed/picsum/390/280",
-  "https://picsum.photos/seed/picsum/390/280",
+  "https://picsum.photos/id/44/1000/1000",
+  "https://picsum.photos/id/75/1000/1000",
+  "https://picsum.photos/id/38/1000/1000",
+  "https://picsum.photos/id/47/1000/1000",
 ];
 
 const Carousel = ({ imgs }: CarouselProps) => {
@@ -124,6 +124,10 @@ const Carousel = ({ imgs }: CarouselProps) => {
                 key={index}
                 src={img}
                 width={390}
+                style={{
+                  width: "100%",
+                  height: "280px",
+                }}
                 height={280}
                 alt="테스트 이미지"
                 loading="eager"
