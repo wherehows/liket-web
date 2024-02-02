@@ -32,7 +32,7 @@ export default function Home() {
       </section>
       <Divider height="8px" width="100%" margin="24px 0" />
       <section className="pl-[24px] mb-[48px]">
-        <h2>
+        <h2 className="mb-[8px]">
           선선한 가을 날씨에 <span className="text-skyblue-01">#힐링</span>하기
           좋은 곳 🍁
         </h2>
@@ -159,7 +159,7 @@ export default function Home() {
       </section>
       <Divider height="8px" width="100%" margin="24px 0" />
       <section className="pl-[24px] mb-[48px]">
-        <h2>오픈 예정 컨텐츠</h2>
+        <h2 className="mb-[8px]">오픈 예정 컨텐츠</h2>
         <div className="flex flex-row overflow-x-scroll gap-[8px] overflow-y-hidden w-[100%]">
           {CONTENT_CARDS.map((data, index) => {
             return <ContentCard key={index} {...data} />;
@@ -167,7 +167,7 @@ export default function Home() {
         </div>
       </section>
       <section className="pl-[24px]">
-        <h2>종료 예정 컨텐츠</h2>
+        <h2 className="mb-[8px]">종료 예정 컨텐츠</h2>
         <div className="flex flex-row overflow-x-scroll gap-[8px] overflow-y-hidden w-[100%]">
           {CONTENT_CARDS.map((data, index) => {
             return <ContentCard key={index} {...data} />;
@@ -176,7 +176,7 @@ export default function Home() {
       </section>
       <Divider height="8px" width="100%" margin="24px 0" />
       <section className="pl-[24px] mb-[24px]">
-        <h2>최근 인기 리뷰</h2>
+        <h2 className="mb-[8px]">최근 인기 리뷰</h2>
         <div className="flex flex-row overflow-x-scroll gap-[8px] overflow-y-hidden w-[100%]">
           {REVIEW_CARDS.map((data, index) => {
             return <ReviewCard key={index} {...data} />;
