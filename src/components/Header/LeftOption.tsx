@@ -5,7 +5,7 @@ import Logo from "@/icons/logo.svg";
 import Link from "next/link";
 
 import BackIcon from "@/icons/back.svg";
-import CloseIcon from "@/icons/close.svg";
+import CloseIcon from "@/icons/close-24.svg";
 import { useRouter } from "next/navigation";
 
 type LeftOptionProps = XOR<
