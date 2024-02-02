@@ -7,7 +7,7 @@ import ActiveLike from "@/icons/like-filled.svg";
 import { colors } from "@/utils/style";
 import Link from "next/link";
 
-export interface ContentCardProps {
+interface ContentCardProps {
   idx: number;
   status: CONTENT_STATUSType;
   genre: GENRESType;
@@ -17,6 +17,89 @@ export interface ContentCardProps {
   endDate: string;
   isLike: boolean;
 }
+
+export const CONTENT_CARDS_DUMMY: ContentCardProps[] = [
+  {
+    idx: 1,
+    status: "active",
+    genre: "연극",
+    title: "성수 디올 팝업 스토어",
+    location: "서울 성동구",
+    startDate: "2023-01-30",
+    endDate: "2023-02-23",
+    isLike: false,
+  },
+  {
+    idx: 2,
+    status: "active",
+    genre: "연극",
+    title: "성수 디올 팝업 스토어",
+    location: "서울 성동구",
+    startDate: "2023-01-30",
+    endDate: "2023-02-23",
+    isLike: false,
+  },
+  {
+    idx: 3,
+    status: "active",
+    genre: "연극",
+    title: "성수 디올 팝업 스토어",
+    location: "서울 성동구",
+    startDate: "2023-01-30",
+    endDate: "2023-02-23",
+    isLike: false,
+  },
+  {
+    idx: 4,
+    status: "active",
+    genre: "연극",
+    title: "성수 디올 팝업 스토어",
+    location: "서울 성동구",
+    startDate: "2023-01-30",
+    endDate: "2023-02-23",
+    isLike: false,
+  },
+  {
+    idx: 5,
+    status: "active",
+    genre: "연극",
+    title: "성수 디올 팝업 스토어",
+    location: "서울 성동구",
+    startDate: "2023-01-30",
+    endDate: "2023-02-23",
+    isLike: false,
+  },
+  {
+    idx: 6,
+    status: "active",
+    genre: "연극",
+    title: "성수 디올 팝업 스토어",
+    location: "서울 성동구",
+    startDate: "2023-01-30",
+    endDate: "2023-02-23",
+    isLike: false,
+  },
+  {
+    idx: 7,
+    status: "active",
+    genre: "연극",
+    title: "성수 디올 팝업 스토어",
+    location: "서울 성동구",
+    startDate: "2023-01-30",
+    endDate: "2023-02-23",
+    isLike: false,
+  },
+  {
+    idx: 8,
+    status: "active",
+    genre: "연극",
+    title: "성수 디올 팝업 스토어",
+    location: "서울 성동구",
+    startDate: "2023-01-30",
+    endDate: "2023-02-23",
+    isLike: false,
+  },
+];
 
 const ChipStyle: CSSProperties = {
   position: "absolute",

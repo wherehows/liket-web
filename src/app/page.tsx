@@ -1,5 +1,7 @@
 import Carousel, { CAROUSEL_DUMMY } from "@/components/Carousel";
-import ContentCard, { ContentCardProps } from "@/components/Card/ContentCard";
+import ContentCard, {
+  CONTENT_CARDS_DUMMY,
+} from "@/components/Card/ContentCard";
 import ReviewCard, { REVIEW_CARDS_DUMMY } from "@/components/Card/ReviewCard";
 import Divider from "@/components/Divider";
 import GenreTile from "@/components/GenreTile";
@@ -39,7 +41,7 @@ export default function Home() {
           좋은 곳 🍁
         </h2>
         <div className="flex flex-row overflow-x-scroll gap-[8px] overflow-y-hidden w-[100%]">
-          {CONTENT_CARDS.map((data, index) => {
+          {CONTENT_CARDS_DUMMY.map((data, index) => {
             return <ContentCard key={index} {...data} />;
           })}
         </div>
@@ -50,7 +52,7 @@ export default function Home() {
           곳 ✨
         </h2>
         <div className="flex flex-row overflow-x-scroll gap-[8px] overflow-y-hidden w-[100%]">
-          {CONTENT_CARDS.map((data, index) => {
+          {CONTENT_CARDS_DUMMY.map((data, index) => {
             return <ContentCard key={index} {...data} />;
           })}
         </div>
@@ -211,7 +213,7 @@ export default function Home() {
       <section className="pl-[24px] mb-[48px]">
         <h2 className="mb-[8px]">오픈 예정 컨텐츠</h2>
         <div className="flex flex-row overflow-x-scroll gap-[8px] overflow-y-hidden w-[100%]">
-          {CONTENT_CARDS.map((data, index) => {
+          {CONTENT_CARDS_DUMMY.map((data, index) => {
             return <ContentCard key={index} {...data} />;
           })}
         </div>
@@ -219,7 +221,7 @@ export default function Home() {
       <section className="pl-[24px]">
         <h2 className="mb-[8px]">종료 예정 컨텐츠</h2>
         <div className="flex flex-row overflow-x-scroll gap-[8px] overflow-y-hidden w-[100%]">
-          {CONTENT_CARDS.map((data, index) => {
+          {CONTENT_CARDS_DUMMY.map((data, index) => {
             return <ContentCard key={index} {...data} />;
           })}
         </div>
@@ -237,86 +239,3 @@ export default function Home() {
     </>
   );
 }
-
-const CONTENT_CARDS: ContentCardProps[] = [
-  {
-    idx: 1,
-    status: "active",
-    genre: "연극",
-    title: "성수 디올 팝업 스토어",
-    location: "서울 성동구",
-    startDate: "2023-01-30",
-    endDate: "2023-02-23",
-    isLike: false,
-  },
-  {
-    idx: 2,
-    status: "active",
-    genre: "연극",
-    title: "성수 디올 팝업 스토어",
-    location: "서울 성동구",
-    startDate: "2023-01-30",
-    endDate: "2023-02-23",
-    isLike: false,
-  },
-  {
-    idx: 3,
-    status: "active",
-    genre: "연극",
-    title: "성수 디올 팝업 스토어",
-    location: "서울 성동구",
-    startDate: "2023-01-30",
-    endDate: "2023-02-23",
-    isLike: false,
-  },
-  {
-    idx: 4,
-    status: "active",
-    genre: "연극",
-    title: "성수 디올 팝업 스토어",
-    location: "서울 성동구",
-    startDate: "2023-01-30",
-    endDate: "2023-02-23",
-    isLike: false,
-  },
-  {
-    idx: 5,
-    status: "active",
-    genre: "연극",
-    title: "성수 디올 팝업 스토어",
-    location: "서울 성동구",
-    startDate: "2023-01-30",
-    endDate: "2023-02-23",
-    isLike: false,
-  },
-  {
-    idx: 6,
-    status: "active",
-    genre: "연극",
-    title: "성수 디올 팝업 스토어",
-    location: "서울 성동구",
-    startDate: "2023-01-30",
-    endDate: "2023-02-23",
-    isLike: false,
-  },
-  {
-    idx: 7,
-    status: "active",
-    genre: "연극",
-    title: "성수 디올 팝업 스토어",
-    location: "서울 성동구",
-    startDate: "2023-01-30",
-    endDate: "2023-02-23",
-    isLike: false,
-  },
-  {
-    idx: 8,
-    status: "active",
-    genre: "연극",
-    title: "성수 디올 팝업 스토어",
-    location: "서울 성동구",
-    startDate: "2023-01-30",
-    endDate: "2023-02-23",
-    isLike: false,
-  },
-];
