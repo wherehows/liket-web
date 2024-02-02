@@ -12,6 +12,13 @@ interface CarouselProps {
   imgs: string[];
 }
 
+export const CAROUSEL_DUMMY = [
+  "https://picsum.photos/seed/picsum/390/280",
+  "https://picsum.photos/seed/picsum/390/280",
+  "https://picsum.photos/seed/picsum/390/280",
+  "https://picsum.photos/seed/picsum/390/280",
+];
+
 const Carousel = ({ imgs }: CarouselProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isSwiping, setIsSwiping] = useState(false);

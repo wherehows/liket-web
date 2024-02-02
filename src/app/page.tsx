@@ -1,4 +1,4 @@
-import Carousel from "@/components/Carousel";
+import Carousel, { CAROUSEL_DUMMY } from "@/components/Carousel";
 import ContentCard, { ContentCardProps } from "@/components/Card/ContentCard";
 import ReviewCard, { ReviewCardProps } from "@/components/Card/ReviewCard";
 import Divider from "@/components/Divider";
@@ -24,7 +24,7 @@ export default function Home() {
         <Header.LeftOption logo />
         <Header.RightOption option={{ search: true, like: true }} />
       </Header>
-      <Carousel imgs={imgs} />
+      <Carousel imgs={CAROUSEL_DUMMY} />
       <section className="pl-[24px] mt-[24px]">
         <div className="flex flex-row w-[100%] justify-between overflow-x-scroll overflow-y-hidden">
           {(["전체", ...GENRES] as const).map((genre) => {
@@ -237,13 +237,6 @@ export default function Home() {
     </>
   );
 }
-
-const imgs = [
-  "https://picsum.photos/seed/picsum/390/280",
-  "https://picsum.photos/seed/picsum/390/280",
-  "https://picsum.photos/seed/picsum/390/280",
-  "https://picsum.photos/seed/picsum/390/280",
-];
 
 const REVIEW_CARDS: ReviewCardProps[] = [
   {
