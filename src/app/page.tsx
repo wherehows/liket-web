@@ -304,6 +304,7 @@ const REVIEW_CARDS: ReviewCardProps[] = [
 
 const CONTENT_CARDS: ContentCardProps[] = [
   {
+    idx: 1,
     status: "active",
     genre: "연극",
     title: "성수 디올 팝업 스토어",
@@ -313,6 +314,7 @@ const CONTENT_CARDS: ContentCardProps[] = [
     isLike: false,
   },
   {
+    idx: 2,
     status: "active",
     genre: "연극",
     title: "성수 디올 팝업 스토어",
@@ -322,6 +324,7 @@ const CONTENT_CARDS: ContentCardProps[] = [
     isLike: false,
   },
   {
+    idx: 3,
     status: "active",
     genre: "연극",
     title: "성수 디올 팝업 스토어",
@@ -331,6 +334,7 @@ const CONTENT_CARDS: ContentCardProps[] = [
     isLike: false,
   },
   {
+    idx: 4,
     status: "active",
     genre: "연극",
     title: "성수 디올 팝업 스토어",
@@ -340,6 +344,7 @@ const CONTENT_CARDS: ContentCardProps[] = [
     isLike: false,
   },
   {
+    idx: 5,
     status: "active",
     genre: "연극",
     title: "성수 디올 팝업 스토어",
@@ -349,6 +354,7 @@ const CONTENT_CARDS: ContentCardProps[] = [
     isLike: false,
   },
   {
+    idx: 6,
     status: "active",
     genre: "연극",
     title: "성수 디올 팝업 스토어",
@@ -358,6 +364,7 @@ const CONTENT_CARDS: ContentCardProps[] = [
     isLike: false,
   },
   {
+    idx: 7,
     status: "active",
     genre: "연극",
     title: "성수 디올 팝업 스토어",
@@ -367,6 +374,7 @@ const CONTENT_CARDS: ContentCardProps[] = [
     isLike: false,
   },
   {
+    idx: 8,
     status: "active",
     genre: "연극",
     title: "성수 디올 팝업 스토어",
