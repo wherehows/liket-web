@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export interface ReviewCardProps {
-  index: string;
+interface ReviewCardProps {
+  idx: number;
   profileImgPath: string;
   thumbnail: string;
   nickname: string;
@@ -10,8 +10,65 @@ export interface ReviewCardProps {
   title: string;
 }
 
+export const REVIEW_CARDS_DUMMY: ReviewCardProps[] = [
+  {
+    idx: 1,
+    title: "성수 디올 팝업 스토어",
+    profileImgPath: "https://picsum.photos/seed/picsum/390/280",
+    thumbnail: "https://picsum.photos/seed/picsum/390/280",
+    nickname: "yhkim.dev",
+    description:
+      "엄청나게 긴 문자열을 쓰는 경우에 어떻게 되는가에 대해서 궁금합니다.",
+  },
+  {
+    idx: 2,
+    title: "성수 디올 팝업 스토어",
+    profileImgPath: "https://picsum.photos/seed/picsum/390/280",
+    thumbnail: "https://picsum.photos/seed/picsum/390/280",
+    nickname: "yhkim.dev",
+    description:
+      "엄청나게 긴 문자열을 쓰는 경우에 어떻게 되는가에 대해서 궁금합니다.",
+  },
+  {
+    idx: 3,
+    title: "성수 디올 팝업 스토어",
+    profileImgPath: "https://picsum.photos/seed/picsum/390/280",
+    thumbnail: "https://picsum.photos/seed/picsum/390/280",
+    nickname: "yhkim.dev",
+    description:
+      "엄청나게 긴 문자열을 쓰는 경우에 어떻게 되는가에 대해서 궁금합니다.",
+  },
+  {
+    idx: 4,
+    title: "성수 디올 팝업 스토어",
+    profileImgPath: "https://picsum.photos/seed/picsum/390/280",
+    thumbnail: "https://picsum.photos/seed/picsum/390/280",
+    nickname: "yhkim.dev",
+    description:
+      "엄청나게 긴 문자열을 쓰는 경우에 어떻게 되는가에 대해서 궁금합니다.",
+  },
+  {
+    idx: 5,
+    title: "성수 디올 팝업 스토어",
+    profileImgPath: "https://picsum.photos/seed/picsum/390/280",
+    thumbnail: "https://picsum.photos/seed/picsum/390/280",
+    nickname: "yhkim.dev",
+    description:
+      "엄청나게 긴 문자열을 쓰는 경우에 어떻게 되는가에 대해서 궁금합니다.",
+  },
+  {
+    idx: 6,
+    title: "성수 디올 팝업 스토어",
+    profileImgPath: "https://picsum.photos/seed/picsum/390/280",
+    thumbnail: "https://picsum.photos/seed/picsum/390/280",
+    nickname: "yhkim.dev",
+    description:
+      "엄청나게 긴 문자열을 쓰는 경우에 어떻게 되는가에 대해서 궁금합니다.",
+  },
+];
+
 const ReviewCard = ({
-  index,
+  idx,
   profileImgPath,
   nickname,
   thumbnail,
@@ -19,7 +76,7 @@ const ReviewCard = ({
   title,
 }: ReviewCardProps) => {
   return (
-    <Link href={`/review/${index}`} className="w-[164px] h-[232px]">
+    <Link href={`/contents/${idx}`} className="w-[164px] h-[232px]">
       <article className="w-[164px] h-[232px] relative">
         <Image
           alt={`${title} 썸네일 이미지`}

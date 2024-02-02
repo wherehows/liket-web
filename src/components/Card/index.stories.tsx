@@ -15,6 +15,7 @@ export const ContentCardIndex: IndexType = {
   render: ({ genre, status, title, isLike, location, startDate, endDate }) => {
     return (
       <ContentCard
+        idx={1}
         status={status}
         genre={genre}
         title={title}
@@ -50,7 +51,7 @@ export const ReviewCardIndex = {
   render: () => {
     return (
       <ReviewCard
-        index="1"
+        idx={1}
         title="성수 디올 팝업 스토어"
         profileImgPath="https://picsum.photos/seed/picsum/390/280"
         nickname="yhkim.dev"
