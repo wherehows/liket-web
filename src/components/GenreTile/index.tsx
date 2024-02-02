@@ -9,7 +9,7 @@ interface GenreTileProps {
 const GenreTile = ({ genre }: GenreTileProps) => {
   return (
     <Link
-      href={`/search?type=${genre}`}
+      href={`/category?type=${genre}`}
       className="flex flex-col gap-[4px] items-center w-[56px] h-[78px] mr-[8px]"
     >
       <div className="w-[56px] h-[56px]">

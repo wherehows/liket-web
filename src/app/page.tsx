@@ -25,7 +25,7 @@ export default function Home() {
     <>
       <Header>
         <Header.LeftOption logo />
-        <Header.RightOption option={{ search: true, like: true }} />
+        <Header.RightOption option={{ category: true, like: true }} />
       </Header>
       <Carousel imgs={CAROUSEL_DUMMY} />
       <section className="pl-[24px] mt-[24px]">
@@ -67,7 +67,7 @@ export default function Home() {
         <div className="flex flex-row overflow-x-scroll gap-[8px] overflow-y-hidden w-[100%]">
           <div>
             <Link
-              href="/search?type=팝업스토어&orderby=famous"
+              href="/category?type=팝업스토어&orderby=famous"
               className="flex item-center"
             >
               <div className="text-skyblue-01 text-body4">팝업 스토어</div>
@@ -93,7 +93,7 @@ export default function Home() {
           </div>
           <div>
             <Link
-              href="/search?type=전시회&orderby=famous"
+              href="/category?type=전시회&orderby=famous"
               className="flex item-center"
             >
               <div className="text-skyblue-01 text-body4">전시회</div>
@@ -120,7 +120,7 @@ export default function Home() {
           </div>
           <div>
             <Link
-              href="/search?type=연극&orderby=famous"
+              href="/category?type=연극&orderby=famous"
               className="flex item-center"
             >
               <div className="text-skyblue-01 text-body4">연극</div>
@@ -147,7 +147,7 @@ export default function Home() {
           </div>
           <div>
             <Link
-              href="/search?type=뮤지컬&orderby=famous"
+              href="/category?type=뮤지컬&orderby=famous"
               className="flex item-center"
             >
               <div className="text-skyblue-01 text-body4">뮤지컬</div>
@@ -174,7 +174,7 @@ export default function Home() {
           </div>
           <div>
             <Link
-              href="/search?type=콘서트&orderby=famous"
+              href="/category?type=콘서트&orderby=famous"
               className="flex item-center"
             >
               <div className="text-skyblue-01 text-body4">콘서트</div>
@@ -201,7 +201,7 @@ export default function Home() {
           </div>
           <div>
             <Link
-              href="/search?type=페스티벌&orderby=famous"
+              href="/category?type=페스티벌&orderby=famous"
               className="flex item-center"
             >
               <div className="text-skyblue-01 text-body4">페스티벌</div>
