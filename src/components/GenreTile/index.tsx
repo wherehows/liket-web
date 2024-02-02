@@ -21,7 +21,7 @@ const GenreTile = ({ genre }: GenreTileProps) => {
           height={56}
         />
       </div>
-      {genre !== "전체" && <div>{genre}</div>}
+      {genre !== "전체" && <div className="text-body5">{genre}</div>}
     </Link>
   );
 };
