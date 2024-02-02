@@ -25,7 +25,7 @@ export default function Home() {
     <>
       <Header>
         <Header.LeftOption logo />
-        <Header.RightOption option={{ category: true, like: true }} />
+        <Header.RightOption option={{ search: true, like: true }} />
       </Header>
       <Carousel imgs={CAROUSEL_DUMMY} />
       <section className="pl-[24px] mt-[24px]">

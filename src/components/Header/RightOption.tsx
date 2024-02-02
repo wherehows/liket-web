@@ -6,6 +6,7 @@ import CreateIcon from "@/icons/create.svg";
 import MenuIcon from "@/icons/menu.svg";
 import SaveIcon from "@/icons/save.svg";
 import { colors } from "@/utils/style";
+import Link from "next/link";
 
 type RightOptionProps = XOR<
   {
@@ -31,14 +32,14 @@ const RightOption = ({ text, option }: RightOptionProps) => {
     const { search, like, create, menu, save } = option;
 
     const Search = search && (
-      <button>
+      <Link href="/search">
         <SearchIcon />
-      </button>
+      </Link>
     );
     const Like = like && (
-      <button>
+      <Link href="/like">
         <LikeIcon />
-      </button>
+      </Link>
     );
     const Create = create && (
       <button>
