@@ -14,7 +14,7 @@ export const useStorage = <T,>(
   );
   const [value, _setValue] = useState(() => {
     if (typeof window === "undefined") {
-      return undefined;
+      return defaultValue;
     }
 
     return getRefValue(storageRef).getItem(key, defaultValue);
