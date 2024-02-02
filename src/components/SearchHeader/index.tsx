@@ -1,10 +1,16 @@
+"use client";
+
 import BackIcon from "@/icons/back.svg";
 import SearchIcon from "@/icons/search.svg";
 import RemoveIcon from "@/icons/remove.svg";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 
-const SearchHeader = () => {
+interface SearchHeaderProps {
+  placeholder: "검색어를 입력해주세요." | "원하는 컨텐츠를 검색해보세요.";
+}
+
+const SearchHeader = ({ placeholder }: SearchHeaderProps) => {
   const [searchText, setSearchText] = useState("");
   const router = useRouter();
 
@@ -36,7 +42,7 @@ const SearchHeader = () => {
             autoComplete="off"
             autoCorrect="off"
             spellCheck={false}
-            placeholder="검색어를 입력해주세요."
+            placeholder={placeholder}
             className="w-[100%] text-body3 placeholder:text-body3 placeholder-grey-02"
             value={searchText}
             onChange={handleChangeInput}

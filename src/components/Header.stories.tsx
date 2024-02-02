@@ -95,6 +95,6 @@ export const GeneralHeader = {
 
 export const SearchHeaderIndex = {
   render: () => {
-    return <SearchHeader />;
+    return <SearchHeader placeholder="검색어를 입력해주세요." />;
   },
 };

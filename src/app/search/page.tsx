@@ -1,3 +1,9 @@
+import SearchHeader from "@/components/SearchHeader";
+
 export default function Page() {
-  return <div>개발중</div>;
+  return (
+    <>
+      <SearchHeader placeholder="검색어를 입력해주세요." />
+    </>
+  );
 }
