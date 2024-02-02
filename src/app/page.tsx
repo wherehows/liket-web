@@ -1,7 +1,7 @@
+"use client";
+
 import Carousel, { CAROUSEL_DUMMY } from "@/components/Carousel";
-import ContentCard, {
-  CONTENT_CARDS_DUMMY,
-} from "@/components/Card/ContentCard";
+import ContentCard, { ContentCardProps } from "@/components/Card/ContentCard";
 import ReviewCard, { REVIEW_CARDS_DUMMY } from "@/components/Card/ReviewCard";
 import Divider from "@/components/Divider";
 import GenreTile from "@/components/GenreTile";
@@ -258,3 +258,86 @@ export default function Home() {
     </>
   );
 }
+
+const CONTENT_CARDS_DUMMY: ContentCardProps[] = [
+  {
+    idx: 1,
+    status: "active",
+    genre: "연극",
+    title: "성수 디올 팝업 스토어",
+    location: "서울 성동구",
+    startDate: "2023-01-30",
+    endDate: "2023-02-23",
+    isLike: false,
+  },
+  {
+    idx: 2,
+    status: "active",
+    genre: "연극",
+    title: "성수 디올 팝업 스토어",
+    location: "서울 성동구",
+    startDate: "2023-01-30",
+    endDate: "2023-02-23",
+    isLike: false,
+  },
+  {
+    idx: 3,
+    status: "active",
+    genre: "연극",
+    title: "성수 디올 팝업 스토어",
+    location: "서울 성동구",
+    startDate: "2023-01-30",
+    endDate: "2023-02-23",
+    isLike: false,
+  },
+  {
+    idx: 4,
+    status: "active",
+    genre: "연극",
+    title: "성수 디올 팝업 스토어",
+    location: "서울 성동구",
+    startDate: "2023-01-30",
+    endDate: "2023-02-23",
+    isLike: false,
+  },
+  {
+    idx: 5,
+    status: "active",
+    genre: "연극",
+    title: "성수 디올 팝업 스토어",
+    location: "서울 성동구",
+    startDate: "2023-01-30",
+    endDate: "2023-02-23",
+    isLike: false,
+  },
+  {
+    idx: 6,
+    status: "active",
+    genre: "연극",
+    title: "성수 디올 팝업 스토어",
+    location: "서울 성동구",
+    startDate: "2023-01-30",
+    endDate: "2023-02-23",
+    isLike: false,
+  },
+  {
+    idx: 7,
+    status: "active",
+    genre: "연극",
+    title: "성수 디올 팝업 스토어",
+    location: "서울 성동구",
+    startDate: "2023-01-30",
+    endDate: "2023-02-23",
+    isLike: false,
+  },
+  {
+    idx: 8,
+    status: "active",
+    genre: "연극",
+    title: "성수 디올 팝업 스토어",
+    location: "서울 성동구",
+    startDate: "2023-01-30",
+    endDate: "2023-02-23",
+    isLike: false,
+  },
+];
