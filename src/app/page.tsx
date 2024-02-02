@@ -1,7 +1,7 @@
+"use client";
+
 import Carousel, { CAROUSEL_DUMMY } from "@/components/Carousel";
-import ContentCard, {
-  CONTENT_CARDS_DUMMY,
-} from "@/components/Card/ContentCard";
+import ContentCard, { ContentCardProps } from "@/components/Card/ContentCard";
 import ReviewCard, { REVIEW_CARDS_DUMMY } from "@/components/Card/ReviewCard";
 import Divider from "@/components/Divider";
 import GenreTile from "@/components/GenreTile";
@@ -18,6 +18,7 @@ import HotPlaceItem, {
   HOT_PLACE_DUMMY_6,
 } from "@/components/List/Hotplace";
 import { colors } from "@/utils/style";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -65,7 +66,10 @@ export default function Home() {
         </div>
         <div className="flex flex-row overflow-x-scroll gap-[8px] overflow-y-hidden w-[100%]">
           <div>
-            <div className="flex item-center">
+            <Link
+              href="/search?type=팝업스토어&orderby=famous"
+              className="flex item-center"
+            >
               <div className="text-skyblue-01 text-body4">팝업 스토어</div>
               <RightArrow
                 fill={colors.skyblue["01"]}
@@ -73,7 +77,7 @@ export default function Home() {
                   display: "inline",
                 }}
               />
-            </div>
+            </Link>
             <ul>
               {HOT_PLACE_DUMMY_1.map((dummy, index) => {
                 return (
@@ -88,7 +92,10 @@ export default function Home() {
             </ul>
           </div>
           <div>
-            <div className="flex item-center">
+            <Link
+              href="/search?type=전시회&orderby=famous"
+              className="flex item-center"
+            >
               <div className="text-skyblue-01 text-body4">전시회</div>
               <RightArrow
                 fill={colors.skyblue["01"]}
@@ -96,7 +103,7 @@ export default function Home() {
                   display: "inline",
                 }}
               />
-            </div>
+            </Link>
             <ul>
               {HOT_PLACE_DUMMY_2.map((dummy, index) => {
                 const { idx, thumbnail } = dummy;
@@ -112,7 +119,10 @@ export default function Home() {
             </ul>
           </div>
           <div>
-            <div className="flex item-center">
+            <Link
+              href="/search?type=연극&orderby=famous"
+              className="flex item-center"
+            >
               <div className="text-skyblue-01 text-body4">연극</div>
               <RightArrow
                 fill={colors.skyblue["01"]}
@@ -120,7 +130,7 @@ export default function Home() {
                   display: "inline",
                 }}
               />
-            </div>
+            </Link>
             <ul>
               {HOT_PLACE_DUMMY_3.map((dummy, index) => {
                 const { idx, thumbnail } = dummy;
@@ -136,7 +146,10 @@ export default function Home() {
             </ul>
           </div>
           <div>
-            <div className="flex item-center">
+            <Link
+              href="/search?type=뮤지컬&orderby=famous"
+              className="flex item-center"
+            >
               <div className="text-skyblue-01 text-body4">뮤지컬</div>
               <RightArrow
                 fill={colors.skyblue["01"]}
@@ -144,7 +157,7 @@ export default function Home() {
                   display: "inline",
                 }}
               />
-            </div>
+            </Link>
             <ul>
               {HOT_PLACE_DUMMY_4.map((dummy, index) => {
                 const { idx, thumbnail } = dummy;
@@ -160,7 +173,10 @@ export default function Home() {
             </ul>
           </div>
           <div>
-            <div className="flex item-center">
+            <Link
+              href="/search?type=콘서트&orderby=famous"
+              className="flex item-center"
+            >
               <div className="text-skyblue-01 text-body4">콘서트</div>
               <RightArrow
                 fill={colors.skyblue["01"]}
@@ -168,7 +184,7 @@ export default function Home() {
                   display: "inline",
                 }}
               />
-            </div>
+            </Link>
             <ul>
               {HOT_PLACE_DUMMY_5.map((dummy, index) => {
                 const { idx, thumbnail } = dummy;
@@ -184,7 +200,10 @@ export default function Home() {
             </ul>
           </div>
           <div>
-            <div className="flex item-center">
+            <Link
+              href="/search?type=페스티벌&orderby=famous"
+              className="flex item-center"
+            >
               <div className="text-skyblue-01 text-body4">페스티벌</div>
               <RightArrow
                 fill={colors.skyblue["01"]}
@@ -192,7 +211,7 @@ export default function Home() {
                   display: "inline",
                 }}
               />
-            </div>
+            </Link>
             <ul>
               {HOT_PLACE_DUMMY_6.map((dummy, index) => {
                 const { idx, thumbnail } = dummy;
@@ -239,3 +258,86 @@ export default function Home() {
     </>
   );
 }
+
+const CONTENT_CARDS_DUMMY: ContentCardProps[] = [
+  {
+    idx: 1,
+    status: "active",
+    genre: "연극",
+    title: "성수 디올 팝업 스토어",
+    location: "서울 성동구",
+    startDate: "2023-01-30",
+    endDate: "2023-02-23",
+    isLike: false,
+  },
+  {
+    idx: 2,
+    status: "active",
+    genre: "연극",
+    title: "성수 디올 팝업 스토어",
+    location: "서울 성동구",
+    startDate: "2023-01-30",
+    endDate: "2023-02-23",
+    isLike: false,
+  },
+  {
+    idx: 3,
+    status: "active",
+    genre: "연극",
+    title: "성수 디올 팝업 스토어",
+    location: "서울 성동구",
+    startDate: "2023-01-30",
+    endDate: "2023-02-23",
+    isLike: false,
+  },
+  {
+    idx: 4,
+    status: "active",
+    genre: "연극",
+    title: "성수 디올 팝업 스토어",
+    location: "서울 성동구",
+    startDate: "2023-01-30",
+    endDate: "2023-02-23",
+    isLike: false,
+  },
+  {
+    idx: 5,
+    status: "active",
+    genre: "연극",
+    title: "성수 디올 팝업 스토어",
+    location: "서울 성동구",
+    startDate: "2023-01-30",
+    endDate: "2023-02-23",
+    isLike: false,
+  },
+  {
+    idx: 6,
+    status: "active",
+    genre: "연극",
+    title: "성수 디올 팝업 스토어",
+    location: "서울 성동구",
+    startDate: "2023-01-30",
+    endDate: "2023-02-23",
+    isLike: false,
+  },
+  {
+    idx: 7,
+    status: "active",
+    genre: "연극",
+    title: "성수 디올 팝업 스토어",
+    location: "서울 성동구",
+    startDate: "2023-01-30",
+    endDate: "2023-02-23",
+    isLike: false,
+  },
+  {
+    idx: 8,
+    status: "active",
+    genre: "연극",
+    title: "성수 디올 팝업 스토어",
+    location: "서울 성동구",
+    startDate: "2023-01-30",
+    endDate: "2023-02-23",
+    isLike: false,
+  },
+];
