@@ -5,12 +5,21 @@ import SearchIcon from "@/icons/search.svg";
 import RemoveIcon from "@/icons/remove.svg";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
+import { EmptyFunction } from "@/types/common";
 
 interface SearchHeaderProps {
   placeholder: "검색어를 입력해주세요." | "원하는 컨텐츠를 검색해보세요.";
+  onSearch: (text: string) => void;
+  onInput: (text: string) => void;
+  onRemove: EmptyFunction;
 }
 
-const SearchHeader = ({ placeholder }: SearchHeaderProps) => {
+const SearchHeader = ({
+  placeholder,
+  onInput,
+  onRemove,
+  onSearch,
+}: SearchHeaderProps) => {
   const [searchText, setSearchText] = useState("");
   const router = useRouter();
 
@@ -20,14 +29,22 @@ const SearchHeader = ({ placeholder }: SearchHeaderProps) => {
 
   const handleChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchText(e.target.value);
+    onInput(e.target.value);
   };
 
   const handleClickRemoveButton = () => {
     setSearchText("");
+    onRemove();
   };
 
   const handleSubmitForm = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (!searchText.length) {
+      return;
+    }
+
+    onSearch(searchText);
   };
 
   return (
