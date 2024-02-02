@@ -18,6 +18,7 @@ import HotPlaceItem, {
   HOT_PLACE_DUMMY_6,
 } from "@/components/List/Hotplace";
 import { colors } from "@/utils/style";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -65,7 +66,10 @@ export default function Home() {
         </div>
         <div className="flex flex-row overflow-x-scroll gap-[8px] overflow-y-hidden w-[100%]">
           <div>
-            <div className="flex item-center">
+            <Link
+              href="/search?type=팝업스토어&orderby=famous"
+              className="flex item-center"
+            >
               <div className="text-skyblue-01 text-body4">팝업 스토어</div>
               <RightArrow
                 fill={colors.skyblue["01"]}
@@ -73,7 +77,7 @@ export default function Home() {
                   display: "inline",
                 }}
               />
-            </div>
+            </Link>
             <ul>
               {HOT_PLACE_DUMMY_1.map((dummy, index) => {
                 return (
@@ -88,7 +92,10 @@ export default function Home() {
             </ul>
           </div>
           <div>
-            <div className="flex item-center">
+            <Link
+              href="/search?type=전시회&orderby=famous"
+              className="flex item-center"
+            >
               <div className="text-skyblue-01 text-body4">전시회</div>
               <RightArrow
                 fill={colors.skyblue["01"]}
@@ -96,7 +103,7 @@ export default function Home() {
                   display: "inline",
                 }}
               />
-            </div>
+            </Link>
             <ul>
               {HOT_PLACE_DUMMY_2.map((dummy, index) => {
                 const { idx, thumbnail } = dummy;
@@ -112,7 +119,10 @@ export default function Home() {
             </ul>
           </div>
           <div>
-            <div className="flex item-center">
+            <Link
+              href="/search?type=연극&orderby=famous"
+              className="flex item-center"
+            >
               <div className="text-skyblue-01 text-body4">연극</div>
               <RightArrow
                 fill={colors.skyblue["01"]}
@@ -120,7 +130,7 @@ export default function Home() {
                   display: "inline",
                 }}
               />
-            </div>
+            </Link>
             <ul>
               {HOT_PLACE_DUMMY_3.map((dummy, index) => {
                 const { idx, thumbnail } = dummy;
@@ -136,7 +146,10 @@ export default function Home() {
             </ul>
           </div>
           <div>
-            <div className="flex item-center">
+            <Link
+              href="/search?type=뮤지컬&orderby=famous"
+              className="flex item-center"
+            >
               <div className="text-skyblue-01 text-body4">뮤지컬</div>
               <RightArrow
                 fill={colors.skyblue["01"]}
@@ -144,7 +157,7 @@ export default function Home() {
                   display: "inline",
                 }}
               />
-            </div>
+            </Link>
             <ul>
               {HOT_PLACE_DUMMY_4.map((dummy, index) => {
                 const { idx, thumbnail } = dummy;
@@ -160,7 +173,10 @@ export default function Home() {
             </ul>
           </div>
           <div>
-            <div className="flex item-center">
+            <Link
+              href="/search?type=콘서트&orderby=famous"
+              className="flex item-center"
+            >
               <div className="text-skyblue-01 text-body4">콘서트</div>
               <RightArrow
                 fill={colors.skyblue["01"]}
@@ -168,7 +184,7 @@ export default function Home() {
                   display: "inline",
                 }}
               />
-            </div>
+            </Link>
             <ul>
               {HOT_PLACE_DUMMY_5.map((dummy, index) => {
                 const { idx, thumbnail } = dummy;
@@ -184,7 +200,10 @@ export default function Home() {
             </ul>
           </div>
           <div>
-            <div className="flex item-center">
+            <Link
+              href="/search?type=페스티벌&orderby=famous"
+              className="flex item-center"
+            >
               <div className="text-skyblue-01 text-body4">페스티벌</div>
               <RightArrow
                 fill={colors.skyblue["01"]}
@@ -192,7 +211,7 @@ export default function Home() {
                   display: "inline",
                 }}
               />
-            </div>
+            </Link>
             <ul>
               {HOT_PLACE_DUMMY_6.map((dummy, index) => {
                 const { idx, thumbnail } = dummy;
