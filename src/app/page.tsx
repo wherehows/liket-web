@@ -1,6 +1,6 @@
 import Carousel, { CAROUSEL_DUMMY } from "@/components/Carousel";
 import ContentCard, { ContentCardProps } from "@/components/Card/ContentCard";
-import ReviewCard, { ReviewCardProps } from "@/components/Card/ReviewCard";
+import ReviewCard, { REVIEW_CARDS_DUMMY } from "@/components/Card/ReviewCard";
 import Divider from "@/components/Divider";
 import GenreTile from "@/components/GenreTile";
 import Header from "@/components/Header";
@@ -228,7 +228,7 @@ export default function Home() {
       <section className="pl-[24px] mb-[24px]">
         <h2 className="mb-[8px]">최근 인기 리뷰</h2>
         <div className="flex flex-row overflow-x-scroll gap-[8px] overflow-y-hidden w-[100%]">
-          {REVIEW_CARDS.map((data, index) => {
+          {REVIEW_CARDS_DUMMY.map((data, index) => {
             return <ReviewCard key={index} {...data} />;
           })}
         </div>
@@ -237,63 +237,6 @@ export default function Home() {
     </>
   );
 }
-
-const REVIEW_CARDS: ReviewCardProps[] = [
-  {
-    index: "1",
-    title: "성수 디올 팝업 스토어",
-    profileImgPath: "https://picsum.photos/seed/picsum/390/280",
-    thumbnail: "https://picsum.photos/seed/picsum/390/280",
-    nickname: "yhkim.dev",
-    description:
-      "엄청나게 긴 문자열을 쓰는 경우에 어떻게 되는가에 대해서 궁금합니다.",
-  },
-  {
-    index: "2",
-    title: "성수 디올 팝업 스토어",
-    profileImgPath: "https://picsum.photos/seed/picsum/390/280",
-    thumbnail: "https://picsum.photos/seed/picsum/390/280",
-    nickname: "yhkim.dev",
-    description:
-      "엄청나게 긴 문자열을 쓰는 경우에 어떻게 되는가에 대해서 궁금합니다.",
-  },
-  {
-    index: "3",
-    title: "성수 디올 팝업 스토어",
-    profileImgPath: "https://picsum.photos/seed/picsum/390/280",
-    thumbnail: "https://picsum.photos/seed/picsum/390/280",
-    nickname: "yhkim.dev",
-    description:
-      "엄청나게 긴 문자열을 쓰는 경우에 어떻게 되는가에 대해서 궁금합니다.",
-  },
-  {
-    index: "4",
-    title: "성수 디올 팝업 스토어",
-    profileImgPath: "https://picsum.photos/seed/picsum/390/280",
-    thumbnail: "https://picsum.photos/seed/picsum/390/280",
-    nickname: "yhkim.dev",
-    description:
-      "엄청나게 긴 문자열을 쓰는 경우에 어떻게 되는가에 대해서 궁금합니다.",
-  },
-  {
-    index: "5",
-    title: "성수 디올 팝업 스토어",
-    profileImgPath: "https://picsum.photos/seed/picsum/390/280",
-    thumbnail: "https://picsum.photos/seed/picsum/390/280",
-    nickname: "yhkim.dev",
-    description:
-      "엄청나게 긴 문자열을 쓰는 경우에 어떻게 되는가에 대해서 궁금합니다.",
-  },
-  {
-    index: "6",
-    title: "성수 디올 팝업 스토어",
-    profileImgPath: "https://picsum.photos/seed/picsum/390/280",
-    thumbnail: "https://picsum.photos/seed/picsum/390/280",
-    nickname: "yhkim.dev",
-    description:
-      "엄청나게 긴 문자열을 쓰는 경우에 어떻게 되는가에 대해서 궁금합니다.",
-  },
-];
 
 const CONTENT_CARDS: ContentCardProps[] = [
   {

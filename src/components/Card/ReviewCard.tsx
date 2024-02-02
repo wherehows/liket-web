@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export interface ReviewCardProps {
+interface ReviewCardProps {
   index: string;
   profileImgPath: string;
   thumbnail: string;
@@ -9,6 +9,63 @@ export interface ReviewCardProps {
   description: string;
   title: string;
 }
+
+export const REVIEW_CARDS_DUMMY: ReviewCardProps[] = [
+  {
+    index: "1",
+    title: "성수 디올 팝업 스토어",
+    profileImgPath: "https://picsum.photos/seed/picsum/390/280",
+    thumbnail: "https://picsum.photos/seed/picsum/390/280",
+    nickname: "yhkim.dev",
+    description:
+      "엄청나게 긴 문자열을 쓰는 경우에 어떻게 되는가에 대해서 궁금합니다.",
+  },
+  {
+    index: "2",
+    title: "성수 디올 팝업 스토어",
+    profileImgPath: "https://picsum.photos/seed/picsum/390/280",
+    thumbnail: "https://picsum.photos/seed/picsum/390/280",
+    nickname: "yhkim.dev",
+    description:
+      "엄청나게 긴 문자열을 쓰는 경우에 어떻게 되는가에 대해서 궁금합니다.",
+  },
+  {
+    index: "3",
+    title: "성수 디올 팝업 스토어",
+    profileImgPath: "https://picsum.photos/seed/picsum/390/280",
+    thumbnail: "https://picsum.photos/seed/picsum/390/280",
+    nickname: "yhkim.dev",
+    description:
+      "엄청나게 긴 문자열을 쓰는 경우에 어떻게 되는가에 대해서 궁금합니다.",
+  },
+  {
+    index: "4",
+    title: "성수 디올 팝업 스토어",
+    profileImgPath: "https://picsum.photos/seed/picsum/390/280",
+    thumbnail: "https://picsum.photos/seed/picsum/390/280",
+    nickname: "yhkim.dev",
+    description:
+      "엄청나게 긴 문자열을 쓰는 경우에 어떻게 되는가에 대해서 궁금합니다.",
+  },
+  {
+    index: "5",
+    title: "성수 디올 팝업 스토어",
+    profileImgPath: "https://picsum.photos/seed/picsum/390/280",
+    thumbnail: "https://picsum.photos/seed/picsum/390/280",
+    nickname: "yhkim.dev",
+    description:
+      "엄청나게 긴 문자열을 쓰는 경우에 어떻게 되는가에 대해서 궁금합니다.",
+  },
+  {
+    index: "6",
+    title: "성수 디올 팝업 스토어",
+    profileImgPath: "https://picsum.photos/seed/picsum/390/280",
+    thumbnail: "https://picsum.photos/seed/picsum/390/280",
+    nickname: "yhkim.dev",
+    description:
+      "엄청나게 긴 문자열을 쓰는 경우에 어떻게 되는가에 대해서 궁금합니다.",
+  },
+];
 
 const ReviewCard = ({
   index,
