@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --bottom-tab-height: 74px;
+}
+
 @layer base {
   [hidden] {
     display: none !important;
@@ -58,4 +62,5 @@ div[data-rsbs-overlay],
 div[data-rsbs-backdrop] {
   margin: 0 auto;
   max-width: 600px;
+  bottom: var(--bottom-tab-height);
 }
