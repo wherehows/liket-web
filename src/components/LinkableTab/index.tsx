@@ -12,6 +12,10 @@ import FilledCreateIcon from "@/icons/create-filled.svg";
 import MyPageIcon from "@/icons/mypage.svg";
 import FilledMyPageIcon from "@/icons/mypage-filled.svg";
 import { colors } from "@/utils/style";
+import CustomBottomSheet from "../BottomSheet";
+import CreateReview from "@/icons/create-review-24.svg";
+import CreateLiket from "@/icons/create-liket-24.svg";
+import CreateRoute from "@/icons/create-route-24.svg";
 
 interface LinkTabProps {
   isSelected: boolean;
@@ -33,38 +37,74 @@ const LinkableTab = () => {
   const [isWriteModalOpen, setIsWriteModalOpen] = useState(false);
 
   return (
-    <div role="tablist" className="bottom-tab justify-around pt-[8px]">
-      <LinkTab
-        href="/"
-        isSelected={pathname === "/" && !isWriteModalOpen}
-        icon={<HomeIcon color={colors.grey["02"]} />}
-        selectedIcon={<FilledHomeIcon color={colors.skyblue["01"]} />}
-      />
-      <LinkTab
-        href="/map"
-        isSelected={pathname === "/map" && !isWriteModalOpen}
-        icon={<MapIcon color={colors.grey["02"]} />}
-        selectedIcon={<FilledMapIcon color={colors.skyblue["01"]} />}
-      />
-      <button
-        role="tab"
-        aria-selected={isWriteModalOpen}
-        className="h-fit"
-        onClick={() => setIsWriteModalOpen(!isWriteModalOpen)}
+    <>
+      <CustomBottomSheet title="Create" open={isWriteModalOpen}>
+        <ul>
+          <li className="flex">
+            <Link
+              href="/create/review"
+              className="flex text-body3 items-center h-[48px] mx-[24px] grow"
+            >
+              <CreateReview className="mr-[8px]" />
+              리뷰 작성
+            </Link>
+          </li>
+          <li className="flex">
+            <Link
+              href="/create/liket"
+              className="flex text-body3 items-center h-[48px] mx-[24px] grow"
+            >
+              <CreateLiket className="mr-[8px]" />
+              라이켓 제작
+            </Link>
+          </li>
+          <li className="flex">
+            <Link
+              href="/create/route"
+              className="flex text-body3 items-center h-[48px] mx-[24px] grow"
+            >
+              <CreateRoute className="mr-[8px]" />
+              루트 짜기
+            </Link>
+          </li>
+        </ul>
+      </CustomBottomSheet>
+      <div
+        role="tablist"
+        className="bottom-tab justify-around h-[var(--bottom-tab-height)] pt-[8px] z-[999]"
       >
-        {isWriteModalOpen ? (
-          <FilledCreateIcon color={colors.skyblue["01"]} />
-        ) : (
-          <CreateIcon color={colors.grey["02"]} />
-        )}
-      </button>
-      <LinkTab
-        href="/mypage"
-        isSelected={pathname === "/mypage" && !isWriteModalOpen}
-        icon={<MyPageIcon color={colors.grey["02"]} />}
-        selectedIcon={<FilledMyPageIcon color={colors.skyblue["01"]} />}
-      />
-    </div>
+        <LinkTab
+          href="/"
+          isSelected={pathname === "/" && !isWriteModalOpen}
+          icon={<HomeIcon color={colors.grey["02"]} />}
+          selectedIcon={<FilledHomeIcon color={colors.skyblue["01"]} />}
+        />
+        <LinkTab
+          href="/map"
+          isSelected={pathname === "/map" && !isWriteModalOpen}
+          icon={<MapIcon color={colors.grey["02"]} />}
+          selectedIcon={<FilledMapIcon color={colors.skyblue["01"]} />}
+        />
+        <button
+          role="tab"
+          aria-selected={isWriteModalOpen}
+          className="h-fit"
+          onClick={() => setIsWriteModalOpen(true)}
+        >
+          {isWriteModalOpen ? (
+            <FilledCreateIcon color={colors.skyblue["01"]} />
+          ) : (
+            <CreateIcon color={colors.grey["02"]} />
+          )}
+        </button>
+        <LinkTab
+          href="/mypage"
+          isSelected={pathname === "/mypage" && !isWriteModalOpen}
+          icon={<MyPageIcon color={colors.grey["02"]} />}
+          selectedIcon={<FilledMyPageIcon color={colors.skyblue["01"]} />}
+        />
+      </div>
+    </>
   );
 };
 
