@@ -23,7 +23,7 @@
     "react-dom": "^18",
     "react-hook-form": "^7.48.2",
     "react-hot-toast": "^2.4.1",
-    "react-spring-bottom-sheet": "9.4.5-beta.1",
+    "react-spring-bottom-sheet": "3.5.0-alpha.0",
     "zod": "^3.22.4",
     "zustand": "^4.4.7"
   },
