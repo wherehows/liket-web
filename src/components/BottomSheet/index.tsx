@@ -17,7 +17,7 @@ const CustomBottomSheet = ({
   children,
 }: CustomBottomSheetProps) => {
   return (
-    <BottomSheet open={open}>
+    <BottomSheet open={open} blocking={false}>
       {title && <h2 className="w-[100%] text-center text-h2">{title}</h2>}
       {children}
     </BottomSheet>
