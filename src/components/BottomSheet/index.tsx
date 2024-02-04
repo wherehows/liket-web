@@ -1,6 +1,7 @@
 import { StrictPropsWithChildren } from "@/types/common";
 import { ReactNode } from "react";
 import { BottomSheet } from "react-spring-bottom-sheet";
+import "react-spring-bottom-sheet/dist/style.css";
 
 type CustomBottomSheetProps = StrictPropsWithChildren<
   {
