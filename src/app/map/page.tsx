@@ -7,6 +7,7 @@ import { useState } from "react";
 import { classNames } from "@/utils/helpers";
 import BottomButtonTabWrapper from "@/components/BottomButtonTabWrapper";
 import Button from "@/components/Button";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function MapPage() {
   const [isTownSelectionModalOpen, setIsTownSelectionModalOpen] =
@@ -14,8 +15,12 @@ export default function MapPage() {
   const [citySelection, setCitySelection] = useState("서울");
   const [guSelection, setGuSelection] = useState("동대문구1");
 
+  const router = useRouter();
+  const pathname = usePathname();
+
   const onClickTownSelection = () => {
     setIsTownSelectionModalOpen(true);
+    router.push(`${pathname}?isSelectingModal=true`);
   };
 
   const CITYS = ["서울", "인천", "경기"];
