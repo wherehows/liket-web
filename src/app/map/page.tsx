@@ -71,9 +71,10 @@ export default function MapPage() {
             <div className="flex grow h-[0]">
               <div className="h-[100%] w-[50%] bg-grey-01">
                 <ul className="flex flex-col w-[100%] grow">
-                  {CITYS.map((CITY) => {
+                  {CITYS.map((CITY, index) => {
                     return (
                       <li
+                        key={index}
                         className={classNames(
                           "center h-[48px]",
                           citySelection === CITY
@@ -89,9 +90,10 @@ export default function MapPage() {
               </div>
               <div className="grow w-[50%]">
                 <ul className="flex flex-col w-[100%] h-[100%] overflow-y-scroll">
-                  {GUS.map((GU) => {
+                  {GUS.map((GU, index) => {
                     return (
                       <li
+                        key={index}
                         className={classNames(
                           "center h-[48px] shrink-0",
                           guSelection === GU && "text-skyblue-01"
