@@ -7,11 +7,11 @@ import { useState } from "react";
 import { classNames } from "@/utils/helpers";
 import BottomButtonTabWrapper from "@/components/BottomButtonTabWrapper";
 import Button from "@/components/Button";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 export default function MapPage() {
-  const [isTownSelectionModalOpen, setIsTownSelectionModalOpen] =
-    useState(false);
+  const searchParams = useSearchParams();
+  const isTownSelectionModalOpen = searchParams.get("isTownSelectionModalOpen");
   const [citySelection, setCitySelection] = useState("서울");
   const [guSelection, setGuSelection] = useState("동대문구1");
 
@@ -19,8 +19,16 @@ export default function MapPage() {
   const pathname = usePathname();
 
   const onClickTownSelection = () => {
-    setIsTownSelectionModalOpen(true);
-    router.push(`${pathname}?isSelectingModal=true`);
+    router.push(`${pathname}?isTownSelectionModalOpen=true`);
+  };
+
+  const onCloseTownSelection = () => {
+    router.back();
+  };
+
+  const onClickGu = (gu: string) => {
+    setGuSelection(gu);
+    router.back();
   };
 
   const CITYS = ["서울", "인천", "경기"];
@@ -67,7 +75,9 @@ export default function MapPage() {
           <Header>
             <Header.LeftOption
               option={{
-                close: true,
+                close: {
+                  onClick: onCloseTownSelection,
+                },
               }}
             />
             <Header.MiddleText text="지역설정" />
@@ -104,7 +114,7 @@ export default function MapPage() {
                           guSelection === GU && "text-skyblue-01"
                         )}
                       >
-                        {GU}
+                        <button onClick={() => onClickGu(GU)}>{GU}</button>
                       </li>
                     );
                   })}
