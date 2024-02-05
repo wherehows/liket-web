@@ -28,7 +28,6 @@ export default function MapPage() {
 
   const onClickGu = (gu: string) => {
     setGuSelection(gu);
-    router.back();
   };
 
   const CITYS = ["서울", "인천", "경기"];
