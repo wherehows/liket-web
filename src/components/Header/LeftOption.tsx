@@ -62,7 +62,9 @@ const LeftOption = ({
     const Close = close && (
       <button
         onClick={() => {
-          router.back();
+          if (typeof close === "object") {
+            close.onClick && close.onClick();
+          }
         }}
       >
         <CloseIcon />

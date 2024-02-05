@@ -18,6 +18,7 @@ export type IconButtonOption =
       disabled?: boolean;
       active?: boolean;
       blackBackground?: boolean;
+      onClick?: EmptyFunction;
     };
 
 export type PartialPick<T, F extends keyof T> = Omit<T, F> &
