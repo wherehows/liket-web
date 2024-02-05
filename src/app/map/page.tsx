@@ -30,8 +30,8 @@ export default function MapPage() {
     setGuSelection(gu);
   };
 
-  const CITYS = ["서울", "인천", "경기"];
-  const GUS = [
+  const CITYS_DUMMY = ["서울", "인천", "경기"];
+  const GUS_DUMMY = [
     "동대문구1",
     "도봉구2",
     "동작구3",
@@ -85,7 +85,7 @@ export default function MapPage() {
             <div className="flex grow h-[0]">
               <div className="h-[100%] w-[50%] bg-grey-01">
                 <ul className="flex flex-col w-[100%] grow">
-                  {CITYS.map((CITY, index) => {
+                  {CITYS_DUMMY.map((CITY, index) => {
                     return (
                       <li
                         key={index}
@@ -104,7 +104,7 @@ export default function MapPage() {
               </div>
               <div className="grow w-[50%]">
                 <ul className="flex flex-col w-[100%] h-[100%] overflow-y-scroll">
-                  {GUS.map((GU, index) => {
+                  {GUS_DUMMY.map((GU, index) => {
                     return (
                       <li
                         key={index}
