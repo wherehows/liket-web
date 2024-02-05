@@ -32,7 +32,7 @@ export const GeneralHeader = {
         </div>
         <div className="relative h-[48px]">
           <Header>
-            <Header.LeftOption townSelection />
+            <Header.LeftOption townSelection onClickTownSelection={() => {}} />
             <Header.RightOption
               option={{
                 search: true,

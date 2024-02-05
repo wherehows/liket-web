@@ -13,7 +13,7 @@ export const Map = {
     return (
       <>
         <Header>
-          <Header.LeftOption townSelection />
+          <Header.LeftOption townSelection onClickTownSelection={() => {}} />
           <Header.RightOption option={{ search: true, like: true }} />
         </Header>
         <KaKaoMap width="100%" height="calc(100% - 48px - 74px)" />

@@ -1,6 +1,6 @@
 "use client";
 
-import { IconButtonOption, XOR } from "@/types/common";
+import { EmptyFunction, IconButtonOption, XOR } from "@/types/common";
 import Logo from "@/icons/logo.svg";
 import Link from "next/link";
 
@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 type LeftOptionProps = XOR<
   {
     townSelection: boolean;
+    onClickTownSelection: EmptyFunction;
   },
   XOR<
     {
@@ -23,7 +24,12 @@ type LeftOptionProps = XOR<
   >
 >;
 
-const LeftOption = ({ logo, townSelection, option }: LeftOptionProps) => {
+const LeftOption = ({
+  logo,
+  townSelection,
+  option,
+  onClickTownSelection,
+}: LeftOptionProps) => {
   const router = useRouter();
 
   if (logo) {
@@ -35,7 +41,9 @@ const LeftOption = ({ logo, townSelection, option }: LeftOptionProps) => {
   }
 
   if (townSelection) {
-    return <div>동네 선택 컴포넌트(미완)</div>;
+    return (
+      <button onClick={onClickTownSelection}>동네 선택 컴포넌트(미완)</button>
+    );
   }
 
   if (option) {
