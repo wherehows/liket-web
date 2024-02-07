@@ -17,6 +17,9 @@
 
   body {
     @apply min-h-[100%] mx-auto max-w-[600px] flex flex-col;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-smooth: never;
   }
 
   main {
