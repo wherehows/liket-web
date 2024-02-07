@@ -7,11 +7,11 @@ import { useState } from "react";
 import { classNames } from "@/utils/helpers";
 import BottomButtonTabWrapper from "@/components/BottomButtonTabWrapper";
 import Button from "@/components/Button";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 export default function MapPage() {
-  const [isTownSelectionModalOpen, setIsTownSelectionModalOpen] =
-    useState(false);
+  const searchParams = useSearchParams();
+  const isTownSelectionModalOpen = searchParams.get("isTownSelectionModalOpen");
   const [citySelection, setCitySelection] = useState("서울");
   const [guSelection, setGuSelection] = useState("동대문구1");
 
@@ -19,12 +19,19 @@ export default function MapPage() {
   const pathname = usePathname();
 
   const onClickTownSelection = () => {
-    setIsTownSelectionModalOpen(true);
-    router.push(`${pathname}?isSelectingModal=true`);
+    router.push(`${pathname}?isTownSelectionModalOpen=true`);
   };
 
-  const CITYS = ["서울", "인천", "경기"];
-  const GUS = [
+  const onCloseTownSelection = () => {
+    router.back();
+  };
+
+  const onClickGu = (gu: string) => {
+    setGuSelection(gu);
+  };
+
+  const CITYS_DUMMY = ["서울", "인천", "경기"];
+  const GUS_DUMMY = [
     "동대문구1",
     "도봉구2",
     "동작구3",
@@ -67,7 +74,9 @@ export default function MapPage() {
           <Header>
             <Header.LeftOption
               option={{
-                close: true,
+                close: {
+                  onClick: onCloseTownSelection,
+                },
               }}
             />
             <Header.MiddleText text="지역설정" />
@@ -76,7 +85,7 @@ export default function MapPage() {
             <div className="flex grow h-[0]">
               <div className="h-[100%] w-[50%] bg-grey-01">
                 <ul className="flex flex-col w-[100%] grow">
-                  {CITYS.map((CITY, index) => {
+                  {CITYS_DUMMY.map((CITY, index) => {
                     return (
                       <li
                         key={index}
@@ -95,7 +104,7 @@ export default function MapPage() {
               </div>
               <div className="grow w-[50%]">
                 <ul className="flex flex-col w-[100%] h-[100%] overflow-y-scroll">
-                  {GUS.map((GU, index) => {
+                  {GUS_DUMMY.map((GU, index) => {
                     return (
                       <li
                         key={index}
@@ -104,7 +113,7 @@ export default function MapPage() {
                           guSelection === GU && "text-skyblue-01"
                         )}
                       >
-                        {GU}
+                        <button onClick={() => onClickGu(GU)}>{GU}</button>
                       </li>
                     );
                   })}
