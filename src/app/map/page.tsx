@@ -137,7 +137,7 @@ export default function MapPage() {
             <Header.RightOption option={{ search: true, like: true }} />
           </Header>
           <main>
-            <Map width="100%" height="calc(100% - 48px - 74px)" />
+            <Map />
           </main>
           <LinkableTab />
         </>

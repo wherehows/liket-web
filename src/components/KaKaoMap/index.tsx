@@ -6,17 +6,12 @@ declare const window: {
   kakao: any;
 } & Window;
 
-interface KaKaoMapProps {
-  width: string;
-  height: string;
-}
-
 const { lng, lat } = {
   lng: 127.0495556,
   lat: 37.514575,
 };
 
-const KaKaoMap = ({ width, height }: KaKaoMapProps) => {
+const KaKaoMap = () => {
   useEffect(() => {
     const $mapScript = document.createElement("script");
     $mapScript.async = false;
@@ -38,7 +33,7 @@ const KaKaoMap = ({ width, height }: KaKaoMapProps) => {
     $mapScript.addEventListener("load", onLoadMap);
   }, []);
 
-  return <div id="map" style={{ width, height }}></div>;
+  return <div id="map" className="grow" style={{ width: "100%" }}></div>;
 };
 
 export default KaKaoMap;
