@@ -8,6 +8,10 @@ import { classNames } from "@/utils/helpers";
 import BottomButtonTabWrapper from "@/components/BottomButtonTabWrapper";
 import Button from "@/components/Button";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import CustomBottomSheet from "@/components/BottomSheet";
+import MapBottomSheetCard, {
+  CONTENT_CARDS_DUMMY,
+} from "@/components/Card/MapBottomSheetCard";
 
 export default function MapPage() {
   const searchParams = useSearchParams();
@@ -138,6 +142,17 @@ export default function MapPage() {
           </Header>
           <main>
             <Map />
+            <CustomBottomSheet open={true}>
+              <ul>
+                {CONTENT_CARDS_DUMMY.map((cardItem, index) => {
+                  return (
+                    <li key={index}>
+                      <MapBottomSheetCard {...cardItem} />
+                    </li>
+                  );
+                })}
+              </ul>
+            </CustomBottomSheet>
           </main>
           <LinkableTab />
         </>
