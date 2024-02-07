@@ -7,7 +7,7 @@ type CustomBottomSheetProps = StrictPropsWithChildren<
   {
     title?: string;
     open: boolean;
-    onClickBackDrop: () => void;
+    onClickBackDrop?: () => void;
   },
   ReactNode
 >;
@@ -20,13 +20,17 @@ const CustomBottomSheet = ({
 }: CustomBottomSheetProps) => {
   return (
     <>
-      {open && (
+      {open && onClickBackDrop && (
         <div
           className="bg-black bg-opacity-60 fixed z-[3] top-0 bottom-0 left-0 right-0"
           onClick={onClickBackDrop}
         />
       )}
-      <BottomSheet open={open} blocking={false}>
+      <BottomSheet
+        open={open}
+        blocking={false}
+        snapPoints={({ minHeight }) => [minHeight, 400]}
+      >
         {title && <h2 className="w-[100%] text-center text-h2">{title}</h2>}
         {children}
       </BottomSheet>
