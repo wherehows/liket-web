@@ -22,11 +22,23 @@ interface LinkTabProps {
   href: string;
   icon: ReactNode;
   selectedIcon: ReactNode;
+  onClickLink: (href: string) => void;
 }
 
-const LinkTab = ({ isSelected, href, icon, selectedIcon }: LinkTabProps) => {
+const LinkTab = ({
+  isSelected,
+  href,
+  icon,
+  selectedIcon,
+  onClickLink,
+}: LinkTabProps) => {
   return (
-    <Link role="tab" href={href} aria-selected={isSelected}>
+    <Link
+      role="tab"
+      href={href}
+      aria-selected={isSelected}
+      onClick={() => onClickLink(href)}
+    >
       {isSelected ? selectedIcon : icon}
     </Link>
   );
@@ -35,10 +47,19 @@ const LinkTab = ({ isSelected, href, icon, selectedIcon }: LinkTabProps) => {
 const LinkableTab = () => {
   const pathname = usePathname();
   const [isWriteModalOpen, setIsWriteModalOpen] = useState(false);
+  const onClickLink = (href: string) => {
+    if (pathname === href) {
+      setIsWriteModalOpen(false);
+    }
+  };
 
   return (
     <>
-      <CustomBottomSheet title="Create" open={isWriteModalOpen}>
+      <CustomBottomSheet
+        title="Create"
+        open={isWriteModalOpen}
+        onClickBackDrop={() => setIsWriteModalOpen(false)}
+      >
         <ul>
           <li className="flex">
             <Link
@@ -71,19 +92,21 @@ const LinkableTab = () => {
       </CustomBottomSheet>
       <div
         role="tablist"
-        className="bottom-tab justify-around h-[var(--bottom-tab-height)] pt-[8px] z-[999]"
+        className="bottom-tab justify-around h-[var(--bottom-tab-height)] pt-[8px] z-[5]"
       >
         <LinkTab
           href="/"
           isSelected={pathname === "/" && !isWriteModalOpen}
           icon={<HomeIcon color={colors.grey["02"]} />}
           selectedIcon={<FilledHomeIcon color={colors.skyblue["01"]} />}
+          onClickLink={onClickLink}
         />
         <LinkTab
           href="/map"
           isSelected={pathname === "/map" && !isWriteModalOpen}
           icon={<MapIcon color={colors.grey["02"]} />}
           selectedIcon={<FilledMapIcon color={colors.skyblue["01"]} />}
+          onClickLink={onClickLink}
         />
         <button
           role="tab"
@@ -101,6 +124,7 @@ const LinkableTab = () => {
           href="/mypage"
           isSelected={pathname === "/mypage" && !isWriteModalOpen}
           icon={<MyPageIcon color={colors.grey["02"]} />}
+          onClickLink={onClickLink}
           selectedIcon={<FilledMyPageIcon color={colors.skyblue["01"]} />}
         />
       </div>
