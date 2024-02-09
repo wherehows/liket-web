@@ -14,7 +14,7 @@ const variantToStyleMap = {
   [key in CONTENT_STATUSType]: string;
 };
 
-type ChipProps = StrictPropsWithChildren<
+type BadgeProps = StrictPropsWithChildren<
   {
     variant: CONTENT_STATUSType;
     style?: CSSProperties;
@@ -22,7 +22,7 @@ type ChipProps = StrictPropsWithChildren<
   string
 >;
 
-const Chip = ({ variant, children, style }: ChipProps) => {
+const Badge = ({ variant, children, style }: BadgeProps) => {
   return (
     <span
       style={style}
@@ -36,4 +36,4 @@ const Chip = ({ variant, children, style }: ChipProps) => {
   );
 };
 
-export default Chip;
+export default Badge;
