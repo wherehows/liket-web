@@ -16,7 +16,8 @@ import MapBottomSheetCard, {
 export default function MapPage() {
   const searchParams = useSearchParams();
   const isTownSelectionModalOpen = searchParams.get("isTownSelectionModalOpen");
-  const [citySelection, setCitySelection] = useState("서울");
+  const [citySelection, setCitySelection] = useState(CITYS[0]);
+  const [guList, setGuList] = useState(CITY_GU_MAP[citySelection]);
   const [guSelection, setGuSelection] = useState("동대문구1");
 
   const router = useRouter();
@@ -32,6 +33,11 @@ export default function MapPage() {
 
   const onClickGu = (gu: string) => {
     setGuSelection(gu);
+  };
+
+  const onClickCity = (city: (typeof CITYS)[number]) => {
+    setCitySelection(city);
+    setGuList(CITY_GU_MAP[city]);
   };
 
   return (
@@ -52,7 +58,7 @@ export default function MapPage() {
             <div className="flex grow h-[0]">
               <div className="h-[100%] w-[50%] bg-grey-01">
                 <ul className="flex flex-col w-[100%] grow">
-                  {CITYS_DUMMY.map((CITY, index) => {
+                  {CITYS.map((CITY, index) => {
                     return (
                       <li
                         key={index}
@@ -63,7 +69,9 @@ export default function MapPage() {
                             : "bg-grey-01 text-grey-04"
                         )}
                       >
-                        <button>{CITY}</button>
+                        <button onClick={() => onClickCity(CITY)}>
+                          {CITY}
+                        </button>
                       </li>
                     );
                   })}
@@ -71,7 +79,7 @@ export default function MapPage() {
               </div>
               <div className="grow w-[50%]">
                 <ul className="flex flex-col w-[100%] h-[100%] overflow-y-scroll">
-                  {GUS_DUMMY.map((GU, index) => {
+                  {guList.map((GU, index) => {
                     return (
                       <li
                         key={index}
@@ -132,8 +140,7 @@ export default function MapPage() {
   );
 }
 
-const CITYS_DUMMY = ["서울", "인천", "경기"];
-const GUS_DUMMY = [
+const SEOUL_GU_DUMMY = [
   "동대문구1",
   "도봉구2",
   "동작구3",
@@ -168,3 +175,15 @@ const GUS_DUMMY = [
   "마포구532",
   "서초구631",
 ];
+
+const INCHENON_GU_DUMMY = ["미추홀구", "부평구"];
+
+const GYEONGGI_GU_DUMMY = ["아모르겠구", "이세구"];
+
+const CITY_GU_MAP = {
+  서울광역시: SEOUL_GU_DUMMY,
+  인천광역시: INCHENON_GU_DUMMY,
+  경기도: GYEONGGI_GU_DUMMY,
+} as const;
+
+const CITYS = Object.keys(CITY_GU_MAP) as Array<keyof typeof CITY_GU_MAP>;
