@@ -144,6 +144,7 @@ export default function MapPage() {
             <Map />
             <CustomBottomSheet
               open={true}
+              defaultSnap={20}
               snapPoints={({ maxHeight }) => [
                 20,
                 maxHeight / 2 - 45,

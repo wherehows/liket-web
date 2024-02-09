@@ -8,6 +8,7 @@ type CustomBottomSheetProps = StrictPropsWithChildren<
   {
     open: boolean;
     title?: string;
+    defaultSnap?: number;
     snapPoints?: ({
       minHeight,
       maxHeight,
@@ -20,6 +21,7 @@ type CustomBottomSheetProps = StrictPropsWithChildren<
 const CustomBottomSheet = ({
   title,
   open,
+  defaultSnap,
   children,
   snapPoints,
   onClickBackDrop,
@@ -34,9 +36,9 @@ const CustomBottomSheet = ({
         />
       )}
       <BottomSheet
+        defaultSnap={defaultSnap}
         open={open}
         blocking={false}
-        defaultSnap={20}
         snapPoints={snapPoints}
       >
         {title && <h2 className="w-[100%] text-center text-h2">{title}</h2>}
