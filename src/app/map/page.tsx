@@ -142,7 +142,15 @@ export default function MapPage() {
           </Header>
           <main>
             <Map />
-            <CustomBottomSheet open={true}>
+            <CustomBottomSheet
+              open={true}
+              defaultSnap={20}
+              snapPoints={({ maxHeight }) => [
+                20,
+                maxHeight / 2 - 45,
+                maxHeight - 68 - 48 - 74,
+              ]}
+            >
               <ul>
                 {CONTENT_CARDS_DUMMY.map((cardItem, index) => {
                   return (
