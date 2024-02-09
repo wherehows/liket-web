@@ -40,7 +40,7 @@ export default function MapPage() {
     router.push(`${pathname}?isFilterModalOpen=true`);
   };
 
-  const onCloseTownSelection = () => {
+  const onCloseTownSelectionModal = () => {
     router.back();
     setCityAndGuSelection({
       ...cityAndGuSelection,
@@ -140,7 +140,7 @@ export default function MapPage() {
             <Header.LeftOption
               option={{
                 close: {
-                  onClick: onCloseTownSelection,
+                  onClick: onCloseTownSelectionModal,
                 },
               }}
             />
