@@ -15,6 +15,8 @@ import MapBottomSheetCard, {
 import FilterFilled from "@/icons/filter-filled-36.svg";
 import Filter from "@/icons/filter-36.svg";
 import ButtonGroup from "@/components/ButtonGroup";
+import { AGES, GENRES, STYLES } from "@/utils/const";
+import Chip from "@/components/Chip";
 
 export default function MapPage() {
   const searchParams = useSearchParams();
@@ -75,6 +77,9 @@ export default function MapPage() {
     setAppliedFilters(true);
   };
 
+  const onCloseFilterSelectionModal = () => router.back();
+  const onClickOptions = () => {};
+
   return (
     <>
       {isFilterModalOpen && (
@@ -83,14 +88,34 @@ export default function MapPage() {
             <Header.LeftOption
               option={{
                 close: {
-                  onClick: onCloseTownSelection,
+                  onClick: onCloseFilterSelectionModal,
                 },
               }}
             />
             <Header.MiddleText text="필터" />
           </Header>
-          <main className="z-[5]">
-            <div className="flex grow h-[0] bg-white"></div>
+          <main className="z-[5] px-[24px]">
+            <div className="flex flex-col grow h-[0] bg-white gap-[48px] mt-[16px]">
+              {(["장르", "지역", "연령대", "스타일"] as const).map((option) => {
+                return (
+                  <div key={option} className="">
+                    <div className="text-h2 mb-[15px]">{option}</div>
+                    <ul
+                      onClick={() => onClickOptions}
+                      className="flex flex-wrap gap-[8px]"
+                    >
+                      {FILTER_OPTIONS[option].map((item) => {
+                        return (
+                          <li key={item}>
+                            <Chip isSelected={false}>{item}</Chip>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </div>
+                );
+              })}
+            </div>
             <BottomButtonTabWrapper>
               <ButtonGroup gap={16}>
                 <Button
@@ -269,3 +294,10 @@ const INITIAL_CITY_AND_GU_SELECTION = {
   newSelectedCity: CITYS[0],
   newSelectedGu: CITY_GU_MAP[CITYS[0]][0],
 };
+
+const FILTER_OPTIONS = {
+  장르: GENRES,
+  지역: CITYS,
+  연령대: AGES,
+  스타일: STYLES,
+} as const;
