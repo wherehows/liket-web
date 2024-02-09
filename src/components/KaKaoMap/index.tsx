@@ -1,6 +1,10 @@
 "use client";
 
-import { useEffect } from "react";
+import { ReactNode, useEffect } from "react";
+
+interface KaKaoMapProps {
+  children: ReactNode;
+}
 
 declare const window: {
   kakao: any;
@@ -11,7 +15,7 @@ const { lng, lat } = {
   lat: 37.514575,
 };
 
-const KaKaoMap = () => {
+const KaKaoMap = ({ children }: KaKaoMapProps) => {
   useEffect(() => {
     const $mapScript = document.createElement("script");
     $mapScript.async = false;
@@ -33,7 +37,11 @@ const KaKaoMap = () => {
     $mapScript.addEventListener("load", onLoadMap);
   }, []);
 
-  return <div id="map" className="grow" style={{ width: "100%" }}></div>;
+  return (
+    <div id="map" className="grow relative w-[100%]">
+      {children}
+    </div>
+  );
 };
 
 export default KaKaoMap;
