@@ -13,7 +13,10 @@ export const Map = {
     return (
       <>
         <Header>
-          <Header.LeftOption townSelection onClickTownSelection={() => {}} />
+          <Header.LeftOption
+            townName="강동구"
+            onClickTownSelection={() => {}}
+          />
           <Header.RightOption option={{ search: true, like: true }} />
         </Header>
         <KaKaoMap />

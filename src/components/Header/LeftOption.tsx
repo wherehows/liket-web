@@ -7,10 +7,11 @@ import Link from "next/link";
 import BackIcon from "@/icons/back.svg";
 import CloseIcon from "@/icons/close-24.svg";
 import { useRouter } from "next/navigation";
+import DropDown from "@/icons/dropdown-24.svg";
 
 type LeftOptionProps = XOR<
   {
-    townSelection: boolean;
+    townName: string;
     onClickTownSelection: EmptyFunction;
   },
   XOR<
@@ -26,7 +27,7 @@ type LeftOptionProps = XOR<
 
 const LeftOption = ({
   logo,
-  townSelection,
+  townName,
   option,
   onClickTownSelection,
 }: LeftOptionProps) => {
@@ -40,9 +41,12 @@ const LeftOption = ({
     );
   }
 
-  if (townSelection) {
+  if (townName) {
     return (
-      <button onClick={onClickTownSelection}>동네 선택 컴포넌트(미완)</button>
+      <button className="text-h1 flex" onClick={onClickTownSelection}>
+        {townName}
+        <DropDown />
+      </button>
     );
   }
 

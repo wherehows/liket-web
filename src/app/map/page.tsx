@@ -135,7 +135,7 @@ export default function MapPage() {
         <>
           <Header>
             <Header.LeftOption
-              townSelection
+              townName={guSelection}
               onClickTownSelection={onClickTownSelection}
             />
             <Header.RightOption option={{ search: true, like: true }} />
