@@ -2,7 +2,7 @@
 
 import Header from "@/components/Header";
 import LinkableTab from "@/components/LinkableTab";
-import Map from "@/components/KaKaoMap";
+import KaKaoMap from "@/components/KaKaoMap";
 import { useState } from "react";
 import { classNames } from "@/utils/helpers";
 import BottomButtonTabWrapper from "@/components/BottomButtonTabWrapper";
@@ -12,10 +12,14 @@ import CustomBottomSheet from "@/components/BottomSheet";
 import MapBottomSheetCard, {
   CONTENT_CARDS_DUMMY,
 } from "@/components/Card/MapBottomSheetCard";
+import FilterFilled from "@/icons/filter-filled-36.svg";
+import Filter from "@/icons/filter-36.svg";
 
 export default function MapPage() {
   const searchParams = useSearchParams();
   const isTownSelectionModalOpen = searchParams.get("isTownSelectionModalOpen");
+  const isFilterModalOpen = searchParams.get("isFilterModalOpen");
+  const [appliedFilters, setAppliedFilters] = useState(false);
   const [cityAndGuSelection, setCityAndGuSelection] = useState(
     INITIAL_CITY_AND_GU_SELECTION
   );
@@ -28,6 +32,9 @@ export default function MapPage() {
 
   const onClickTownSelection = () => {
     router.push(`${pathname}?isTownSelectionModalOpen=true`);
+  };
+  const onClickFilter = () => {
+    router.push(`${pathname}?isFilterModalOpen=true`);
   };
 
   const onCloseTownSelection = () => {
@@ -61,6 +68,67 @@ export default function MapPage() {
 
   return (
     <>
+      {isFilterModalOpen && (
+        <>
+          <Header>
+            <Header.LeftOption
+              option={{
+                close: {
+                  onClick: onCloseTownSelection,
+                },
+              }}
+            />
+            <Header.MiddleText text="필터" />
+          </Header>
+          <main className="z-[5]">
+            <div className="flex grow h-[0]">
+              <div className="h-[100%] w-[50%] bg-grey-01">
+                <ul className="flex flex-col w-[100%] grow">
+                  {CITYS.map((CITY, index) => {
+                    return (
+                      <li
+                        key={index}
+                        className={classNames(
+                          "center h-[48px]",
+                          newSelectedCity === CITY
+                            ? "bg-white text-skyblue-01"
+                            : "bg-grey-01 text-grey-04"
+                        )}
+                      >
+                        <button onClick={() => onClickCity(CITY)}>
+                          {CITY}
+                        </button>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+              <div className="grow w-[50%] bg-white">
+                <ul className="flex flex-col w-[100%] h-[100%] overflow-y-scroll">
+                  {CITY_GU_MAP[newSelectedCity].map((GU, index) => {
+                    return (
+                      <li
+                        key={index}
+                        className={classNames(
+                          "center h-[48px] shrink-0",
+                          newSelectedGu === GU && "text-skyblue-01"
+                        )}
+                      >
+                        <button onClick={() => onClickGu(GU)}>{GU}</button>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            </div>
+            <BottomButtonTabWrapper>
+              <Button height={48} onClick={onClickSetting} fullWidth>
+                설정하기
+              </Button>
+            </BottomButtonTabWrapper>
+          </main>
+        </>
+      )}
       {isTownSelectionModalOpen && (
         <>
           <Header>
@@ -122,7 +190,11 @@ export default function MapPage() {
           </main>
         </>
       )}
-      <main className={classNames(!isTownSelectionModalOpen ? "" : "hidden")}>
+      <main
+        className={classNames(
+          !isTownSelectionModalOpen && !isFilterModalOpen ? "" : "hidden"
+        )}
+      >
         <Header>
           <Header.LeftOption
             townName={currentSelectedGu}
@@ -130,7 +202,14 @@ export default function MapPage() {
           />
           <Header.RightOption option={{ search: true, like: true }} />
         </Header>
-        <Map />
+        <KaKaoMap>
+          <button
+            className="absolute top-0 left-0 z-[2]"
+            onClick={onClickFilter}
+          >
+            {appliedFilters ? <FilterFilled /> : <Filter />}
+          </button>
+        </KaKaoMap>
         <CustomBottomSheet
           open={true}
           defaultSnap={20}
