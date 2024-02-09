@@ -52,17 +52,16 @@ export default function MapPage() {
     setCityAndGuSelection(newCityAndGuSelection);
   };
 
-  const onClickSetting = () => {
+  const onClickSetting = () =>
     setCityAndGuSelection({
       ...cityAndGuSelection,
       currentSelectedCity: cityAndGuSelection.newSelectedCity,
       currentSelectedGu: cityAndGuSelection.newSelectedGu,
     });
-  };
 
   return (
     <>
-      {isTownSelectionModalOpen ? (
+      {isTownSelectionModalOpen && (
         <>
           <Header>
             <Header.LeftOption
@@ -74,7 +73,7 @@ export default function MapPage() {
             />
             <Header.MiddleText text="지역설정" />
           </Header>
-          <main>
+          <main className="z-[5]">
             <div className="flex grow h-[0]">
               <div className="h-[100%] w-[50%] bg-grey-01">
                 <ul className="flex flex-col w-[100%] grow">
@@ -97,7 +96,7 @@ export default function MapPage() {
                   })}
                 </ul>
               </div>
-              <div className="grow w-[50%]">
+              <div className="grow w-[50%] bg-white">
                 <ul className="flex flex-col w-[100%] h-[100%] overflow-y-scroll">
                   {CITY_GU_MAP[newSelectedCity].map((GU, index) => {
                     return (
@@ -122,40 +121,37 @@ export default function MapPage() {
             </BottomButtonTabWrapper>
           </main>
         </>
-      ) : (
-        <>
-          <Header>
-            <Header.LeftOption
-              townName={currentSelectedGu}
-              onClickTownSelection={onClickTownSelection}
-            />
-            <Header.RightOption option={{ search: true, like: true }} />
-          </Header>
-          <main>
-            <Map />
-            <CustomBottomSheet
-              open={true}
-              defaultSnap={20}
-              snapPoints={({ maxHeight }) => [
-                20,
-                maxHeight / 2 - 45,
-                maxHeight - 68 - 48 - 74,
-              ]}
-            >
-              <ul>
-                {CONTENT_CARDS_DUMMY.map((cardItem, index) => {
-                  return (
-                    <li key={index}>
-                      <MapBottomSheetCard {...cardItem} />
-                    </li>
-                  );
-                })}
-              </ul>
-            </CustomBottomSheet>
-          </main>
-          <LinkableTab />
-        </>
       )}
+      <main className={classNames(!isTownSelectionModalOpen ? "" : "hidden")}>
+        <Header>
+          <Header.LeftOption
+            townName={currentSelectedGu}
+            onClickTownSelection={onClickTownSelection}
+          />
+          <Header.RightOption option={{ search: true, like: true }} />
+        </Header>
+        <Map />
+        <CustomBottomSheet
+          open={true}
+          defaultSnap={20}
+          snapPoints={({ maxHeight }) => [
+            20,
+            maxHeight / 2 - 45,
+            maxHeight - 68 - 48 - 74,
+          ]}
+        >
+          <ul>
+            {CONTENT_CARDS_DUMMY.map((cardItem, index) => {
+              return (
+                <li key={index}>
+                  <MapBottomSheetCard {...cardItem} />
+                </li>
+              );
+            })}
+          </ul>
+        </CustomBottomSheet>
+        <LinkableTab />
+      </main>
     </>
   );
 }
