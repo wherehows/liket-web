@@ -26,6 +26,7 @@ const CustomBottomSheet = ({
 }: CustomBottomSheetProps) => {
   return (
     <>
+      {/* 바텀 시트 z-index가 기본적으로 4이므로, 4보다 한 단계 낮은 3으로 설정 */}
       {open && onClickBackDrop && (
         <div
           className="bg-black bg-opacity-60 fixed z-[3] top-0 bottom-0 left-0 right-0"
