@@ -124,11 +124,11 @@ const Carousel = ({ imgs }: CarouselProps) => {
                 key={index}
                 src={img}
                 width={390}
+                height={336}
                 style={{
                   width: "100%",
-                  height: "280px",
+                  height: "336px",
                 }}
-                height={280}
                 alt="테스트 이미지"
                 loading="eager"
                 draggable={false}
