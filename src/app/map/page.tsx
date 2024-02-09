@@ -14,6 +14,7 @@ import MapBottomSheetCard, {
 } from "@/components/Card/MapBottomSheetCard";
 import FilterFilled from "@/icons/filter-filled-36.svg";
 import Filter from "@/icons/filter-36.svg";
+import ButtonGroup from "@/components/ButtonGroup";
 
 export default function MapPage() {
   const searchParams = useSearchParams();
@@ -59,12 +60,20 @@ export default function MapPage() {
     setCityAndGuSelection(newCityAndGuSelection);
   };
 
-  const onClickSetting = () =>
+  const onClickSettingNeighbor = () =>
     setCityAndGuSelection({
       ...cityAndGuSelection,
       currentSelectedCity: cityAndGuSelection.newSelectedCity,
       currentSelectedGu: cityAndGuSelection.newSelectedGu,
     });
+
+  const onClickInitialize = () => {
+    setAppliedFilters(false);
+  };
+  const onClickSettingFilter = () => {
+    router.back();
+    setAppliedFilters(true);
+  };
 
   return (
     <>
@@ -81,50 +90,21 @@ export default function MapPage() {
             <Header.MiddleText text="필터" />
           </Header>
           <main className="z-[5]">
-            <div className="flex grow h-[0]">
-              <div className="h-[100%] w-[50%] bg-grey-01">
-                <ul className="flex flex-col w-[100%] grow">
-                  {CITYS.map((CITY, index) => {
-                    return (
-                      <li
-                        key={index}
-                        className={classNames(
-                          "center h-[48px]",
-                          newSelectedCity === CITY
-                            ? "bg-white text-skyblue-01"
-                            : "bg-grey-01 text-grey-04"
-                        )}
-                      >
-                        <button onClick={() => onClickCity(CITY)}>
-                          {CITY}
-                        </button>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
-              <div className="grow w-[50%] bg-white">
-                <ul className="flex flex-col w-[100%] h-[100%] overflow-y-scroll">
-                  {CITY_GU_MAP[newSelectedCity].map((GU, index) => {
-                    return (
-                      <li
-                        key={index}
-                        className={classNames(
-                          "center h-[48px] shrink-0",
-                          newSelectedGu === GU && "text-skyblue-01"
-                        )}
-                      >
-                        <button onClick={() => onClickGu(GU)}>{GU}</button>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
-            </div>
+            <div className="flex grow h-[0] bg-white"></div>
             <BottomButtonTabWrapper>
-              <Button height={48} onClick={onClickSetting} fullWidth>
-                설정하기
-              </Button>
+              <ButtonGroup gap={16}>
+                <Button
+                  height={48}
+                  onClick={onClickInitialize}
+                  variant="ghost"
+                  fullWidth
+                >
+                  초기화
+                </Button>
+                <Button height={48} onClick={onClickSettingFilter} fullWidth>
+                  설정하기
+                </Button>
+              </ButtonGroup>
             </BottomButtonTabWrapper>
           </main>
         </>
@@ -183,7 +163,7 @@ export default function MapPage() {
               </div>
             </div>
             <BottomButtonTabWrapper>
-              <Button height={48} onClick={onClickSetting} fullWidth>
+              <Button height={48} onClick={onClickSettingNeighbor} fullWidth>
                 설정하기
               </Button>
             </BottomButtonTabWrapper>
