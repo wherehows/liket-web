@@ -16,8 +16,12 @@ import MapBottomSheetCard, {
 export default function MapPage() {
   const searchParams = useSearchParams();
   const isTownSelectionModalOpen = searchParams.get("isTownSelectionModalOpen");
-  const [citySelection, setCitySelection] = useState("서울");
-  const [guSelection, setGuSelection] = useState("동대문구1");
+  const [cityAndGuSelection, setCityAndGuSelection] = useState(
+    INITIAL_CITY_AND_GU_SELECTION
+  );
+
+  const { currentSelectedGu, newSelectedCity, newSelectedGu } =
+    cityAndGuSelection;
 
   const router = useRouter();
   const pathname = usePathname();
@@ -28,52 +32,36 @@ export default function MapPage() {
 
   const onCloseTownSelection = () => {
     router.back();
+    setCityAndGuSelection({
+      ...cityAndGuSelection,
+      newSelectedCity: cityAndGuSelection.currentSelectedCity,
+      newSelectedGu: cityAndGuSelection.currentSelectedGu,
+    });
   };
 
   const onClickGu = (gu: string) => {
-    setGuSelection(gu);
+    const newCityAndGuSelection = { ...cityAndGuSelection };
+    newCityAndGuSelection.newSelectedGu = gu;
+    setCityAndGuSelection(newCityAndGuSelection);
   };
 
-  const CITYS_DUMMY = ["서울", "인천", "경기"];
-  const GUS_DUMMY = [
-    "동대문구1",
-    "도봉구2",
-    "동작구3",
-    "서대문구4",
-    "마포구5",
-    "서초구6",
-    "동작구7",
-    "서대문구8",
-    "마포구9",
-    "서초구10",
-    "동작구11",
-    "서대문구12",
-    "마포구1",
-    "서초구2",
-    "동작구3",
-    "서대문구4",
-    "마포구5",
-    "서초구6",
-    "마포구23",
-    "서초구22",
-    "동작구31",
-    "서대문구24",
-    "마포구53",
-    "서초구61",
-    "서대문구234",
-    "마포구532",
-    "서초구61",
-    "마포구223",
-    "서초구212",
-    "동작구331",
-    "서대문구224",
-    "마포구532",
-    "서초구631",
-  ];
+  const onClickCity = (city: (typeof CITYS)[number]) => {
+    const newCityAndGuSelection = { ...cityAndGuSelection };
+    newCityAndGuSelection.newSelectedCity = city;
+    newCityAndGuSelection.newSelectedGu = CITY_GU_MAP[city][0];
+    setCityAndGuSelection(newCityAndGuSelection);
+  };
+
+  const onClickSetting = () =>
+    setCityAndGuSelection({
+      ...cityAndGuSelection,
+      currentSelectedCity: cityAndGuSelection.newSelectedCity,
+      currentSelectedGu: cityAndGuSelection.newSelectedGu,
+    });
 
   return (
     <>
-      {isTownSelectionModalOpen ? (
+      {isTownSelectionModalOpen && (
         <>
           <Header>
             <Header.LeftOption
@@ -85,36 +73,38 @@ export default function MapPage() {
             />
             <Header.MiddleText text="지역설정" />
           </Header>
-          <main>
+          <main className="z-[5]">
             <div className="flex grow h-[0]">
               <div className="h-[100%] w-[50%] bg-grey-01">
                 <ul className="flex flex-col w-[100%] grow">
-                  {CITYS_DUMMY.map((CITY, index) => {
+                  {CITYS.map((CITY, index) => {
                     return (
                       <li
                         key={index}
                         className={classNames(
                           "center h-[48px]",
-                          citySelection === CITY
+                          newSelectedCity === CITY
                             ? "bg-white text-skyblue-01"
                             : "bg-grey-01 text-grey-04"
                         )}
                       >
-                        <button>{CITY}</button>
+                        <button onClick={() => onClickCity(CITY)}>
+                          {CITY}
+                        </button>
                       </li>
                     );
                   })}
                 </ul>
               </div>
-              <div className="grow w-[50%]">
+              <div className="grow w-[50%] bg-white">
                 <ul className="flex flex-col w-[100%] h-[100%] overflow-y-scroll">
-                  {GUS_DUMMY.map((GU, index) => {
+                  {CITY_GU_MAP[newSelectedCity].map((GU, index) => {
                     return (
                       <li
                         key={index}
                         className={classNames(
                           "center h-[48px] shrink-0",
-                          guSelection === GU && "text-skyblue-01"
+                          newSelectedGu === GU && "text-skyblue-01"
                         )}
                       >
                         <button onClick={() => onClickGu(GU)}>{GU}</button>
@@ -125,46 +115,98 @@ export default function MapPage() {
               </div>
             </div>
             <BottomButtonTabWrapper>
-              <Button height={48} onClick={() => {}} fullWidth>
+              <Button height={48} onClick={onClickSetting} fullWidth>
                 설정하기
               </Button>
             </BottomButtonTabWrapper>
           </main>
         </>
-      ) : (
-        <>
-          <Header>
-            <Header.LeftOption
-              townName={guSelection}
-              onClickTownSelection={onClickTownSelection}
-            />
-            <Header.RightOption option={{ search: true, like: true }} />
-          </Header>
-          <main>
-            <Map />
-            <CustomBottomSheet
-              open={true}
-              defaultSnap={20}
-              snapPoints={({ maxHeight }) => [
-                20,
-                maxHeight / 2 - 45,
-                maxHeight - 68 - 48 - 74,
-              ]}
-            >
-              <ul>
-                {CONTENT_CARDS_DUMMY.map((cardItem, index) => {
-                  return (
-                    <li key={index}>
-                      <MapBottomSheetCard {...cardItem} />
-                    </li>
-                  );
-                })}
-              </ul>
-            </CustomBottomSheet>
-          </main>
-          <LinkableTab />
-        </>
       )}
+      <main className={classNames(!isTownSelectionModalOpen ? "" : "hidden")}>
+        <Header>
+          <Header.LeftOption
+            townName={currentSelectedGu}
+            onClickTownSelection={onClickTownSelection}
+          />
+          <Header.RightOption option={{ search: true, like: true }} />
+        </Header>
+        <Map />
+        <CustomBottomSheet
+          open={true}
+          defaultSnap={20}
+          snapPoints={({ maxHeight }) => [
+            20,
+            maxHeight / 2 - 45,
+            maxHeight - 68 - 48 - 74,
+          ]}
+        >
+          <ul>
+            {CONTENT_CARDS_DUMMY.map((cardItem, index) => {
+              return (
+                <li key={index}>
+                  <MapBottomSheetCard {...cardItem} />
+                </li>
+              );
+            })}
+          </ul>
+        </CustomBottomSheet>
+        <LinkableTab />
+      </main>
     </>
   );
 }
+
+const SEOUL_GU_DUMMY = [
+  "동대문구1",
+  "도봉구2",
+  "동작구3",
+  "서대문구4",
+  "마포구5",
+  "서초구6",
+  "동작구7",
+  "서대문구8",
+  "마포구9",
+  "서초구10",
+  "동작구11",
+  "서대문구12",
+  "마포구1",
+  "서초구2",
+  "동작구3",
+  "서대문구4",
+  "마포구5",
+  "서초구6",
+  "마포구23",
+  "서초구22",
+  "동작구31",
+  "서대문구24",
+  "마포구53",
+  "서초구61",
+  "서대문구234",
+  "마포구532",
+  "서초구61",
+  "마포구223",
+  "서초구212",
+  "동작구331",
+  "서대문구224",
+  "마포구532",
+  "서초구631",
+];
+
+const INCHENON_GU_DUMMY = ["미추홀구", "부평구"];
+
+const GYEONGGI_GU_DUMMY = ["아모르겠구", "이세구"];
+
+const CITY_GU_MAP = {
+  서울광역시: SEOUL_GU_DUMMY,
+  인천광역시: INCHENON_GU_DUMMY,
+  경기도: GYEONGGI_GU_DUMMY,
+} as const;
+
+const CITYS = Object.keys(CITY_GU_MAP) as Array<keyof typeof CITY_GU_MAP>;
+
+const INITIAL_CITY_AND_GU_SELECTION = {
+  currentSelectedCity: CITYS[0],
+  currentSelectedGu: CITY_GU_MAP[CITYS[0]][0],
+  newSelectedCity: CITYS[0],
+  newSelectedGu: CITY_GU_MAP[CITYS[0]][0],
+};
