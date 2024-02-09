@@ -16,9 +16,12 @@ import MapBottomSheetCard, {
 export default function MapPage() {
   const searchParams = useSearchParams();
   const isTownSelectionModalOpen = searchParams.get("isTownSelectionModalOpen");
-  const [citySelection, setCitySelection] = useState(CITYS[0]);
-  const [guList, setGuList] = useState(CITY_GU_MAP[citySelection]);
-  const [guSelection, setGuSelection] = useState("동대문구1");
+  const [cityAndGuSelection, setCityAndGuSelection] = useState(
+    INITIAL_CITY_AND_GU_SELECTION
+  );
+
+  const { currentSelectedGu, newSelectedCity, newSelectedGu } =
+    cityAndGuSelection;
 
   const router = useRouter();
   const pathname = usePathname();
@@ -29,15 +32,32 @@ export default function MapPage() {
 
   const onCloseTownSelection = () => {
     router.back();
+    setCityAndGuSelection({
+      ...cityAndGuSelection,
+      newSelectedCity: cityAndGuSelection.currentSelectedCity,
+      newSelectedGu: cityAndGuSelection.currentSelectedGu,
+    });
   };
 
   const onClickGu = (gu: string) => {
-    setGuSelection(gu);
+    const newCityAndGuSelection = { ...cityAndGuSelection };
+    newCityAndGuSelection.newSelectedGu = gu;
+    setCityAndGuSelection(newCityAndGuSelection);
   };
 
   const onClickCity = (city: (typeof CITYS)[number]) => {
-    setCitySelection(city);
-    setGuList(CITY_GU_MAP[city]);
+    const newCityAndGuSelection = { ...cityAndGuSelection };
+    newCityAndGuSelection.newSelectedCity = city;
+    newCityAndGuSelection.newSelectedGu = CITY_GU_MAP[city][0];
+    setCityAndGuSelection(newCityAndGuSelection);
+  };
+
+  const onClickSetting = () => {
+    setCityAndGuSelection({
+      ...cityAndGuSelection,
+      currentSelectedCity: cityAndGuSelection.newSelectedCity,
+      currentSelectedGu: cityAndGuSelection.newSelectedGu,
+    });
   };
 
   return (
@@ -64,7 +84,7 @@ export default function MapPage() {
                         key={index}
                         className={classNames(
                           "center h-[48px]",
-                          citySelection === CITY
+                          newSelectedCity === CITY
                             ? "bg-white text-skyblue-01"
                             : "bg-grey-01 text-grey-04"
                         )}
@@ -79,13 +99,13 @@ export default function MapPage() {
               </div>
               <div className="grow w-[50%]">
                 <ul className="flex flex-col w-[100%] h-[100%] overflow-y-scroll">
-                  {guList.map((GU, index) => {
+                  {CITY_GU_MAP[newSelectedCity].map((GU, index) => {
                     return (
                       <li
                         key={index}
                         className={classNames(
                           "center h-[48px] shrink-0",
-                          guSelection === GU && "text-skyblue-01"
+                          newSelectedGu === GU && "text-skyblue-01"
                         )}
                       >
                         <button onClick={() => onClickGu(GU)}>{GU}</button>
@@ -96,7 +116,7 @@ export default function MapPage() {
               </div>
             </div>
             <BottomButtonTabWrapper>
-              <Button height={48} onClick={() => {}} fullWidth>
+              <Button height={48} onClick={onClickSetting} fullWidth>
                 설정하기
               </Button>
             </BottomButtonTabWrapper>
@@ -106,7 +126,7 @@ export default function MapPage() {
         <>
           <Header>
             <Header.LeftOption
-              townName={guSelection}
+              townName={currentSelectedGu}
               onClickTownSelection={onClickTownSelection}
             />
             <Header.RightOption option={{ search: true, like: true }} />
@@ -187,3 +207,10 @@ const CITY_GU_MAP = {
 } as const;
 
 const CITYS = Object.keys(CITY_GU_MAP) as Array<keyof typeof CITY_GU_MAP>;
+
+const INITIAL_CITY_AND_GU_SELECTION = {
+  currentSelectedCity: CITYS[0],
+  currentSelectedGu: CITY_GU_MAP[CITYS[0]][0],
+  newSelectedCity: CITYS[0],
+  newSelectedGu: CITY_GU_MAP[CITYS[0]][0],
+};
