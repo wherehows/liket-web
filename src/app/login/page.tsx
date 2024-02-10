@@ -1,17 +1,25 @@
+"use client";
+
 import ColoredLogo from "@/icons/color-logo.svg";
 import KaKaoLogin from "@/icons/kakao-login.svg";
 import AppleLogin from "@/icons/apple-login.svg";
 import NaverLogin from "@/icons/naver-login.svg";
 import Header from "@/components/Header";
 import Divider from "@/components/Divider";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
-const Page = () => {
+export default function Page() {
+  const router = useRouter();
+
   return (
     <>
       <Header>
         <Header.LeftOption
           option={{
-            back: true,
+            back: {
+              onClick: () => router.back(),
+            },
           }}
         />
       </Header>
@@ -34,17 +42,18 @@ const Page = () => {
           <Divider height="1px" width="48px" />
         </div>
         <div className="flex items-center">
-          <button className="text-grey-03 text-button6 mr-[16px]">
+          <Link
+            href="/login/email"
+            className="text-grey-03 text-button6 mr-[16px]"
+          >
             이메일로 로그인
-          </button>
+          </Link>
           <Divider height="8px" width="1px" orientation="vertical" />
-          <button className="text-grey-03 text-button6 ml-[16px]">
+          <Link href="/signup" className="text-grey-03 text-button6 ml-[16px]">
             이메일로 회원가입
-          </button>
+          </Link>
         </div>
       </div>
     </>
   );
-};
-
-export default Page;
+}

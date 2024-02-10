@@ -5,6 +5,7 @@ import Button from "@/components/Button";
 import Header from "@/components/Header";
 import Input from "@/components/Input";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
 import { FormProvider, useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -14,6 +15,8 @@ const schema = z.object({
 });
 
 export default function Page() {
+  const router = useRouter();
+
   const methods = useForm({
     mode: "onBlur",
     defaultValues: {
@@ -35,7 +38,9 @@ export default function Page() {
       <Header>
         <Header.LeftOption
           option={{
-            close: true,
+            close: {
+              onClick: () => router.back(),
+            },
           }}
         />
         <Header.MiddleText text="로그인" />

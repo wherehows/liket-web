@@ -5,6 +5,7 @@ import Button from "@/components/Button";
 import Header from "@/components/Header";
 import Input from "@/components/Input";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { z } from "zod";
@@ -15,6 +16,8 @@ const schema = z.object({
 });
 
 const SignUpPage = () => {
+  const router = useRouter();
+
   const methods = useForm({
     mode: "onBlur",
     defaultValues: {
@@ -31,7 +34,9 @@ const SignUpPage = () => {
       <Header>
         <Header.LeftOption
           option={{
-            back: true,
+            back: {
+              onClick: () => router.back(),
+            },
           }}
         />
         <Header.MiddleText text="회원가입" />
