@@ -3,7 +3,7 @@
 import Header from "@/components/Header";
 import LinkableTab from "@/components/LinkableTab";
 import KaKaoMap from "@/components/KaKaoMap";
-import { useState } from "react";
+import { useState, MouseEvent } from "react";
 import { classNames } from "@/utils/helpers";
 import BottomButtonTabWrapper from "@/components/BottomButtonTabWrapper";
 import Button from "@/components/Button";
@@ -14,12 +14,33 @@ import MapBottomSheetCard, {
 } from "@/components/Card/MapBottomSheetCard";
 import FilterFilled from "@/icons/filter-filled-36.svg";
 import Filter from "@/icons/filter-36.svg";
+import ButtonGroup from "@/components/ButtonGroup";
+import {
+  AGES,
+  AGESType,
+  CITYSType,
+  GENRES,
+  GENRESType,
+  STYLES,
+  STYLESType,
+} from "@/utils/const";
+import Chip from "@/components/Chip";
 
 export default function MapPage() {
   const searchParams = useSearchParams();
   const isTownSelectionModalOpen = searchParams.get("isTownSelectionModalOpen");
   const isFilterModalOpen = searchParams.get("isFilterModalOpen");
-  const [appliedFilters, setAppliedFilters] = useState(false);
+  const [appliedFilters, setAppliedFilters] = useState<AppliedFiltersType>({
+    currentAges: [],
+    currentGenres: [],
+    currentStyles: [],
+    currentCities: [],
+    newGenres: [],
+    newCities: [],
+    newAges: [],
+    newStyles: [],
+  });
+
   const [cityAndGuSelection, setCityAndGuSelection] = useState(
     INITIAL_CITY_AND_GU_SELECTION
   );
@@ -37,7 +58,7 @@ export default function MapPage() {
     router.push(`${pathname}?isFilterModalOpen=true`);
   };
 
-  const onCloseTownSelection = () => {
+  const onCloseTownSelectionModal = () => {
     router.back();
     setCityAndGuSelection({
       ...cityAndGuSelection,
@@ -59,12 +80,98 @@ export default function MapPage() {
     setCityAndGuSelection(newCityAndGuSelection);
   };
 
-  const onClickSetting = () =>
+  const onClickSettingNeighbor = () =>
     setCityAndGuSelection({
       ...cityAndGuSelection,
       currentSelectedCity: cityAndGuSelection.newSelectedCity,
       currentSelectedGu: cityAndGuSelection.newSelectedGu,
     });
+
+  const onClickInitialize = () =>
+    setAppliedFilters({
+      ...appliedFilters,
+      newAges: [],
+      newCities: [],
+      newGenres: [],
+      newStyles: [],
+    });
+
+  const onClickSettingFilter = () => {
+    router.back();
+    const { currentAges, currentCities, currentGenres, currentStyles } =
+      appliedFilters;
+
+    setAppliedFilters({
+      ...appliedFilters,
+      newAges: currentAges,
+      newCities: currentCities,
+      newGenres: currentGenres,
+      newStyles: currentStyles,
+    });
+  };
+
+  const onCloseFilterSelectionModal = () => {
+    router.back();
+
+    const { currentAges, currentCities, currentGenres, currentStyles } =
+      appliedFilters;
+
+    setAppliedFilters({
+      ...appliedFilters,
+      newAges: currentAges,
+      newCities: currentCities,
+      newGenres: currentGenres,
+      newStyles: currentStyles,
+    });
+  };
+  const onClickOption = (
+    e: MouseEvent<HTMLUListElement>,
+    option: "장르" | "스타일" | "연령대" | "지역"
+  ) => {
+    const target = e.target as HTMLUListElement;
+
+    const textContent = target.textContent;
+
+    if (target.tagName !== "BUTTON" || !textContent) {
+      return;
+    }
+
+    const { newGenres, newCities, newAges, newStyles } = appliedFilters;
+
+    if (option === "장르") {
+      setAppliedFilters({
+        ...appliedFilters,
+        newGenres: getAppliedOptionList(
+          newGenres,
+          textContent
+        ) as AppliedFiltersType["newGenres"],
+      });
+    } else if (option === "스타일") {
+      setAppliedFilters({
+        ...appliedFilters,
+        newStyles: getAppliedOptionList(
+          newStyles,
+          textContent
+        ) as AppliedFiltersType["newStyles"],
+      });
+    } else if (option === "연령대") {
+      setAppliedFilters({
+        ...appliedFilters,
+        newAges: getAppliedOptionList(
+          newAges,
+          textContent
+        ) as AppliedFiltersType["newAges"],
+      });
+    } else if (option === "지역") {
+      setAppliedFilters({
+        ...appliedFilters,
+        newCities: getAppliedOptionList(
+          newCities,
+          textContent
+        ) as AppliedFiltersType["newCities"],
+      });
+    }
+  };
 
   return (
     <>
@@ -74,57 +181,62 @@ export default function MapPage() {
             <Header.LeftOption
               option={{
                 close: {
-                  onClick: onCloseTownSelection,
+                  onClick: onCloseFilterSelectionModal,
                 },
               }}
             />
             <Header.MiddleText text="필터" />
           </Header>
-          <main className="z-[5]">
-            <div className="flex grow h-[0]">
-              <div className="h-[100%] w-[50%] bg-grey-01">
-                <ul className="flex flex-col w-[100%] grow">
-                  {CITYS.map((CITY, index) => {
-                    return (
-                      <li
-                        key={index}
-                        className={classNames(
-                          "center h-[48px]",
-                          newSelectedCity === CITY
-                            ? "bg-white text-skyblue-01"
-                            : "bg-grey-01 text-grey-04"
-                        )}
-                      >
-                        <button onClick={() => onClickCity(CITY)}>
-                          {CITY}
-                        </button>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
-              <div className="grow w-[50%] bg-white">
-                <ul className="flex flex-col w-[100%] h-[100%] overflow-y-scroll">
-                  {CITY_GU_MAP[newSelectedCity].map((GU, index) => {
-                    return (
-                      <li
-                        key={index}
-                        className={classNames(
-                          "center h-[48px] shrink-0",
-                          newSelectedGu === GU && "text-skyblue-01"
-                        )}
-                      >
-                        <button onClick={() => onClickGu(GU)}>{GU}</button>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
+          <main className="z-[5] px-[24px]">
+            <div className="flex flex-col grow h-[0] bg-white gap-[48px] mt-[16px]">
+              {(["장르", "지역", "연령대", "스타일"] as const).map((option) => {
+                return (
+                  <div key={option} className="">
+                    <div className="text-h2 mb-[15px]">{option}</div>
+                    <ul
+                      onClick={(e) => onClickOption(e, option)}
+                      className="flex flex-wrap gap-[8px]"
+                    >
+                      {FILTER_OPTIONS[option].map((item) => {
+                        const { newGenres, newCities, newAges, newStyles } =
+                          appliedFilters;
+
+                        let isSelected = false;
+                        if (option === "장르") {
+                          isSelected = newGenres.includes(item as GENRESType);
+                        } else if (option === "스타일") {
+                          isSelected = newStyles.includes(item as STYLESType);
+                        } else if (option === "연령대") {
+                          isSelected = newAges.includes(item as AGESType);
+                        } else if (option === "지역") {
+                          isSelected = newCities.includes(item as CITYSType);
+                        }
+
+                        return (
+                          <li key={item}>
+                            <Chip isSelected={isSelected}>{item}</Chip>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </div>
+                );
+              })}
             </div>
             <BottomButtonTabWrapper>
-              <Button height={48} onClick={onClickSetting} fullWidth>
-                설정하기
-              </Button>
+              <ButtonGroup gap={16}>
+                <Button
+                  height={48}
+                  onClick={onClickInitialize}
+                  variant="ghost"
+                  fullWidth
+                >
+                  초기화
+                </Button>
+                <Button height={48} onClick={onClickSettingFilter} fullWidth>
+                  설정하기
+                </Button>
+              </ButtonGroup>
             </BottomButtonTabWrapper>
           </main>
         </>
@@ -135,7 +247,7 @@ export default function MapPage() {
             <Header.LeftOption
               option={{
                 close: {
-                  onClick: onCloseTownSelection,
+                  onClick: onCloseTownSelectionModal,
                 },
               }}
             />
@@ -183,7 +295,7 @@ export default function MapPage() {
               </div>
             </div>
             <BottomButtonTabWrapper>
-              <Button height={48} onClick={onClickSetting} fullWidth>
+              <Button height={48} onClick={onClickSettingNeighbor} fullWidth>
                 설정하기
               </Button>
             </BottomButtonTabWrapper>
@@ -207,7 +319,11 @@ export default function MapPage() {
             className="absolute top-0 left-0 z-[2]"
             onClick={onClickFilter}
           >
-            {appliedFilters ? <FilterFilled /> : <Filter />}
+            {isAppliedFilterExist(appliedFilters) ? (
+              <FilterFilled />
+            ) : (
+              <Filter />
+            )}
           </button>
         </KaKaoMap>
         <CustomBottomSheet
@@ -289,3 +405,46 @@ const INITIAL_CITY_AND_GU_SELECTION = {
   newSelectedCity: CITYS[0],
   newSelectedGu: CITY_GU_MAP[CITYS[0]][0],
 };
+
+const FILTER_OPTIONS = {
+  장르: GENRES,
+  지역: CITYS,
+  연령대: AGES,
+  스타일: STYLES,
+} as const;
+
+const isAppliedFilterExist = ({
+  currentAges,
+  currentCities,
+  currentGenres,
+  currentStyles,
+}: AppliedFiltersType) => {
+  return (
+    currentAges.length !== 0 ||
+    currentCities.length !== 0 ||
+    currentGenres.length !== 0 ||
+    currentStyles.length !== 0
+  );
+};
+
+const getAppliedOptionList = (
+  prevOptionList: string[],
+  targetOption: string
+) => {
+  if (prevOptionList.some((option) => option === targetOption)) {
+    return prevOptionList.filter((option) => option !== targetOption);
+  }
+
+  return [...prevOptionList, targetOption];
+};
+
+interface AppliedFiltersType {
+  currentGenres: GENRESType[];
+  currentAges: AGESType[];
+  currentStyles: STYLESType[];
+  currentCities: CITYSType[];
+  newGenres: GENRESType[];
+  newCities: CITYSType[];
+  newAges: AGESType[];
+  newStyles: STYLESType[];
+}

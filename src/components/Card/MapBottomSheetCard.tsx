@@ -1,7 +1,7 @@
 import { CONTENT_STATUSType, GENRESType } from "@/utils/const";
 import Link from "next/link";
 import Image from "next/image";
-import Chip from "../Chip";
+import Badge from "../Badge/Badge";
 import { colors } from "@/utils/style";
 import Like from "@/icons/like.svg";
 import ActiveLike from "@/icons/like-filled.svg";
@@ -129,7 +129,7 @@ const MapBottomSheetCard = ({
         <Image src={thumbnail} fill alt={`${title} 썸네일 이미지`} />
       </div>
       <div>
-        <Chip variant={status}>진행중</Chip>
+        <Badge variant={status}>진행중</Badge>
         <div className="text-body4 text-skyblue-01">{genre}</div>
         <h2 className="text-body2">{title}</h2>
         <div className="text-body5 text-grey-04">{location}</div>

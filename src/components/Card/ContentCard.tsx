@@ -2,7 +2,7 @@
 
 import { CONTENT_STATUSType, GENRESType } from "@/utils/const";
 import Image from "next/image";
-import Chip from "../Chip";
+import Badge from "../Badge/Badge";
 import { CSSProperties } from "react";
 import Like from "@/icons/like.svg";
 import ActiveLike from "@/icons/like-filled.svg";
@@ -20,7 +20,7 @@ export interface ContentCardProps {
   isLike: boolean;
 }
 
-const ChipStyle: CSSProperties = {
+const BadgeStyle: CSSProperties = {
   position: "absolute",
   left: "8px",
   top: "8px",
@@ -47,9 +47,9 @@ const ContentCard = ({
               alt={`${title}에 대한 포스터`}
             />
           </div>
-          <Chip variant={status} style={ChipStyle}>
+          <Badge variant={status} style={BadgeStyle}>
             진행중
-          </Chip>
+          </Badge>
           <button
             onClick={(e) => {
               e.preventDefault();

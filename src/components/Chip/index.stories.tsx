@@ -1,25 +1,73 @@
-import { StoryObj } from "@storybook/react";
+import { useState } from "react";
+import { MouseEvent } from "react";
 import Chip from ".";
+import { GENRES } from "@/utils/const";
 
-const meta = {
+export default {
   title: "components/Chip",
 };
 
-export default meta;
+const GENDER = ["남자", "여자"] as const;
 
-type IndexType = StoryObj<typeof Chip>;
+export const SingleSelectionChips = {
+  render: function Render() {
+    const [selectedGender, setSelcetedGender] = useState<
+      (typeof GENDER)[number]
+    >(GENDER[0]);
+    const onClickChip = (e: MouseEvent<HTMLUListElement>) => {
+      const target = e.target as HTMLUListElement;
 
-export const Index: IndexType = {
-  render: ({ variant }) => {
+      if (target.tagName === "BUTTON") {
+        setSelcetedGender(target.textContent as (typeof GENDER)[number]);
+      }
+    };
+
     return (
-      <div>
-        <Chip variant="willActive">오픈예정</Chip>
-        <Chip variant="active">진행중</Chip>
-        <Chip variant="willClosed">종료예정</Chip>
-        <Chip variant="closed">종료</Chip>
-        <Chip variant="waiting">등록대기</Chip>
-        <Chip variant="inactive">비활성화</Chip>
-      </div>
+      <ul
+        className="flex flex-wrap gap-[8px] w-[100%]"
+        onClick={(e) => onClickChip(e)}
+      >
+        {GENDER.map((gender) => {
+          return (
+            <li key={gender}>
+              <Chip isSelected={selectedGender === gender}>{gender}</Chip>
+            </li>
+          );
+        })}
+      </ul>
+    );
+  },
+};
+
+export const MultipleSelectionChips = {
+  render: function Render() {
+    const [selectedGenres, setSelectedGenres] = useState<
+      (typeof GENRES)[number][]
+    >([]);
+    const onClickChip = (e: MouseEvent<HTMLUListElement>) => {
+      const target = e.target as HTMLUListElement;
+
+      if (target.tagName === "BUTTON") {
+        setSelectedGenres([
+          ...selectedGenres,
+          target.textContent as (typeof GENRES)[number],
+        ]);
+      }
+    };
+
+    return (
+      <ul
+        className="flex flex-wrap gap-[8px] w-[100%]"
+        onClick={(e) => onClickChip(e)}
+      >
+        {GENRES.map((genre: (typeof GENRES)[number]) => {
+          return (
+            <li key={genre}>
+              <Chip isSelected={selectedGenres.includes(genre)}>{genre}</Chip>
+            </li>
+          );
+        })}
+      </ul>
     );
   },
 };
