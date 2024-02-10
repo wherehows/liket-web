@@ -20,20 +20,33 @@ export const CONTENT_STATUS = [
 
 export type CONTENT_STATUSType = (typeof CONTENT_STATUS)[number];
 
-export const CITYS = ["서울특별시", "인천광역시", "경기도"];
+export const CITYS = ["서울특별시", "인천광역시", "경기도"] as const;
 
-export const AGES = ["전체", "아이들", "10대", "20대", "30대", "4050대"];
+export type CITYSType = (typeof CITYS)[number];
+
+export const AGES = [
+  "전체",
+  "아이들",
+  "10대",
+  "20대",
+  "30대",
+  "4050대",
+] as const;
+
+export type AGESType = (typeof AGES)[number];
 
 export const STYLES = [
   "혼자",
   "함께",
   "반려동물",
-  "포토존",
   "체험",
   "굿즈",
   "재미있는",
   "귀여운",
+  "포토존",
   "세련된",
   "힙한",
   "미니멀",
-];
+] as const;
+
+export type STYLESType = (typeof STYLES)[number];
