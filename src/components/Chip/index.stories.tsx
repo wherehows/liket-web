@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { MouseEvent } from "react";
 import Chip from ".";
-import { GENRES, GENRESType } from "@/utils/const";
+import { GENRES } from "@/utils/const";
 
 export default {
   title: "components/Chip",
