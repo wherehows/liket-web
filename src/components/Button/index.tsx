@@ -4,6 +4,7 @@ import { variantToStyleMap, variantWithDisabledStyleMap } from "@/utils/style";
 
 type ButtonProps = StrictPropsWithChildren<
   {
+    type?: "button" | "submit";
     disabled?: boolean;
     variant?: keyof typeof variantToStyleMap;
     fullWidth?: boolean;
@@ -13,6 +14,7 @@ type ButtonProps = StrictPropsWithChildren<
   string
 >;
 const Button = ({
+  type = "button",
   disabled = false,
   variant = "primary",
   fullWidth = false,
@@ -22,6 +24,7 @@ const Button = ({
 }: ButtonProps) => {
   return (
     <button
+      type={type}
       disabled={disabled}
       style={{
         height,
