@@ -67,31 +67,79 @@ const LinkableTab = () => {
       >
         <ul>
           <li className="flex">
-            <Link
-              href="/create/review"
-              className="flex text-body3 items-center h-[48px] mx-[24px] grow"
-            >
-              <CreateReview className="mr-[8px]" />
-              리뷰 작성
-            </Link>
+            {isLoggedIn ? (
+              <Link
+                href="/create/review"
+                className="flex text-body3 items-center h-[48px] mx-[24px] grow"
+              >
+                <CreateReview className="mr-[8px]" />
+                리뷰 작성
+              </Link>
+            ) : (
+              <button
+                onClick={() => {
+                  openModal("LoginModal", {
+                    onClickPositive: () => {
+                      router.push("/create/review");
+                    },
+                  });
+                }}
+                className="flex text-body3 items-center h-[48px] mx-[24px] grow"
+              >
+                <CreateReview className="mr-[8px]" />
+                리뷰 작성
+              </button>
+            )}
           </li>
           <li className="flex">
-            <Link
-              href="/create/liket"
-              className="flex text-body3 items-center h-[48px] mx-[24px] grow"
-            >
-              <CreateLiket className="mr-[8px]" />
-              라이켓 제작
-            </Link>
+            {isLoggedIn ? (
+              <Link
+                href="/create/liket"
+                className="flex text-body3 items-center h-[48px] mx-[24px] grow"
+              >
+                <CreateLiket className="mr-[8px]" />
+                라이켓 제작
+              </Link>
+            ) : (
+              <button
+                onClick={() => {
+                  openModal("LoginModal", {
+                    onClickPositive: () => {
+                      router.push("/create/liket");
+                    },
+                  });
+                }}
+                className="flex text-body3 items-center h-[48px] mx-[24px] grow"
+              >
+                <CreateLiket className="mr-[8px]" />
+                라이켓 제작
+              </button>
+            )}
           </li>
           <li className="flex">
-            <Link
-              href="/create/route"
-              className="flex text-body3 items-center h-[48px] mx-[24px] grow"
-            >
-              <CreateRoute className="mr-[8px]" />
-              루트 짜기
-            </Link>
+            {isLoggedIn ? (
+              <Link
+                href="/create/route"
+                className="flex text-body3 items-center h-[48px] mx-[24px] grow"
+              >
+                <CreateRoute className="mr-[8px]" />
+                루트 짜기
+              </Link>
+            ) : (
+              <button
+                onClick={() => {
+                  openModal("LoginModal", {
+                    onClickPositive: () => {
+                      router.push("/create/route");
+                    },
+                  });
+                }}
+                className="flex text-body3 items-center h-[48px] mx-[24px] grow"
+              >
+                <CreateRoute className="mr-[8px]" />
+                루트 짜기
+              </button>
+            )}
           </li>
         </ul>
       </CustomBottomSheet>
