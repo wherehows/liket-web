@@ -146,6 +146,7 @@ const Carousel = ({ imgs }: CarouselProps) => {
           {imgs.map((_, index) => {
             return (
               <Control
+                key={index}
                 onClick={() => handleClickControl(index)}
                 isSelected={currentIndex === index}
               />
