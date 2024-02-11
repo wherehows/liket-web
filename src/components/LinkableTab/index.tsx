@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { ReactNode, useState } from "react";
 import HomeIcon from "@/icons/home.svg";
 import FilledHomeIcon from "@/icons/home-filled.svg";
@@ -16,6 +16,7 @@ import CustomBottomSheet from "../BottomSheet";
 import CreateReview from "@/icons/create-review-24.svg";
 import CreateLiket from "@/icons/create-liket-24.svg";
 import CreateRoute from "@/icons/create-route-24.svg";
+import useModalStore from "@/stores/modalStore";
 
 interface LinkTabProps {
   isSelected: boolean;
@@ -45,6 +46,7 @@ const LinkTab = ({
 };
 
 const LinkableTab = () => {
+  const router = useRouter();
   const pathname = usePathname();
   const [isWriteModalOpen, setIsWriteModalOpen] = useState(false);
   const onClickLink = (href: string) => {
@@ -52,6 +54,9 @@ const LinkableTab = () => {
       setIsWriteModalOpen(false);
     }
   };
+
+  const isLoggedIn = false;
+  const openModal = useModalStore(({ openModal }) => openModal);
 
   return (
     <>
@@ -120,13 +125,30 @@ const LinkableTab = () => {
             <CreateIcon color={colors.grey["02"]} />
           )}
         </button>
-        <LinkTab
-          href="/mypage"
-          isSelected={pathname === "/mypage" && !isWriteModalOpen}
-          icon={<MyPageIcon color={colors.grey["02"]} />}
-          onClickLink={onClickLink}
-          selectedIcon={<FilledMyPageIcon color={colors.skyblue["01"]} />}
-        />
+        {isLoggedIn ? (
+          <LinkTab
+            href="/mypage"
+            isSelected={pathname === "/mypage" && !isWriteModalOpen}
+            icon={<MyPageIcon color={colors.grey["02"]} />}
+            onClickLink={onClickLink}
+            selectedIcon={<FilledMyPageIcon color={colors.skyblue["01"]} />}
+          />
+        ) : (
+          <button
+            role="tab"
+            aria-selected={isWriteModalOpen}
+            className="h-fit"
+            onClick={() => {
+              openModal("LoginModal", {
+                onClickPositive: () => {
+                  router.push("/login");
+                },
+              });
+            }}
+          >
+            <MyPageIcon color={colors.grey["02"]} />
+          </button>
+        )}
       </div>
     </>
   );
