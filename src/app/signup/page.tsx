@@ -53,11 +53,6 @@ const profileScheme = z.object({
   password: z.string().min(8, "8자 이상 입력해주세요."),
 });
 
-const schema = z.object({
-  email: z.string().email("올바른 이메일을 입력해주세요."),
-  password: z.string().min(8, "8자 이상 입력해주세요."),
-});
-
 const SignUpPage = () => {
   const router = useRouter();
   const [funnelState, setFunnelState] = useState(INITIAL_FUNNEL_STATE);
