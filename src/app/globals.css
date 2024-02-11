@@ -58,6 +58,10 @@
   .col-expanded {
     @apply flex flex-col grow;
   }
+
+  .select {
+    @apply bg-[center_right_10px] bg-[url(/icons/down-arrow-24.svg)] bg-no-repeat border-[1px] border-solid border-grey-02 py-[8px] px-[10px] rounded-[20px] appearance-none;
+  }
 }
 
 /* react-spring-bottom-sheet */

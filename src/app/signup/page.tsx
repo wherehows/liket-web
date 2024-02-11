@@ -135,10 +135,7 @@ const EmailInput = () => {
           <div className="grow">
             <Input margin="0 0 34px 0">
               <Input.Label htmlFor="email">이메일</Input.Label>
-              <Input.Content
-                id="email"
-                placeholder="영문, 숫자 포함 4 ~ 12자"
-              />
+              <Input.Content id="email" placeholder="liket@email.com" />
               <Input.Button
                 disabled={
                   !!getFieldState("email").error ||
@@ -158,6 +155,7 @@ const EmailInput = () => {
                 placeholder="인증번호 6자리"
                 type="password"
               />
+              <input type="date" />
             </Input>
           </div>
           <BottomButtonTabWrapper>
@@ -305,6 +303,7 @@ const ProfileInput = () => {
             </Input>
             <Input>
               <Input.Label htmlFor="birth-year">연령</Input.Label>
+              <select></select>
             </Input>
           </div>
           <BottomButtonTabWrapper>
