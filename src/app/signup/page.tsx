@@ -2,6 +2,7 @@
 
 import BottomButtonTabWrapper from "@/components/BottomButtonTabWrapper";
 import Button from "@/components/Button";
+import Chip from "@/components/Chip";
 import Control from "@/components/Control";
 import Header from "@/components/Header";
 import Input from "@/components/Input";
@@ -26,31 +27,6 @@ const FunnelStateContext = createContext({
   inputFunnelState: (newState: typeof INITIAL_FUNNEL_STATE) => {
     newState;
   },
-});
-
-const emailVerificationScheme = z.object({
-  email: z.string().email("올바른 이메일을 입력해주세요."),
-  "verification-code": z.string().length(6, "6자를 입력해주세요"),
-});
-
-const passwordScheme = z
-  .object({
-    password: z
-      .string()
-      .min(8, "최소 8자리 이상 입력해야 합니다.")
-      .regex(/[a-zA-Z]/, "영문, 숫자, 특수문자 모두 포함해야 합니다.")
-      .regex(/[0-9]/, "영문, 숫자, 특수문자 모두 포함해야 합니다.")
-      .regex(/[^a-zA-Z0-9]/, "영문, 숫자, 특수문자 모두 포함해야 합니다."),
-    "confirm-password": z.string(),
-  })
-  .refine((data) => data.password === data["confirm-password"], {
-    message: "비밀번호가 일치하지 않습니다.",
-    path: ["confirm-password"],
-  });
-
-const profileScheme = z.object({
-  email: z.string().email("올바른 이메일을 입력해주세요."),
-  password: z.string().min(8, "8자 이상 입력해주세요."),
 });
 
 const SignUpPage = () => {
@@ -89,9 +65,9 @@ const SignUpPage = () => {
         <FunnelStateContext.Provider
           value={{ currentIndex, funnelState, inputFunnelState }}
         >
-          {currentIndex === 2 && <EmailInput />}
+          {currentIndex === 0 && <EmailInput />}
           {currentIndex === 1 && <PasswordInput />}
-          {currentIndex === 0 && <ProfileInput />}
+          {currentIndex === 2 && <ProfileInput />}
         </FunnelStateContext.Provider>
       </main>
     </>
@@ -99,6 +75,33 @@ const SignUpPage = () => {
 };
 
 export default SignUpPage;
+
+const emailVerificationScheme = z.object({
+  email: z.string().email("올바른 이메일을 입력해주세요."),
+  "verification-code": z.string().length(6, "6자를 입력해주세요"),
+});
+
+const passwordScheme = z
+  .object({
+    password: z
+      .string()
+      .min(8, "최소 8자리 이상 입력해야 합니다.")
+      .regex(/[a-zA-Z]/, "영문, 숫자, 특수문자 모두 포함해야 합니다.")
+      .regex(/[0-9]/, "영문, 숫자, 특수문자 모두 포함해야 합니다.")
+      .regex(/[^a-zA-Z0-9]/, "영문, 숫자, 특수문자 모두 포함해야 합니다."),
+    "confirm-password": z.string(),
+  })
+  .refine((data) => data.password === data["confirm-password"], {
+    message: "비밀번호가 일치하지 않습니다.",
+    path: ["confirm-password"],
+  });
+
+const profileScheme = z.object({
+  "profile-image": z.string(),
+  nickname: z.string().email("올바른 이메일을 입력해주세요."),
+  gender: z.string().min(8, "8자 이상 입력해주세요."),
+  "birth-year": z.string(),
+});
 
 const EmailInput = () => {
   const { funnelState, inputFunnelState } = useContext(FunnelStateContext);
@@ -242,6 +245,7 @@ const PasswordInput = () => {
 
 const ProfileInput = () => {
   const router = useRouter();
+  const [selectedGender, setSelectedGender] = useState("");
   const { funnelState, inputFunnelState } = useContext(FunnelStateContext);
 
   const methods = useForm({
@@ -265,6 +269,8 @@ const ProfileInput = () => {
     router.push("/");
   };
 
+  const handleClickGender = () => {};
+
   return (
     <>
       <FormProvider {...methods}>
@@ -273,17 +279,32 @@ const ProfileInput = () => {
           onSubmit={handleSubmit(onSubmit)}
         >
           <div className="grow">
+            <div>아바타 업로더</div>
             <Input margin="0 0 34px 0">
-              <Input.Label htmlFor="email">이메일</Input.Label>
-              <Input.Content id="email" placeholder="이메일 입력" />
-            </Input>
-            <Input margin="0 0 47px 0">
-              <Input.Label htmlFor="password">비밀번호</Input.Label>
+              <Input.Label htmlFor="email">닉네임</Input.Label>
               <Input.Content
-                id="password"
-                type="password"
-                placeholder="비밀번호 입력"
+                id="email"
+                placeholder="영문, 숫자 포함 2~15자 (중복 불가)"
               />
+            </Input>
+            <Input margin="0 0 34px 0">
+              <Input.Label htmlFor="gender">성별</Input.Label>
+              <ul
+                id="gender"
+                onClick={handleClickGender}
+                className="flex mt-[12px] gap-[8px]"
+              >
+                {["남자", "여자"].map((gender) => {
+                  return (
+                    <li key={gender}>
+                      <Chip isSelected={false}>{gender}</Chip>
+                    </li>
+                  );
+                })}
+              </ul>
+            </Input>
+            <Input>
+              <Input.Label htmlFor="birth-year">연령</Input.Label>
             </Input>
           </div>
           <BottomButtonTabWrapper>
