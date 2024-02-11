@@ -51,6 +51,7 @@ const Label = ({ currentLength, maxLength, htmlFor, children }: LabelProps) => {
 
 interface ContentProps {
   id: string;
+  maxLength?: number;
   type?: HTMLInputTypeAttribute;
   placeholder?: string;
   isRequired?: boolean;
@@ -58,6 +59,7 @@ interface ContentProps {
 
 const Content = ({
   id,
+  maxLength,
   type = "text",
   isRequired = false,
   placeholder,
@@ -73,11 +75,12 @@ const Content = ({
     <>
       <input
         className={classNames(
-          "box-border pl-[8px] pr-[8px] pt-[16px] pb-[15px] mb-[4px] text-body3 border-b-[1px] border-b-grey-01 focus:border-b-[2px] placeholder:text-button4 placeholder:text-grey-02",
+          "box-border pl-[8px] pr-[8px] pt-[16px] pb-[15px] text-body3 border-b-[1px] border-b-grey-01 focus:border-b-[2px] placeholder:text-button4 placeholder:text-grey-02",
           isErrorExist
             ? "border-b-[2px] border-b-rosepink-01 focus:border-b-rosepink-01"
             : "focus:border-b-skyblue-01"
         )}
+        maxLength={maxLength}
         id={id}
         type={type}
         placeholder={placeholder}
