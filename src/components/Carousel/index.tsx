@@ -5,6 +5,7 @@ import { getTouchEventData } from "@/utils/dom";
 import { classNames, getRefValue } from "@/utils/helpers";
 import Image from "next/image";
 import { useRef, useState } from "react";
+import Control from "../Control";
 
 const MIN_SWIPE_REQUIRED = 40;
 
@@ -144,13 +145,10 @@ const Carousel = ({ imgs }: CarouselProps) => {
         >
           {imgs.map((_, index) => {
             return (
-              <button
+              <Control
                 key={index}
                 onClick={() => handleClickControl(index)}
-                className={classNames(
-                  "w-[8px] h-[8px] rounded-[50%]",
-                  currentIndex === index ? "bg-skyblue-01" : "bg-grey-01"
-                )}
+                isSelected={currentIndex === index}
               />
             );
           })}
