@@ -1,3 +1,5 @@
+"use client";
+
 import { StrictPropsWithChildren } from "@/types/common";
 import { useEffect, useRef } from "react";
 import type { KeyboardEvent } from "react";

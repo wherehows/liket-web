@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import localFont from "next/font/local";
+import ModalProvider from "@/components/Modal/ModalProvider";
 
 export const appleGothic = localFont({
   src: [
@@ -55,7 +56,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko">
-      <body className={appleGothic.className}>{children}</body>
+      <ModalProvider>
+        <body className={appleGothic.className}>{children}</body>
+      </ModalProvider>
     </html>
   );
 }

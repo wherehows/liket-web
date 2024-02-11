@@ -1,5 +1,8 @@
 import dynamic from "next/dynamic";
-import useModalStore, { ModalInformation, ModalType } from "./store";
+import useModalStore, {
+  ModalInformation,
+  ModalType,
+} from "@/stores/modalStore";
 import { EmptyFunction } from "@/types/common";
 
 interface LazyComponent {
