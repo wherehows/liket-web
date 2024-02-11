@@ -11,8 +11,10 @@ export const Index = {
   render: function Render() {
     return (
       <div className="flex gap-[8px]">
-        {[0, 1, 2, 3, 4].map((number) => {
-          return <Control onClick={() => {}} isSelected={number === 0} />;
+        {[0, 1, 2, 3, 4].map((number, index) => {
+          return (
+            <Control key={index} onClick={() => {}} isSelected={number === 0} />
+          );
         })}
       </div>
     );
