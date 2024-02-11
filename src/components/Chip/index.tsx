@@ -15,7 +15,6 @@ const Chip = ({ children, isSelected }: ChipProps) => {
         "text-button4 rounded-[12px] border-solid border-[1px] px-[8px] h-[24px] center",
         isSelected && "text-white bg-skyblue-01 border-skyblue-01"
       )}
-      aria-selected={isSelected}
     >
       {children}
     </button>
