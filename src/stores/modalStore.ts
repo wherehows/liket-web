@@ -24,8 +24,8 @@ type Actions = {
   closeModal: (modalType: ModalType) => void;
 };
 
-const testStore = create<State & Actions>()(
-  immer((set, get) => ({
+const useModalStore = create<State & Actions>()(
+  immer((set) => ({
     modalInformation: {},
     modalList: [],
     openModal: (modalType, meta) => {
@@ -53,4 +53,4 @@ const testStore = create<State & Actions>()(
   }))
 );
 
-export default testStore;
+export default useModalStore;

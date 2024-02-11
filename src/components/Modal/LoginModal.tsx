@@ -2,7 +2,7 @@ import { EmptyFunction } from "@/types/common";
 import Modal from ".";
 import Button from "../Button";
 import ButtonGroup from "../ButtonGroup";
-import { ModalInformation } from "./store";
+import { ModalInformation } from "@/stores/modalStore";
 
 type LoginModalProps = ModalInformation & {
   onClose: EmptyFunction;
@@ -18,6 +18,7 @@ const LoginModal = ({ isOpen, onClose, meta }: LoginModalProps) => {
     onClose();
     meta?.onClickPositive && meta?.onClickPositive();
   };
+
   return (
     <Modal
       title="라이켓"

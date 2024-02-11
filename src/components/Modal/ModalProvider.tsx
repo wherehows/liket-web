@@ -1,4 +1,6 @@
-import useModalStore from "./store";
+"use client";
+
+import useModalStore from "@/stores/modalStore";
 import { StrictPropsWithChildren } from "@/types/common";
 import LazyComponent from "./LazyComponent";
 

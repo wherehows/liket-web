@@ -1,7 +1,7 @@
 import type { Meta } from "@storybook/react";
 
 import Modal from ".";
-import useModalStore from "./store";
+import useModalStore from "@/stores/modalStore";
 import ModalProvider from "./ModalProvider";
 import Button from "../Button";
 import ButtonGroup from "../ButtonGroup";

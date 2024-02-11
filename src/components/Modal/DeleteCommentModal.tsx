@@ -2,7 +2,7 @@ import { EmptyFunction } from "@/types/common";
 import Modal from ".";
 import Button from "../Button";
 import ButtonGroup from "../ButtonGroup";
-import { ModalInformation } from "./store";
+import { ModalInformation } from "@/stores/modalStore";
 
 type DeleteCommentModalProps = ModalInformation & {
   onClose: EmptyFunction;
