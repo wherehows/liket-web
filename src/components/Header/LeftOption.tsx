@@ -55,6 +55,7 @@ const LeftOption = ({
 
     const Back = back && (
       <button
+        key={"back"}
         onClick={() => {
           router.back();
         }}
@@ -65,6 +66,7 @@ const LeftOption = ({
 
     const Close = close && (
       <button
+        key={"close"}
         onClick={() => {
           if (typeof close === "object") {
             close.onClick && close.onClick();
