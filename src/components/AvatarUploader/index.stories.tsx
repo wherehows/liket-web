@@ -5,5 +5,7 @@ export default {
 };
 
 export const Index = {
-  render: () => <AvatarUploader />,
+  render: () => {
+    return <AvatarUploader onUploadImage={() => {}} />;
+  },
 };
