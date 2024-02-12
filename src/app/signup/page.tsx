@@ -1,5 +1,6 @@
 "use client";
 
+import AvatarUploader from "@/components/AvatarUploader";
 import BottomButtonTabWrapper from "@/components/BottomButtonTabWrapper";
 import Button from "@/components/Button";
 import Chip from "@/components/Chip";
@@ -8,7 +9,7 @@ import Header from "@/components/Header";
 import Input from "@/components/Input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, MouseEvent } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -65,9 +66,9 @@ const SignUpPage = () => {
         <FunnelStateContext.Provider
           value={{ currentIndex, funnelState, inputFunnelState }}
         >
-          {currentIndex === 0 && <EmailInput />}
+          {currentIndex === 2 && <EmailInput />}
           {currentIndex === 1 && <PasswordInput />}
-          {currentIndex === 2 && <ProfileInput />}
+          {currentIndex === 0 && <ProfileInput />}
         </FunnelStateContext.Provider>
       </main>
     </>
@@ -135,10 +136,7 @@ const EmailInput = () => {
           <div className="grow">
             <Input margin="0 0 34px 0">
               <Input.Label htmlFor="email">이메일</Input.Label>
-              <Input.Content
-                id="email"
-                placeholder="영문, 숫자 포함 4 ~ 12자"
-              />
+              <Input.Content id="email" placeholder="liket@email.com" />
               <Input.Button
                 disabled={
                   !!getFieldState("email").error ||
@@ -269,7 +267,14 @@ const ProfileInput = () => {
     router.push("/");
   };
 
-  const handleClickGender = () => {};
+  const handleClickGender = (e: MouseEvent<HTMLUListElement>) => {
+    const target = e.target as HTMLUListElement;
+
+    if (target.tagName === "BUTTON") {
+      const targetGender = target.textContent as "남성" | "여성";
+      setSelectedGender(targetGender === selectedGender ? "" : targetGender);
+    }
+  };
 
   return (
     <>
@@ -279,7 +284,9 @@ const ProfileInput = () => {
           onSubmit={handleSubmit(onSubmit)}
         >
           <div className="grow">
-            <div>아바타 업로더</div>
+            <div className="center mb-[34px]">
+              <AvatarUploader onUploadImage={() => {}} />
+            </div>
             <Input margin="0 0 34px 0">
               <Input.Label htmlFor="email">닉네임</Input.Label>
               <Input.Content
@@ -297,7 +304,9 @@ const ProfileInput = () => {
                 {["남자", "여자"].map((gender) => {
                   return (
                     <li key={gender}>
-                      <Chip isSelected={false}>{gender}</Chip>
+                      <Chip isSelected={selectedGender === gender}>
+                        {gender}
+                      </Chip>
                     </li>
                   );
                 })}
