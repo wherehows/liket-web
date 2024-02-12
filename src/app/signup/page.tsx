@@ -165,7 +165,7 @@ const EmailInput = () => {
               height={48}
               onClick={onClickNextButton}
             >
-              저장
+              다음
             </Button>
           </BottomButtonTabWrapper>
         </form>
@@ -232,7 +232,7 @@ const PasswordInput = () => {
               height={48}
               onClick={onClickNextButton}
             >
-              저장
+              다음
             </Button>
           </BottomButtonTabWrapper>
         </form>
@@ -288,7 +288,9 @@ const ProfileInput = () => {
               <AvatarUploader onUploadImage={() => {}} />
             </div>
             <Input margin="0 0 34px 0">
-              <Input.Label htmlFor="email">닉네임</Input.Label>
+              <Input.Label htmlFor="email">
+                닉네임 <span className="text-top">*</span>
+              </Input.Label>
               <Input.Content
                 id="email"
                 placeholder="영문, 숫자 포함 2~15자 (중복 불가)"
@@ -323,7 +325,7 @@ const ProfileInput = () => {
               height={48}
               onClick={onClickNextButton}
             >
-              저장
+              라이켓 시작하기
             </Button>
           </BottomButtonTabWrapper>
         </form>
