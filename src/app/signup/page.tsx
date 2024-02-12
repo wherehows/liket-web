@@ -66,9 +66,9 @@ const SignUpPage = () => {
         <FunnelStateContext.Provider
           value={{ currentIndex, funnelState, inputFunnelState }}
         >
-          {currentIndex === 2 && <EmailInput />}
+          {currentIndex === 0 && <EmailInput />}
           {currentIndex === 1 && <PasswordInput />}
-          {currentIndex === 0 && <ProfileInput />}
+          {currentIndex === 2 && <ProfileInput />}
         </FunnelStateContext.Provider>
       </main>
     </>
