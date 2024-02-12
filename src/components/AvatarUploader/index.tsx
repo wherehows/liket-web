@@ -2,16 +2,19 @@ import { getRefValue } from "@/utils/helpers";
 import Image from "next/image";
 import { useRef, useState } from "react";
 
-const AvatarUploader = () => {
-  const [file, setFile] = useState<File | null>(null);
-  const imageUrl = file && URL.createObjectURL(file);
+interface AvatarUploaderProps {
+  onUploadImage: (url: string) => void;
+}
+
+const AvatarUploader = ({ onUploadImage }: AvatarUploaderProps) => {
+  const [url, setUrl] = useState<string>("");
   const inputRef = useRef<HTMLInputElement>(null);
 
   return (
     <div className="w-[80px] h-[80px] relative">
       <div className="w-[100%] h-[100%] rounded-full relative overflow-hidden">
         <Image
-          src={imageUrl ? imageUrl : "/icons/default-avatar.svg"}
+          src={url ? url : "/icons/default-avatar.svg"}
           alt="아바타 이미지"
           fill
           objectFit="cover"
@@ -25,7 +28,9 @@ const AvatarUploader = () => {
           const files = e.target.files;
 
           if (files) {
-            setFile(files[0]);
+            const url = URL.createObjectURL(files[0]);
+            setUrl(url);
+            onUploadImage(url);
           }
         }}
       />
