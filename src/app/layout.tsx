@@ -58,13 +58,15 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <ModalProvider>
-        <Toaster
-          position="bottom-center"
-          containerStyle={{
-            inset: "16px 16px 114px 16px",
-          }}
-        />
-        <body className={appleGothic.className}>{children}</body>
+        <body className={appleGothic.className}>
+          <Toaster
+            position="bottom-center"
+            containerStyle={{
+              inset: "16px 16px 114px 16px",
+            }}
+          />
+          {children}
+        </body>
       </ModalProvider>
     </html>
   );
