@@ -158,17 +158,17 @@ const EmailInput = () => {
               />
             </Input>
           </div>
-          <BottomButtonTabWrapper>
-            <Button
-              fullWidth
-              disabled={!isValid}
-              height={48}
-              onClick={onClickNextButton}
-            >
-              다음
-            </Button>
-          </BottomButtonTabWrapper>
         </form>
+        <BottomButtonTabWrapper>
+          <Button
+            fullWidth
+            disabled={!isValid}
+            height={48}
+            onClick={onClickNextButton}
+          >
+            다음
+          </Button>
+        </BottomButtonTabWrapper>
       </FormProvider>
     </>
   );
@@ -225,17 +225,17 @@ const PasswordInput = () => {
               />
             </Input>
           </div>
-          <BottomButtonTabWrapper>
-            <Button
-              fullWidth
-              disabled={!isValid}
-              height={48}
-              onClick={onClickNextButton}
-            >
-              다음
-            </Button>
-          </BottomButtonTabWrapper>
         </form>
+        <BottomButtonTabWrapper>
+          <Button
+            fullWidth
+            disabled={!isValid}
+            height={48}
+            onClick={onClickNextButton}
+          >
+            다음
+          </Button>
+        </BottomButtonTabWrapper>
       </FormProvider>
     </>
   );
@@ -318,17 +318,17 @@ const ProfileInput = () => {
               <Input.Label htmlFor="birth-year">연령</Input.Label>
             </Input>
           </div>
-          <BottomButtonTabWrapper>
-            <Button
-              fullWidth
-              disabled={!isValid}
-              height={48}
-              onClick={onClickNextButton}
-            >
-              라이켓 시작하기
-            </Button>
-          </BottomButtonTabWrapper>
         </form>
+        <BottomButtonTabWrapper>
+          <Button
+            fullWidth
+            disabled={!isValid}
+            height={48}
+            onClick={onClickNextButton}
+          >
+            라이켓 시작하기
+          </Button>
+        </BottomButtonTabWrapper>
       </FormProvider>
     </>
   );
