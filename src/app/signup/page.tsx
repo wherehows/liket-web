@@ -123,7 +123,7 @@ const EmailInput = () => {
 
   const onSubmit = () => {};
 
-  const { isValid } = formState;
+  const { isValid, isValidating } = formState;
 
   const onClickNextButton = () => {
     if (!isEmailVerified) {
@@ -149,7 +149,8 @@ const EmailInput = () => {
                 disabled={
                   !!getFieldState("email").error ||
                   !getFieldState("email").isDirty ||
-                  !getFieldState("email").isTouched
+                  !getFieldState("email").isTouched ||
+                  isValidating
                 }
                 onClick={() => {}}
               >
