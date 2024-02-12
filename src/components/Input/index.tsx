@@ -1,7 +1,7 @@
 import { EmptyFunction, StrictPropsWithChildren } from "@/types/common";
 import { classNames } from "@/utils/helpers";
 import { variantToStyleMap, variantWithDisabledStyleMap } from "@/utils/style";
-import { HTMLInputTypeAttribute } from "react";
+import { HTMLInputTypeAttribute, ReactNode } from "react";
 import { useFormContext } from "react-hook-form";
 
 type InputProps = StrictPropsWithChildren<{
@@ -25,7 +25,7 @@ interface LabelProps {
   maxLength?: number;
   currentLength?: number;
   htmlFor: string;
-  children: string;
+  children: ReactNode;
 }
 
 const Label = ({ currentLength, maxLength, htmlFor, children }: LabelProps) => {

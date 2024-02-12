@@ -7,10 +7,12 @@ import Chip from "@/components/Chip";
 import Control from "@/components/Control";
 import Header from "@/components/Header";
 import Input from "@/components/Input";
+import customToast from "@/utils/customToast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { createContext, useContext, useState, MouseEvent } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { z } from "zod";
 
 const INITIAL_FUNNEL_STATE = {
@@ -66,9 +68,9 @@ const SignUpPage = () => {
         <FunnelStateContext.Provider
           value={{ currentIndex, funnelState, inputFunnelState }}
         >
-          {currentIndex === 2 && <EmailInput />}
+          {currentIndex === 0 && <EmailInput />}
           {currentIndex === 1 && <PasswordInput />}
-          {currentIndex === 0 && <ProfileInput />}
+          {currentIndex === 2 && <ProfileInput />}
         </FunnelStateContext.Provider>
       </main>
     </>
@@ -106,6 +108,7 @@ const profileScheme = z.object({
 
 const EmailInput = () => {
   const { funnelState, inputFunnelState } = useContext(FunnelStateContext);
+  const isEmailVerified = false;
 
   const methods = useForm({
     mode: "onBlur",
@@ -120,9 +123,14 @@ const EmailInput = () => {
 
   const onSubmit = () => {};
 
-  const { isValid } = formState;
+  const { isValid, isValidating } = formState;
 
   const onClickNextButton = () => {
+    if (!isEmailVerified) {
+      customToast("올바른 인증번호를 입력해주세요.");
+      return;
+    }
+
     inputFunnelState({ ...funnelState });
   };
 
@@ -141,7 +149,8 @@ const EmailInput = () => {
                 disabled={
                   !!getFieldState("email").error ||
                   !getFieldState("email").isDirty ||
-                  !getFieldState("email").isTouched
+                  !getFieldState("email").isTouched ||
+                  isValidating
                 }
                 onClick={() => {}}
               >
@@ -158,17 +167,17 @@ const EmailInput = () => {
               />
             </Input>
           </div>
-          <BottomButtonTabWrapper>
-            <Button
-              fullWidth
-              disabled={!isValid}
-              height={48}
-              onClick={onClickNextButton}
-            >
-              저장
-            </Button>
-          </BottomButtonTabWrapper>
         </form>
+        <BottomButtonTabWrapper>
+          <Button
+            fullWidth
+            disabled={!isValid}
+            height={48}
+            onClick={onClickNextButton}
+          >
+            다음
+          </Button>
+        </BottomButtonTabWrapper>
       </FormProvider>
     </>
   );
@@ -225,17 +234,17 @@ const PasswordInput = () => {
               />
             </Input>
           </div>
-          <BottomButtonTabWrapper>
-            <Button
-              fullWidth
-              disabled={!isValid}
-              height={48}
-              onClick={onClickNextButton}
-            >
-              저장
-            </Button>
-          </BottomButtonTabWrapper>
         </form>
+        <BottomButtonTabWrapper>
+          <Button
+            fullWidth
+            disabled={!isValid}
+            height={48}
+            onClick={onClickNextButton}
+          >
+            다음
+          </Button>
+        </BottomButtonTabWrapper>
       </FormProvider>
     </>
   );
@@ -288,7 +297,9 @@ const ProfileInput = () => {
               <AvatarUploader onUploadImage={() => {}} />
             </div>
             <Input margin="0 0 34px 0">
-              <Input.Label htmlFor="email">닉네임</Input.Label>
+              <Input.Label htmlFor="email">
+                닉네임 <span className="text-top">*</span>
+              </Input.Label>
               <Input.Content
                 id="email"
                 placeholder="영문, 숫자 포함 2~15자 (중복 불가)"
@@ -316,17 +327,17 @@ const ProfileInput = () => {
               <Input.Label htmlFor="birth-year">연령</Input.Label>
             </Input>
           </div>
-          <BottomButtonTabWrapper>
-            <Button
-              fullWidth
-              disabled={!isValid}
-              height={48}
-              onClick={onClickNextButton}
-            >
-              저장
-            </Button>
-          </BottomButtonTabWrapper>
         </form>
+        <BottomButtonTabWrapper>
+          <Button
+            fullWidth
+            disabled={!isValid}
+            height={48}
+            onClick={onClickNextButton}
+          >
+            라이켓 시작하기
+          </Button>
+        </BottomButtonTabWrapper>
       </FormProvider>
     </>
   );
