@@ -7,10 +7,12 @@ import Chip from "@/components/Chip";
 import Control from "@/components/Control";
 import Header from "@/components/Header";
 import Input from "@/components/Input";
+import customToast from "@/utils/customToast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { createContext, useContext, useState, MouseEvent } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { z } from "zod";
 
 const INITIAL_FUNNEL_STATE = {
@@ -106,6 +108,7 @@ const profileScheme = z.object({
 
 const EmailInput = () => {
   const { funnelState, inputFunnelState } = useContext(FunnelStateContext);
+  const isEmailVerified = false;
 
   const methods = useForm({
     mode: "onBlur",
@@ -123,6 +126,11 @@ const EmailInput = () => {
   const { isValid } = formState;
 
   const onClickNextButton = () => {
+    if (!isEmailVerified) {
+      customToast("올바른 인증번호를 입력해주세요.");
+      return;
+    }
+
     inputFunnelState({ ...funnelState });
   };
 
