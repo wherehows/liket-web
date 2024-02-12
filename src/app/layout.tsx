@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import localFont from "next/font/local";
 import ModalProvider from "@/components/Modal/ModalProvider";
+import { Toaster } from "react-hot-toast";
 
 export const appleGothic = localFont({
   src: [
@@ -57,6 +58,12 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <ModalProvider>
+        <Toaster
+          position="bottom-center"
+          containerStyle={{
+            inset: "16px 16px 114px 16px",
+          }}
+        />
         <body className={appleGothic.className}>{children}</body>
       </ModalProvider>
     </html>
