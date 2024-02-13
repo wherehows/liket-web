@@ -12,7 +12,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { createContext, useContext, useState, MouseEvent } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import toast from "react-hot-toast";
 import { z } from "zod";
 
 const INITIAL_FUNNEL_STATE = {
@@ -68,9 +67,9 @@ const SignUpPage = () => {
         <FunnelStateContext.Provider
           value={{ currentIndex, funnelState, inputFunnelState }}
         >
-          {currentIndex === 0 && <EmailInput />}
-          {currentIndex === 1 && <PasswordInput />}
-          {currentIndex === 2 && <ProfileInput />}
+          {currentIndex === 0 && <EmailForm />}
+          {currentIndex === 1 && <PasswordForm />}
+          {currentIndex === 2 && <ProfileForm />}
         </FunnelStateContext.Provider>
       </main>
     </>
@@ -106,7 +105,7 @@ const profileScheme = z.object({
   "birth-year": z.string(),
 });
 
-const EmailInput = () => {
+const EmailForm = () => {
   const { funnelState, inputFunnelState } = useContext(FunnelStateContext);
   const isEmailVerified = false;
 
@@ -183,7 +182,7 @@ const EmailInput = () => {
   );
 };
 
-const PasswordInput = () => {
+const PasswordForm = () => {
   const { funnelState, inputFunnelState } = useContext(FunnelStateContext);
 
   const methods = useForm({
@@ -195,11 +194,11 @@ const PasswordInput = () => {
     resolver: zodResolver(passwordScheme),
   });
 
-  const { handleSubmit, formState, trigger } = methods;
+  const { handleSubmit, formState, trigger, watch } = methods;
 
   const onSubmit = () => {};
 
-  const { isValid } = formState;
+  const { isValid, dirtyFields } = formState;
 
   const onClickNextButton = () => {
     inputFunnelState({ ...funnelState });
@@ -220,6 +219,14 @@ const PasswordInput = () => {
                 type="password"
                 placeholder="영문, 숫자, 특수문자 포함 8~15자"
                 maxLength={15}
+                onChange={(value) => {
+                  if (
+                    value !== watch("password") &&
+                    dirtyFields["confirm-password"]
+                  ) {
+                    trigger("confirm-password");
+                  }
+                }}
               />
             </Input>
             <Input margin="0 0 47px 0">
@@ -250,7 +257,7 @@ const PasswordInput = () => {
   );
 };
 
-const ProfileInput = () => {
+const ProfileForm = () => {
   const router = useRouter();
   const [selectedGender, setSelectedGender] = useState("");
   const { funnelState, inputFunnelState } = useContext(FunnelStateContext);
