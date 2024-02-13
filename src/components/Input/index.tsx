@@ -55,6 +55,7 @@ interface ContentProps {
   type?: HTMLInputTypeAttribute;
   placeholder?: string;
   isRequired?: boolean;
+  onChange?: (value: string) => void;
 }
 
 const Content = ({
@@ -63,6 +64,7 @@ const Content = ({
   type = "text",
   isRequired = false,
   placeholder,
+  onChange,
 }: ContentProps) => {
   const {
     register,
@@ -86,7 +88,9 @@ const Content = ({
         placeholder={placeholder}
         aria-invalid={isErrorExist}
         aria-required={!!isRequired}
-        {...register(id)}
+        {...register(id, {
+          onChange,
+        })}
       />
       <strong
         className="transform translate-y-[100%] absolute bottom-0 text-button6 text-rosepink-01"
