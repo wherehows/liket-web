@@ -51,6 +51,14 @@
     @apply flex sticky bottom-0 bg-white w-[100%] h-[74px] min-h-[74px] shadow-[0px_-8px_16px_0px_rgba(0,0,0,0.04)];
   }
 
+  .bottom-sheet-list {
+    @apply flex text-body3 h-[48px] mx-[24px];
+  }
+
+  .bottom-sheet-button {
+    @apply flex items-center grow;
+  }
+
   .center {
     @apply flex justify-center items-center;
   }
@@ -69,5 +77,14 @@ div[data-rsbs-overlay],
 div[data-rsbs-backdrop] {
   margin: 0 auto;
   max-width: 600px;
+  border-radius: 24px 24px 0 0;
   bottom: var(--bottom-tab-height);
+}
+div[data-rsbs-header] {
+  padding-bottom: 12px;
+}
+
+/* drawer */
+.MuiPaper-root.MuiPaper-elevation {
+  border-radius: 24px 24px 0 0;
 }
