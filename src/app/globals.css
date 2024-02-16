@@ -79,3 +79,8 @@ div[data-rsbs-backdrop] {
   max-width: 600px;
   bottom: var(--bottom-tab-height);
 }
+
+/* drawer */
+.MuiPaper-root.MuiPaper-elevation {
+  border-radius: 24px 24px 0 0;
+}
