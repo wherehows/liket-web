@@ -51,6 +51,10 @@
     @apply flex sticky bottom-0 bg-white w-[100%] h-[74px] min-h-[74px] shadow-[0px_-8px_16px_0px_rgba(0,0,0,0.04)];
   }
 
+  .bottom-sheet-list {
+    @apply flex text-body3 h-[48px] mx-[24px];
+  }
+
   .center {
     @apply flex justify-center items-center;
   }
