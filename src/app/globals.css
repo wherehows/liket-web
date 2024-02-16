@@ -55,6 +55,10 @@
     @apply flex text-body3 h-[48px] mx-[24px];
   }
 
+  .bottom-sheet-button {
+    @apply flex items-center grow;
+  }
+
   .center {
     @apply flex justify-center items-center;
   }

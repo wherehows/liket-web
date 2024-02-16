@@ -66,12 +66,9 @@ const LinkableTab = () => {
         onClickBackDrop={() => setIsWriteModalOpen(false)}
       >
         <ul>
-          <li className="flex">
+          <li className="bottom-sheet-list">
             {isLoggedIn ? (
-              <Link
-                href="/create/review"
-                className="flex text-body3 items-center h-[48px] mx-[24px] grow"
-              >
+              <Link href="/create/review" className="bottom-sheet-button">
                 <CreateReview className="mr-[8px]" />
                 리뷰 작성
               </Link>
@@ -84,19 +81,16 @@ const LinkableTab = () => {
                     },
                   });
                 }}
-                className="flex text-body3 items-center h-[48px] mx-[24px] grow"
+                className="bottom-sheet-button"
               >
                 <CreateReview className="mr-[8px]" />
                 리뷰 작성
               </button>
             )}
           </li>
-          <li className="flex">
+          <li className="bottom-sheet-list">
             {isLoggedIn ? (
-              <Link
-                href="/create/liket"
-                className="flex text-body3 items-center h-[48px] mx-[24px] grow"
-              >
+              <Link href="/create/liket" className="bottom-sheet-button">
                 <CreateLiket className="mr-[8px]" />
                 라이켓 제작
               </Link>
@@ -109,19 +103,16 @@ const LinkableTab = () => {
                     },
                   });
                 }}
-                className="flex text-body3 items-center h-[48px] mx-[24px] grow"
+                className="bottom-sheet-button"
               >
                 <CreateLiket className="mr-[8px]" />
                 라이켓 제작
               </button>
             )}
           </li>
-          <li className="flex">
+          <li className="bottom-sheet-list">
             {isLoggedIn ? (
-              <Link
-                href="/create/route"
-                className="flex text-body3 items-center h-[48px] mx-[24px] grow"
-              >
+              <Link href="/create/route" className="bottom-sheet-button">
                 <CreateRoute className="mr-[8px]" />
                 루트 짜기
               </Link>
@@ -134,7 +125,7 @@ const LinkableTab = () => {
                     },
                   });
                 }}
-                className="flex text-body3 items-center h-[48px] mx-[24px] grow"
+                className="bottom-sheet-button"
               >
                 <CreateRoute className="mr-[8px]" />
                 루트 짜기
