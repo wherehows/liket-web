@@ -1,5 +1,6 @@
 import { useState, MouseEvent } from "react";
 import CustomBottomSheet from "../BottomSheet";
+import SmallDownArrow from "@/icons/down-arrow-small-24.svg";
 
 const ORDER_TYPE = ["최신순", "인기순"] as const;
 
@@ -16,7 +17,13 @@ const Index = ({ onChangeType }: Props) => {
 
   return (
     <>
-      <button onClick={onClickButton}>{orderType}</button>
+      <button
+        className="flex items-center text-button3"
+        onClick={onClickButton}
+      >
+        {orderType}
+        <SmallDownArrow />
+      </button>
       <CustomBottomSheet open={isBottomSheetOpen} title="정렬">
         <ul
           onClick={(e: MouseEvent<HTMLUListElement>) => {
