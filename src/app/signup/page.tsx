@@ -72,9 +72,9 @@ const SignUpPage = () => {
         <FunnelStateContext.Provider
           value={{ currentIndex, funnelState, inputFunnelState }}
         >
-          {currentIndex === 2 && <EmailForm />}
+          {currentIndex === 0 && <EmailForm />}
           {currentIndex === 1 && <PasswordForm />}
-          {currentIndex === 0 && <ProfileForm />}
+          {currentIndex === 2 && <ProfileForm />}
         </FunnelStateContext.Provider>
       </main>
     </>
@@ -372,7 +372,11 @@ const ProfileForm = () => {
           maxDate={dayjs(`${new Date().getFullYear() - 1}`)}
         />
         <div className="flex h-[98px] px-[24px]">
-          <Button height={48} fullWidth onClick={() => {}}>
+          <Button
+            height={48}
+            fullWidth
+            onClick={() => setIsYearSelectionDrawerOpen(false)}
+          >
             확인
           </Button>
         </div>
