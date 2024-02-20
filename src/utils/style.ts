@@ -123,6 +123,8 @@ const colors = {
   purple: "#45098c",
 };
 
+export const contentWidth = "600px";
+
 export const variantToStyleMap = {
   primary:
     "bg-skyblue-01 text-white hover:bg-skyblue-02 active:bg-skyblue-03 focus:outline-skyblue-02 focus:outline-offset-[1px] focus:outline-[2px]",

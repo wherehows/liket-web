@@ -1,4 +1,9 @@
-import { TypographyScale, ButtonScale, colors } from "./src/utils/style";
+import {
+  TypographyScale,
+  ButtonScale,
+  colors,
+  contentWidth,
+} from "./src/utils/style";
 import type { Config } from "tailwindcss";
 
 const config: Config = {
@@ -15,6 +20,9 @@ const config: Config = {
       },
       fontSize: { ...TypographyScale, ...ButtonScale },
       colors,
+      maxWidth: {
+        content: contentWidth,
+      },
     },
   },
   plugins: [],
