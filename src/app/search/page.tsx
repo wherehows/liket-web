@@ -2,9 +2,11 @@
 
 import SearchHeader from "@/components/SearchHeader";
 import { useStorage } from "@/hooks/useStorage";
-import { useState, MouseEvent } from "react";
+import { useState } from "react";
 import CategoryTab from "@/components/CategoryTab";
 import { GENRES } from "@/utils/const";
+import SmallSelectButton from "@/components/SelectButton/SmallSelectButton";
+import SamllDownArrow from "@/icons/down-arrow-small-24.svg";
 
 export default function Page() {
   const [searchText, setSearchText] = useState("");
@@ -35,6 +37,36 @@ export default function Page() {
           marginTop: "8px",
         }}
       />
+      <div className="flex ml-[24px] mt-[8px] mb-[11px] gap-[8px]">
+        <SmallSelectButton
+          placeholder="지역"
+          text=""
+          onClick={() => {}}
+          Icon={<SamllDownArrow />}
+        />
+        <SmallSelectButton
+          placeholder="연령대"
+          text=""
+          onClick={() => {}}
+          Icon={<SamllDownArrow />}
+        />
+        <SmallSelectButton
+          placeholder="스타일"
+          text=""
+          onClick={() => {}}
+          Icon={<SamllDownArrow />}
+        />
+      </div>
+      <div className="flex justify-between">
+        <div>진행중인 컨텐츠만 보기</div>
+        <SmallSelectButton
+          withBorder={false}
+          placeholder="최신순"
+          text=""
+          onClick={() => {}}
+          Icon={<SamllDownArrow />}
+        />
+      </div>
     </>
   );
 }

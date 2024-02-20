@@ -1,7 +1,7 @@
 import { EmptyFunction, StrictPropsWithChildren } from "@/types/common";
 import { classNames } from "@/utils/helpers";
 import { variantToStyleMap, variantWithDisabledStyleMap } from "@/utils/style";
-import { HTMLInputTypeAttribute, ReactNode } from "react";
+import { CSSProperties, HTMLInputTypeAttribute, ReactNode } from "react";
 import { useFormContext } from "react-hook-form";
 
 type InputProps = StrictPropsWithChildren<{
@@ -26,15 +26,24 @@ interface LabelProps {
   currentLength?: number;
   htmlFor: string;
   children: ReactNode;
+  style?: CSSProperties;
 }
 
-const Label = ({ currentLength, maxLength, htmlFor, children }: LabelProps) => {
+const Label = ({
+  currentLength,
+  maxLength,
+  htmlFor,
+  children,
+  style,
+}: LabelProps) => {
   const labelTextClassName = "text-caption text-grey-04";
 
   if (maxLength && currentLength) {
     return (
       <div className={`flex flex-row ${labelTextClassName}`}>
-        <label className="flex-1">{children}</label>
+        <label className="flex-1" style={style}>
+          {children}
+        </label>
         <div className="text-numbering3 text-grey-04">
           {currentLength} / {maxLength}
         </div>
@@ -43,7 +52,7 @@ const Label = ({ currentLength, maxLength, htmlFor, children }: LabelProps) => {
   }
 
   return (
-    <label className={labelTextClassName} htmlFor={htmlFor}>
+    <label className={labelTextClassName} htmlFor={htmlFor} style={style}>
       {children}
     </label>
   );

@@ -7,12 +7,17 @@ import Chip from "@/components/Chip";
 import Control from "@/components/Control";
 import Header from "@/components/Header";
 import Input from "@/components/Input";
+import MediumSelectButton from "@/components/SelectButton/MediumSelectButton";
 import customToast from "@/utils/customToast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { createContext, useContext, useState, MouseEvent } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { z } from "zod";
+import CalendarIcon from "@/icons/calendar.svg";
+import { YearCalendar } from "@mui/x-date-pickers";
+import CustomDrawer from "@/components/CustomDrawer";
+import dayjs from "dayjs";
 
 const INITIAL_FUNNEL_STATE = {
   email: "",
@@ -260,6 +265,8 @@ const PasswordForm = () => {
 const ProfileForm = () => {
   const router = useRouter();
   const [selectedGender, setSelectedGender] = useState("");
+  const [isYearSelectionDrawerOpen, setIsYearSelectionDrawerOpen] =
+    useState(false);
   const { funnelState, inputFunnelState } = useContext(FunnelStateContext);
 
   const methods = useForm({
@@ -331,7 +338,20 @@ const ProfileForm = () => {
               </ul>
             </Input>
             <Input>
-              <Input.Label htmlFor="birth-year">연령</Input.Label>
+              <Input.Label
+                style={{
+                  margin: "0 0 12px 0",
+                }}
+                htmlFor="birth-year"
+              >
+                연령
+              </Input.Label>
+              <MediumSelectButton
+                text=""
+                placeholder="출생년도"
+                onClick={() => setIsYearSelectionDrawerOpen(true)}
+                Icon={<CalendarIcon />}
+              />
             </Input>
           </div>
         </form>
@@ -346,6 +366,21 @@ const ProfileForm = () => {
           </Button>
         </BottomButtonTabWrapper>
       </FormProvider>
+      <CustomDrawer open={isYearSelectionDrawerOpen}>
+        <YearCalendar
+          minDate={dayjs(`${new Date().getFullYear() - 100}`)}
+          maxDate={dayjs(`${new Date().getFullYear() - 1}`)}
+        />
+        <div className="flex h-[98px] px-[24px]">
+          <Button
+            height={48}
+            fullWidth
+            onClick={() => setIsYearSelectionDrawerOpen(false)}
+          >
+            확인
+          </Button>
+        </div>
+      </CustomDrawer>
     </>
   );
 };

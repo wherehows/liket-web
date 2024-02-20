@@ -3,6 +3,7 @@ import "./globals.css";
 import localFont from "next/font/local";
 import ModalProvider from "@/components/Modal/ModalProvider";
 import { Toaster } from "react-hot-toast";
+import MuiLocalizationProvider from "@/components/MuiLocalizationProvider";
 
 export const appleGothic = localFont({
   src: [
@@ -59,13 +60,15 @@ export default function RootLayout({
     <html lang="ko">
       <ModalProvider>
         <body className={appleGothic.className}>
-          <Toaster
-            position="bottom-center"
-            containerStyle={{
-              inset: "16px 16px 114px 16px",
-            }}
-          />
-          {children}
+          <MuiLocalizationProvider>
+            <Toaster
+              position="bottom-center"
+              containerStyle={{
+                inset: "16px 16px 114px 16px",
+              }}
+            />
+            {children}
+          </MuiLocalizationProvider>
         </body>
       </ModalProvider>
     </html>
