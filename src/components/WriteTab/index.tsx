@@ -61,7 +61,7 @@ const WriteTab = ({
       <div
         role="tablist"
         aria-label="적용 가능 편집 리스트"
-        className="w-[100%] h-[100%] flex pl-[24px] pr-[24px] pb-[34px]"
+        className="w-[100%] h-[100%] flex pl-[24px] pr-[24px] pb-[34px] shadow-[0px_-8px_16px_0px_rgba(0,0,0,0.04)]"
       >
         {items.map(({ label }, index) => {
           const isSelected = index === selectedIndex;
@@ -75,7 +75,7 @@ const WriteTab = ({
               aria-controls={`${label}-panel`}
               aria-selected={isSelected}
               className={classNames(
-                "flex-1 border-solid",
+                "flex-1 border-solid h-[40px] center",
                 isSelected && enabled
                   ? "text-button3 text-skyblue-01 border-t-[2px] border-skyblue-01"
                   : "text-button4 text-grey-02 border-t-[1px] border-grey-01"
