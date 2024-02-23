@@ -19,6 +19,13 @@ export default function Page() {
           }}
         />
         <Header.MiddleText text="라이켓 제작" />
+        <Header.RightOption
+          option={{
+            check: {
+              disabled: true,
+            },
+          }}
+        />
       </Header>
       <div className="center mt-[36px] mb-[24px]">
         <FrontBackSwitch />

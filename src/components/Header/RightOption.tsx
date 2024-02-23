@@ -57,7 +57,7 @@ const RightOption = ({ text, option }: RightOptionProps) => {
     const Save = check && (
       <button disabled={checkDisabled}>
         <CheckIcon
-          fill={checkDisabled ? colors.grey["01"] : colors.skyblue["01"]}
+          fill={checkDisabled ? colors.grey["02"] : colors.skyblue["01"]}
         />
       </button>
     );
