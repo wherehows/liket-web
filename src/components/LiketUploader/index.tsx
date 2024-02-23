@@ -25,11 +25,12 @@ const LiketUploader = ({ shapes }: Props) => {
               alt="유저가 포토 카드에 올린 이미지"
               cornerRadius={8}
             />
-            {shapes.map((shape) => {
+            {shapes.map((shape, idx) => {
               switch (shape.type) {
                 case "image": {
                   return (
                     <Image
+                      key={`${shape.type}-${idx}`}
                       draggable
                       image={shape.image}
                       x={0}
