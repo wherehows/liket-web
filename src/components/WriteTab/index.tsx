@@ -75,7 +75,7 @@ const WriteTab = ({
               aria-controls={`${label}-panel`}
               aria-selected={isSelected}
               className={classNames(
-                "flex-1 border-solid",
+                "flex-1 border-solid h-[40px] center",
                 isSelected && enabled
                   ? "text-button3 text-skyblue-01 border-t-[2px] border-skyblue-01"
                   : "text-button4 text-grey-02 border-t-[1px] border-grey-01"
