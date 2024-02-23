@@ -1,3 +1,5 @@
+"use client";
+
 import { classNames } from "@/utils/helpers";
 import { useState } from "react";
 
