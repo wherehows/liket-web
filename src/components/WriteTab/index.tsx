@@ -1,3 +1,5 @@
+"use client";
+
 import { classNames } from "@/utils/helpers";
 import { MouseEvent, useState } from "react";
 import SizeEdit from "./SizeEdit";
@@ -35,7 +37,7 @@ const WriteTab = ({
   ];
 
   return (
-    <div className="bottom-tab">
+    <div className="fixed bottom-0 w-[100%] max-w-content">
       <div>
         {items.map(({ label, content }, index) => {
           const isSelected = index === selectedIndex;
