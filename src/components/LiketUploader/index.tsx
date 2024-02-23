@@ -28,7 +28,6 @@ const LiketUploader = ({ shapes }: Props) => {
             {shapes.map((shape) => {
               switch (shape.type) {
                 case "image": {
-                  console.log("이미지첨부");
                   return (
                     <Image
                       draggable
