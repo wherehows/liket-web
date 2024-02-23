@@ -10,7 +10,7 @@ interface IconButtonGroup {
   icons: IconType[];
   iconSize: number;
   iconGap?: number;
-  onClickIcon: (e: MouseEvent<HTMLUListElement>) => void;
+  onClickIcon: (e: IconType) => void;
 }
 
 const IconButtonGroup = ({
@@ -25,7 +25,16 @@ const IconButtonGroup = ({
         gap: iconGap,
       }}
       className={`flex justify-between overflow-x-auto x-[100%] h-[100%]`}
-      onClick={onClickIcon}
+      onClick={(e: MouseEvent<HTMLUListElement>) => {
+        const target = e.target as HTMLElement;
+
+        if (target.tagName !== "IMG") {
+          return;
+        }
+
+        const iconName = target.dataset.icon;
+        iconName && onClickIcon(iconName as IconType);
+      }}
     >
       {icons.map((icon: IconType) => {
         let iconName = null;
@@ -46,7 +55,6 @@ const IconButtonGroup = ({
         return (
           <li key={iconName} className={`flex justify-center items-center`}>
             <button
-              data-icon={iconName}
               disabled={status.isDisabled}
               style={{
                 width: `${iconSize}px`,
@@ -54,6 +62,7 @@ const IconButtonGroup = ({
               }}
             >
               <Image
+                data-icon={iconName}
                 alt={`${iconName} 아이콘`}
                 width={iconSize}
                 height={iconSize}
