@@ -4,7 +4,7 @@ import SearchIcon from "@/icons/search.svg";
 import LikeIcon from "@/icons/like.svg";
 import CreateIcon from "@/icons/create.svg";
 import MenuIcon from "@/icons/menu.svg";
-import SaveIcon from "@/icons/save.svg";
+import CheckIcon from "@/icons/check.svg";
 import { colors } from "@/utils/style";
 import Link from "next/link";
 
@@ -18,7 +18,7 @@ type RightOptionProps = XOR<
       like?: IconButtonOption;
       create?: IconButtonOption;
       menu?: IconButtonOption;
-      save?: IconButtonOption;
+      check?: IconButtonOption;
     };
   }
 >;
@@ -29,7 +29,7 @@ const RightOption = ({ text, option }: RightOptionProps) => {
   }
 
   if (option) {
-    const { search, like, create, menu, save } = option;
+    const { search, like, create, menu, check } = option;
 
     const Search = search && (
       <Link href="/search">
@@ -52,11 +52,12 @@ const RightOption = ({ text, option }: RightOptionProps) => {
       </button>
     );
 
-    const saveDisabled = save && typeof save !== "boolean" && !!save.disabled;
-    const Save = save && (
-      <button disabled={saveDisabled}>
-        <SaveIcon
-          fill={saveDisabled ? colors.grey["01"] : colors.skyblue["01"]}
+    const checkDisabled =
+      check && typeof check !== "boolean" && !!check.disabled;
+    const Save = check && (
+      <button disabled={checkDisabled}>
+        <CheckIcon
+          fill={checkDisabled ? colors.grey["01"] : colors.skyblue["01"]}
         />
       </button>
     );
