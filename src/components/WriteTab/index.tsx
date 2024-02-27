@@ -2,13 +2,13 @@
 
 import { classNames } from "@/utils/helpers";
 import { MouseEvent, useState } from "react";
-import SizeEdit from "./SizeEdit";
+import SizeEdit, { CardSizeType } from "./SizeEdit";
 import TextEdit, { ColorTokensType } from "./TextEdit";
 import StickerEdit from "./StickerEdit";
 
 interface WriteTabProps {
   enabled: boolean;
-  onClickChangeSize: (size: string) => void;
+  onClickChangeSize: (size: CardSizeType) => void;
   onClickSticker: (sticker: MouseEvent<HTMLUListElement>) => void;
   onClickColor: (color: ColorTokensType) => void;
 }

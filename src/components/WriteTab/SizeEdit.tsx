@@ -7,7 +7,7 @@ const CARD_SIZE = {
   SMALL: "SMALL",
 } as const;
 
-type CardSizeType = keyof typeof CARD_SIZE;
+export type CardSizeType = keyof typeof CARD_SIZE;
 
 interface SizeEditProps {
   onClickChangeSize: (size: CardSizeType) => void;

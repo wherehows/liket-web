@@ -42,20 +42,24 @@ const RightOption = ({ text, option }: RightOptionProps) => {
       </Link>
     );
     const Create = create && (
-      <button>
+      <button key="button">
         <CreateIcon />
       </button>
     );
     const Menu = menu && (
-      <button>
+      <button key="menu">
         <MenuIcon />
       </button>
     );
 
     const checkDisabled =
       check && typeof check !== "boolean" && !!check.disabled;
-    const Save = check && (
-      <button disabled={checkDisabled}>
+    const Check = check && typeof check === "object" && (
+      <button
+        key="check"
+        disabled={checkDisabled}
+        onClick={() => check.onClick && check.onClick()}
+      >
         <CheckIcon
           fill={checkDisabled ? colors.grey["02"] : colors.skyblue["01"]}
         />
@@ -64,7 +68,7 @@ const RightOption = ({ text, option }: RightOptionProps) => {
 
     return (
       <div className="flex gap-[18px]">
-        {[Search, Like, Create, Menu, Save]}
+        {[Search, Like, Create, Menu, Check]}
       </div>
     );
   }
