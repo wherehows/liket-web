@@ -23,3 +23,5 @@ export type IconButtonOption =
 
 export type PartialPick<T, F extends keyof T> = Omit<T, F> &
   Partial<Pick<T, F>>;
+
+export type RequireProperty<T, K extends keyof T> = T & Required<Pick<T, K>>;
