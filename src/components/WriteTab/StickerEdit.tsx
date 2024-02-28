@@ -1,8 +1,7 @@
-import IconButtonGroup from "../IconButtonGroup";
-import { MouseEvent } from "react";
+import IconButtonGroup, { IconType } from "../IconButtonGroup";
 
 interface StickerEditProps {
-  onClickSticker: (sticker: MouseEvent<HTMLUListElement>) => void;
+  onClickSticker: (sticker: IconType) => void;
 }
 
 const StickerEdit = ({ onClickSticker }: StickerEditProps) => {

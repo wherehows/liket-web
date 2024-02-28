@@ -1,15 +1,16 @@
 "use client";
 
 import { classNames } from "@/utils/helpers";
-import { MouseEvent, useState } from "react";
+import { useState } from "react";
 import SizeEdit, { CardSizeType } from "./SizeEdit";
 import TextEdit, { ColorTokensType } from "./TextEdit";
 import StickerEdit from "./StickerEdit";
+import { IconType } from "../IconButtonGroup";
 
 interface WriteTabProps {
   enabled: boolean;
   onClickChangeSize: (size: CardSizeType) => void;
-  onClickSticker: (sticker: MouseEvent<HTMLUListElement>) => void;
+  onClickSticker: (sticker: IconType) => void;
   onClickColor: (color: ColorTokensType) => void;
 }
 
@@ -37,7 +38,7 @@ const WriteTab = ({
   ];
 
   return (
-    <div className="fixed bottom-0 w-[100%] max-w-content">
+    <div className="fixed bottom-0 w-[100%] max-w-content bg-white">
       <div>
         {items.map(({ label, content }, index) => {
           const isSelected = index === selectedIndex;
@@ -49,7 +50,7 @@ const WriteTab = ({
               aria-hidden={!enabled || !selectedIndex}
               role="tabpanel"
               className={classNames(
-                "translate-y-[-100%] absolute left-[24px] right-[24px] border-grey-01 border-solid border-t-[1px] min-w-[342px]",
+                "bg-white bg-opacity-80 translate-y-[-100%] absolute left-[24px] right-[24px] border-grey-01 border-solid border-t-[1px] min-w-[342px]",
                 isSelected && enabled ? "block" : "hidden"
               )}
             >

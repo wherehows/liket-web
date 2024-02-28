@@ -2,29 +2,24 @@
 
 import FrontBackSwitch from "@/components/FrontBackSwitch";
 import Header from "@/components/Header";
-import LiketUploader from "@/components/LiketUploader";
 import WriteTab from "@/components/WriteTab";
 import { CardSizeType } from "@/components/WriteTab/SizeEdit";
-import { getRefValue } from "@/utils/helpers";
-import { TypographyScale } from "@/utils/style";
-import Konva from "konva";
+import { StrictShapeConfig } from "@/types/konva";
+import { generateRandomId } from "@/utils/helpers";
+import { Stage } from "konva/lib/Stage";
+import dynamic from "next/dynamic";
 import { useRef, useState } from "react";
 
+const NoSSRLiketUploader = dynamic(() => import("@/components/LiketUploader"), {
+  ssr: false,
+});
+
 export default function Page() {
-  const [shapes, setShapes] = useState<Konva.ShapeConfig[]>([]);
+  const [isImageUploaded, setIsImageUploaded] = useState(false);
+  const [isFront, setIsFront] = useState(true);
+  const [shapes, setShapes] = useState<StrictShapeConfig[]>([]);
   const [size, setSize] = useState<CardSizeType>("LARGE");
-  const [text, setText] = useState<Konva.TextConfig>({
-    text: "텍스트를 입력해주세요",
-    x: 0,
-    y: 0,
-    fontSize: 16,
-    lineHeight: 20,
-    width: 147,
-    fill: "color",
-    fontFamily: "AppleSDGothicNeo",
-    fontStyle: "bold",
-  });
-  const stageRef = useRef<Konva.Stage>(null);
+  const stageRef = useRef<Stage>(null);
 
   return (
     <>
@@ -39,104 +34,107 @@ export default function Page() {
           option={{
             check: {
               onClick: () => {
-                const dataURL = getRefValue(stageRef).toDataURL();
-                const link = document.createElement("a");
-                link.download = "edited_image.png";
-                link.href = dataURL;
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
+                // 저장 로직
+                // const dataURL = getRefValue(stageRef).toDataURL();
               },
             },
           }}
         />
       </Header>
       <div className="center mt-[36px] mb-[24px]">
-        <FrontBackSwitch />
-      </div>
-      <div className="mx-auto">
-        <LiketUploader
-          stageRef={stageRef}
-          size={size}
-          shapes={shapes}
-          onChangeShape={(newShapes) => {
-            setShapes(newShapes);
-          }}
+        <FrontBackSwitch
+          isFront={isFront}
+          onClickSwitch={() => setIsFront(!isFront)}
         />
       </div>
-      <WriteTab
-        enabled={true}
-        onClickChangeSize={(size) => setSize(size)}
-        onClickSticker={(sticker) => {
-          fetch(`/icons/${sticker}.svg`)
-            .then((response) => response.blob())
-            .then((blob) => {
-              const reader = new FileReader();
-              reader.onload = () => {
-                const image = new window.Image();
-                image.src = reader.result as string;
-                image.onload = () => {
+      <main>
+        {!isFront && <div className="liket-card mx-auto">제작예정</div>}
+        {isFront && (
+          <>
+            <NoSSRLiketUploader
+              stageRef={stageRef}
+              size={size}
+              shapes={shapes}
+              onChangeShape={(newShapes: StrictShapeConfig[]) => {
+                setShapes(newShapes);
+              }}
+              onUploadImage={() => setIsImageUploaded(true)}
+            />
+            <WriteTab
+              enabled={isImageUploaded}
+              onClickChangeSize={(size) => setSize(size)}
+              onClickSticker={async (sticker) => {
+                try {
+                  const response = await fetch(`/icons/${sticker}.svg`);
+                  const blob = await response.blob();
+                  const reader = new FileReader();
+                  reader.onload = () => {
+                    const image = new window.Image();
+                    image.src = reader.result as string;
+                    image.onload = () => {
+                      setShapes([
+                        ...shapes,
+                        {
+                          id: generateRandomId(10),
+                          image,
+                          ...INITIAL_STICKER_SETTING,
+                        },
+                      ]);
+                    };
+                  };
+                  reader.readAsDataURL(blob);
+                } catch (error) {
+                  console.error(
+                    "스티커를 가져오는 도중 에러가 발생했습니다",
+                    error
+                  );
+                }
+              }}
+              onClickColor={(fill) => {
+                const textShapeIdx = shapes.findIndex(
+                  ({ type }) => type === "text"
+                );
+                if (textShapeIdx > -1) {
+                  const newShapes = [...shapes];
+                  newShapes[textShapeIdx] = {
+                    ...newShapes[textShapeIdx],
+                    fill,
+                  };
+                  setShapes(newShapes);
+                } else {
                   setShapes([
                     ...shapes,
                     {
-                      id: getRandomId(9),
-                      type: "image",
-                      image,
-                      x: 0,
-                      y: 0,
-                      width: 80,
-                      height: 80,
+                      id: generateRandomId(10),
+                      fill,
+                      ...INITIAL_TEXT_SETTING,
                     },
                   ]);
-                };
-              };
-              reader.readAsDataURL(blob);
-            })
-            .catch((error) => {
-              console.error("Error fetching sticker:", error);
-            });
-        }}
-        onClickColor={(color) => {
-          const textShapeIdx = shapes.findIndex(({ type }) => type === "text");
-          if (textShapeIdx > -1) {
-            const newShapes = [...shapes];
-            newShapes[textShapeIdx] = {
-              ...newShapes[textShapeIdx],
-              fill: color,
-            };
-            setShapes(newShapes);
-          } else {
-            setShapes([
-              ...shapes,
-              {
-                id: getRandomId(9),
-                type: "text",
-                text: "텍스트를 입력해주세요",
-                x: 0,
-                y: 0,
-                fontSize: 16,
-                lineHeight: 2,
-                width: 147,
-                fill: color,
-                fontFamily: "AppleSDGothicNeo",
-                fontStyle: "bold",
-              },
-            ]);
-          }
-        }}
-      />
+                }
+              }}
+            />
+          </>
+        )}
+      </main>
     </>
   );
 }
 
-const getRandomId = (length: number) => {
-  const characters =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  const charactersLength = characters.length;
-  let randomId = "";
-  for (let i = 0; i < length; i++) {
-    randomId += characters.charAt(Math.floor(Math.random() * charactersLength));
-  }
+const INITIAL_STICKER_SETTING = {
+  type: "image",
+  x: 0,
+  y: 0,
+  width: 80,
+  height: 80,
+};
 
-  return randomId;
+const INITIAL_TEXT_SETTING = {
+  type: "text",
+  text: "텍스트를 입력해주세요",
+  x: 74,
+  y: 427,
+  fontSize: 16,
+  width: 147,
+  fontFamily: "AppleSDGothicNeo",
+  fontStyle: "bold",
 };
