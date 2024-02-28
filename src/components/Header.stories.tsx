@@ -68,7 +68,7 @@ export const GeneralHeader = {
             />
             <Header.RightOption
               option={{
-                save: {
+                check: {
                   disabled: true,
                 },
               }}
@@ -84,7 +84,7 @@ export const GeneralHeader = {
             />
             <Header.RightOption
               option={{
-                save: {
+                check: {
                   disabled: false,
                 },
               }}
