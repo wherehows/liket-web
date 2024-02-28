@@ -4,7 +4,7 @@ import SearchIcon from "@/icons/search.svg";
 import LikeIcon from "@/icons/like.svg";
 import CreateIcon from "@/icons/create.svg";
 import MenuIcon from "@/icons/menu.svg";
-import SaveIcon from "@/icons/save.svg";
+import CheckIcon from "@/icons/check.svg";
 import { colors } from "@/utils/style";
 import Link from "next/link";
 
@@ -18,7 +18,7 @@ type RightOptionProps = XOR<
       like?: IconButtonOption;
       create?: IconButtonOption;
       menu?: IconButtonOption;
-      save?: IconButtonOption;
+      check?: IconButtonOption;
     };
   }
 >;
@@ -29,7 +29,7 @@ const RightOption = ({ text, option }: RightOptionProps) => {
   }
 
   if (option) {
-    const { search, like, create, menu, save } = option;
+    const { search, like, create, menu, check } = option;
 
     const Search = search && (
       <Link href="/search">
@@ -42,28 +42,33 @@ const RightOption = ({ text, option }: RightOptionProps) => {
       </Link>
     );
     const Create = create && (
-      <button>
+      <button key="button">
         <CreateIcon />
       </button>
     );
     const Menu = menu && (
-      <button>
+      <button key="menu">
         <MenuIcon />
       </button>
     );
 
-    const saveDisabled = save && typeof save !== "boolean" && !!save.disabled;
-    const Save = save && (
-      <button disabled={saveDisabled}>
-        <SaveIcon
-          fill={saveDisabled ? colors.grey["01"] : colors.skyblue["01"]}
+    const checkDisabled =
+      check && typeof check !== "boolean" && !!check.disabled;
+    const Check = check && typeof check === "object" && (
+      <button
+        key="check"
+        disabled={checkDisabled}
+        onClick={() => check.onClick && check.onClick()}
+      >
+        <CheckIcon
+          fill={checkDisabled ? colors.grey["02"] : colors.skyblue["01"]}
         />
       </button>
     );
 
     return (
       <div className="flex gap-[18px]">
-        {[Search, Like, Create, Menu, Save]}
+        {[Search, Like, Create, Menu, Check]}
       </div>
     );
   }
