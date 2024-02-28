@@ -81,6 +81,10 @@
   .select {
     @apply bg-[center_right_10px] bg-[url(/icons/down-arrow-24.svg)] bg-no-repeat border-[1px] border-solid border-grey-02 py-[8px] px-[10px] rounded-[20px] appearance-none;
   }
+
+  .liket-card {
+    @apply flex justify-center items-center w-[294px] h-[468px] rounded-[8px] border-[2px] border-solid divide-grey-01 relative mx-auto;
+  }
 }
 
 /* react-spring-bottom-sheet */
