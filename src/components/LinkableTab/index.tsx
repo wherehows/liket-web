@@ -89,7 +89,11 @@ const LinkableTab = () => {
             )}
           </li>
           <li className="bottom-sheet-list">
-            {isLoggedIn ? (
+            <Link href="/create/liket" className="bottom-sheet-button">
+              <CreateLiket className="mr-[8px]" />
+              라이켓 제작
+            </Link>
+            {/* {isLoggedIn ? (
               <Link href="/create/liket" className="bottom-sheet-button">
                 <CreateLiket className="mr-[8px]" />
                 라이켓 제작
@@ -108,7 +112,7 @@ const LinkableTab = () => {
                 <CreateLiket className="mr-[8px]" />
                 라이켓 제작
               </button>
-            )}
+            )} */}
           </li>
           <li className="bottom-sheet-list">
             {isLoggedIn ? (

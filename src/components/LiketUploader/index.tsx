@@ -1,7 +1,7 @@
 "use client";
 
 import { Layer, Image, Stage } from "react-konva";
-import { RefObject, useRef, useState } from "react";
+import { RefObject, useEffect, useRef, useState } from "react";
 import Konva from "konva";
 import { getRefValue } from "@/utils/helpers";
 import { CardSizeType } from "../WriteTab/SizeEdit";
@@ -46,6 +46,20 @@ const LiketUploader = ({
     newShapes[idx] = newAttrs;
     onChangeShape(newShapes);
   };
+
+  useEffect(() => {
+    const handleClickOutSideOfStage = (e: MouseEvent) => {
+      if (
+        (e.target as HTMLElement)?.tagName !== "CANVAS" &&
+        (e.target as HTMLElement)?.tagName !== "TEXTAREA"
+      ) {
+        setSelcetedShapeId(" ");
+      }
+    };
+
+    window.addEventListener("click", handleClickOutSideOfStage);
+    return () => window.removeEventListener("click", handleClickOutSideOfStage);
+  }, []);
 
   return (
     <div
