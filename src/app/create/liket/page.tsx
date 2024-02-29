@@ -131,10 +131,10 @@ const INITIAL_STICKER_SETTING = {
 const INITIAL_TEXT_SETTING = {
   type: "text",
   text: "텍스트를 입력해주세요",
-  x: 74,
+  x: 2,
   y: 427,
   fontSize: 16,
-  width: 147,
+  width: 288,
   fontFamily: "AppleSDGothicNeo",
   fontStyle: "bold",
 };

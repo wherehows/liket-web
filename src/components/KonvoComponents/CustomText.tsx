@@ -46,12 +46,16 @@ const CustomText = ({
     document.body.appendChild(textarea);
     textarea.focus();
 
+    const $konvaStage = document.querySelector(
+      ".konvajs-content"
+    ) as HTMLDivElement;
+
     const removeTextArea = () => {
-      console.log("remove 실행?");
       textarea.parentNode?.removeChild(textarea);
       getRefValue(textNodeRef).show();
       trRef.current?.show();
       trRef.current?.forceUpdate();
+      $konvaStage.removeEventListener("click", handleOutsideClick);
       window.removeEventListener("click", handleOutsideClick);
     };
 
@@ -60,28 +64,6 @@ const CustomText = ({
         getRefValue(textNodeRef).text(textarea.value);
         removeTextArea();
       }
-    };
-
-    const setTextareaWidth = (newWidth: number) => {
-      if (!newWidth) {
-        newWidth = getRefValue(textNodeRef).fontSize();
-      }
-
-      const isSafari = /^((?!chrome|android).)*safari/i.test(
-        navigator.userAgent
-      );
-      const isFirefox =
-        navigator.userAgent.toLowerCase().indexOf("firefox") > -1;
-      if (isSafari || isFirefox) {
-        newWidth = Math.ceil(newWidth);
-      }
-
-      const isEdge = /Edge/.test(navigator.userAgent);
-
-      if (isEdge) {
-        newWidth += 1;
-      }
-      textarea.style.width = newWidth + "px";
     };
 
     textarea.addEventListener("keydown", function (e) {
@@ -117,11 +99,12 @@ const CustomText = ({
     textarea.style.outline = "none";
     textarea.style.resize = "none";
     textarea.style.lineHeight = `${getRefValue(textNodeRef).lineHeight()}`;
-    textarea.style.fontFamily = getRefValue(textNodeRef).fontFamily();
+    textarea.style.fontFamily = "AppleSDGothicNeo";
     textarea.style.transformOrigin = "left top";
-    textarea.style.fontWeight = getRefValue(textNodeRef).fontStyle();
+    textarea.style.fontWeight = "bold";
     textarea.style.textAlign = getRefValue(textNodeRef).align();
     textarea.style.color = getRefValue(textNodeRef).fill();
+    textarea.maxLength = 18;
     const rotation = getRefValue(textNodeRef).rotation();
     let transform = "";
     if (rotation) {
@@ -142,15 +125,8 @@ const CustomText = ({
 
     textarea.focus();
 
-    textarea.addEventListener("keydown", function (e) {
-      const scale = getRefValue(textNodeRef).getAbsoluteScale().x;
-      setTextareaWidth(getRefValue(textNodeRef).width() * scale);
-      textarea.style.height = "auto";
-      textarea.style.height =
-        textarea.scrollHeight + getRefValue(textNodeRef).fontSize() + "px";
-    });
-
     setTimeout(() => {
+      $konvaStage?.addEventListener("click", handleOutsideClick);
       window.addEventListener("click", handleOutsideClick);
     });
   };
@@ -160,13 +136,13 @@ const CustomText = ({
       <Text
         ref={textNodeRef}
         onDblClick={handleDoubleClick}
-        onDblTap={handleDoubleClick}
         onTouchStart={onSelect}
         onMouseDown={onSelect}
         onClick={onSelect}
         onTap={onSelect}
         {...shapeProps}
         draggable
+        align="center"
         onDragEnd={(e) => {
           onChange({
             ...shapeProps,
