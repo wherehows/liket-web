@@ -1,3 +1,4 @@
+import "@smastrom/react-rating/style.css";
 import { XOR } from "@/types/common";
 import { colors } from "@/utils/style";
 import { Rating } from "@smastrom/react-rating";
@@ -9,7 +10,7 @@ type StarRatingProps = XOR<
   { readOnly: boolean }
 > & {
   value: number;
-  inactiveFillColor: string;
+  inactiveFillColor?: string;
 };
 
 const itemShapes = (
