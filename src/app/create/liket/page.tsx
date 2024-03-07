@@ -162,7 +162,7 @@ export default function Page() {
                 ({ type }) => type === "image"
               ).length;
 
-              if (num_of_images >= 10) {
+              if (num_of_images > 10) {
                 return false;
               }
 
