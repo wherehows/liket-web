@@ -61,7 +61,11 @@ const CustomImage = ({ shapeProps, isSelected, onSelect, onChange }: Props) => {
         <Transformer
           ref={trRef}
           flipEnabled={false}
-          boundBoxFunc={(_, newBox) => {
+          boundBoxFunc={(oldBox, newBox) => {
+            if (Math.abs(newBox.width) < 24 || Math.abs(newBox.height) < 24) {
+              return oldBox;
+            }
+
             return newBox;
           }}
         />
