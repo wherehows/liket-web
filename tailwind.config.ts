@@ -2,6 +2,7 @@ import {
   TypographyScale,
   ButtonScale,
   colors,
+  PAGE_CONTENT_MAX_WIDTH,
   LIKET_CARD_HEIGHT,
   LIKET_CARD_WIDTH,
 } from "./src/utils/style";
@@ -28,7 +29,7 @@ const config: Config = {
         "liket-card": LIKET_CARD_HEIGHT,
       },
       maxWidth: {
-        content: contentWidth,
+        content: PAGE_CONTENT_MAX_WIDTH,
       },
     },
   },
