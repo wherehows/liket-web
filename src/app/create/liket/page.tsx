@@ -52,13 +52,13 @@ export default function Page() {
           }}
         />
       </Header>
-      <div className="center mt-[36px] mb-[24px]">
-        <FrontBackSwitch
-          isFront={isFront}
-          onClickSwitch={() => setIsFront(!isFront)}
-        />
-      </div>
       <main>
+        <div className="center mt-[36px] mb-[24px]">
+          <FrontBackSwitch
+            isFront={isFront}
+            onClickSwitch={() => setIsFront(!isFront)}
+          />
+        </div>
         <div
           className={classNames(
             "liket-card flex-col mx-auto p-[16px]",
