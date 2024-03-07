@@ -123,7 +123,9 @@ const colors = {
   purple: "#45098c",
 };
 
-export const contentWidth = "600px";
+export const PAGE_CONTENT_MAX_WIDTH = "600px";
+export const LIKET_CARD_HEIGHT = "468px";
+export const LIKET_CARD_WIDTH = "294px";
 
 export const variantToStyleMap = {
   primary:

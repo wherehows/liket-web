@@ -1,6 +1,7 @@
 import { EmptyFunction } from "@/types/common";
 import { StrictShapeConfig } from "@/types/konva";
 import { getRefValue } from "@/utils/helpers";
+import { LIKET_CARD_HEIGHT, LIKET_CARD_WIDTH } from "@/utils/style";
 import Konva from "konva";
 import { useEffect, useRef } from "react";
 import { Transformer, Image } from "react-konva";
@@ -26,6 +27,8 @@ const CustomImage = ({ shapeProps, isSelected, onSelect, onChange }: Props) => {
   return (
     <>
       <Image
+        x={+LIKET_CARD_WIDTH.replace("px", "") / 2 - 40}
+        y={+LIKET_CARD_HEIGHT.replace("px", "") / 2 - 40}
         onTouchStart={() => onSelect()}
         onMouseDown={() => onSelect()}
         image={shapeProps.image}
@@ -61,7 +64,11 @@ const CustomImage = ({ shapeProps, isSelected, onSelect, onChange }: Props) => {
         <Transformer
           ref={trRef}
           flipEnabled={false}
-          boundBoxFunc={(_, newBox) => {
+          boundBoxFunc={(oldBox, newBox) => {
+            if (Math.abs(newBox.width) < 24 || Math.abs(newBox.height) < 24) {
+              return oldBox;
+            }
+
             return newBox;
           }}
         />

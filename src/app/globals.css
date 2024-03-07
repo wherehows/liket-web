@@ -83,7 +83,7 @@
   }
 
   .liket-card {
-    @apply flex justify-center items-center w-[294px] h-[468px] rounded-[8px] border-[2px] border-solid divide-grey-01 relative mx-auto;
+    @apply w-liket-card h-liket-card rounded-[8px] border-[2px] border-solid divide-grey-01 relative mx-auto;
   }
 }
 

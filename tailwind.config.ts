@@ -2,7 +2,9 @@ import {
   TypographyScale,
   ButtonScale,
   colors,
-  contentWidth,
+  PAGE_CONTENT_MAX_WIDTH,
+  LIKET_CARD_HEIGHT,
+  LIKET_CARD_WIDTH,
 } from "./src/utils/style";
 import type { Config } from "tailwindcss";
 
@@ -20,8 +22,14 @@ const config: Config = {
       },
       fontSize: { ...TypographyScale, ...ButtonScale },
       colors,
+      width: {
+        "liket-card": LIKET_CARD_WIDTH,
+      },
+      height: {
+        "liket-card": LIKET_CARD_HEIGHT,
+      },
       maxWidth: {
-        content: contentWidth,
+        content: PAGE_CONTENT_MAX_WIDTH,
       },
     },
   },

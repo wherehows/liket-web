@@ -1,6 +1,6 @@
 "use client";
 
-import ColoredLogo from "@/icons/color-logo.svg";
+import ColoredLogo from "@/icons/logo.svg";
 import KaKaoLogin from "@/icons/kakao-login.svg";
 import AppleLogin from "@/icons/apple-login.svg";
 import NaverLogin from "@/icons/naver-login.svg";
