@@ -22,6 +22,7 @@ const NoSSRLiketUploader = dynamic(() => import("@/components/LiketUploader"), {
 export default function Page() {
   const [isImageUploaded, setIsImageUploaded] = useState(false);
   const [isFront, setIsFront] = useState(true);
+  const [selectedShapeId, setSelectedShapeId] = useState(" ");
   const [shapes, setShapes] = useState<StrictShapeConfig[]>([]);
   const [size, setSize] = useState<CardSizeType>("LARGE");
   const stageRef = useRef<Stage>(null);
@@ -151,6 +152,7 @@ export default function Page() {
             onUploadImage={() => setIsImageUploaded(true)}
           />
           <WriteTab
+            hidden={selectedShapeId.length > 1}
             enabled={isImageUploaded}
             onClickChangeSize={(size) => setSize(size)}
             onClickSticker={async (sticker) => {

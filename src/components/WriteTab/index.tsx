@@ -8,6 +8,7 @@ import StickerEdit from "./StickerEdit";
 import { IconType } from "../IconButtonGroup";
 
 interface WriteTabProps {
+  hidden: boolean;
   enabled: boolean;
   onClickChangeSize: (size: CardSizeType) => void;
   onClickSticker: (sticker: IconType) => void;
@@ -15,6 +16,7 @@ interface WriteTabProps {
 }
 
 const WriteTab = ({
+  hidden,
   enabled = true,
   onClickChangeSize,
   onClickSticker,
@@ -38,7 +40,12 @@ const WriteTab = ({
   ];
 
   return (
-    <div className="fixed bottom-0 w-[100%] max-w-content bg-white">
+    <div
+      className={classNames(
+        "fixed bottom-0 w-[100%] max-w-content bg-white",
+        hidden && "hidden"
+      )}
+    >
       <div>
         {items.map(({ label, content }, index) => {
           const isSelected = index === selectedIndex;
