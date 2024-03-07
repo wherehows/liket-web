@@ -12,9 +12,11 @@ import { EmptyFunction } from "@/types/common";
 import { StrictShapeConfig } from "@/types/konva";
 
 interface Props {
+  selectedShapeId: string;
   shapes: StrictShapeConfig[];
   stageRef: RefObject<Konva.Stage>;
   size: CardSizeType;
+  onSelectShape: (shapeId: string) => void;
   onChangeShape: (shapes: StrictShapeConfig[]) => void;
   onUploadImage: EmptyFunction;
 }
@@ -23,13 +25,14 @@ const LiketUploader = ({
   shapes,
   size = "LARGE",
   stageRef,
+  selectedShapeId,
+  onSelectShape,
   onChangeShape,
   onUploadImage,
 }: Props) => {
   const [file, setFile] = useState<CanvasImageSource>();
   const inputRef = useRef<HTMLInputElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
-  const [selectedShapeId, setSelcetedShapeId] = useState(" ");
   const { x, y, width, height } = BACKGROUND_CARD_SIZES[size];
 
   const onClickStage = (e: KonvaEventObject<MouseEvent | TouchEvent>) => {
@@ -37,7 +40,7 @@ const LiketUploader = ({
     const isBackgroundImageClicked = e.target.attrs.id === "bg-image";
 
     if (isEmptyAreaClicked || isBackgroundImageClicked) {
-      setSelcetedShapeId(" ");
+      onSelectShape(" ");
     }
   };
 
@@ -47,13 +50,17 @@ const LiketUploader = ({
     onChangeShape(newShapes);
   };
 
+  const handleSelectItem = (id: string) => {
+    onSelectShape(id);
+  };
+
   useEffect(() => {
     const handleClickOutSideOfStage = (e: MouseEvent) => {
       if (
         (e.target as HTMLElement)?.tagName !== "CANVAS" &&
         (e.target as HTMLElement)?.tagName !== "TEXTAREA"
       ) {
-        setSelcetedShapeId(" ");
+        onSelectShape(" ");
       }
     };
 
@@ -102,7 +109,7 @@ const LiketUploader = ({
                       }}
                       isSelected={id === selectedShapeId}
                       shapeProps={shape}
-                      onSelect={() => setSelcetedShapeId(id)}
+                      onSelect={() => handleSelectItem(id)}
                       onChange={(newAttrs: StrictShapeConfig) =>
                         onChange(newAttrs, idx)
                       }
@@ -115,7 +122,7 @@ const LiketUploader = ({
                       key={id}
                       isSelected={id === selectedShapeId}
                       shapeProps={shape}
-                      onSelect={() => setSelcetedShapeId(id)}
+                      onSelect={() => handleSelectItem(id)}
                       onChange={(newAttrs: StrictShapeConfig) =>
                         onChange(newAttrs, idx)
                       }

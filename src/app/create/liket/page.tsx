@@ -14,6 +14,7 @@ import dynamic from "next/dynamic";
 import Image from "next/image";
 import SampleQR from "@/icons/sample-qr.svg";
 import { useRef, useState } from "react";
+import CircleCross from "@/icons/circle-cross.svg";
 
 const NoSSRLiketUploader = dynamic(() => import("@/components/LiketUploader"), {
   ssr: false,
@@ -26,6 +27,10 @@ export default function Page() {
   const [shapes, setShapes] = useState<StrictShapeConfig[]>([]);
   const [size, setSize] = useState<CardSizeType>("LARGE");
   const stageRef = useRef<Stage>(null);
+  const handleClickRemoveItem = () => {
+    const newShapes = shapes.filter(({ id }) => id !== selectedShapeId);
+    setShapes(newShapes);
+  };
 
   return (
     <>
@@ -60,7 +65,7 @@ export default function Page() {
             isFront && "hidden"
           )}
         >
-          <div id="profile" className="flex items-center">
+          <div className="flex items-center">
             <div className="relative w-[14px] h-[14px] overflow-hidden rounded-full">
               <Image
                 src="https://picsum.photos/seed/picsum/14/14"
@@ -71,45 +76,36 @@ export default function Page() {
             </div>
             <div className="ml-[4px] text-grey-02">jjjuuu_a</div>
           </div>
-          <div
-            id="content"
-            className="relative h-[80px] center border-y-[1px] border-solid border-y-grey-01"
-          >
+          <div className="relative h-[80px] center border-y-[1px] border-solid border-y-grey-01">
             <div className="absolute top-[13px] left-0 text-caption text-grey-04">
               컨텐츠
             </div>
             <div className="text-body-01">성수 디올 팝업 스토어</div>
           </div>
-          <div id="genre" className="flex items-center h-[40px]">
+          <div className="flex items-center h-[40px]">
             <div className="text-caption text-grey-04">장르</div>
             <div className="ml-[16px] text-body3">팝업스토어</div>
           </div>
-          <div
-            id="location"
-            className="flex items-center h-[40px] border-y-[1px] border-solid border-y-grey-01"
-          >
+          <div className="flex items-center h-[40px] border-y-[1px] border-solid border-y-grey-01">
             <div className="text-caption text-grey-04">위치</div>
             <div className="ml-[16px] text-body3">
               서울특별시 성동구 연무장5길 7
             </div>
           </div>
-          <div id="time" className="flex items-center h-[40px]">
-            <div id="date" className="flex items-center w-[131px]">
+          <div className="flex items-center h-[40px]">
+            <div className="flex items-center w-[131px]">
               <div className="text-caption text-grey-04">날짜</div>
               <time dateTime="2023.09.09" className="ml-[16px] text-body3">
                 2023.09.09
               </time>
             </div>
             <Divider width="1px" height="8px" orientation="vertical" />
-            <div id="time" className="flex items-center w-[131px]">
+            <div className="flex items-center w-[131px]">
               <div className="text-caption text-grey-04 ml-[17px]">시간</div>
               <div className="ml-[16px] text-body3">19:20</div>
             </div>
           </div>
-          <div
-            id="rate"
-            className="flex items-center h-[40px] border-y-[1px] border-solid border-y-grey-01"
-          >
+          <div className="flex items-center h-[40px] border-y-[1px] border-solid border-y-grey-01">
             <div className="text-caption text-grey-04">평점</div>
             <div className="ml-[16px] w-[131px]">
               <StarRating
@@ -128,16 +124,10 @@ export default function Page() {
               낮엔 되게 비싸보이는데 <br /> 밤엔 엄청 비싸보이는 다올
             </div>
           </div>
-          <div
-            id="dark-logo"
-            className="absolute left-0 bottom-0 mb-[16px] ml-[16px]"
-          >
+          <div className="absolute left-0 bottom-0 mb-[16px] ml-[16px]">
             로고
           </div>
-          <div
-            id="qr-code"
-            className="absolute right-0 bottom-0 mb-[16px] mr-[16px]"
-          >
+          <div className="absolute right-0 bottom-0 mb-[16px] mr-[16px]">
             <SampleQR />
           </div>
         </div>
@@ -146,16 +136,36 @@ export default function Page() {
             stageRef={stageRef}
             size={size}
             shapes={shapes}
+            selectedShapeId={selectedShapeId}
+            onSelectShape={(selectedShapeId: string) =>
+              setSelectedShapeId(selectedShapeId)
+            }
             onChangeShape={(newShapes: StrictShapeConfig[]) => {
               setShapes(newShapes);
             }}
             onUploadImage={() => setIsImageUploaded(true)}
           />
+          {selectedShapeId.length > 1 && (
+            <button
+              className="absolute bottom-[34px] left-1/2 transform -translate-x-1/2"
+              onClick={handleClickRemoveItem}
+            >
+              <CircleCross />
+            </button>
+          )}
           <WriteTab
             hidden={selectedShapeId.length > 1}
             enabled={isImageUploaded}
             onClickChangeSize={(size) => setSize(size)}
             onClickSticker={async (sticker) => {
+              const num_of_images = shapes.map(
+                ({ type }) => type === "image"
+              ).length;
+
+              if (num_of_images >= 10) {
+                return false;
+              }
+
               try {
                 const response = await fetch(`/icons/${sticker}.svg`);
                 const blob = await response.blob();
@@ -167,9 +177,11 @@ export default function Page() {
                     setShapes([
                       ...shapes,
                       {
+                        type: "image",
                         id: generateRandomId(10),
                         image,
-                        ...INITIAL_STICKER_SETTING,
+                        width: 80,
+                        height: 80,
                       },
                     ]);
                   };
@@ -197,9 +209,10 @@ export default function Page() {
                 setShapes([
                   ...shapes,
                   {
+                    type: "text",
                     id: generateRandomId(10),
                     fill,
-                    ...INITIAL_TEXT_SETTING,
+                    text: "텍스트를 입력해주세요",
                   },
                 ]);
               }
@@ -210,22 +223,3 @@ export default function Page() {
     </>
   );
 }
-
-const INITIAL_STICKER_SETTING = {
-  type: "image",
-  x: 0,
-  y: 0,
-  width: 80,
-  height: 80,
-};
-
-const INITIAL_TEXT_SETTING = {
-  type: "text",
-  text: "텍스트를 입력해주세요",
-  x: 2,
-  y: 427,
-  fontSize: 16,
-  width: 288,
-  fontFamily: "AppleSDGothicNeo",
-  fontStyle: "bold",
-};
