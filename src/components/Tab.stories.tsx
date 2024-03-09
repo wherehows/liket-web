@@ -20,8 +20,11 @@ export const WriteTabIndex = {
       <div className="flex flex-col h-[100%]">
         <div className="flex-1"></div>
         <WriteTab
+          selectedIndex={0}
           hidden={false}
           enabled={isImageExist}
+          onChangeTab={() => {}}
+          onClickText={() => {}}
           onClickChangeSize={() => {}}
           onClickColor={() => {}}
           onClickSticker={() => {}}
