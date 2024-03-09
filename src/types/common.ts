@@ -17,7 +17,7 @@ export type IconButtonOption =
   | {
       disabled?: boolean;
       active?: boolean;
-      blackBackground?: boolean;
+      color?: string;
       onClick?: EmptyFunction;
     };
 

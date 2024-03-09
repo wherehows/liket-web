@@ -23,6 +23,7 @@ const config: Config = {
       fontSize: { ...TypographyScale, ...ButtonScale },
       colors,
       width: {
+        content: PAGE_CONTENT_MAX_WIDTH,
         "liket-card": LIKET_CARD_WIDTH,
       },
       height: {

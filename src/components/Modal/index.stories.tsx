@@ -19,7 +19,7 @@ export const Index = {
 
     return (
       <ModalProvider>
-        <div className="w-[600px]">
+        <div className="w-content">
           <ButtonGroup gap={16}>
             <Button
               fullWidth
