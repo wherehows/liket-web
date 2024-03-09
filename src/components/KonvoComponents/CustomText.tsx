@@ -15,13 +15,7 @@ const RECT_HEIGHT = 42;
 const PADDING_BETWEEN_TEXT_AND_BOX = 24;
 const FONT_SIZE = 16;
 
-const CustomText = ({
-  shapeProps,
-  isSelected,
-  stagePos,
-  onSelect,
-  onChange,
-}: Props) => {
+const CustomText = ({ shapeProps, isSelected, onSelect }: Props) => {
   return (
     <>
       <Group
