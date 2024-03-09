@@ -73,7 +73,9 @@ const LeftOption = ({
           }
         }}
       >
-        <CloseIcon />
+        <CloseIcon
+          fill={(typeof close === "object" && close?.color) || "black"}
+        />
       </button>
     );
 
