@@ -1,29 +1,33 @@
 "use client";
 
 import { classNames } from "@/utils/helpers";
-import { useState } from "react";
 import SizeEdit, { CardSizeType } from "./SizeEdit";
 import TextEdit, { ColorTokensType } from "./TextEdit";
 import StickerEdit from "./StickerEdit";
 import { IconType } from "../IconButtonGroup";
+import { EmptyFunction } from "@/types/common";
 
 interface WriteTabProps {
   hidden: boolean;
   enabled: boolean;
+  selectedIndex: number;
+  onChangeTab: (index: number) => void;
+  onClickText: EmptyFunction;
   onClickChangeSize: (size: CardSizeType) => void;
   onClickSticker: (sticker: IconType) => void;
   onClickColor: (color: ColorTokensType) => void;
 }
 
 const WriteTab = ({
+  selectedIndex,
   hidden,
   enabled = true,
+  onChangeTab,
+  onClickText,
   onClickChangeSize,
   onClickSticker,
   onClickColor,
 }: WriteTabProps) => {
-  const [selectedIndex, setSelectedIndex] = useState(0);
-
   const items = [
     {
       label: "사이즈",
@@ -88,7 +92,13 @@ const WriteTab = ({
                   ? "text-button3 text-skyblue-01 border-t-[2px] border-skyblue-01"
                   : "text-button4 text-grey-02 border-t-[1px] border-grey-01"
               )}
-              onClick={() => setSelectedIndex(index)}
+              onClick={() => {
+                if (label === "텍스트") {
+                  onClickText();
+                }
+
+                onChangeTab(index);
+              }}
             >
               {label}
             </button>
