@@ -2,9 +2,21 @@ import { StrictPropsWithChildren } from "@/types/common";
 import LeftOption from "./LeftOption";
 import RightOption from "./RightOption";
 import MiddleText from "./MiddleText";
+import { classNames } from "@/utils/helpers";
 
-const Header = ({ children }: StrictPropsWithChildren<object>) => {
-  return <header className="header">{children}</header>;
+type Props = StrictPropsWithChildren<{ opacityApplied?: boolean }>;
+
+const Header = ({ children, opacityApplied = false }: Props) => {
+  return (
+    <header
+      className={classNames(
+        "header",
+        opacityApplied && "max-w-content mx-auto bg-transparent"
+      )}
+    >
+      {children}
+    </header>
+  );
 };
 
 Header.LeftOption = LeftOption;
