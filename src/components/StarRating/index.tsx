@@ -20,7 +20,7 @@ const itemShapes = (
 const StarRating = ({
   readOnly,
   value,
-  inactiveFillColor,
+  inactiveFillColor = colors.grey["01"],
   onChangeRate,
 }: StarRatingProps) => {
   return (
