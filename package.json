@@ -10,8 +10,7 @@
     "sb": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "test": "jest --watch --coverage",
-    "test:ci": "jest --ci",
-    "chromatic": "dotenv -e .env.local npx chromatic --project-token=%CHROMATIC_PROJECT_TOKEN%"
+    "test:ci": "jest --ci"
   },
   "dependencies": {
     "@emotion/react": "^11.11.3",
