@@ -125,9 +125,12 @@ export default function Page({ params: { idx } }: PageProps) {
                 <BottomArrowIcon />
               </button>
               <ul>
-                {[1, 2, 3, 4, 5].map(() => {
+                {[1, 2, 3, 4, 5].map((tempId) => {
                   return (
-                    <li className="border-solid border-b-[1px] border-grey-01">
+                    <li
+                      key={tempId}
+                      className="border-solid border-b-[1px] border-grey-01"
+                    >
                       <div className="px-[24px] py-[16px]">
                         <div className="flex justify-between">
                           <div className="flex mb-[8px]">
