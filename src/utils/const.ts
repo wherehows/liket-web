@@ -47,6 +47,13 @@ export const STYLES = [
   "세련된",
   "힙한",
   "미니멀",
+  "편안한",
+  "힐링",
+  "핫한",
 ] as const;
 
 export type STYLESType = (typeof STYLES)[number];
+
+export const ORDER_TYPES = ["최신순", "인기순"] as const;
+
+export type ORDER_TYPETypes = (typeof ORDER_TYPES)[number];
