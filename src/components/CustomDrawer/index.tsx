@@ -44,4 +44,4 @@ const Wrapper = styled(Drawer)(() => ({
     backgroundColor: colors.skyblue["01"],
   },
   // Time Picker
-}));
+} as const));
