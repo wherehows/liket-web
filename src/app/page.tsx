@@ -28,15 +28,7 @@ export default function Home() {
         <Header.RightOption option={{ search: true, like: true }} />
       </Header>
       <Carousel imgs={CAROUSEL_DUMMY} />
-      <section className="pl-[24px] mt-[24px]">
-        <div className="flex flex-row w-[100%] justify-between overflow-x-scroll overflow-y-hidden">
-          {(["전체", ...GENRES] as const).map((genre) => {
-            return <GenreTile key={genre} genre={genre} />;
-          })}
-        </div>
-      </section>
-      <Divider height="8px" width="100%" margin="24px 0" />
-      <section className="pl-[24px] mb-[48px]">
+      <section className="pl-[24px] mb-[48px] mt-[24px]">
         <h2 className="mb-[8px]">
           선선한 가을 날씨에 <span className="text-skyblue-01">#힐링</span>하기
           좋은 곳 🍁
@@ -48,7 +40,7 @@ export default function Home() {
         </div>
       </section>
       <section className="pl-[24px]">
-        <h2>
+        <h2 className="mb-[8px]">
           요즘 <span className="text-skyblue-01">#10대</span> Z세대가 주목하는
           곳 ✨
         </h2>
