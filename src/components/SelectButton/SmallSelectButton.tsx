@@ -21,9 +21,9 @@ const SmallSelectButton = ({
     <button
       onClick={onClick}
       className={classNames(
-        "flex justify-between items-center rounded-[20px] text-button4",
+        "flex justify-between items-center rounded-[20px] text-button3",
         withBorder && "border-solid border-[1px] border-grey-02",
-        text && "bg-skyblue-01text-white",
+        text && "bg-skyblue-01 text-white",
         "h-[28px] pl-[8px] pr-[6px]"
       )}
     >
