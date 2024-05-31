@@ -1,9 +1,9 @@
 "use client";
 
 import ColoredLogo from "@/icons/logo.svg";
-import KaKaoLogin from "@/icons/kakao-login.svg";
-import AppleLogin from "@/icons/apple-login.svg";
-import NaverLogin from "@/icons/naver-login.svg";
+import KaKaoLogin from "@/icons/logins/kakao-login.svg";
+import AppleLogin from "@/icons/logins/apple-login.svg";
+import NaverLogin from "@/icons/logins/naver-login.svg";
 import Header from "@/components/Header";
 import Divider from "@/components/Divider";
 import Link from "next/link";

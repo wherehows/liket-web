@@ -1,6 +1,6 @@
 import { useState, MouseEvent } from "react";
 import CustomBottomSheet from "../BottomSheet";
-import SmallDownArrow from "@/icons/down-arrow-small-24.svg";
+import SmallDownArrow from "@/icons/down-arrow-small.svg";
 
 const ORDER_TYPE = ["최신순", "인기순"] as const;
 

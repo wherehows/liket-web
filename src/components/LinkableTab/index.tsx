@@ -13,9 +13,9 @@ import MyPageIcon from "@/icons/mypage.svg";
 import FilledMyPageIcon from "@/icons/mypage-filled.svg";
 import { colors } from "@/utils/style";
 import CustomBottomSheet from "../BottomSheet";
-import CreateReview from "@/icons/create-review-24.svg";
-import CreateLiket from "@/icons/create-liket-24.svg";
-import CreateRoute from "@/icons/create-route-24.svg";
+import CreateReview from "@/icons/create-review.svg";
+import CreateLiket from "@/icons/create-liket.svg";
+import CreateRoute from "@/icons/create-route.svg";
 import useModalStore from "@/stores/modalStore";
 
 interface LinkTabProps {
