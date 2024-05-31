@@ -4,10 +4,8 @@ import Carousel, { CAROUSEL_DUMMY } from "@/components/Carousel";
 import ContentCard, { ContentCardProps } from "@/components/Card/ContentCard";
 import ReviewCard, { REVIEW_CARDS_DUMMY } from "@/components/Card/ReviewCard";
 import Divider from "@/components/Divider";
-import GenreTile from "@/components/GenreTile";
 import Header from "@/components/Header";
 import LinkableTab from "@/components/LinkableTab";
-import { GENRES } from "@/utils/const";
 import RightArrow from "@/icons/right-arrow.svg";
 import HotPlaceItem, {
   HOT_PLACE_DUMMY_1,
@@ -28,15 +26,7 @@ export default function Home() {
         <Header.RightOption option={{ search: true, like: true }} />
       </Header>
       <Carousel imgs={CAROUSEL_DUMMY} />
-      <section className="pl-[24px] mt-[24px]">
-        <div className="flex flex-row w-[100%] justify-between overflow-x-scroll overflow-y-hidden">
-          {(["전체", ...GENRES] as const).map((genre) => {
-            return <GenreTile key={genre} genre={genre} />;
-          })}
-        </div>
-      </section>
-      <Divider height="8px" width="100%" margin="24px 0" />
-      <section className="pl-[24px] mb-[48px]">
+      <section className="pl-[24px] mb-[48px] mt-[24px]">
         <h2 className="mb-[8px]">
           선선한 가을 날씨에 <span className="text-skyblue-01">#힐링</span>하기
           좋은 곳 🍁
@@ -48,7 +38,7 @@ export default function Home() {
         </div>
       </section>
       <section className="pl-[24px]">
-        <h2>
+        <h2 className="mb-[8px]">
           요즘 <span className="text-skyblue-01">#10대</span> Z세대가 주목하는
           곳 ✨
         </h2>
@@ -266,8 +256,8 @@ const CONTENT_CARDS_DUMMY: ContentCardProps[] = [
     genre: "연극",
     title: "성수 디올 팝업 스토어",
     location: "서울 성동구",
-    startDate: "2023-01-30",
-    endDate: "2023-02-23",
+    startDate: "2023.01.30",
+    endDate: "2023.02.23",
     isLike: false,
   },
   {
@@ -276,8 +266,8 @@ const CONTENT_CARDS_DUMMY: ContentCardProps[] = [
     genre: "연극",
     title: "성수 디올 팝업 스토어",
     location: "서울 성동구",
-    startDate: "2023-01-30",
-    endDate: "2023-02-23",
+    startDate: "2023.01.30",
+    endDate: "2023.02.23",
     isLike: false,
   },
   {
@@ -286,8 +276,8 @@ const CONTENT_CARDS_DUMMY: ContentCardProps[] = [
     genre: "연극",
     title: "성수 디올 팝업 스토어",
     location: "서울 성동구",
-    startDate: "2023-01-30",
-    endDate: "2023-02-23",
+    startDate: "2023.01.30",
+    endDate: "2023.02.23",
     isLike: false,
   },
   {
@@ -296,8 +286,8 @@ const CONTENT_CARDS_DUMMY: ContentCardProps[] = [
     genre: "연극",
     title: "성수 디올 팝업 스토어",
     location: "서울 성동구",
-    startDate: "2023-01-30",
-    endDate: "2023-02-23",
+    startDate: "2023.01.30",
+    endDate: "2023.02.23",
     isLike: false,
   },
   {
@@ -306,8 +296,8 @@ const CONTENT_CARDS_DUMMY: ContentCardProps[] = [
     genre: "연극",
     title: "성수 디올 팝업 스토어",
     location: "서울 성동구",
-    startDate: "2023-01-30",
-    endDate: "2023-02-23",
+    startDate: "2023.01.30",
+    endDate: "2023.02.23",
     isLike: false,
   },
   {
@@ -316,8 +306,8 @@ const CONTENT_CARDS_DUMMY: ContentCardProps[] = [
     genre: "연극",
     title: "성수 디올 팝업 스토어",
     location: "서울 성동구",
-    startDate: "2023-01-30",
-    endDate: "2023-02-23",
+    startDate: "2023.01.30",
+    endDate: "2023.02.23",
     isLike: false,
   },
   {
@@ -326,8 +316,8 @@ const CONTENT_CARDS_DUMMY: ContentCardProps[] = [
     genre: "연극",
     title: "성수 디올 팝업 스토어",
     location: "서울 성동구",
-    startDate: "2023-01-30",
-    endDate: "2023-02-23",
+    startDate: "2023.01.30",
+    endDate: "2023.02.23",
     isLike: false,
   },
   {
@@ -336,8 +326,8 @@ const CONTENT_CARDS_DUMMY: ContentCardProps[] = [
     genre: "연극",
     title: "성수 디올 팝업 스토어",
     location: "서울 성동구",
-    startDate: "2023-01-30",
-    endDate: "2023-02-23",
+    startDate: "2023.01.30",
+    endDate: "2023.02.23",
     isLike: false,
   },
 ];
