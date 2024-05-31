@@ -68,7 +68,7 @@ const ContentCard = ({
           <div className="text-body2">{title}</div>
           <div className="text-body5 text-grey-04">{location}</div>
           <div className="text-body5 text-grey-04">
-            {startDate} ~ {endDate}
+            {startDate} - {endDate}
           </div>
         </div>
       </article>
