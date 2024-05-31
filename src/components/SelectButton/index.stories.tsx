@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import SelectButton from "./MediumSelectButton";
-import DownArrow from "@/icons/down-arrow-small-24.svg";
+import DownArrow from "@/icons/down-arrow-small.svg";
 import MediumSelectButton from "./MediumSelectButton";
 import SmallSelectButton from "./SmallSelectButton";
 

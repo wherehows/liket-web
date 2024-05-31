@@ -41,7 +41,7 @@ const AvatarUploader = ({ onUploadImage }: AvatarUploaderProps) => {
         }}
       >
         <Image
-          src="/icons/plus-24.svg"
+          src="/icons/circle-plus.svg"
           width={24}
           height={24}
           alt="아바타 업로드 버튼"

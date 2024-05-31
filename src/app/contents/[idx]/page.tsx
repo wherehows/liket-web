@@ -11,7 +11,7 @@ import Link from "next/link";
 import { useState } from "react";
 import SignificantIcon from "@/icons/significant.svg";
 import RightArrowIcon from "@/icons/right-arrow.svg";
-import BottomArrowIcon from "@/icons/down-arrow-small-24.svg";
+import BottomArrowIcon from "@/icons/down-arrow-small.svg";
 import StarRating from "@/components/StarRating";
 import Image from "next/image";
 import ThumbIcon from "@/icons/thumb.svg";

@@ -12,8 +12,8 @@ import CustomBottomSheet from "@/components/BottomSheet";
 import MapBottomSheetCard, {
   CONTENT_CARDS_DUMMY,
 } from "@/components/Card/MapBottomSheetCard";
-import FilterFilled from "@/icons/filter-filled-36.svg";
-import Filter from "@/icons/filter-36.svg";
+import FilterFilled from "@/icons/filter-filled.svg";
+import Filter from "@/icons/filter.svg";
 import ButtonGroup from "@/components/ButtonGroup";
 import {
   AGES,

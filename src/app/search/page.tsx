@@ -6,7 +6,7 @@ import { useState } from "react";
 import CategoryTab from "@/components/CategoryTab";
 import { AGES, CITYS, GENRES, ORDER_TYPES, STYLES } from "@/utils/const";
 import SmallSelectButton from "@/components/SelectButton/SmallSelectButton";
-import SamllDownArrow from "@/icons/down-arrow-small-24.svg";
+import SamllDownArrow from "@/icons/down-arrow-small.svg";
 import CustomDrawer from "@/components/CustomDrawer";
 import Chip from "@/components/Chip";
 import Button from "@/components/Button";
