@@ -4,10 +4,8 @@ import Carousel, { CAROUSEL_DUMMY } from "@/components/Carousel";
 import ContentCard, { ContentCardProps } from "@/components/Card/ContentCard";
 import ReviewCard, { REVIEW_CARDS_DUMMY } from "@/components/Card/ReviewCard";
 import Divider from "@/components/Divider";
-import GenreTile from "@/components/GenreTile";
 import Header from "@/components/Header";
 import LinkableTab from "@/components/LinkableTab";
-import { GENRES } from "@/utils/const";
 import RightArrow from "@/icons/right-arrow.svg";
 import HotPlaceItem, {
   HOT_PLACE_DUMMY_1,
