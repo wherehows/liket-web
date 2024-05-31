@@ -12,7 +12,7 @@ export default meta;
 type Index = StoryObj<typeof Checkbox>;
 
 export const Index: Index = {
-  render: () => {
+  render: function Render() {
     const [isChecked, setIsChecked] = useState(false);
 
     return (
