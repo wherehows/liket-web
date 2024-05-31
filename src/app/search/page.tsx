@@ -10,6 +10,7 @@ import SamllDownArrow from "@/icons/down-arrow-small.svg";
 import CustomDrawer from "@/components/CustomDrawer";
 import Chip from "@/components/Chip";
 import Button from "@/components/Button";
+import Checkbox from "@/components/Checkbox";
 
 export default function Page() {
   const [searchText, setSearchText] = useState("");
@@ -18,6 +19,8 @@ export default function Page() {
     [],
     "localStorage"
   );
+  const [isOnlyActiveContentShown, setIsOnlyActiveContentShown] =
+    useState(false);
   const [selectedTab, setSelectedTab] = useState("전체");
   const [isCitySelectionDrawerOpen, setIsCitySelectionDrawerOpen] =
     useState(false);
@@ -74,8 +77,15 @@ export default function Page() {
           Icon={<SamllDownArrow />}
         />
       </div>
-      <div className="flex justify-between">
-        <div>진행중인 컨텐츠만 보기</div>
+      <div className="flex justify-between mx-[24px]">
+        <Checkbox
+          label="진행중인 컨텐츠만 보기"
+          size="12px"
+          isChecked={isOnlyActiveContentShown}
+          onChange={() =>
+            setIsOnlyActiveContentShown(!isOnlyActiveContentShown)
+          }
+        />
         <SmallSelectButton
           withBorder={false}
           placeholder="최신순"
