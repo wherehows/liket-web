@@ -294,7 +294,7 @@ export default function MapPage() {
                 </ul>
               </div>
             </div>
-            <BottomButtonTabWrapper>
+            <BottomButtonTabWrapper shadow>
               <Button height={48} onClick={onClickSettingNeighbor} fullWidth>
                 설정하기
               </Button>
