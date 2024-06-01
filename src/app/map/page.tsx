@@ -277,7 +277,7 @@ export default function MapPage() {
                 </ul>
               </div>
               <div className="grow w-[50%] bg-white">
-                <ul className="flex flex-col w-[100%] h-[100%] overflow-y-scroll">
+                <ul className="flex flex-col w-[100%] h-[100%] overflow-y-auto">
                   {CITY_GU_MAP[newSelectedCity].map((GU, index) => {
                     return (
                       <li
