@@ -234,7 +234,7 @@ export default function MapPage() {
                   초기화
                 </Button>
                 <Button height={48} onClick={onClickSettingFilter} fullWidth>
-                  설정하기
+                  적용하기
                 </Button>
               </ButtonGroup>
             </BottomButtonTabWrapper>
