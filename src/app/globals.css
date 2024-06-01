@@ -59,7 +59,7 @@
   }
 
   .bottom-tab {
-    @apply flex sticky bottom-0 bg-white w-[100%] h-[74px] min-h-[74px] shadow-[0px_-8px_16px_0px_rgba(0,0,0,0.04)];
+    @apply flex sticky bottom-0 bg-white w-[100%] h-[74px] min-h-[74px];
   }
 
   .bottom-sheet-list {
