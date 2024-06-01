@@ -187,9 +187,11 @@ export default function MapPage() {
             />
             <Header.MiddleText text="필터" />
           </Header>
-          <main className="z-[5] px-[24px]">
-            <div className="flex flex-col grow h-[0] bg-white gap-[48px] mt-[16px]">
-              {(["장르", "지역", "연령대", "스타일"] as const).map((option) => {
+          <main className="z-[5]">
+            <div className="flex flex-col grow h-[0] mt-[16px] w-[100%] px-[24px] bg-white">
+              <div className="flex flex-col gap-[48px] h-[100%] overflow-y-auto">
+                {(["장르", "지역", "연령대", "스타일"] as const).map(
+                  (option) => {
                 return (
                   <div key={option} className="">
                     <div className="text-h2 mb-[15px]">{option}</div>
@@ -203,13 +205,19 @@ export default function MapPage() {
 
                         let isSelected = false;
                         if (option === "장르") {
-                          isSelected = newGenres.includes(item as GENRESType);
+                              isSelected = newGenres.includes(
+                                item as GENRESType
+                              );
                         } else if (option === "스타일") {
-                          isSelected = newStyles.includes(item as STYLESType);
+                              isSelected = newStyles.includes(
+                                item as STYLESType
+                              );
                         } else if (option === "연령대") {
                           isSelected = newAges.includes(item as AGESType);
                         } else if (option === "지역") {
-                          isSelected = newCities.includes(item as CITYSType);
+                              isSelected = newCities.includes(
+                                item as CITYSType
+                              );
                         }
 
                         return (
@@ -221,7 +229,9 @@ export default function MapPage() {
                     </ul>
                   </div>
                 );
-              })}
+                  }
+                )}
+              </div>
             </div>
             <BottomButtonTabWrapper>
               <ButtonGroup gap={16}>
@@ -234,7 +244,7 @@ export default function MapPage() {
                   초기화
                 </Button>
                 <Button height={48} onClick={onClickSettingFilter} fullWidth>
-                  설정하기
+                  적용하기
                 </Button>
               </ButtonGroup>
             </BottomButtonTabWrapper>
@@ -277,7 +287,7 @@ export default function MapPage() {
                 </ul>
               </div>
               <div className="grow w-[50%] bg-white">
-                <ul className="flex flex-col w-[100%] h-[100%] overflow-y-scroll">
+                <ul className="flex flex-col w-[100%] h-[100%] overflow-y-auto">
                   {CITY_GU_MAP[newSelectedCity].map((GU, index) => {
                     return (
                       <li
@@ -294,7 +304,7 @@ export default function MapPage() {
                 </ul>
               </div>
             </div>
-            <BottomButtonTabWrapper>
+            <BottomButtonTabWrapper shadow>
               <Button height={48} onClick={onClickSettingNeighbor} fullWidth>
                 설정하기
               </Button>
