@@ -187,9 +187,11 @@ export default function MapPage() {
             />
             <Header.MiddleText text="필터" />
           </Header>
-          <main className="z-[5] px-[24px]">
-            <div className="flex flex-col grow h-[0] bg-white gap-[48px] mt-[16px]">
-              {(["장르", "지역", "연령대", "스타일"] as const).map((option) => {
+          <main className="z-[5]">
+            <div className="flex flex-col grow h-[0] mt-[16px] w-[100%] px-[24px] bg-white">
+              <div className="flex flex-col gap-[48px] h-[100%] overflow-y-auto">
+                {(["장르", "지역", "연령대", "스타일"] as const).map(
+                  (option) => {
                 return (
                   <div key={option} className="">
                     <div className="text-h2 mb-[15px]">{option}</div>
@@ -227,7 +229,9 @@ export default function MapPage() {
                     </ul>
                   </div>
                 );
-              })}
+                  }
+                )}
+              </div>
             </div>
             <BottomButtonTabWrapper>
               <ButtonGroup gap={16}>
