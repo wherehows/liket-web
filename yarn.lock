@@ -6929,6 +6929,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"classnames@npm:^2.2.6":
+  version: 2.5.1
+  resolution: "classnames@npm:2.5.1"
+  checksum: 10c0/afff4f77e62cea2d79c39962980bf316bacb0d7c49e13a21adaadb9221e1c6b9d3cdb829d8bb1b23c406f4e740507f37e1dcf506f7e3b7113d17c5bab787aa69
+  languageName: node
+  linkType: hard
+
 "clean-css@npm:^5.2.2":
   version: 5.3.3
   resolution: "clean-css@npm:5.3.3"
@@ -7557,6 +7564,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"debounce@npm:^1.2.0":
+  version: 1.2.1
+  resolution: "debounce@npm:1.2.1"
+  checksum: 10c0/6c9320aa0973fc42050814621a7a8a78146c1975799b5b3cc1becf1f77ba9a5aa583987884230da0842a03f385def452fad5d60db97c3d1c8b824e38a8edf500
+  languageName: node
+  linkType: hard
+
 "debug@npm:2.6.9, debug@npm:^2.6.9":
   version: 2.6.9
   resolution: "debug@npm:2.6.9"
@@ -8059,6 +8073,13 @@ __metadata:
   version: 0.2.0
   resolution: "eastasianwidth@npm:0.2.0"
   checksum: 10c0/26f364ebcdb6395f95124fda411f63137a4bfb5d3a06453f7f23dfe52502905bd84e0488172e0f9ec295fdc45f05c23d5d91baf16bd26f0fe9acd777a188dc39
+  languageName: node
+  linkType: hard
+
+"easy-bem@npm:^1.1.1":
+  version: 1.1.1
+  resolution: "easy-bem@npm:1.1.1"
+  checksum: 10c0/83b54e5c854795612a245fba9bc48053da3593205ff19d8aad38ef9bc0cbf56d2df7af73d90b533602696ead1ffe6beef55d756e2356e981f50156e044a1463e
   languageName: node
   linkType: hard
 
@@ -11487,6 +11508,7 @@ __metadata:
     react-dom: "npm:^18"
     react-hook-form: "npm:^7.48.2"
     react-hot-toast: "npm:^2.4.1"
+    react-indiana-drag-scroll: "npm:^2.2.0"
     react-konva: "npm:^18.2.10"
     react-spring-bottom-sheet: "npm:3.5.0-alpha.0"
     storybook: "npm:^7.5.1"
@@ -13618,6 +13640,20 @@ __metadata:
     react: ">=16"
     react-dom: ">=16"
   checksum: 10c0/591ecec3c6adc1cdb70f00165a57baa3d7f75d0d30fa767213c36496bdcc6be2b2e6a3edbf7c04f7d726a1b17dcfb5e7feb2136b04b17c9ccb769894b970f365
+  languageName: node
+  linkType: hard
+
+"react-indiana-drag-scroll@npm:^2.2.0":
+  version: 2.2.0
+  resolution: "react-indiana-drag-scroll@npm:2.2.0"
+  dependencies:
+    classnames: "npm:^2.2.6"
+    debounce: "npm:^1.2.0"
+    easy-bem: "npm:^1.1.1"
+  peerDependencies:
+    react: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+  checksum: 10c0/2c337ec8b2cf0628ac4f17df3c84d4a24b5357f8f93d5a4cfc74c4d104cc1bc32c3e0eeb33ed5ffd505d74bc345a30615a0b0b4f6a761767db57378f45e8d87b
   languageName: node
   linkType: hard
 
