@@ -203,13 +203,19 @@ export default function MapPage() {
 
                         let isSelected = false;
                         if (option === "장르") {
-                          isSelected = newGenres.includes(item as GENRESType);
+                              isSelected = newGenres.includes(
+                                item as GENRESType
+                              );
                         } else if (option === "스타일") {
-                          isSelected = newStyles.includes(item as STYLESType);
+                              isSelected = newStyles.includes(
+                                item as STYLESType
+                              );
                         } else if (option === "연령대") {
                           isSelected = newAges.includes(item as AGESType);
                         } else if (option === "지역") {
-                          isSelected = newCities.includes(item as CITYSType);
+                              isSelected = newCities.includes(
+                                item as CITYSType
+                              );
                         }
 
                         return (
