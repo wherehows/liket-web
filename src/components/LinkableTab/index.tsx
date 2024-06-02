@@ -17,6 +17,7 @@ import CreateReview from "@/icons/create-review.svg";
 import CreateLiket from "@/icons/create-liket.svg";
 import CreateRoute from "@/icons/create-route.svg";
 import useModalStore from "@/stores/modalStore";
+import CustomDrawer from "../CustomDrawer";
 
 interface LinkTabProps {
   isSelected: boolean;
@@ -60,10 +61,9 @@ const LinkableTab = () => {
 
   return (
     <>
-      <CustomBottomSheet
-        title="Create"
+      <CustomDrawer
         open={isWriteModalOpen}
-        onClickBackDrop={() => setIsWriteModalOpen(false)}
+        onClose={() => setIsWriteModalOpen(false)}
       >
         <ul>
           <li className="bottom-sheet-list">
@@ -137,7 +137,8 @@ const LinkableTab = () => {
             )}
           </li>
         </ul>
-      </CustomBottomSheet>
+      </CustomDrawer>
+
       <div
         role="tablist"
         className="bottom-tab justify-around h-[var(--bottom-tab-height)] pt-[8px] z-[5]"
