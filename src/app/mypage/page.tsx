@@ -53,7 +53,7 @@ export default function Mypage() {
             <ScrollContainer className="flex flex-row gap-[8px] overflow-x-hidden overflow-y-hidden w-[100%] mt-[8px]">
               {REVIEW_DUMMY_DATA.map((src, index) => {
                 return (
-                  <Link href={`/review/${index}`}>
+                  <Link href={`/review/${index}`} key={index}>
                     <div className="relative w-[112px] h-[112px]">
                       <Image src={src} alt="리뷰 이미지" fill />
                     </div>
@@ -71,9 +71,9 @@ export default function Mypage() {
             <ScrollContainer className="flex flex-row gap-[8px] overflow-x-hidden overflow-y-hidden w-[100%] mt-[8px]">
               {REVIEW_DUMMY_DATA.map((src, index) => {
                 return (
-                  <Link href={`/likets/${index}`}>
+                  <Link href={`/likets/${index}`} key={index}>
                     <div className="relative w-[112px] h-[178px]">
-                      <Image src={src} alt="리뷰 이미지" fill />
+                      <Image src={src} fill alt="라이켓 이미지" />
                     </div>
                   </Link>
                 );
