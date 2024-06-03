@@ -100,9 +100,7 @@ export default function Page() {
       </div>
       <main>
         {searchText ? (
-          <div className="grow center text-body3 text-grey-04">
-            검색 결과가 없습니다.
-          </div>
+          <div className="empty">검색 결과가 없습니다.</div>
         ) : (
           <div className="flex flex-wrap mx-[24px] gap-[14px]">
             {CONTENT_CARDS_DUMMY.map((data, index) => {
