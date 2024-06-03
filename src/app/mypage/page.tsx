@@ -8,7 +8,7 @@ import Image from "next/image";
 import Link from "next/link";
 import ScrollContainer from "react-indiana-drag-scroll";
 
-export default function Mypage() {
+export default function Index() {
   return (
     <>
       <main className="grow">
@@ -62,14 +62,14 @@ export default function Mypage() {
               })}
             </ScrollContainer>
           </div>
-          <Link className="flex flex-col mt-[24px]" href="/list/likets">
-            <div className="flex items-center">
+          <div className="flex flex-col mt-[24px]">
+            <Link className="flex items-center" href="/list/likets">
               <div className="text-h2 mr-[4px]">라이켓</div>
               <div className="text-numbering1 text-skyblue-01">24</div>
               <RightArrow />
-            </div>
+            </Link>
             <ScrollContainer className="flex flex-row gap-[8px] overflow-x-hidden overflow-y-hidden w-[100%] mt-[8px]">
-              {REVIEW_DUMMY_DATA.map((src, index) => {
+              {LIKET_DUMMY_DATA.map((src, index) => {
                 return (
                   <Link href={`/likets/${index}`} key={index}>
                     <div className="relative w-[112px] h-[178px]">
@@ -79,7 +79,7 @@ export default function Mypage() {
                 );
               })}
             </ScrollContainer>
-          </Link>
+          </div>
         </div>
         <Divider width="100%" height="8px" margin="24px 0 0 0" />
         <LinkItem text="계정 관리" href="/account" />
