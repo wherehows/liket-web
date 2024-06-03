@@ -245,7 +245,7 @@ export default function Home() {
           })}
         </ScrollContainer>
       </section>
-      <LinkableTab />
+      <LinkableTab shadow />
     </>
   );
 }
