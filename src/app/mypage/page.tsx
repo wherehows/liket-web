@@ -45,7 +45,7 @@ export default function Mypage() {
             </div>
           </div>
           <div className="flex flex-col mt-[24px]">
-            <Link className="flex items-center" href="/list/review">
+            <Link className="flex items-center" href="/reviews">
               <div className="text-h2 mr-[4px]">리뷰</div>
               <div className="text-numbering1 text-skyblue-01">30</div>
               <RightArrow />
@@ -53,7 +53,7 @@ export default function Mypage() {
             <ScrollContainer className="flex flex-row gap-[8px] overflow-x-hidden overflow-y-hidden w-[100%] mt-[8px]">
               {REVIEW_DUMMY_DATA.map((src, index) => {
                 return (
-                  <Link href={`/review/${index}`} key={index}>
+                  <Link href={`/reviews/${index}`} key={index}>
                     <div className="relative w-[112px] h-[112px]">
                       <Image src={src} alt="리뷰 이미지" fill />
                     </div>
@@ -62,7 +62,7 @@ export default function Mypage() {
               })}
             </ScrollContainer>
           </div>
-          <Link className="flex flex-col mt-[24px]" href="/list/likets">
+          <Link className="flex flex-col mt-[24px]" href="/likets">
             <div className="flex items-center">
               <div className="text-h2 mr-[4px]">라이켓</div>
               <div className="text-numbering1 text-skyblue-01">24</div>
@@ -84,8 +84,8 @@ export default function Mypage() {
         <Divider width="100%" height="8px" margin="24px 0 0 0" />
         <LinkItem text="계정 관리" href="/account" />
         <Divider width="100%" height="8px" />
-        <LinkItem text="컨텐츠 등록 요청" href="/list/content-create" />
-        <LinkItem text="1:1 문의" href="/list/inquiry" />
+        <LinkItem text="컨텐츠 등록 요청" href="/requested-contents" />
+        <LinkItem text="1:1 문의" href="/inquires" />
         <Divider width="100%" height="8px" />
         <LinkItem text="약관/정책" href="/terms" />
         <div className="flex justify-between items-center w-[100%] h-[48px] px-[24px]">
