@@ -6,7 +6,7 @@ interface Props {
   href: string;
 }
 
-export default function ({ text, href }: Props) {
+export default function Index({ text, href }: Props) {
   return (
     <Link
       href={href}
