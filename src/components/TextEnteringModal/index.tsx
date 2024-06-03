@@ -37,7 +37,7 @@ const Index = ({
     <>
       {isOpen && (
         <div className="z-[9999] flex flex-col fixed top-0 left-0 right-0 height-0 bottom-0 bg-black bg-opacity-80">
-          <Header opacityApplied>
+          <Header transparent>
             <Header.LeftOption
               option={{
                 close: {

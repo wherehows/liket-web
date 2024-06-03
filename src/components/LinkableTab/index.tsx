@@ -17,6 +17,7 @@ import CreateReview from "@/icons/create-review.svg";
 import CreateLiket from "@/icons/create-liket.svg";
 import CreateRoute from "@/icons/create-route.svg";
 import useModalStore from "@/stores/modalStore";
+import { classNames } from "@/utils/helpers";
 
 interface LinkTabProps {
   isSelected: boolean;
@@ -45,7 +46,11 @@ const LinkTab = ({
   );
 };
 
-const LinkableTab = () => {
+interface Props {
+  shadow?: boolean;
+}
+
+const LinkableTab = ({ shadow = false }: Props) => {
   const router = useRouter();
   const pathname = usePathname();
   const [isWriteModalOpen, setIsWriteModalOpen] = useState(false);
@@ -140,7 +145,10 @@ const LinkableTab = () => {
       </CustomBottomSheet>
       <div
         role="tablist"
-        className="bottom-tab justify-around h-[var(--bottom-tab-height)] pt-[8px] z-[5]"
+        className={classNames(
+          "bottom-tab justify-around h-[var(--bottom-tab-height)] pt-[8px] z-[5]",
+          shadow && "shadow-[0px_-8px_16px_0px_rgba(0,0,0,0.04)]"
+        )}
       >
         <LinkTab
           href="/"
@@ -168,7 +176,14 @@ const LinkableTab = () => {
             <CreateIcon color={colors.grey["02"]} />
           )}
         </button>
-        {isLoggedIn ? (
+        <LinkTab
+          href="/mypage"
+          isSelected={pathname === "/mypage" && !isWriteModalOpen}
+          icon={<MyPageIcon color={colors.grey["02"]} />}
+          onClickLink={onClickLink}
+          selectedIcon={<FilledMyPageIcon color={colors.skyblue["01"]} />}
+        />
+        {/* {isLoggedIn ? (
           <LinkTab
             href="/mypage"
             isSelected={pathname === "/mypage" && !isWriteModalOpen}
@@ -191,7 +206,7 @@ const LinkableTab = () => {
           >
             <MyPageIcon color={colors.grey["02"]} />
           </button>
-        )}
+        )} */}
       </div>
     </>
   );

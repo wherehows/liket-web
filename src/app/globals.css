@@ -12,7 +12,7 @@
   }
 
   html {
-    @apply h-[100%];
+    @apply h-[100%] w-[100vw] overflow-x-hidden;
   }
 
   body {
@@ -84,6 +84,10 @@
 
   .liket-card {
     @apply w-liket-card h-liket-card rounded-[8px] border-[2px] border-solid divide-grey-01 relative mx-auto;
+  }
+
+  .empty {
+    @apply grow center text-body3 text-grey-04;
   }
 }
 
