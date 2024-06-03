@@ -4,14 +4,14 @@ import RightOption from "./RightOption";
 import MiddleText from "./MiddleText";
 import { classNames } from "@/utils/helpers";
 
-type Props = StrictPropsWithChildren<{ opacityApplied?: boolean }>;
+type Props = StrictPropsWithChildren<{ transparent?: boolean }>;
 
-const Header = ({ children, opacityApplied = false }: Props) => {
+const Header = ({ children, transparent = false }: Props) => {
   return (
     <header
       className={classNames(
         "header",
-        opacityApplied && "max-w-content mx-auto bg-transparent"
+        transparent && "max-w-content mx-auto bg-transparent"
       )}
     >
       {children}
