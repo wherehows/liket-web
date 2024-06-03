@@ -62,8 +62,8 @@ export default function Index() {
               })}
             </ScrollContainer>
           </div>
-          <Link className="flex flex-col mt-[24px]" href="/likets">
-            <div className="flex items-center">
+          <div className="flex flex-col mt-[24px]">
+            <Link className="flex items-center" href="/likets">
               <div className="text-h2 mr-[4px]">라이켓</div>
               <div className="text-numbering1 text-skyblue-01">24</div>
               <RightArrow />
