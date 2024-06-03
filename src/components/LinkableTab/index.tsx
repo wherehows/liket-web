@@ -176,7 +176,14 @@ const LinkableTab = ({ shadow = false }: Props) => {
             <CreateIcon color={colors.grey["02"]} />
           )}
         </button>
-        {isLoggedIn ? (
+        <LinkTab
+          href="/mypage"
+          isSelected={pathname === "/mypage" && !isWriteModalOpen}
+          icon={<MyPageIcon color={colors.grey["02"]} />}
+          onClickLink={onClickLink}
+          selectedIcon={<FilledMyPageIcon color={colors.skyblue["01"]} />}
+        />
+        {/* {isLoggedIn ? (
           <LinkTab
             href="/mypage"
             isSelected={pathname === "/mypage" && !isWriteModalOpen}
@@ -199,7 +206,7 @@ const LinkableTab = ({ shadow = false }: Props) => {
           >
             <MyPageIcon color={colors.grey["02"]} />
           </button>
-        )}
+        )} */}
       </div>
     </>
   );
