@@ -35,6 +35,7 @@ const AvatarUploader = ({ onUploadImage }: AvatarUploaderProps) => {
         }}
       />
       <button
+        type="button"
         className="absolute right-0 bottom-0"
         onClick={() => {
           getRefValue(inputRef).click();
