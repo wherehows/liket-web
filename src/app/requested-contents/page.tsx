@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import { useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function Page() {
   const [contents, setContents] = useState([1]);
@@ -26,8 +27,9 @@ export default function Page() {
           <ul>
             {DUMMY_DATA.map(({ id, genre, title, img, date, status }) => {
               return (
-                <li
+                <Link
                   key={id}
+                  href={`/requested-contents/${id}`}
                   className="flex justify-between items-center border-b-[1px] w-[100%] h-[80px] border-bottom"
                 >
                   <div className="flex">
@@ -43,7 +45,7 @@ export default function Page() {
                   <div className="flex items-center">
                     <Badge variant="active">등록 대기</Badge>
                   </div>
-                </li>
+                </Link>
               );
             })}
           </ul>
