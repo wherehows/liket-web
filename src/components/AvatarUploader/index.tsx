@@ -3,11 +3,15 @@ import Image from "next/image";
 import { useRef, useState } from "react";
 
 interface AvatarUploaderProps {
+  defaultAvatar?: string;
   onUploadImage: (url: string) => void;
 }
 
-const AvatarUploader = ({ onUploadImage }: AvatarUploaderProps) => {
-  const [url, setUrl] = useState<string>("");
+const AvatarUploader = ({
+  defaultAvatar = "",
+  onUploadImage,
+}: AvatarUploaderProps) => {
+  const [url, setUrl] = useState<string>(defaultAvatar);
   const inputRef = useRef<HTMLInputElement>(null);
 
   return (
