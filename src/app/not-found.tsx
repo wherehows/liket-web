@@ -1,5 +1,3 @@
-"use client";
-
 import BottomButtonTabWrapper from "@/components/BottomButtonTabWrapper";
 import ButtonGroup from "@/components/ButtonGroup";
 import ExclamationIcon from "@/icons/circle-exclamation.svg";
