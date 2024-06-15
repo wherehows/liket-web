@@ -196,3 +196,19 @@ export const InputLikeButton = ({
     </>
   );
 };
+
+const InputAsReadOnly = ({ children }: StrictPropsWithChildren) => {
+  return (
+    <div className="box-border pl-[8px] pr-[8px] pt-[16px] pb-[15px] text-body3 border-b-[1px] border-b-grey-01 focus:border-b-[2px] placeholder:text-button4 placeholder:text-grey-02">
+      {children}
+    </div>
+  );
+};
+
+Input.AsReadOnly = InputAsReadOnly;
+
+const LabelAsReadOnly = ({ children }: StrictPropsWithChildren) => {
+  return <div className="text-caption text-grey-04">{children}</div>;
+};
+
+Label.AsReadOnly = LabelAsReadOnly;
