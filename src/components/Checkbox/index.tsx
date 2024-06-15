@@ -37,9 +37,9 @@ const Index = ({
       />
       <p className="ml-[6px]">
         {isChecked ? (
-          <FilledCheckbox width="24" />
+          <FilledCheckbox width="24" height="24" />
         ) : (
-          <UnFilledCheckbox width="24" />
+          <UnFilledCheckbox width="24" height="24" />
         )}
       </p>
     </label>

@@ -48,7 +48,7 @@ export const Label = ({
 }: LabelProps) => {
   const labelTextClassName = "text-caption text-grey-04";
 
-  if (maxLength && currentLength) {
+  if (maxLength && typeof currentLength === "number") {
     return (
       <div className={`flex flex-row ${labelTextClassName}`}>
         <label className="flex-1" style={style}>
@@ -101,6 +101,7 @@ export const Input = <T extends FieldValues>({
             ? "border-b-[2px] border-b-rosepink-01 focus:border-b-rosepink-01"
             : "focus:border-b-skyblue-01"
         )}
+        id={field}
         {...register(field, { onChange })}
         {...props}
       />
@@ -150,6 +151,47 @@ export const InputText = ({ children, isShown }: TextProps) => {
         <div className="absolute text-button6 bottom-0 right-0 mb-[17px] text-rosepink-01">
           {children}
         </div>
+      )}
+    </>
+  );
+};
+
+interface InputLikeButtonProps {
+  placeholder: string;
+  subButtonText?: string;
+  text?: string;
+  onClick?: () => void;
+}
+
+export const InputLikeButton = ({
+  text = "",
+  placeholder,
+  subButtonText,
+  onClick,
+}: InputLikeButtonProps) => {
+  return (
+    <>
+      <button
+        type="button"
+        className={classNames(
+          "text-left box-border pl-[8px] pr-[8px] pt-[16px] pb-[15px] text-body3 border-b-[1px] border-b-grey-01",
+          text ? "text-button4" : "text-button4 text-grey-02"
+        )}
+        onClick={onClick}
+      >
+        {text || placeholder}
+      </button>
+      {subButtonText && (
+        <button
+          className={classNames(
+            "px-[8px] text-button4 rounded-[12px] h-[24px] absolute bottom-0 right-0 mb-[12px]",
+            variantToStyleMap["ghost"]
+          )}
+          onClick={onClick}
+          type="button"
+        >
+          {subButtonText}
+        </button>
       )}
     </>
   );

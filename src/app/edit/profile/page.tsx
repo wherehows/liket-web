@@ -5,26 +5,10 @@ import Button from "@/components/Button";
 import Chip from "@/components/Chip";
 import Header from "@/components/Header";
 import { useRouter } from "next/navigation";
-import {
-  CSSProperties,
-  DetailedHTMLProps,
-  InputHTMLAttributes,
-  MouseEvent,
-  ReactNode,
-  useState,
-} from "react";
-import {
-  FieldPath,
-  FieldValues,
-  FormState,
-  UseFormRegister,
-  useForm,
-} from "react-hook-form";
+import { MouseEvent, useState } from "react";
+import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { classNames } from "@/utils/helpers";
-import { StrictPropsWithChildren } from "@/types/common";
-import { variantToStyleMap, variantWithDisabledStyleMap } from "@/utils/style";
 import MediumSelectButton from "@/components/SelectButton/MediumSelectButton";
 import CalendarIcon from "@/icons/calendar.svg";
 import AvatarUploader from "@/components/AvatarUploader";
