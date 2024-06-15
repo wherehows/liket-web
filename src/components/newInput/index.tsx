@@ -48,7 +48,7 @@ export const Label = ({
 }: LabelProps) => {
   const labelTextClassName = "text-caption text-grey-04";
 
-  if (maxLength && currentLength) {
+  if (maxLength && typeof currentLength === "number") {
     return (
       <div className={`flex flex-row ${labelTextClassName}`}>
         <label className="flex-1" style={style}>
