@@ -101,6 +101,7 @@ export const Input = <T extends FieldValues>({
             ? "border-b-[2px] border-b-rosepink-01 focus:border-b-rosepink-01"
             : "focus:border-b-skyblue-01"
         )}
+        id={field}
         {...register(field, { onChange })}
         {...props}
       />
