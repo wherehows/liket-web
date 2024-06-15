@@ -9,7 +9,7 @@ interface Props {
   onClick: EmptyFunction;
 }
 
-const MediumSelectButton = ({ Icon, text, placeholder, onClick }: Props) => {
+const Index = ({ Icon, text, placeholder, onClick }: Props) => {
   return (
     <button
       type="button"
@@ -25,4 +25,17 @@ const MediumSelectButton = ({ Icon, text, placeholder, onClick }: Props) => {
   );
 };
 
-export default MediumSelectButton;
+type AsReadOnlyProps = Pick<Props, "Icon" | "text">;
+
+const AsReadOnly = ({ Icon, text }: AsReadOnlyProps) => {
+  return (
+    <div className="flex justify-between items-center border-solid border-[1px] border-grey-02 rounded-[20px] h-[40px] px-[16px] w-[171px] text-body3">
+      {text}
+      {Icon}
+    </div>
+  );
+};
+
+Index.AsReadOnly = AsReadOnly;
+
+export default Index;
