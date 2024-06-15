@@ -455,7 +455,6 @@ export default function Page() {
       >
         <DateCalendar
           value={dayjs(tempStartDate)}
-          // value={dayjs(new Date(`${tempStartDate || thisYear}-01-01`))}
           onChange={(date) =>
             setTempStartDate(dayjs(date).format("YYYY.MM.DD").toString())
           }
