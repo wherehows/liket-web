@@ -83,6 +83,7 @@ export default function Page({ params }: { params: { slug: string } }) {
             {["입장료", "예약", "반려동물", "주차"].map((item) => {
               return (
                 <Checkbox.AsReadOnly
+                  key={item}
                   isChecked={false}
                   label={item}
                   size="12px"
@@ -116,7 +117,7 @@ export default function Page({ params }: { params: { slug: string } }) {
             <Label.AsReadOnly>상세정보</Label.AsReadOnly>
             <div className="w-[100%] mb-[34px] min-h-[132px] h-[auto] overflow-y-hidden px-[8px] py-[16px] mt-[8px] placeholder:text-body3 placeholder:text-grey-02 border-y-[1px] focus:outline-none focus:ring-0">
               Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
+              industry. Lorem Ipsum has been the industrys standard dummy text
               ever since the 1500s, when an unknown printer took a galley of
               type and scrambled it to make a type specimen book. It has
               survived not only five centuries, but also the leap into
