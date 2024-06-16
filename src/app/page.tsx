@@ -32,7 +32,7 @@ export default function Home() {
           선선한 가을 날씨에 <span className="text-skyblue-01">#힐링</span>하기
           좋은 곳 🍁
         </h2>
-        <ScrollContainer className="flex flex-row gap-[8px] overflow-y-hidden w-[100%] cursor-grab touch-action-none">
+        <ScrollContainer className="flex flex-row gap-[8px] overflow-x-hidden overflow-y-hidden w-[100%] cursor-grab touch-action-none">
           {CONTENT_CARDS_DUMMY.map((data, index) => {
             return <ContentCard key={index} {...data} />;
           })}
@@ -43,7 +43,7 @@ export default function Home() {
           요즘 <span className="text-skyblue-01">#10대</span> Z세대가 주목하는
           곳 ✨
         </h2>
-        <ScrollContainer className="flex flex-row gap-[8px] overflow-y-hidden w-[100%]">
+        <ScrollContainer className="flex flex-row gap-[8px] overflow-x-hidden overflow-y-hidden w-[100%]">
           {CONTENT_CARDS_DUMMY.map((data, index) => {
             return <ContentCard key={index} {...data} />;
           })}
@@ -55,7 +55,7 @@ export default function Home() {
           <h2>핫플차트</h2>
           <div className="text-body5 text-grey-04 flex flex-col-reverse ml-[8px]">{`업로드 Date`}</div>
         </div>
-        <ScrollContainer className="flex flex-row overflow-x-scroll gap-[8px] overflow-y-hidden w-[100%]">
+        <ScrollContainer className="flex flex-row overflow-x-hidden gap-[8px] overflow-y-hidden w-[100%]">
           <div>
             <Link
               href="/category?type=팝업스토어&orderby=famous"
@@ -222,7 +222,7 @@ export default function Home() {
       <Divider height="8px" width="100%" margin="24px 0" />
       <section className="pl-[24px] mb-[48px]">
         <h2 className="mb-[8px]">오픈 예정 컨텐츠</h2>
-        <ScrollContainer className="flex flex-row gap-[8px] overflow-y-hidden w-[100%]">
+        <ScrollContainer className="flex flex-row gap-[8px] overflow-x-hidden overflow-y-hidden w-[100%]">
           {CONTENT_CARDS_DUMMY.map((data, index) => {
             return <ContentCard key={index} {...data} />;
           })}
@@ -230,7 +230,7 @@ export default function Home() {
       </section>
       <section className="pl-[24px]">
         <h2 className="mb-[8px]">종료 예정 컨텐츠</h2>
-        <ScrollContainer className="flex flex-row gap-[8px] overflow-y-hidden w-[100%]">
+        <ScrollContainer className="flex flex-row gap-[8px] overflow-x-hidden overflow-y-hidden w-[100%]">
           {CONTENT_CARDS_DUMMY.map((data, index) => {
             return <ContentCard key={index} {...data} />;
           })}
@@ -239,7 +239,7 @@ export default function Home() {
       <Divider height="8px" width="100%" margin="24px 0" />
       <section className="pl-[24px] mb-[24px]">
         <h2 className="mb-[8px]">최근 인기 리뷰</h2>
-        <ScrollContainer className="flex flex-row gap-[8px] overflow-y-hidden w-[100%]">
+        <ScrollContainer className="flex flex-row gap-[8px] overflow-x-hidden overflow-y-hidden w-[100%]">
           {REVIEW_CARDS_DUMMY.map((data, index) => {
             return <ReviewCard key={index} {...data} />;
           })}
