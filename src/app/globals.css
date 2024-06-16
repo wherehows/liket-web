@@ -16,7 +16,7 @@
   }
 
   body {
-    @apply min-h-[100%] mx-auto max-w-content flex flex-col;
+    @apply min-h-[100%] mx-auto max-w-content flex flex-col relative;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-smooth: never;
