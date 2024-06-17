@@ -22,7 +22,7 @@ const Index = ({
       className={classNames(
         "flex items-center cursor-pointer",
         size == "12px" ? "text-caption text-grey-04" : "text-body3 color-body3",
-        isRight ? "flex-row-reverse" : ""
+        isRight && "flex-row-reverse"
       )}
       style={{
         fontSize: size,
@@ -37,9 +37,9 @@ const Index = ({
       />
       <p className="ml-[6px]">
         {isChecked ? (
-          <FilledCheckbox width="24" />
+          <FilledCheckbox width="24" height="24" />
         ) : (
-          <UnFilledCheckbox width="24" />
+          <UnFilledCheckbox width="24" height="24" />
         )}
       </p>
     </label>
@@ -47,3 +47,36 @@ const Index = ({
 };
 
 export default Index;
+
+type AsReadOnlyProps = Pick<Props, "isChecked" | "label" | "size" | "isRight">;
+
+const AsReadOnly = ({
+  isChecked,
+  label,
+  size,
+  isRight = false,
+}: AsReadOnlyProps) => {
+  return (
+    <div
+      className={classNames(
+        "flex items-center",
+        size == "12px" ? "text-caption text-grey-04" : "text-body3 color-body3",
+        isRight && "flex-row-reverse"
+      )}
+      style={{
+        fontSize: size,
+      }}
+    >
+      {label}
+      <p className="ml-[6px]">
+        {isChecked ? (
+          <FilledCheckbox width="24" height="24" />
+        ) : (
+          <UnFilledCheckbox width="24" height="24" />
+        )}
+      </p>
+    </div>
+  );
+};
+
+Index.AsReadOnly = AsReadOnly;
