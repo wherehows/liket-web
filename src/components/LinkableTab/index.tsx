@@ -168,7 +168,7 @@ const LinkableTab = ({ shadow = false }: Props) => {
           role="tab"
           aria-selected={isWriteModalOpen}
           className="h-fit"
-          onClick={() => setIsWriteModalOpen(true)}
+          // onClick={() => setIsWriteModalOpen(true)}
         >
           {isWriteModalOpen ? (
             <FilledCreateIcon color={colors.skyblue["01"]} />
