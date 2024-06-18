@@ -175,155 +175,14 @@ export default function MapPage() {
 
   return (
     <>
-      {isFilterModalOpen && (
-        <>
-          <Header>
-            <Header.LeftOption
-              option={{
-                close: {
-                  onClick: onCloseFilterSelectionModal,
-                },
-              }}
-            />
-            <Header.MiddleText text="필터" />
-          </Header>
-          <main className="z-[5]">
-            <div className="flex flex-col grow h-[0] mt-[16px] w-[100%] px-[24px] bg-white">
-              <div className="flex flex-col gap-[48px] h-[100%] overflow-y-auto">
-                {(["장르", "지역", "연령대", "스타일"] as const).map(
-                  (option) => {
-                return (
-                  <div key={option} className="">
-                    <div className="text-h2 mb-[15px]">{option}</div>
-                    <ul
-                      onClick={(e) => onClickOption(e, option)}
-                      className="flex flex-wrap gap-[8px]"
-                    >
-                      {FILTER_OPTIONS[option].map((item) => {
-                        const { newGenres, newCities, newAges, newStyles } =
-                          appliedFilters;
-
-                        let isSelected = false;
-                        if (option === "장르") {
-                              isSelected = newGenres.includes(
-                                item as GENRESType
-                              );
-                        } else if (option === "스타일") {
-                              isSelected = newStyles.includes(
-                                item as STYLESType
-                              );
-                        } else if (option === "연령대") {
-                          isSelected = newAges.includes(item as AGESType);
-                        } else if (option === "지역") {
-                              isSelected = newCities.includes(
-                                item as CITYSType
-                              );
-                        }
-
-                        return (
-                          <li key={item}>
-                            <Chip isSelected={isSelected}>{item}</Chip>
-                          </li>
-                        );
-                      })}
-                    </ul>
-                  </div>
-                );
-                  }
-                )}
-              </div>
-            </div>
-            <BottomButtonTabWrapper>
-              <ButtonGroup gap={16}>
-                <Button
-                  height={48}
-                  onClick={onClickInitialize}
-                  variant="ghost"
-                  fullWidth
-                >
-                  초기화
-                </Button>
-                <Button height={48} onClick={onClickSettingFilter} fullWidth>
-                  적용하기
-                </Button>
-              </ButtonGroup>
-            </BottomButtonTabWrapper>
-          </main>
-        </>
-      )}
-      {isTownSelectionModalOpen && (
-        <>
-          <Header>
-            <Header.LeftOption
-              option={{
-                close: {
-                  onClick: onCloseTownSelectionModal,
-                },
-              }}
-            />
-            <Header.MiddleText text="지역설정" />
-          </Header>
-          <main className="z-[5]">
-            <div className="flex grow h-[0]">
-              <div className="h-[100%] w-[50%] bg-grey-01">
-                <ul className="flex flex-col w-[100%] grow">
-                  {CITYS.map((CITY, index) => {
-                    return (
-                      <li
-                        key={index}
-                        className={classNames(
-                          "center h-[48px]",
-                          newSelectedCity === CITY
-                            ? "bg-white text-skyblue-01"
-                            : "bg-grey-01 text-grey-04"
-                        )}
-                      >
-                        <button onClick={() => onClickCity(CITY)}>
-                          {CITY}
-                        </button>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
-              <div className="grow w-[50%] bg-white">
-                <ul className="flex flex-col w-[100%] h-[100%] overflow-y-auto">
-                  {CITY_GU_MAP[newSelectedCity].map((GU, index) => {
-                    return (
-                      <li
-                        key={index}
-                        className={classNames(
-                          "center h-[48px] shrink-0",
-                          newSelectedGu === GU && "text-skyblue-01"
-                        )}
-                      >
-                        <button onClick={() => onClickGu(GU)}>{GU}</button>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
-            </div>
-            <BottomButtonTabWrapper shadow>
-              <Button height={48} onClick={onClickSettingNeighbor} fullWidth>
-                설정하기
-              </Button>
-            </BottomButtonTabWrapper>
-          </main>
-        </>
-      )}
-      <main
-        className={classNames(
-          !isTownSelectionModalOpen && !isFilterModalOpen ? "" : "hidden"
-        )}
-      >
-        <Header>
-          <Header.LeftOption
-            townName={currentSelectedGu}
-            onClickTownSelection={onClickTownSelection}
-          />
-          <Header.RightOption option={{ search: true, like: true }} />
-        </Header>
+      <Header>
+        <Header.LeftOption
+          townName={currentSelectedGu}
+          onClickTownSelection={onClickTownSelection}
+        />
+        <Header.RightOption option={{ search: true, like: true }} />
+      </Header>
+      <main>
         <KaKaoMap>
           <button
             className="absolute top-0 left-0 z-[2]"
@@ -355,51 +214,176 @@ export default function MapPage() {
             })}
           </ul>
         </CustomBottomSheet>
-        <LinkableTab />
       </main>
+      <LinkableTab />
+      <div
+        className="full-modal transform translate-y-full"
+        style={{
+          transform: !!isFilterModalOpen ? "translateY(0)" : "translateY(100%)",
+        }}
+      >
+        <Header>
+          <Header.LeftOption
+            option={{
+              close: {
+                onClick: onCloseFilterSelectionModal,
+              },
+            }}
+          />
+          <Header.MiddleText text="필터" />
+        </Header>
+        <div className="full-modal-main px-[24px] py-[16px] gap-[48px]">
+          {(["장르", "지역", "연령대", "스타일"] as const).map((option) => {
+            return (
+              <div key={option}>
+                <div className="text-h2 mb-[15px]">{option}</div>
+                <ul
+                  onClick={(e) => onClickOption(e, option)}
+                  className="flex flex-wrap gap-[8px]"
+                >
+                  {FILTER_OPTIONS[option].map((item) => {
+                    const { newGenres, newCities, newAges, newStyles } =
+                      appliedFilters;
+
+                    let isSelected = false;
+                    if (option === "장르") {
+                      isSelected = newGenres.includes(item as GENRESType);
+                    } else if (option === "스타일") {
+                      isSelected = newStyles.includes(item as STYLESType);
+                    } else if (option === "연령대") {
+                      isSelected = newAges.includes(item as AGESType);
+                    } else if (option === "지역") {
+                      isSelected = newCities.includes(item as CITYSType);
+                    }
+
+                    return (
+                      <li key={item}>
+                        <Chip isSelected={isSelected}>{item}</Chip>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            );
+          })}
+        </div>
+        <BottomButtonTabWrapper>
+          <ButtonGroup gap={16}>
+            <Button
+              height={48}
+              onClick={onClickInitialize}
+              variant="ghost"
+              fullWidth
+            >
+              초기화
+            </Button>
+            <Button height={48} onClick={onClickSettingFilter} fullWidth>
+              적용하기
+            </Button>
+          </ButtonGroup>
+        </BottomButtonTabWrapper>
+      </div>
+      <div
+        className="full-modal transform translate-y-full"
+        style={{
+          transform: !!isTownSelectionModalOpen
+            ? "translateY(0)"
+            : "translateY(100%)",
+        }}
+      >
+        <Header>
+          <Header.LeftOption
+            option={{
+              close: {
+                onClick: onCloseTownSelectionModal,
+              },
+            }}
+          />
+          <Header.MiddleText text="지역설정" />
+        </Header>
+        <div className="full-modal-main">
+          <div className="flex grow h-[100%]">
+            <div className="h-[100%] w-[50%] bg-grey-01">
+              <ul className="flex flex-col w-[100%]">
+                {CITYS.map((CITY, index) => {
+                  return (
+                    <li
+                      key={index}
+                      className={classNames(
+                        "center h-[48px]",
+                        newSelectedCity === CITY
+                          ? "bg-white text-skyblue-01"
+                          : "bg-grey-01 text-grey-04"
+                      )}
+                    >
+                      <button onClick={() => onClickCity(CITY)}>{CITY}</button>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+            <div className="w-[50%]">
+              <ul className="flex flex-col w-[100%] h-[100%] overflow-y-auto">
+                {CITY_GU_MAP[newSelectedCity].map((GU, index) => {
+                  return (
+                    <li
+                      key={index}
+                      className={classNames(
+                        "center h-[48px] shrink-0",
+                        newSelectedGu === GU && "text-skyblue-01"
+                      )}
+                    >
+                      <button onClick={() => onClickGu(GU)}>{GU}</button>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          </div>
+        </div>
+        <BottomButtonTabWrapper shadow>
+          <Button height={48} onClick={onClickSettingNeighbor} fullWidth>
+            설정하기
+          </Button>
+        </BottomButtonTabWrapper>
+      </div>
     </>
   );
 }
 
 const SEOUL_GU_DUMMY = [
-  "동대문구1",
-  "도봉구2",
-  "동작구3",
-  "서대문구4",
-  "마포구5",
-  "서초구6",
-  "동작구7",
-  "서대문구8",
-  "마포구9",
-  "서초구10",
-  "동작구11",
-  "서대문구12",
-  "마포구1",
-  "서초구2",
-  "동작구3",
-  "서대문구4",
-  "마포구5",
-  "서초구6",
-  "마포구23",
-  "서초구22",
-  "동작구31",
-  "서대문구24",
-  "마포구53",
-  "서초구61",
-  "서대문구234",
-  "마포구532",
-  "서초구61",
-  "마포구223",
-  "서초구212",
-  "동작구331",
-  "서대문구224",
-  "마포구532",
-  "서초구631",
+  "동대문구",
+  "도봉구",
+  "동작구",
+  "서대문구",
+  "마포구",
+  "서초구",
+  "은평구",
+  "용산구",
+  "영등포구",
+  "양천구",
+  "성북구",
+  "송파구",
+  "노원구",
+  "강서구",
+  "관악구",
+  "강북구",
+  "도봉구",
+  "광진구",
+  "구로구",
+  "금천구",
 ];
 
 const INCHENON_GU_DUMMY = ["미추홀구", "부평구"];
 
-const GYEONGGI_GU_DUMMY = ["아모르겠구", "이세구"];
+const GYEONGGI_GU_DUMMY = [
+  "권선구",
+  "기흥구",
+  "수정구",
+  "수지구",
+  "영통구",
+  "오정구",
+];
 
 const CITY_GU_MAP = {
   서울광역시: SEOUL_GU_DUMMY,

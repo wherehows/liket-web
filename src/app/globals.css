@@ -16,7 +16,7 @@
   }
 
   body {
-    @apply min-h-[100%] mx-auto max-w-content flex flex-col;
+    @apply min-h-[100%] mx-auto max-w-content flex flex-col relative;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-smooth: never;
@@ -58,6 +58,14 @@
 }
 
 @layer components {
+  .full-modal {
+    @apply bg-white absolute transition-transform duration-500 ease-in-out flex flex-col h-[100%] w-[100%] z-[9999];
+  }
+
+  .full-modal-main {
+    @apply flex flex-col grow overflow-y-auto;
+  }
+
   .header {
     @apply sticky top-0 z-[1] bg-white flex justify-between items-center w-[100%] h-[48px] min-h-[48px] pl-[24px] pr-[24px];
   }
