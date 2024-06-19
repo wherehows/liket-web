@@ -277,7 +277,6 @@ export default function Page() {
                       URL.createObjectURL(file)
                     );
 
-                    console.log(newImgs);
                     newImgs = [...uploadedImgs, ...newImgs];
                     newImgs = newImgs.slice(0, MAX_COUNT_OF_IMGS);
 

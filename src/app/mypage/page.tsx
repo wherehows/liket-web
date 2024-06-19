@@ -103,8 +103,6 @@ const REVIEW_DUMMY_DATA = Array.from(
   (_, index) => `https://picsum.photos/112/112?random=${index}`
 );
 
-console.log(REVIEW_DUMMY_DATA);
-
 const LIKET_DUMMY_DATA = Array.from(
   { length: 20 },
   (_, index) => `https://picsum.photos/112/112?random=${index}`
