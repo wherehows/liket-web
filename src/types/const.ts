@@ -2,12 +2,11 @@ import {
   AGES,
   CITIES,
   CONTENT_STATES,
-  GENRE_TYPES,
+  GENRES,
   ORDERS,
   STYLES,
 } from "@/utils/const";
-
-export type GenreType = (typeof GENRE_TYPES)[number];
+export type GenreType = (typeof GENRES)[number];
 export type ContentStateType = (typeof CONTENT_STATES)[number];
 export type CityType = (typeof CITIES)[number];
 export type AgeType = (typeof AGES)[number];

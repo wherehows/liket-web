@@ -1,4 +1,4 @@
-export const GENRE_TYPES = [
+export const GENRES = [
   "팝업스토어",
   "전시회",
   "연극",
