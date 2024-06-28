@@ -1,4 +1,4 @@
-export const GENRES = [
+export const GENRE_TYPES = [
   "팝업스토어",
   "전시회",
   "연극",
@@ -7,9 +7,9 @@ export const GENRES = [
   "페스티벌",
 ] as const;
 
-export type GENRESType = (typeof GENRES)[number];
+export type GenreType = (typeof GENRE_TYPES)[number];
 
-export const CONTENT_STATUS = [
+export const CONTENT_STATES = [
   "active",
   "closed",
   "waiting",
@@ -18,11 +18,11 @@ export const CONTENT_STATUS = [
   "inactive",
 ] as const;
 
-export type CONTENT_STATUSType = (typeof CONTENT_STATUS)[number];
+export type ContentStateType = (typeof CONTENT_STATES)[number];
 
-export const CITYS = ["서울특별시", "인천광역시", "경기도"] as const;
+export const CITIES = ["서울특별시", "인천광역시", "경기도"] as const;
 
-export type CITYSType = (typeof CITYS)[number];
+export type CityType = (typeof CITIES)[number];
 
 export const AGES = [
   "전체",
@@ -33,7 +33,7 @@ export const AGES = [
   "4050대",
 ] as const;
 
-export type AGESType = (typeof AGES)[number];
+export type AgeType = (typeof AGES)[number];
 
 export const STYLES = [
   "혼자",
@@ -52,8 +52,8 @@ export const STYLES = [
   "핫한",
 ] as const;
 
-export type STYLESType = (typeof STYLES)[number];
+export type StyleType = (typeof STYLES)[number];
 
-export const ORDER_TYPES = ["최신순", "인기순"] as const;
+export const ORDERS = ["최신순", "인기순"] as const;
 
-export type ORDER_TYPETypes = (typeof ORDER_TYPES)[number];
+export type OrderType = (typeof ORDERS)[number];
