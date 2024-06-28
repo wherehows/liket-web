@@ -22,11 +22,12 @@ import CalendarIcon from "@/icons/calendar.svg";
 import MediumSelectButton from "@/components/SelectButton/MediumSelectButton";
 import { TextareaAutosize } from "@mui/material";
 import CustomDrawer from "@/components/CustomDrawer";
-import { AGES, AGESType, GENRES, GENRESType, STYLES } from "@/utils/const";
+import { AGES, GENRES, STYLES } from "@/utils/const";
 import Chip from "@/components/Chip";
 import Button from "@/components/Button";
 import dayjs from "dayjs";
 import { DateCalendar } from "@mui/x-date-pickers";
+import { AgeType, GenreType } from "@/types/const";
 
 const schema = z.object({
   title: z.string(),
@@ -402,7 +403,7 @@ export default function Page() {
             const target = e.target as HTMLElement;
 
             if (target.tagName === "BUTTON") {
-              const targetGenre = target.textContent as AGESType;
+              const targetGenre = target.textContent as AgeType;
               setValue("age", targetGenre);
             }
 
@@ -429,7 +430,7 @@ export default function Page() {
             const target = e.target as HTMLElement;
 
             if (target.tagName === "BUTTON") {
-              const targetGenre = target.textContent as GENRESType;
+              const targetGenre = target.textContent as GenreType;
               setValue("genre", targetGenre);
             }
 

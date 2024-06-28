@@ -15,16 +15,9 @@ import MapBottomSheetCard, {
 import FilterFilled from "@/icons/filter-filled.svg";
 import Filter from "@/icons/filter.svg";
 import ButtonGroup from "@/components/ButtonGroup";
-import {
-  AGES,
-  AGESType,
-  CITYSType,
-  GENRES,
-  GENRESType,
-  STYLES,
-  STYLESType,
-} from "@/utils/const";
+import { AGES, GENRES, STYLES } from "@/utils/const";
 import Chip from "@/components/Chip";
+import { AgeType, CityType, GenreType, StyleType } from "@/types/const";
 
 export default function MapPage() {
   const searchParams = useSearchParams();
@@ -73,7 +66,7 @@ export default function MapPage() {
     setCityAndGuSelection(newCityAndGuSelection);
   };
 
-  const onClickCity = (city: (typeof CITYS)[number]) => {
+  const onClickCity = (city: (typeof CITIES)[number]) => {
     const newCityAndGuSelection = { ...cityAndGuSelection };
     newCityAndGuSelection.newSelectedCity = city;
     newCityAndGuSelection.newSelectedGu = CITY_GU_MAP[city][0];
@@ -247,13 +240,13 @@ export default function MapPage() {
 
                     let isSelected = false;
                     if (option === "장르") {
-                      isSelected = newGenres.includes(item as GENRESType);
+                      isSelected = newGenres.includes(item as GenreType);
                     } else if (option === "스타일") {
-                      isSelected = newStyles.includes(item as STYLESType);
+                      isSelected = newStyles.includes(item as StyleType);
                     } else if (option === "연령대") {
-                      isSelected = newAges.includes(item as AGESType);
+                      isSelected = newAges.includes(item as AgeType);
                     } else if (option === "지역") {
-                      isSelected = newCities.includes(item as CITYSType);
+                      isSelected = newCities.includes(item as CityType);
                     }
 
                     return (
@@ -305,7 +298,7 @@ export default function MapPage() {
           <div className="flex grow h-[100%]">
             <div className="h-[100%] w-[50%] bg-grey-01">
               <ul className="flex flex-col w-[100%]">
-                {CITYS.map((CITY, index) => {
+                {CITIES.map((CITY, index) => {
                   return (
                     <li
                       key={index}
@@ -391,18 +384,18 @@ const CITY_GU_MAP = {
   경기도: GYEONGGI_GU_DUMMY,
 } as const;
 
-const CITYS = Object.keys(CITY_GU_MAP) as Array<keyof typeof CITY_GU_MAP>;
+const CITIES = Object.keys(CITY_GU_MAP) as Array<keyof typeof CITY_GU_MAP>;
 
 const INITIAL_CITY_AND_GU_SELECTION = {
-  currentSelectedCity: CITYS[0],
-  currentSelectedGu: CITY_GU_MAP[CITYS[0]][0],
-  newSelectedCity: CITYS[0],
-  newSelectedGu: CITY_GU_MAP[CITYS[0]][0],
+  currentSelectedCity: CITIES[0],
+  currentSelectedGu: CITY_GU_MAP[CITIES[0]][0],
+  newSelectedCity: CITIES[0],
+  newSelectedGu: CITY_GU_MAP[CITIES[0]][0],
 };
 
 const FILTER_OPTIONS = {
   장르: GENRES,
-  지역: CITYS,
+  지역: CITIES,
   연령대: AGES,
   스타일: STYLES,
 } as const;
@@ -433,12 +426,12 @@ const getAppliedOptionList = (
 };
 
 interface AppliedFiltersType {
-  currentGenres: GENRESType[];
-  currentAges: AGESType[];
-  currentStyles: STYLESType[];
-  currentCities: CITYSType[];
-  newGenres: GENRESType[];
-  newCities: CITYSType[];
-  newAges: AGESType[];
-  newStyles: STYLESType[];
+  currentGenres: GenreType[];
+  currentAges: AgeType[];
+  currentStyles: StyleType[];
+  currentCities: CityType[];
+  newGenres: GenreType[];
+  newCities: CityType[];
+  newAges: AgeType[];
+  newStyles: StyleType[];
 }
