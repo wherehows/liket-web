@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Like from "@/icons/like.svg";
 import ActiveLike from "@/icons/like-filled.svg";
 import Badge from "../Badge/Badge";
