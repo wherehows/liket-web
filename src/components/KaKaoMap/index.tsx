@@ -31,6 +31,13 @@ const KaKaoMap = ({ children }: KaKaoMapProps) => {
         };
 
         new window.kakao.maps.Map(container, options);
+        // TODO: 지도 이동과 관련한 상세 로직 구현
+        // window.kakao.maps.event.addListener(res, "dragend", (data) =>
+        //   console.log("1", res.getBounds())
+        // );
+        // window.kakao.maps.event.addListener(res, "zoom_changed", (data) =>
+        //   console.log("2", res.getBounds())
+        // );
       });
     };
 
