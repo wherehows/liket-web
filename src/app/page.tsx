@@ -1,7 +1,8 @@
-"use client";
-
 import Carousel, { CAROUSEL_DUMMY } from "@/components/Carousel";
-import ContentCard, { ContentCardProps } from "@/components/Card/ContentCard";
+import ContentCard, {
+  ApiContentCard,
+  ContentCardProps,
+} from "@/components/Card/ContentCard";
 import ReviewCard, { REVIEW_CARDS_DUMMY } from "@/components/Card/ReviewCard";
 import Divider from "@/components/Divider";
 import Header from "@/components/Header";
@@ -17,9 +18,12 @@ import HotPlaceItem, {
 } from "@/components/List/Hotplace";
 import { colors } from "@/utils/style";
 import Link from "next/link";
-import ScrollContainer from "react-indiana-drag-scroll";
+import CustomScrollContainer from "@/components/CustomScrollContainer";
+import { getSoonOpenContents } from "@/apis/content";
 
-export default function Home() {
+export default async function Home() {
+  const { contentList: soonOpenContents } = await getSoonOpenContents();
+
   return (
     <>
       <Header>
@@ -33,22 +37,22 @@ export default function Home() {
             선선한 가을 날씨에 <span className="text-skyblue-01">#힐링</span>
             하기 좋은 곳 🍁
           </h2>
-          <ScrollContainer className="flex flex-row gap-[8px] overflow-x-hidden overflow-y-hidden w-[100%] cursor-grab touch-action-none [&>*:last-child]:mr-[24px] [&>*:first-child]:ml-[24px]">
+          <CustomScrollContainer className="flex flex-row gap-[8px] overflow-x-hidden overflow-y-hidden w-[100%] cursor-grab touch-action-none [&>*:last-child]:mr-[24px] [&>*:first-child]:ml-[24px]">
             {CONTENT_CARDS_DUMMY.map((data, index) => {
               return <ContentCard key={index} {...data} />;
             })}
-          </ScrollContainer>
+          </CustomScrollContainer>
         </section>
         <section>
           <h2 className="pl-[24px] mb-[8px]">
             요즘 <span className="text-skyblue-01">#10대</span> Z세대가 주목하는
             곳 ✨
           </h2>
-          <ScrollContainer className="flex flex-row gap-[8px] overflow-x-hidden overflow-y-hidden w-[100%] [&>*:last-child]:mr-[24px] [&>*:first-child]:ml-[24px]">
+          <CustomScrollContainer className="flex flex-row gap-[8px] overflow-x-hidden overflow-y-hidden w-[100%] [&>*:last-child]:mr-[24px] [&>*:first-child]:ml-[24px]">
             {CONTENT_CARDS_DUMMY.map((data, index) => {
               return <ContentCard key={index} {...data} />;
             })}
-          </ScrollContainer>
+          </CustomScrollContainer>
         </section>
         <Divider height="8px" width="100%" margin="24px 0" />
         <section>
@@ -56,7 +60,7 @@ export default function Home() {
             <h2>핫플차트</h2>
             <div className="text-body5 text-grey-04 flex flex-col-reverse ml-[8px]">{`업로드 Date`}</div>
           </div>
-          <ScrollContainer className="flex flex-row overflow-x-hidden gap-[8px] overflow-y-hidden w-[100%] [&>*:last-child]:mr-[24px] [&>*:first-child]:ml-[24px]">
+          <CustomScrollContainer className="flex flex-row overflow-x-hidden gap-[8px] overflow-y-hidden w-[100%] [&>*:last-child]:mr-[24px] [&>*:first-child]:ml-[24px]">
             <div>
               <Link
                 href="/category?type=팝업스토어&orderby=famous"
@@ -218,40 +222,41 @@ export default function Home() {
                 })}
               </ul>
             </div>
-          </ScrollContainer>
+          </CustomScrollContainer>
         </section>
         <Divider height="8px" width="100%" margin="24px 0" />
         <section className="mb-[48px]">
           <h2 className="pl-[24px] mb-[8px]">오픈예정 컨텐츠</h2>
-          <ScrollContainer className="flex flex-row gap-[8px] overflow-x-hidden overflow-y-hidden w-[100%] [&>*:last-child]:mr-[24px] [&>*:first-child]:ml-[24px]">
-            {CONTENT_CARDS_DUMMY.map((data, index) => {
-              return <ContentCard key={index} {...data} />;
+          <CustomScrollContainer className="flex flex-row gap-[8px] overflow-x-hidden overflow-y-hidden w-[100%] [&>*:last-child]:mr-[24px] [&>*:first-child]:ml-[24px]">
+            {soonOpenContents.map((data, index) => {
+              return (
+                <ApiContentCard key={index} {...data} status="willActive" />
+              );
             })}
-          </ScrollContainer>
+          </CustomScrollContainer>
         </section>
         <section>
           <h2 className="pl-[24px] mb-[8px]">종료예정 컨텐츠</h2>
-          <ScrollContainer className="flex flex-row gap-[8px] overflow-x-hidden overflow-y-hidden w-[100%] [&>*:last-child]:mr-[24px] [&>*:first-child]:ml-[24px]">
+          <CustomScrollContainer className="flex flex-row gap-[8px] overflow-x-hidden overflow-y-hidden w-[100%] [&>*:last-child]:mr-[24px] [&>*:first-child]:ml-[24px]">
             {CONTENT_CARDS_DUMMY.map((data, index) => {
               return <ContentCard key={index} {...data} />;
             })}
-          </ScrollContainer>
+          </CustomScrollContainer>
         </section>
         <Divider height="8px" width="100%" margin="24px 0" />
         <section className="mb-[24px]">
           <h2 className="pl-[24px] mb-[8px]">최근 인기 리뷰</h2>
-          <ScrollContainer className="flex flex-row gap-[8px] overflow-x-hidden overflow-y-hidden w-[100%] [&>*:last-child]:mr-[24px] [&>*:first-child]:ml-[24px]">
+          <CustomScrollContainer className="flex flex-row gap-[8px] overflow-x-hidden overflow-y-hidden w-[100%] [&>*:last-child]:mr-[24px] [&>*:first-child]:ml-[24px]">
             {REVIEW_CARDS_DUMMY.map((data, index) => {
               return <ReviewCard key={index} {...data} />;
             })}
-          </ScrollContainer>
+          </CustomScrollContainer>
         </section>
       </main>
       <LinkableTab shadow />
     </>
   );
 }
-
 const CONTENT_CARDS_DUMMY: ContentCardProps[] = [
   {
     idx: 1,
@@ -261,7 +266,7 @@ const CONTENT_CARDS_DUMMY: ContentCardProps[] = [
     location: "서울 성동구",
     startDate: "2023.01.30",
     endDate: "2023.02.23",
-    isLike: false,
+    likeState: false,
   },
   {
     idx: 2,
@@ -271,7 +276,7 @@ const CONTENT_CARDS_DUMMY: ContentCardProps[] = [
     location: "서울 성동구",
     startDate: "2023.01.30",
     endDate: "2023.02.23",
-    isLike: false,
+    likeState: false,
   },
   {
     idx: 3,
@@ -281,7 +286,7 @@ const CONTENT_CARDS_DUMMY: ContentCardProps[] = [
     location: "서울 성동구",
     startDate: "2023.01.30",
     endDate: "2023.02.23",
-    isLike: false,
+    likeState: false,
   },
   {
     idx: 4,
@@ -291,7 +296,7 @@ const CONTENT_CARDS_DUMMY: ContentCardProps[] = [
     location: "서울 성동구",
     startDate: "2023.01.30",
     endDate: "2023.02.23",
-    isLike: false,
+    likeState: false,
   },
   {
     idx: 5,
@@ -301,7 +306,7 @@ const CONTENT_CARDS_DUMMY: ContentCardProps[] = [
     location: "서울 성동구",
     startDate: "2023.01.30",
     endDate: "2023.02.23",
-    isLike: false,
+    likeState: false,
   },
   {
     idx: 6,
@@ -311,7 +316,7 @@ const CONTENT_CARDS_DUMMY: ContentCardProps[] = [
     location: "서울 성동구",
     startDate: "2023.01.30",
     endDate: "2023.02.23",
-    isLike: false,
+    likeState: false,
   },
   {
     idx: 7,
@@ -321,7 +326,7 @@ const CONTENT_CARDS_DUMMY: ContentCardProps[] = [
     location: "서울 성동구",
     startDate: "2023.01.30",
     endDate: "2023.02.23",
-    isLike: false,
+    likeState: false,
   },
   {
     idx: 8,
@@ -331,6 +336,6 @@ const CONTENT_CARDS_DUMMY: ContentCardProps[] = [
     location: "서울 성동구",
     startDate: "2023.01.30",
     endDate: "2023.02.23",
-    isLike: false,
+    likeState: false,
   },
 ];
