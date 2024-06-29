@@ -11517,6 +11517,7 @@ __metadata:
     react-dom: "npm:^18"
     react-hook-form: "npm:^7.48.2"
     react-hot-toast: "npm:^2.4.1"
+    react-if: "npm:^4.1.5"
     react-indiana-drag-scroll: "npm:^2.2.0"
     react-konva: "npm:^18.2.10"
     react-spring-bottom-sheet: "npm:3.5.0-alpha.0"
@@ -13650,6 +13651,15 @@ __metadata:
     react: ">=16"
     react-dom: ">=16"
   checksum: 10c0/591ecec3c6adc1cdb70f00165a57baa3d7f75d0d30fa767213c36496bdcc6be2b2e6a3edbf7c04f7d726a1b17dcfb5e7feb2136b04b17c9ccb769894b970f365
+  languageName: node
+  linkType: hard
+
+"react-if@npm:^4.1.5":
+  version: 4.1.5
+  resolution: "react-if@npm:4.1.5"
+  peerDependencies:
+    react: ^16.x || ^17.x || ^18.x
+  checksum: 10c0/9b2dccdb534461e2e71b45c42698e9ea9351ca493c64fed48325e88c9f8b8ec8a7743aaf5aea293ff9f42f096057ab266e13b00b7911f81499fa7c6ac1ba8e94
   languageName: node
   linkType: hard
 

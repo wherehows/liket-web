@@ -4,7 +4,7 @@ import SearchHeader from "@/components/SearchHeader";
 import { useStorage } from "@/hooks/useStorage";
 import { useState } from "react";
 import CategoryTab from "@/components/CategoryTab";
-import { AGES, CITYS, GENRES, ORDER_TYPES, STYLES } from "@/utils/const";
+import { AGES, CITIES, GENRES, ORDERS, STYLES } from "@/utils/const";
 import SmallSelectButton from "@/components/SelectButton/SmallSelectButton";
 import SamllDownArrow from "@/icons/down-arrow-small.svg";
 import CustomDrawer from "@/components/CustomDrawer";
@@ -24,7 +24,7 @@ export default function Page() {
   const [isOnlyActiveContentShown, setIsOnlyActiveContentShown] =
     useState(false);
   const [selectedTab, setSelectedTab] = useState("전체");
-  const [isCitySelectionDrawerOpen, setIsCitySelectionDrawerOpen] =
+  const [isCITIESelectionDrawerOpen, setIsCitySelectionDrawerOpen] =
     useState(false);
   const [isAgeRangeSelectionDrawerOpen, setIsAgeRangeSelectionDrawerOpen] =
     useState(false);
@@ -109,7 +109,7 @@ export default function Page() {
           </div>
         )}
       </main>
-      <CustomDrawer open={isCitySelectionDrawerOpen}>
+      <CustomDrawer open={isCITIESelectionDrawerOpen}>
         <div className="center text-h2">지역</div>
         <ul
           className="mb-[48px]"
@@ -117,10 +117,10 @@ export default function Page() {
             setIsCitySelectionDrawerOpen(false);
           }}
         >
-          {CITYS.map((CITY) => {
+          {CITIES.map((City) => {
             return (
-              <li key={CITY} className="bottom-sheet-list">
-                <button className="bottom-sheet-button">{CITY}</button>
+              <li key={City} className="bottom-sheet-list">
+                <button className="bottom-sheet-button">{City}</button>
               </li>
             );
           })}
@@ -134,10 +134,10 @@ export default function Page() {
             setIsAgeRangeSelectionDrawerOpen(false);
           }}
         >
-          {AGES.map((AGE) => {
+          {AGES.map((age) => {
             return (
-              <li key={AGE} className="bottom-sheet-list">
-                <button className="bottom-sheet-button">{AGE}</button>
+              <li key={age} className="bottom-sheet-list">
+                <button className="bottom-sheet-button">{age}</button>
               </li>
             );
           })}
@@ -146,10 +146,10 @@ export default function Page() {
       <CustomDrawer open={isStyleSelectionDrawerOpen}>
         <div className="center text-h2">스타일</div>
         <ul className="my-[16px] w-[100%] flex px-[34px] flex-wrap gap-[8px]">
-          {STYLES.map((STYLE) => {
+          {STYLES.map((style) => {
             return (
-              <li key={STYLE} className="">
-                <Chip isSelected={false}>{STYLE}</Chip>
+              <li key={style} className="">
+                <Chip isSelected={false}>{style}</Chip>
               </li>
             );
           })}
@@ -174,10 +174,10 @@ export default function Page() {
             setIsOrderTypeSelectionDrawerOpen(false);
           }}
         >
-          {ORDER_TYPES.map((ORDER_TYPE) => {
+          {ORDERS.map((order) => {
             return (
-              <li key={ORDER_TYPE} className="bottom-sheet-list">
-                <button className="bottom-sheet-button">{ORDER_TYPE}</button>
+              <li key={order} className="bottom-sheet-list">
+                <button className="bottom-sheet-button">{order}</button>
               </li>
             );
           })}

@@ -1,5 +1,5 @@
 import { StrictPropsWithChildren } from "@/types/common";
-import { CONTENT_STATUSType } from "@/utils/const";
+import { ContentStateType } from "@/types/const";
 import { classNames } from "@/utils/helpers";
 import { CSSProperties } from "react";
 
@@ -11,12 +11,12 @@ const variantToStyleMap = {
   willActive: "bg-grey-01 text-grey-04",
   willClosed: "bg-rosepink-01 text-white",
 } as {
-  [key in CONTENT_STATUSType]: string;
+  [key in ContentStateType]: string;
 };
 
 type BadgeProps = StrictPropsWithChildren<
   {
-    variant: CONTENT_STATUSType;
+    variant: ContentStateType;
     style?: CSSProperties;
   },
   string
