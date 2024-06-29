@@ -7,7 +7,7 @@ import { getRefValue } from "@/utils/helpers";
 import { CardSizeType } from "../WriteTab/SizeEdit";
 import { KonvaEventObject } from "konva/lib/Node";
 import CustomText from "../KonvoComponents/CustomText";
-import CustomImage from "../KonvoComponents/CustomImage";
+import KonvaImage from "../KonvoComponents/KonvaImage";
 import { EmptyFunction } from "@/types/common";
 import { StrictShapeConfig } from "@/types/konva";
 
@@ -118,7 +118,7 @@ const LiketUploader = ({
                 }
                 case "image": {
                   return (
-                    <CustomImage
+                    <KonvaImage
                       key={id}
                       isSelected={id === selectedShapeId}
                       shapeProps={shape}

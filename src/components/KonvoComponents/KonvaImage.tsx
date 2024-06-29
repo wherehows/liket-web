@@ -13,7 +13,7 @@ interface Props {
   onSelect: EmptyFunction;
 }
 
-const CustomImage = ({ shapeProps, isSelected, onSelect, onChange }: Props) => {
+const KonvaImage = ({ shapeProps, isSelected, onSelect, onChange }: Props) => {
   const imageRef = useRef<Konva.Image>(null);
   const trRef = useRef<Konva.Transformer>(null);
 
@@ -80,4 +80,4 @@ const CustomImage = ({ shapeProps, isSelected, onSelect, onChange }: Props) => {
   );
 };
 
-export default CustomImage;
+export default KonvaImage;
