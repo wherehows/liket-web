@@ -1,9 +1,9 @@
+import { GenreType } from "@/types/const";
 import Image from "next/image";
-import { GENRESType } from "@/utils/const";
 import Link from "next/link";
 
 interface GenreTileProps {
-  genre: GENRESType | "전체";
+  genre: GenreType | "전체";
 }
 
 const GenreTile = ({ genre }: GenreTileProps) => {
