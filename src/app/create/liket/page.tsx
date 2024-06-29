@@ -13,6 +13,7 @@ import CircleCross from "@/icons/circle-cross.svg";
 import TextEnteringModal from "@/components/TextEnteringModal";
 import { useRouter } from "next/navigation";
 import LiketBackSide from "@/components/LiketBackSide";
+import { Else, If, Then } from "react-if";
 
 const NoSSRLiketUploader = dynamic(() => import("@/components/LiketUploader"), {
   ssr: false,
@@ -75,20 +76,6 @@ export default function Page() {
 
   return (
     <>
-      <TextEnteringModal
-        isOpen={isTextEnteringOnFrontSide}
-        maxLength={18}
-        allowNewLine={false}
-        onClickClose={handleClickFrontTextEnteringClose}
-        onClickCheck={handleClickFrontTextEnteringCheck}
-      />
-      <TextEnteringModal
-        isOpen={isTextEnteringOnBackSide}
-        maxLength={42}
-        allowNewLine
-        onClickClose={handleClickBackTextEnteringClose}
-        onClickCheck={handleClickBackTextEnteringCheck}
-      />
       <Header>
         {!isTextEnteringOpen && (
           <>
@@ -103,8 +90,8 @@ export default function Page() {
                 check: {
                   disabled: !isImageUploaded,
                   onClick: () => {
-                    // const dataURL = getRefValue(stageRef).toDataURL();
-                    router.push("/mypage/likets/1");
+                    const dataURL = getRefValue(stageRef).toDataURL();
+                    // router.push("/mypage/likets/1");
                   },
                 },
               }}
@@ -138,76 +125,98 @@ export default function Page() {
             }}
             onUploadImage={() => setIsImageUploaded(true)}
           />
-          {selectedShapeId.length > 1 && (
-            <button
-              className="absolute bottom-[34px] left-1/2 transform -translate-x-1/2"
-              onClick={handleClickRemoveItem}
-            >
-              <CircleCross />
-            </button>
-          )}
-          <WriteTab
-            selectedIndex={selectedIndex}
-            onChangeTab={(index) => setSelectedIndex(index)}
-            hidden={selectedShapeId.length > 1}
-            enabled={isImageUploaded}
-            onClickText={() =>
-              !isTextExist && setIsTextEnteringOnFrontSide(true)
-            }
-            onClickChangeSize={(size) => setSize(size)}
-            onClickSticker={async (sticker) => {
-              const num_of_images = shapes.map(
-                ({ type }) => type === "image"
-              ).length;
+          <If condition={selectedShapeId.length > 1}>
+            <Then>
+              <button
+                className="absolute bottom-[34px] left-1/2 transform -translate-x-1/2"
+                onClick={handleClickRemoveItem}
+              >
+                <CircleCross />
+              </button>
+            </Then>
+            <Else>
+              <WriteTab
+                selectedIndex={selectedIndex}
+                onChangeTab={(index) => setSelectedIndex(index)}
+                hidden={selectedShapeId.length > 1}
+                enabled={isImageUploaded}
+                onClickText={() =>
+                  !isTextExist && setIsTextEnteringOnFrontSide(true)
+                }
+                onClickChangeSize={(size) => setSize(size)}
+                onClickSticker={async (sticker) => {
+                  const num_of_images = shapes.map(
+                    ({ type }) => type === "image"
+                  ).length;
 
-              if (num_of_images > 10) {
-                return false;
-              }
+                  if (num_of_images > 10) {
+                    return false;
+                  }
 
-              try {
-                const response = await fetch(`/icons/stickers/${sticker}.svg`);
-                const blob = await response.blob();
-                const reader = new FileReader();
-                reader.onload = () => {
-                  const image = new window.Image();
-                  image.src = reader.result as string;
-                  image.onload = () => {
-                    setShapes([
-                      ...shapes,
-                      {
-                        type: "image",
-                        id: generateRandomId(10),
-                        image,
-                        width: 80,
-                        height: 80,
-                      },
-                    ]);
+                  try {
+                    const response = await fetch(
+                      `/icons/stickers/${sticker}.svg`
+                    );
+                    const blob = await response.blob();
+                    const reader = new FileReader();
+                    reader.onload = () => {
+                      const image = new window.Image();
+                      image.src = reader.result as string;
+                      image.onload = () => {
+                        setShapes([
+                          ...shapes,
+                          {
+                            type: "image",
+                            id: generateRandomId(10),
+                            image,
+                            width: 155.0000000000017,
+                            height: 155.0000000000017,
+                            x: 132.90240239540793,
+                            y: 79.39955775197706,
+                          },
+                        ]);
+                      };
+                    };
+                    reader.readAsDataURL(blob);
+                  } catch (error) {
+                    console.error(
+                      "스티커를 가져오는 도중 에러가 발생했습니다",
+                      error
+                    );
+                  }
+                }}
+                onClickColor={(fill) => {
+                  const textShapeIdx = shapes.findIndex(
+                    ({ type }) => type === "text"
+                  );
+
+                  const newShapes = [...shapes];
+                  newShapes[textShapeIdx] = {
+                    ...newShapes[textShapeIdx],
+                    fill,
                   };
-                };
-                reader.readAsDataURL(blob);
-              } catch (error) {
-                console.error(
-                  "스티커를 가져오는 도중 에러가 발생했습니다",
-                  error
-                );
-              }
-            }}
-            onClickColor={(fill) => {
-              const textShapeIdx = shapes.findIndex(
-                ({ type }) => type === "text"
-              );
 
-              const newShapes = [...shapes];
-              newShapes[textShapeIdx] = {
-                ...newShapes[textShapeIdx],
-                fill,
-              };
-
-              setShapes(newShapes);
-            }}
-          />
+                  setShapes(newShapes);
+                }}
+              />
+            </Else>
+          </If>
         </div>
       </main>
+      <TextEnteringModal
+        isOpen={isTextEnteringOnFrontSide}
+        maxLength={18}
+        allowNewLine={false}
+        onClickClose={handleClickFrontTextEnteringClose}
+        onClickCheck={handleClickFrontTextEnteringCheck}
+      />
+      <TextEnteringModal
+        isOpen={isTextEnteringOnBackSide}
+        maxLength={42}
+        allowNewLine
+        onClickClose={handleClickBackTextEnteringClose}
+        onClickCheck={handleClickBackTextEnteringCheck}
+      />
     </>
   );
 }
