@@ -1,7 +1,7 @@
 import { EmptyFunction } from "@/types/common";
 import { StrictShapeConfig } from "@/types/konva";
+import { LIKET_CARD_HEIGHT, LIKET_CARD_WIDTH } from "@/utils/create-liket";
 import { getRefValue } from "@/utils/helpers";
-import { LIKET_CARD_HEIGHT, LIKET_CARD_WIDTH } from "@/utils/style";
 import Konva from "konva";
 import { useEffect, useRef } from "react";
 import { Transformer, Image } from "react-konva";

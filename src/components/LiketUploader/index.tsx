@@ -10,6 +10,7 @@ import KonvaText from "../KonvoComponents/KonvaText";
 import KonvaImage from "../KonvoComponents/KonvaImage";
 import { EmptyFunction } from "@/types/common";
 import { StrictShapeConfig } from "@/types/konva";
+import { BACKGROUND_CARD_SIZES, STAGE_SIZE } from "@/utils/create-liket";
 
 interface Props {
   selectedShapeId: string;
@@ -178,26 +179,3 @@ const LiketUploader = ({
 };
 
 export default LiketUploader;
-
-const PADDING_BETWEEN_STAGE = 16;
-
-const STAGE_SIZE = {
-  WIDTH: 294,
-  HEIGHT: 468,
-};
-
-const BACKGROUND_CARD_SIZES = {
-  SMALL: {
-    x: PADDING_BETWEEN_STAGE,
-    y: PADDING_BETWEEN_STAGE,
-    width: STAGE_SIZE.WIDTH - PADDING_BETWEEN_STAGE * 2,
-    height: STAGE_SIZE.HEIGHT - 81,
-  },
-  MEDIUM: {
-    x: PADDING_BETWEEN_STAGE,
-    y: PADDING_BETWEEN_STAGE,
-    width: STAGE_SIZE.WIDTH - PADDING_BETWEEN_STAGE * 2,
-    height: STAGE_SIZE.HEIGHT - PADDING_BETWEEN_STAGE * 2,
-  },
-  LARGE: { x: 0, y: 0, width: STAGE_SIZE.WIDTH, height: STAGE_SIZE.HEIGHT },
-};

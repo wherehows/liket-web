@@ -1,6 +1,14 @@
 import { EmptyFunction } from "@/types/common";
 import { StrictShapeConfig } from "@/types/konva";
-import { LIKET_CARD_HEIGHT, LIKET_CARD_WIDTH, colors } from "@/utils/style";
+import {
+  getXPos,
+  yPos,
+  RECT_HEIGHT,
+  FONT_SIZE,
+  PADDING_BETWEEN_TEXT_AND_BOX,
+} from "@/utils/create-liket";
+import { getPxLength } from "@/utils/helper";
+import { colors } from "@/utils/style";
 import { Text, Rect, Group } from "react-konva";
 
 interface Props {
@@ -11,24 +19,24 @@ interface Props {
   stagePos: { x: number; y: number };
 }
 
-const RECT_HEIGHT = 42;
-const PADDING_BETWEEN_TEXT_AND_BOX = 24;
-const FONT_SIZE = 16;
-
-const KonvaText = ({ shapeProps, isSelected, onSelect }: Props) => {
+const KonvaText = ({ shapeProps, isSelected, onSelect, onChange }: Props) => {
   return (
     <>
       <Group
-        x={
-          +LIKET_CARD_WIDTH.replace("px", "") / 2 -
-          (getPxLength(shapeProps.text) + 2 * PADDING_BETWEEN_TEXT_AND_BOX) / 2
-        }
-        y={+LIKET_CARD_HEIGHT.replace("px", "") / 2 - RECT_HEIGHT / 2}
+        draggable
+        x={getXPos(shapeProps.text)}
+        y={yPos}
         onTouchStart={onSelect}
         onMouseDown={onSelect}
         onClick={onSelect}
         onTab={onSelect}
-        draggable
+        onDragEnd={(e) => {
+          onChange({
+            ...shapeProps,
+            // x: e.target.x(),
+            // y: e.target.y(),
+          });
+        }}
       >
         <Text
           text="텍스트를 입력해주세요"
@@ -53,20 +61,3 @@ const KonvaText = ({ shapeProps, isSelected, onSelect }: Props) => {
 };
 
 export default KonvaText;
-
-const getPxLength = (text: string) => {
-  const tempElem = document.createElement("span");
-  tempElem.style.visibility = "hidden";
-  tempElem.style.position = "absolute";
-  tempElem.style.left = "-9999px";
-  tempElem.style.top = "-9999px";
-  tempElem.style.fontFamily = "AppleSDGothicNeo";
-  tempElem.style.fontStyle = "bold";
-  tempElem.style.fontSize = "16";
-  tempElem.textContent = text;
-  document.body.appendChild(tempElem);
-
-  const width = tempElem.offsetWidth;
-  document.body.removeChild(tempElem);
-  return width;
-};
