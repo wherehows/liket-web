@@ -27,6 +27,7 @@ const CustomImage = ({ shapeProps, isSelected, onSelect, onChange }: Props) => {
   return (
     <>
       <Image
+        alt="스티커 이미지"
         x={+LIKET_CARD_WIDTH.replace("px", "") / 2 - 40}
         y={+LIKET_CARD_HEIGHT.replace("px", "") / 2 - 40}
         onTouchStart={() => onSelect()}
