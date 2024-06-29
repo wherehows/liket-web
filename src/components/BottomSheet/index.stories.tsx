@@ -1,7 +1,6 @@
 import { GENRES } from "@/utils/const";
 import CustomBottomSheet from ".";
 import "react-spring-bottom-sheet/dist/style.css";
-import CustomDrawer from "../CustomDrawer";
 
 export const Index = {
   render: () => {
