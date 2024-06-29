@@ -251,7 +251,6 @@ export default function Home() {
     </>
   );
 }
-
 const CONTENT_CARDS_DUMMY: ContentCardProps[] = [
   {
     idx: 1,
@@ -261,7 +260,7 @@ const CONTENT_CARDS_DUMMY: ContentCardProps[] = [
     location: "서울 성동구",
     startDate: "2023.01.30",
     endDate: "2023.02.23",
-    isLike: false,
+    likeState: false,
   },
   {
     idx: 2,
@@ -271,7 +270,7 @@ const CONTENT_CARDS_DUMMY: ContentCardProps[] = [
     location: "서울 성동구",
     startDate: "2023.01.30",
     endDate: "2023.02.23",
-    isLike: false,
+    likeState: false,
   },
   {
     idx: 3,
@@ -281,7 +280,7 @@ const CONTENT_CARDS_DUMMY: ContentCardProps[] = [
     location: "서울 성동구",
     startDate: "2023.01.30",
     endDate: "2023.02.23",
-    isLike: false,
+    likeState: false,
   },
   {
     idx: 4,
@@ -291,7 +290,7 @@ const CONTENT_CARDS_DUMMY: ContentCardProps[] = [
     location: "서울 성동구",
     startDate: "2023.01.30",
     endDate: "2023.02.23",
-    isLike: false,
+    likeState: false,
   },
   {
     idx: 5,
@@ -301,7 +300,7 @@ const CONTENT_CARDS_DUMMY: ContentCardProps[] = [
     location: "서울 성동구",
     startDate: "2023.01.30",
     endDate: "2023.02.23",
-    isLike: false,
+    likeState: false,
   },
   {
     idx: 6,
@@ -311,7 +310,7 @@ const CONTENT_CARDS_DUMMY: ContentCardProps[] = [
     location: "서울 성동구",
     startDate: "2023.01.30",
     endDate: "2023.02.23",
-    isLike: false,
+    likeState: false,
   },
   {
     idx: 7,
@@ -321,7 +320,7 @@ const CONTENT_CARDS_DUMMY: ContentCardProps[] = [
     location: "서울 성동구",
     startDate: "2023.01.30",
     endDate: "2023.02.23",
-    isLike: false,
+    likeState: false,
   },
   {
     idx: 8,
@@ -331,6 +330,6 @@ const CONTENT_CARDS_DUMMY: ContentCardProps[] = [
     location: "서울 성동구",
     startDate: "2023.01.30",
     endDate: "2023.02.23",
-    isLike: false,
+    likeState: false,
   },
 ];

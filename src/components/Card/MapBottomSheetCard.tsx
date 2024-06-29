@@ -5,17 +5,18 @@ import Badge from "../Badge/Badge";
 import { colors } from "@/utils/style";
 import Like from "@/icons/like.svg";
 import ActiveLike from "@/icons/like-filled.svg";
+import { ContentStateType, GenreType } from "@/types/const";
 
 interface MapBottomSheetCardProps {
   idx: number;
-  status: CONTENT_STATUSType;
+  status: ContentStateType;
   thumbnail: string;
   title: string;
   startDate: string;
   endDate: string;
-  isLike: boolean;
+  likeState: boolean;
   location: string;
-  genre: GENRESType;
+  genre: GenreType;
 }
 
 export const CONTENT_CARDS_DUMMY: MapBottomSheetCardProps[] = [
@@ -28,7 +29,7 @@ export const CONTENT_CARDS_DUMMY: MapBottomSheetCardProps[] = [
     location: "서울 성동구",
     startDate: "2023-01-30",
     endDate: "2023-02-23",
-    isLike: false,
+    likeState: false,
   },
   {
     idx: 2,
@@ -39,7 +40,7 @@ export const CONTENT_CARDS_DUMMY: MapBottomSheetCardProps[] = [
     location: "서울 성동구",
     startDate: "2023-01-30",
     endDate: "2023-02-23",
-    isLike: false,
+    likeState: false,
   },
   {
     idx: 3,
@@ -50,7 +51,7 @@ export const CONTENT_CARDS_DUMMY: MapBottomSheetCardProps[] = [
     location: "서울 성동구",
     startDate: "2023-01-30",
     endDate: "2023-02-23",
-    isLike: false,
+    likeState: false,
   },
   {
     idx: 4,
@@ -61,7 +62,7 @@ export const CONTENT_CARDS_DUMMY: MapBottomSheetCardProps[] = [
     location: "서울 성동구",
     startDate: "2023-01-30",
     endDate: "2023-02-23",
-    isLike: false,
+    likeState: false,
   },
   {
     idx: 5,
@@ -72,7 +73,7 @@ export const CONTENT_CARDS_DUMMY: MapBottomSheetCardProps[] = [
     location: "서울 성동구",
     startDate: "2023-01-30",
     endDate: "2023-02-23",
-    isLike: false,
+    likeState: false,
   },
   {
     idx: 6,
@@ -83,7 +84,7 @@ export const CONTENT_CARDS_DUMMY: MapBottomSheetCardProps[] = [
     location: "서울 성동구",
     startDate: "2023-01-30",
     endDate: "2023-02-23",
-    isLike: false,
+    likeState: false,
   },
   {
     idx: 7,
@@ -94,7 +95,7 @@ export const CONTENT_CARDS_DUMMY: MapBottomSheetCardProps[] = [
     location: "서울 성동구",
     startDate: "2023-01-30",
     endDate: "2023-02-23",
-    isLike: false,
+    likeState: false,
   },
   {
     idx: 8,
@@ -105,7 +106,7 @@ export const CONTENT_CARDS_DUMMY: MapBottomSheetCardProps[] = [
     location: "서울 성동구",
     startDate: "2023-01-30",
     endDate: "2023-02-23",
-    isLike: false,
+    likeState: false,
   },
   {
     idx: 9,
@@ -116,7 +117,7 @@ export const CONTENT_CARDS_DUMMY: MapBottomSheetCardProps[] = [
     location: "서울 성동구",
     startDate: "2023-01-30",
     endDate: "2023-02-23",
-    isLike: false,
+    likeState: false,
   },
   {
     idx: 10,
@@ -127,7 +128,7 @@ export const CONTENT_CARDS_DUMMY: MapBottomSheetCardProps[] = [
     location: "서울 성동구",
     startDate: "2023-01-30",
     endDate: "2023-02-23",
-    isLike: false,
+    likeState: false,
   },
   {
     idx: 11,
@@ -138,7 +139,7 @@ export const CONTENT_CARDS_DUMMY: MapBottomSheetCardProps[] = [
     location: "서울 성동구",
     startDate: "2023-01-30",
     endDate: "2023-02-23",
-    isLike: false,
+    likeState: false,
   },
 ];
 
@@ -150,7 +151,7 @@ const MapBottomSheetCard = ({
   genre,
   startDate,
   endDate,
-  isLike,
+  likeState,
   location,
 }: MapBottomSheetCardProps) => {
   return (
@@ -176,7 +177,7 @@ const MapBottomSheetCard = ({
         }}
         className="absolute top-0 right-0"
       >
-        {isLike ? (
+        {likeState ? (
           <ActiveLike color={colors.skyblue["01"]} />
         ) : (
           <Like color={colors.grey["02"]} />

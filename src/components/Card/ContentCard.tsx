@@ -18,7 +18,7 @@ export interface ContentCardProps {
   location: string;
   startDate: string;
   endDate: string;
-  isLike: boolean;
+  likeState: boolean;
 }
 
 const ContentCard = ({
@@ -29,7 +29,7 @@ const ContentCard = ({
   location,
   startDate,
   endDate,
-  isLike,
+  likeState,
 }: ContentCardProps) => {
   return (
     <Link href={`/contents/${idx}`}>
@@ -58,7 +58,7 @@ const ContentCard = ({
             }}
             className="absolute bottom-[8px] right-[8px]"
           >
-            {isLike ? (
+            {likeState ? (
               <ActiveLike color={colors.skyblue["01"]} />
             ) : (
               <Like color={colors.grey["02"]} />
