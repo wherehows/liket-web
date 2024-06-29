@@ -15,7 +15,7 @@ const RECT_HEIGHT = 42;
 const PADDING_BETWEEN_TEXT_AND_BOX = 24;
 const FONT_SIZE = 16;
 
-const CustomText = ({ shapeProps, isSelected, onSelect }: Props) => {
+const KonvaText = ({ shapeProps, isSelected, onSelect }: Props) => {
   return (
     <>
       <Group
@@ -52,7 +52,7 @@ const CustomText = ({ shapeProps, isSelected, onSelect }: Props) => {
   );
 };
 
-export default CustomText;
+export default KonvaText;
 
 const getPxLength = (text: string) => {
   const tempElem = document.createElement("span");
