@@ -14,6 +14,7 @@ import TextEnteringModal from "@/components/TextEnteringModal";
 import { useRouter } from "next/navigation";
 import LiketBackSide from "@/components/LiketBackSide";
 import { Else, If, Then } from "react-if";
+import { getXPos, yPos } from "@/utils/create-liket";
 
 const NoSSRLiketUploader = dynamic(() => import("@/components/LiketUploader"), {
   ssr: false,
@@ -56,6 +57,8 @@ export default function Page() {
         id: generateRandomId(10),
         fill: "black",
         text,
+        x: getXPos(text),
+        y: yPos,
       },
     ]);
 

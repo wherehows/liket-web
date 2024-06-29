@@ -1,8 +1,6 @@
 import { EmptyFunction } from "@/types/common";
 import { StrictShapeConfig } from "@/types/konva";
 import {
-  getXPos,
-  yPos,
   RECT_HEIGHT,
   FONT_SIZE,
   PADDING_BETWEEN_TEXT_AND_BOX,
@@ -20,12 +18,14 @@ interface Props {
 }
 
 const KonvaText = ({ shapeProps, isSelected, onSelect, onChange }: Props) => {
+  const { x, y, text, fill } = shapeProps;
+
   return (
     <>
       <Group
         draggable
-        x={getXPos(shapeProps.text)}
-        y={yPos}
+        x={x}
+        y={y}
         onTouchStart={onSelect}
         onMouseDown={onSelect}
         onClick={onSelect}
@@ -33,19 +33,19 @@ const KonvaText = ({ shapeProps, isSelected, onSelect, onChange }: Props) => {
         onDragEnd={(e) => {
           onChange({
             ...shapeProps,
-            // x: e.target.x(),
-            // y: e.target.y(),
+            x: e.target.x(),
+            y: e.target.y(),
           });
         }}
       >
         <Text
-          text="텍스트를 입력해주세요"
+          text={text}
+          fill={fill}
           fontSize={16}
           fontFamily="AppleSDGothicNeo"
           fontStyle="bold"
           y={(RECT_HEIGHT - FONT_SIZE) / 2 + 2}
           x={PADDING_BETWEEN_TEXT_AND_BOX}
-          {...shapeProps}
         />
         <Rect
           stroke={colors["skyblue"]["02"]}
