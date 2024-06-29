@@ -1,4 +1,3 @@
-import { CONTENT_STATUSType, GENRESType } from "@/utils/const";
 import Link from "next/link";
 import Image from "next/image";
 import Badge from "../Badge/Badge";
