@@ -9,6 +9,7 @@ import { colors } from "@/utils/style";
 import Link from "next/link";
 import { ContentListItem } from "@/types/content";
 import { ContentStateType, GenreType } from "@/types/const";
+import CustomImage from "../CustomImage";
 
 export interface ContentCardProps {
   idx: number;
@@ -36,9 +37,9 @@ const ContentCard = ({
       <article className="w-[164px]">
         <div className="relative mb-[8px]">
           <div className="relative w-[164px] h-[232px]">
-            <Image
+            <CustomImage
               src="https://picsum.photos/seed/picsum/164/232"
-              fill={true}
+              fill
               alt={`${title}에 대한 포스터`}
             />
           </div>
@@ -98,13 +99,7 @@ export const ApiContentCard = ({
       <article className="w-[164px]">
         <div className="relative mb-[8px]">
           <div className="relative w-[164px] h-[232px]">
-            {thumbnail ? (
-              <Image
-                src={thumbnail}
-                fill={true}
-                alt={`${title}에 대한 포스터`}
-              />
-            ) : null}
+            <CustomImage src={thumbnail} fill alt={`${title}에 대한 포스터`} />
           </div>
           <Badge
             variant={status}
