@@ -131,7 +131,7 @@ export default function Page() {
                 className="absolute bottom-[34px] left-1/2 transform -translate-x-1/2"
                 onClick={handleClickRemoveItem}
               >
-                <CircleCross />
+                <CircleCross width="36" height="36" />
               </button>
             </Then>
             <Else>
