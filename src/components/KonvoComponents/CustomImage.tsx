@@ -43,6 +43,7 @@ const CustomImage = ({ shapeProps, isSelected, onSelect, onChange }: Props) => {
             ...shapeProps,
             x: e.target.x(),
             y: e.target.y(),
+            rotation: e.target.rotation(),
           });
         }}
         onTransformEnd={() => {
@@ -58,6 +59,7 @@ const CustomImage = ({ shapeProps, isSelected, onSelect, onChange }: Props) => {
             y: node.y(),
             width: Math.max(5, node.width() * scaleX),
             height: Math.max(node.height() * scaleY),
+            rotation: node.rotation(),
           });
         }}
       />
