@@ -86,6 +86,8 @@ const useWriteTab = ({
               image,
               width: 80,
               height: 80,
+              x: 0,
+              y: 0,
             },
           ]);
         };
