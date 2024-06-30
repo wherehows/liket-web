@@ -30,13 +30,13 @@ const KonvaText = ({ shapeProps, isSelected, onSelect, onChange }: Props) => {
         onMouseDown={onSelect}
         onClick={onSelect}
         onTab={onSelect}
-        onDragEnd={(e) => {
+        onDragEnd={(e) =>
           onChange({
             ...shapeProps,
             x: e.target.x(),
             y: e.target.y(),
-          });
-        }}
+          })
+        }
       >
         <Text
           text={text}

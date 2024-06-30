@@ -22,7 +22,7 @@ const NoSSRLiketUploader = dynamic(() => import("@/components/LiketUploader"), {
 
 export default function Page() {
   const router = useRouter();
-  const [isImageUploaded, setIsImageUploaded] = useState(false);
+  const [uploadedImage, setUploadedImage] = useState<HTMLImageElement>();
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [isTextEnteringOnFrontSide, setIsTextEnteringOnFrontSide] =
     useState(false);
@@ -74,6 +74,15 @@ export default function Page() {
     setIsTextEnteringOnBackSide(false);
   };
 
+  const handleCreateLiket = () => {
+    // const dataURL = getRefValue(stageRef).toDataURL();
+    // const json = JSON.stringify(shapes);
+    // const bg = (uploadedImage as HTMLImageElement).src;
+    // console.log("😂", json);
+    // console.log("😍", bg);
+    // router.push("/mypage/likets/1");
+  };
+
   const isTextEnteringOpen =
     isTextEnteringOnBackSide || isTextEnteringOnFrontSide;
 
@@ -91,11 +100,8 @@ export default function Page() {
             <Header.RightOption
               option={{
                 check: {
-                  disabled: !isImageUploaded,
-                  onClick: () => {
-                    const dataURL = getRefValue(stageRef).toDataURL();
-                    // router.push("/mypage/likets/1");
-                  },
+                  disabled: !uploadedImage,
+                  onClick: handleCreateLiket,
                 },
               }}
             />
@@ -116,6 +122,7 @@ export default function Page() {
         />
         <div className={classNames(!isFront && "hidden")}>
           <NoSSRLiketUploader
+            uploadedImage={uploadedImage}
             stageRef={stageRef}
             size={size}
             shapes={shapes}
@@ -126,7 +133,7 @@ export default function Page() {
             onChangeShape={(newShapes: StrictShapeConfig[]) => {
               setShapes(newShapes);
             }}
-            onUploadImage={() => setIsImageUploaded(true)}
+            onUploadImage={(imageElement) => setUploadedImage(imageElement)}
           />
           <If condition={selectedShapeId.length > 1}>
             <Then>
@@ -142,7 +149,7 @@ export default function Page() {
                 selectedIndex={selectedIndex}
                 onChangeTab={(index) => setSelectedIndex(index)}
                 hidden={selectedShapeId.length > 1}
-                enabled={isImageUploaded}
+                enabled={!!uploadedImage}
                 onClickText={() =>
                   !isTextExist && setIsTextEnteringOnFrontSide(true)
                 }
@@ -172,10 +179,8 @@ export default function Page() {
                             type: "image",
                             id: generateRandomId(10),
                             image,
-                            width: 155.0000000000017,
-                            height: 155.0000000000017,
-                            x: 132.90240239540793,
-                            y: 79.39955775197706,
+                            width: 80,
+                            height: 80,
                           },
                         ]);
                       };

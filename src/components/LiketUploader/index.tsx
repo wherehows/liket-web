@@ -13,16 +13,18 @@ import { StrictShapeConfig } from "@/types/konva";
 import { BACKGROUND_CARD_SIZES, STAGE_SIZE } from "@/utils/create-liket";
 
 interface Props {
+  uploadedImage: HTMLImageElement | undefined;
   selectedShapeId: string;
   shapes: StrictShapeConfig[];
   stageRef: RefObject<Konva.Stage>;
   size: CardSizeType;
   onSelectShape: (shapeId: string) => void;
   onChangeShape: (shapes: StrictShapeConfig[]) => void;
-  onUploadImage: EmptyFunction;
+  onUploadImage: (dataUrl: HTMLImageElement) => void;
 }
 
 const LiketUploader = ({
+  uploadedImage,
   shapes,
   size = "LARGE",
   stageRef,
@@ -31,7 +33,6 @@ const LiketUploader = ({
   onChangeShape,
   onUploadImage,
 }: Props) => {
-  const [file, setFile] = useState<CanvasImageSource>();
   const inputRef = useRef<HTMLInputElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const { x, y, width, height } = BACKGROUND_CARD_SIZES[size];
@@ -74,7 +75,7 @@ const LiketUploader = ({
       ref={wrapperRef}
       className="liket-card center bg-[url(/icons/create-54.svg)] bg-[center_193px] bg-no-repeat"
     >
-      {file ? (
+      {uploadedImage ? (
         <Stage
           ref={stageRef}
           width={STAGE_SIZE.WIDTH}
@@ -85,7 +86,7 @@ const LiketUploader = ({
           <Layer>
             <Image
               id="bg-image"
-              image={file}
+              image={uploadedImage}
               x={x}
               y={y}
               width={width}
@@ -164,8 +165,7 @@ const LiketUploader = ({
                 const image = new window.Image();
                 image.src = reader.result as string;
                 image.onload = () => {
-                  setFile(image);
-                  onUploadImage();
+                  onUploadImage(image);
                 };
               };
 
