@@ -14,7 +14,6 @@ interface Props {
   isSelected: boolean;
   onChange: (newAttrs: StrictShapeConfig) => void;
   onSelect: EmptyFunction;
-  stagePos: { x: number; y: number };
 }
 
 const KonvaText = ({ shapeProps, isSelected, onSelect, onChange }: Props) => {

@@ -100,15 +100,9 @@ const LiketUploader = ({
 
               switch (type) {
                 case "text": {
-                  const rect = getRefValue(wrapperRef).getBoundingClientRect();
-
                   return (
                     <KonvaText
                       key={id}
-                      stagePos={{
-                        x: rect.left,
-                        y: rect.top,
-                      }}
                       isSelected={id === selectedShapeId}
                       shapeProps={shape}
                       onSelect={() => handleSelectItem(id)}
