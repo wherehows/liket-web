@@ -6,18 +6,29 @@ import Button from "@/components/Button";
 import Chip from "@/components/Chip";
 import Control from "@/components/Control";
 import Header from "@/components/Header";
-import Input from "@/components/Input";
 import MediumSelectButton from "@/components/SelectButton/MediumSelectButton";
 import customToast from "@/utils/customToast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { createContext, useContext, useState, MouseEvent } from "react";
-import { FormProvider, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { z } from "zod";
 import CalendarIcon from "@/icons/calendar.svg";
 import { YearCalendar } from "@mui/x-date-pickers";
 import CustomDrawer from "@/components/CustomDrawer";
 import dayjs from "dayjs";
+import { useTimer } from "react-timer-hook";
+import {
+  useCheckAuthentication,
+  useSendAuthentication,
+} from "@/service/signup/hooks";
+import {
+  Input,
+  InputButton,
+  InputText,
+  InputWrapper,
+  Label,
+} from "@/components/newInput";
 
 const INITIAL_FUNNEL_STATE = {
   email: "",
@@ -85,7 +96,7 @@ export default SignUpPage;
 
 const emailVerificationScheme = z.object({
   email: z.string().email("올바른 이메일을 입력해주세요."),
-  "verification-code": z.string().length(6, "6자를 입력해주세요"),
+  "auth-code": z.string().length(6, "6자를 입력해주세요"),
 });
 
 const passwordScheme = z
@@ -104,85 +115,131 @@ const passwordScheme = z
   });
 
 const profileScheme = z.object({
-  "profile-image": z.string(),
-  nickname: z.string().email("올바른 이메일을 입력해주세요."),
+  nickname: z
+    .string()
+    .min(2, { message: "2~15자 이내로 입력해주세요." })
+    .max(15, { message: "2~15자 이내로 입력해주세요." })
+    .regex(/^[a-zA-Z0-9]+$/, {
+      message: "닉네임은 영문, 숫자만 입력할 수 있습니다.",
+    }),
   gender: z.string().min(8, "8자 이상 입력해주세요."),
+  "profile-image": z.string(),
   "birth-year": z.string(),
 });
 
 const EmailForm = () => {
   const { funnelState, inputFunnelState } = useContext(FunnelStateContext);
-  const isEmailVerified = false;
+
+  const time = new Date();
+  time.setSeconds(time.getSeconds() + 180);
+  const { minutes, seconds, isRunning, start } = useTimer({
+    expiryTimestamp: time,
+    autoStart: false,
+  });
+  const [userEmail, setUserEmail] = useState("");
+
+  const {
+    mutate: sendAuthenticationNumber,
+    isSuccess: isSendSuccess,
+    isPending,
+  } = useSendAuthentication({
+    onSuccess: () => start(),
+  });
+
+  const { mutate: checkAuthenticationNumber } = useCheckAuthentication({
+    onSuccess: () => {
+      inputFunnelState({ ...funnelState });
+    },
+    onError: () => customToast("올바른 인증번호를 입력해주세요."),
+  });
 
   const methods = useForm({
     mode: "onBlur",
     defaultValues: {
       email: "",
-      "verification-code": "",
+      "auth-code": "",
     },
     resolver: zodResolver(emailVerificationScheme),
   });
 
-  const { handleSubmit, formState, getFieldState } = methods;
-
-  const onSubmit = () => {};
-
+  const { formState, getFieldState, register, getValues } = methods;
   const { isValid, isValidating } = formState;
 
   const onClickNextButton = () => {
-    if (!isEmailVerified) {
-      customToast("올바른 인증번호를 입력해주세요.");
+    checkAuthenticationNumber({
+      email: userEmail,
+      type: 0,
+      code: getValues("auth-code"),
+    });
+  };
+
+  const onClickSendAuthenticationNumber = () => {
+    if (isSendSuccess || isPending) {
       return;
     }
 
-    inputFunnelState({ ...funnelState });
+    setUserEmail(getValues("email"));
+    sendAuthenticationNumber({
+      email: getValues("email"),
+      type: 0,
+    });
   };
+
+  const isEmailFormatInvalid =
+    !!getFieldState("email").error ||
+    !getFieldState("email").isDirty ||
+    !getFieldState("email").isTouched ||
+    isValidating;
 
   return (
     <>
-      <FormProvider {...methods}>
-        <form
-          className="flex flex-col grow pt-[16px] px-[24px]"
-          onSubmit={handleSubmit(onSubmit)}
+      <form className="flex flex-col grow pt-[16px] px-[24px]">
+        <div className="grow">
+          <InputWrapper margin="0 0 34px 0">
+            <Label htmlFor="email">이메일</Label>
+            <Input
+              field="email"
+              placeholder="liket@email.com"
+              formState={formState}
+              register={register}
+            />
+            <InputButton
+              disabled={
+                (!isSendSuccess && isEmailFormatInvalid) ||
+                (isSendSuccess && isRunning)
+              }
+              onClick={onClickSendAuthenticationNumber}
+            >
+              {isSendSuccess ? "재발송" : "인증받기"}
+            </InputButton>
+          </InputWrapper>
+          <InputWrapper margin="0 0 47px 0">
+            <Label htmlFor="auth-code">인증번호</Label>
+            <Input
+              field="auth-code"
+              maxLength={6}
+              placeholder="인증번호 6자리"
+              type="password"
+              formState={formState}
+              register={register}
+            />
+            <InputText isShown={isSendSuccess}>{`${String(minutes).padStart(
+              2,
+              "0"
+            )}분 ${String(seconds).padStart(2, "0")}초`}</InputText>
+          </InputWrapper>
+        </div>
+      </form>
+      <BottomButtonTabWrapper>
+        <Button
+          fullWidth
+          disabled={!isValid}
+          height={48}
+          onClick={onClickNextButton}
         >
-          <div className="grow">
-            <Input margin="0 0 34px 0">
-              <Input.Label htmlFor="email">이메일</Input.Label>
-              <Input.Content id="email" placeholder="liket@email.com" />
-              <Input.Button
-                disabled={
-                  !!getFieldState("email").error ||
-                  !getFieldState("email").isDirty ||
-                  !getFieldState("email").isTouched ||
-                  isValidating
-                }
-                onClick={() => {}}
-              >
-                인증받기
-              </Input.Button>
-            </Input>
-            <Input margin="0 0 47px 0">
-              <Input.Label htmlFor="verification-code">인증번호</Input.Label>
-              <Input.Content
-                maxLength={6}
-                id="verification-code"
-                placeholder="인증번호 6자리"
-                type="password"
-              />
-            </Input>
-          </div>
-        </form>
-        <BottomButtonTabWrapper>
-          <Button
-            fullWidth
-            disabled={!isValid}
-            height={48}
-            onClick={onClickNextButton}
-          >
-            다음
-          </Button>
-        </BottomButtonTabWrapper>
-      </FormProvider>
+          다음
+        </Button>
+      </BottomButtonTabWrapper>
     </>
   );
 };
@@ -199,75 +256,68 @@ const PasswordForm = () => {
     resolver: zodResolver(passwordScheme),
   });
 
-  const { handleSubmit, formState, trigger, watch } = methods;
-
-  const onSubmit = () => {};
-
+  const { formState, trigger, watch, register } = methods;
   const { isValid, dirtyFields } = formState;
 
-  const onClickNextButton = () => {
-    inputFunnelState({ ...funnelState });
-  };
+  const onClickNextButton = () => inputFunnelState({ ...funnelState });
 
   return (
     <>
-      <FormProvider {...methods}>
-        <form
-          className="flex flex-col grow pt-[16px] px-[24px]"
-          onSubmit={handleSubmit(onSubmit)}
+      <form className="flex flex-col grow pt-[16px] px-[24px]">
+        <div className="grow">
+          <InputWrapper margin="0 0 34px 0">
+            <Label htmlFor="password">비밀번호</Label>
+            <Input
+              field="password"
+              type="password"
+              placeholder="영문, 숫자, 특수문자 포함 8~15자"
+              maxLength={15}
+              formState={formState}
+              register={register}
+              onChange={(e) => {
+                if (
+                  e.target.value !== watch("password") &&
+                  dirtyFields["confirm-password"]
+                ) {
+                  trigger("confirm-password");
+                }
+              }}
+            />
+          </InputWrapper>
+          <InputWrapper margin="0 0 47px 0">
+            <Label htmlFor="confirm-password">비밀번호 확인</Label>
+            <Input
+              field="confirm-password"
+              type="password"
+              placeholder="비밀번호 입력"
+              maxLength={15}
+              formState={formState}
+              register={register}
+            />
+          </InputWrapper>
+        </div>
+      </form>
+      <BottomButtonTabWrapper>
+        <Button
+          fullWidth
+          disabled={!isValid}
+          height={48}
+          onClick={onClickNextButton}
         >
-          <div className="grow">
-            <Input margin="0 0 34px 0">
-              <Input.Label htmlFor="password">비밀번호</Input.Label>
-              <Input.Content
-                id="password"
-                type="password"
-                placeholder="영문, 숫자, 특수문자 포함 8~15자"
-                maxLength={15}
-                onChange={(value) => {
-                  if (
-                    value !== watch("password") &&
-                    dirtyFields["confirm-password"]
-                  ) {
-                    trigger("confirm-password");
-                  }
-                }}
-              />
-            </Input>
-            <Input margin="0 0 47px 0">
-              <Input.Label htmlFor="confirm-password">
-                비밀번호 확인
-              </Input.Label>
-              <Input.Content
-                id="confirm-password"
-                type="password"
-                placeholder="비밀번호 입력"
-                maxLength={15}
-              />
-            </Input>
-          </div>
-        </form>
-        <BottomButtonTabWrapper>
-          <Button
-            fullWidth
-            disabled={!isValid}
-            height={48}
-            onClick={onClickNextButton}
-          >
-            다음
-          </Button>
-        </BottomButtonTabWrapper>
-      </FormProvider>
+          다음
+        </Button>
+      </BottomButtonTabWrapper>
     </>
   );
 };
 
 const ProfileForm = () => {
+  const { funnelState, inputFunnelState } = useContext(FunnelStateContext);
+
   const router = useRouter();
   const [selectedGender, setSelectedGender] = useState("");
   const [isYearSelectionDrawerOpen, setIsYearSelectionDrawerOpen] =
     useState(false);
-  const { funnelState, inputFunnelState } = useContext(FunnelStateContext);
 
   const methods = useForm({
     mode: "onBlur",
@@ -280,7 +330,7 @@ const ProfileForm = () => {
     resolver: zodResolver(profileScheme),
   });
 
-  const { handleSubmit, formState } = methods;
+  const { formState, handleSubmit, register } = methods;
 
   const onSubmit = () => {};
 
@@ -301,71 +351,69 @@ const ProfileForm = () => {
 
   return (
     <>
-      <FormProvider {...methods}>
-        <form
-          className="flex flex-col grow pt-[16px] px-[24px]"
-          onSubmit={handleSubmit(onSubmit)}
-        >
-          <div className="grow">
-            <div className="center mb-[34px]">
-              <AvatarUploader onUploadImage={() => {}} />
-            </div>
-            <Input margin="0 0 34px 0">
-              <Input.Label htmlFor="email">
-                닉네임 <span className="text-top">*</span>
-              </Input.Label>
-              <Input.Content
-                id="email"
-                placeholder="영문, 숫자 포함 2~15자 (중복 불가)"
-              />
-            </Input>
-            <Input margin="0 0 34px 0">
-              <Input.Label htmlFor="gender">성별</Input.Label>
-              <ul
-                id="gender"
-                onClick={handleClickGender}
-                className="flex mt-[12px] gap-[8px]"
-              >
-                {["남자", "여자"].map((gender) => {
-                  return (
-                    <li key={gender}>
-                      <Chip isSelected={selectedGender === gender}>
-                        {gender}
-                      </Chip>
-                    </li>
-                  );
-                })}
-              </ul>
-            </Input>
-            <Input>
-              <Input.Label
-                style={{
-                  margin: "0 0 12px 0",
-                }}
-                htmlFor="birth-year"
-              >
-                연령
-              </Input.Label>
-              <MediumSelectButton
-                text=""
-                placeholder="출생년도"
-                onClick={() => setIsYearSelectionDrawerOpen(true)}
-                Icon={<CalendarIcon />}
-              />
-            </Input>
+      <form
+        className="flex flex-col grow pt-[16px] px-[24px]"
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        <div className="grow">
+          <div className="center mb-[34px]">
+            <AvatarUploader onUploadImage={() => {}} />
           </div>
-        </form>
-        <BottomButtonTabWrapper>
-          <Button
-            fullWidth
-            disabled={!isValid}
-            height={48}
-            onClick={onClickNextButton}
-          >
-            라이켓 시작하기
-          </Button>
-        </BottomButtonTabWrapper>
-      </FormProvider>
+          <InputWrapper margin="0 0 34px 0">
+            <Label htmlFor="email">
+              닉네임 <span className="text-top">*</span>
+            </Label>
+            <Input
+              field="nickname"
+              placeholder="영문, 숫자 포함 2~15자 (중복 불가)"
+              formState={formState}
+              register={register}
+            />
+          </InputWrapper>
+          <InputWrapper margin="0 0 34px 0">
+            <Label htmlFor="gender">성별</Label>
+            <ul
+              id="gender"
+              onClick={handleClickGender}
+              className="flex mt-[12px] gap-[8px]"
+            >
+              {["남자", "여자"].map((gender) => {
+                return (
+                  <li key={gender}>
+                    <Chip isSelected={selectedGender === gender}>{gender}</Chip>
+                  </li>
+                );
+              })}
+            </ul>
+          </InputWrapper>
+          <InputWrapper>
+            <Label
+              style={{
+                margin: "0 0 12px 0",
+              }}
+              htmlFor="birth-year"
+            >
+              연령
+            </Label>
+            <MediumSelectButton
+              text=""
+              placeholder="출생년도"
+              onClick={() => setIsYearSelectionDrawerOpen(true)}
+              Icon={<CalendarIcon />}
+            />
+          </InputWrapper>
+        </div>
+      </form>
+      <BottomButtonTabWrapper>
+        <Button
+          fullWidth
+          disabled={!isValid}
+          height={48}
+          onClick={onClickNextButton}
+        >
+          라이켓 시작하기
+        </Button>
+      </BottomButtonTabWrapper>
       <CustomDrawer open={isYearSelectionDrawerOpen}>
         <YearCalendar
           minDate={dayjs(`${new Date().getFullYear() - 100}`)}
