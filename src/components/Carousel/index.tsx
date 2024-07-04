@@ -6,21 +6,15 @@ import { classNames, getRefValue } from "@/utils/helpers";
 import Image from "next/image";
 import { useRef, useState } from "react";
 import Control from "../Control";
+import { BannerListItem } from "@/types/banner";
 
 const MIN_SWIPE_REQUIRED = 40;
 
 interface CarouselProps {
-  imgs: string[];
+  list: Pick<BannerListItem, "idx" | "imgPath">[];
 }
 
-export const CAROUSEL_DUMMY = [
-  "https://picsum.photos/id/44/1000/1000",
-  "https://picsum.photos/id/75/1000/1000",
-  "https://picsum.photos/id/38/1000/1000",
-  "https://picsum.photos/id/47/1000/1000",
-];
-
-const Carousel = ({ imgs }: CarouselProps) => {
+const Carousel = ({ list }: CarouselProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isSwiping, setIsSwiping] = useState(false);
   const startXRef = useRef(0);
@@ -119,11 +113,11 @@ const Carousel = ({ imgs }: CarouselProps) => {
               : "transition-transform duration-300 ease-out"
           )}
         >
-          {imgs.map((img, index) => {
+          {list.map(({ imgPath, idx }) => {
             return (
               <Image
-                key={index}
-                src={img}
+                key={idx}
+                src={process.env.NEXT_PUBLIC_IMAGE_SERVER + imgPath}
                 width={390}
                 height={336}
                 style={{
@@ -143,7 +137,7 @@ const Carousel = ({ imgs }: CarouselProps) => {
           role="group"
           aria-label="slide controls"
         >
-          {imgs.map((_, index) => {
+          {list.map((_, index) => {
             return (
               <Control
                 key={index}
