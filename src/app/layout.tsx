@@ -5,6 +5,10 @@ import ModalProvider from "@/components/Modal/ModalProvider";
 import { Toaster } from "react-hot-toast";
 import MuiLocalizationProvider from "@/components/MuiLocalizationProvider";
 import Provider from "@/components/Provider";
+import dayjs from "dayjs";
+import "dayjs/locale/ko";
+
+dayjs.locale("ko");
 
 export const appleGothic = localFont({
   src: [
