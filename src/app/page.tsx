@@ -12,18 +12,18 @@ import { colors } from "@/utils/style";
 import Link from "next/link";
 import CustomScrollContainer from "@/components/CustomScrollContainer";
 import {
-  getBannerImages,
   getHotPlaces,
   getSoonEndContents,
   getSoonOpenContents,
 } from "@/apis/content";
 import { Else, If, Then } from "react-if";
 import HotPlaceListItem from "@/components/HotplaceListItem";
+import { getBannerList } from "@/apis/banner";
 
 export default async function Home() {
   const { contentList: soonOpenContents } = await getSoonOpenContents();
   const { contentList: soonEndContents } = await getSoonEndContents();
-  const { bannerList } = await getBannerImages();
+  const { bannerList } = await getBannerList();
   const hotPlaces = await getHotPlaces();
 
   return (
