@@ -11,7 +11,7 @@ import { BannerListItem } from "@/types/banner";
 const MIN_SWIPE_REQUIRED = 40;
 
 interface CarouselProps {
-  list: Pick<BannerListItem, "idx" | "imgPath">[];
+  list: string[];
 }
 
 const Carousel = ({ list }: CarouselProps) => {
@@ -113,10 +113,10 @@ const Carousel = ({ list }: CarouselProps) => {
               : "transition-transform duration-300 ease-out"
           )}
         >
-          {list.map(({ imgPath, idx }) => {
+          {list.map((imgPath, index) => {
             return (
               <Image
-                key={idx}
+                key={index}
                 src={process.env.NEXT_PUBLIC_IMAGE_SERVER + imgPath}
                 width={390}
                 height={336}

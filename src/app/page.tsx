@@ -33,7 +33,7 @@ export default async function Home() {
         <Header.RightOption option={{ search: true, like: true }} />
       </Header>
       <main>
-        <Carousel list={bannerList} />
+        <Carousel list={bannerList.map(({ imgPath }) => imgPath)} />
         <section className="mb-[48px] mt-[24px]">
           <h2 className="pl-[24px] mb-[8px]">
             선선한 가을 날씨에 <span className="text-skyblue-01">#힐링</span>
