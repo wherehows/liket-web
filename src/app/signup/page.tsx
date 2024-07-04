@@ -359,7 +359,7 @@ const ProfileForm = () => {
           <div className="center mb-[34px]">
             <AvatarUploader onUploadImage={() => {}} />
           </div>
-          <InputWrapper margin="0 0 34px 0">
+          <InputWrapper margin="0 0 16px 0">
             <Label htmlFor="email">
               닉네임 <span className="text-top">*</span>
             </Label>
