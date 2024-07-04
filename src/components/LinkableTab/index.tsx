@@ -12,12 +12,12 @@ import FilledCreateIcon from "@/icons/create-filled.svg";
 import MyPageIcon from "@/icons/mypage.svg";
 import FilledMyPageIcon from "@/icons/mypage-filled.svg";
 import { colors } from "@/utils/style";
-import CustomBottomSheet from "../BottomSheet";
 import CreateReview from "@/icons/create-review.svg";
 import CreateLiket from "@/icons/create-liket.svg";
 import CreateRoute from "@/icons/create-route.svg";
 import useModalStore from "@/stores/modalStore";
 import { classNames } from "@/utils/helpers";
+import CustomDrawer from "../CustomDrawer";
 
 interface LinkTabProps {
   isSelected: boolean;
@@ -65,11 +65,11 @@ const LinkableTab = ({ shadow = false }: Props) => {
 
   return (
     <>
-      <CustomBottomSheet
-        title="Create"
+      <CustomDrawer
         open={isWriteModalOpen}
-        onClickBackDrop={() => setIsWriteModalOpen(false)}
+        onClose={() => setIsWriteModalOpen(false)}
       >
+        <div className="center text-h2">Create</div>
         <ul>
           <li className="bottom-sheet-list">
             {isLoggedIn ? (
@@ -94,11 +94,7 @@ const LinkableTab = ({ shadow = false }: Props) => {
             )}
           </li>
           <li className="bottom-sheet-list">
-            <Link href="/create/liket" className="bottom-sheet-button">
-              <CreateLiket className="mr-[8px]" />
-              라이켓 제작
-            </Link>
-            {/* {isLoggedIn ? (
+            {isLoggedIn ? (
               <Link href="/create/liket" className="bottom-sheet-button">
                 <CreateLiket className="mr-[8px]" />
                 라이켓 제작
@@ -117,7 +113,7 @@ const LinkableTab = ({ shadow = false }: Props) => {
                 <CreateLiket className="mr-[8px]" />
                 라이켓 제작
               </button>
-            )} */}
+            )}
           </li>
           <li className="bottom-sheet-list">
             {isLoggedIn ? (
@@ -142,7 +138,7 @@ const LinkableTab = ({ shadow = false }: Props) => {
             )}
           </li>
         </ul>
-      </CustomBottomSheet>
+      </CustomDrawer>
       <div
         role="tablist"
         className={classNames(
@@ -168,7 +164,7 @@ const LinkableTab = ({ shadow = false }: Props) => {
           role="tab"
           aria-selected={isWriteModalOpen}
           className="h-fit"
-          // onClick={() => setIsWriteModalOpen(true)}
+          onClick={() => setIsWriteModalOpen(true)}
         >
           {isWriteModalOpen ? (
             <FilledCreateIcon color={colors.skyblue["01"]} />
