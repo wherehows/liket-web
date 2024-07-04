@@ -1,6 +1,7 @@
 import { StrictPropsWithChildren } from "@/types/common";
 import { classNames } from "@/utils/helpers";
 import { variantToStyleMap, variantWithDisabledStyleMap } from "@/utils/style";
+import { MouseEvent } from "react";
 
 type ButtonProps = StrictPropsWithChildren<
   {
@@ -8,7 +9,7 @@ type ButtonProps = StrictPropsWithChildren<
     disabled?: boolean;
     variant?: keyof typeof variantToStyleMap;
     fullWidth?: boolean;
-    onClick: () => void;
+    onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
     height: 48 | 40;
   },
   string
@@ -36,7 +37,7 @@ const Button = ({
           : `${variantToStyleMap[variant]}`,
         fullWidth && "flex-1"
       )}
-      onClick={onClick}
+      onClick={(e) => onClick && onClick(e)}
     >
       {children}
     </button>
