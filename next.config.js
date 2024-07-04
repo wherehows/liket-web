@@ -21,6 +21,14 @@ const nextConfig = {
       },
     ];
   },
+  async rewrites() {
+    return [
+      {
+        source: "/apis/:path*",
+        destination: `${process.env.NEXT_PUBLIC_API_SERVER}/:path*`,
+      },
+    ];
+  },
   webpack(config) {
     // Grab the existing rule that handles SVG imports
     const fileLoaderRule = config.module.rules.find((rule) =>
