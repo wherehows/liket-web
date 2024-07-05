@@ -21,7 +21,9 @@ const AvatarUploader = ({
           src={url ? url : "/icons/default-avatar.svg"}
           alt="아바타 이미지"
           fill
-          objectFit="cover"
+          style={{
+            objectFit: "cover",
+          }}
         />
       </div>
       <input
