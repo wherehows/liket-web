@@ -17,7 +17,7 @@ export const Index = {
 
     return (
       <div className="w-[390px]">
-        <Carousel imgs={imgs} />
+        <Carousel list={imgs} />
       </div>
     );
   },
