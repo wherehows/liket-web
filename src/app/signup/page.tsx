@@ -230,7 +230,7 @@ const EmailForm = () => {
           </InputWrapper>
         </div>
       </form>
-      <BottomButtonTabWrapper>
+      <BottomButtonTabWrapper shadow>
         <Button
           fullWidth
           disabled={!isValid}
@@ -297,7 +297,7 @@ const PasswordForm = () => {
           </InputWrapper>
         </div>
       </form>
-      <BottomButtonTabWrapper>
+      <BottomButtonTabWrapper shadow>
         <Button
           fullWidth
           disabled={!isValid}
@@ -404,7 +404,7 @@ const ProfileForm = () => {
           </InputWrapper>
         </div>
       </form>
-      <BottomButtonTabWrapper>
+      <BottomButtonTabWrapper shadow>
         <Button
           fullWidth
           disabled={!isValid}
