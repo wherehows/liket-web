@@ -5,7 +5,7 @@ export interface ContentListItem {
   title: string;
   thumbnail: string;
   genre: Genre;
-  style: Style;
+  style: Style[];
   age: Age;
   location: Location;
   // TODO: status 상태 삭제 예정
