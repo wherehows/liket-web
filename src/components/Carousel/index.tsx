@@ -6,7 +6,6 @@ import { classNames, getRefValue } from "@/utils/helpers";
 import Image from "next/image";
 import { useRef, useState } from "react";
 import Control from "../Control";
-import { BannerListItem } from "@/types/banner";
 
 const MIN_SWIPE_REQUIRED = 40;
 
