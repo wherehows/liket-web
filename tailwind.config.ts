@@ -1,10 +1,9 @@
+import { LIKET_CARD_HEIGHT, LIKET_CARD_WIDTH } from "./src/utils/create-liket";
 import {
   TypographyScale,
   ButtonScale,
   colors,
   PAGE_CONTENT_MAX_WIDTH,
-  LIKET_CARD_HEIGHT,
-  LIKET_CARD_WIDTH,
 } from "./src/utils/style";
 import type { Config } from "tailwindcss";
 

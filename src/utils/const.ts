@@ -7,9 +7,7 @@ export const GENRES = [
   "페스티벌",
 ] as const;
 
-export type GENRESType = (typeof GENRES)[number];
-
-export const CONTENT_STATUS = [
+export const CONTENT_STATES = [
   "active",
   "closed",
   "waiting",
@@ -18,11 +16,7 @@ export const CONTENT_STATUS = [
   "inactive",
 ] as const;
 
-export type CONTENT_STATUSType = (typeof CONTENT_STATUS)[number];
-
-export const CITYS = ["서울특별시", "인천광역시", "경기도"] as const;
-
-export type CITYSType = (typeof CITYS)[number];
+export const CITIES = ["서울특별시", "인천광역시", "경기도"] as const;
 
 export const AGES = [
   "전체",
@@ -32,8 +26,6 @@ export const AGES = [
   "30대",
   "4050대",
 ] as const;
-
-export type AGESType = (typeof AGES)[number];
 
 export const STYLES = [
   "혼자",
@@ -52,8 +44,4 @@ export const STYLES = [
   "핫한",
 ] as const;
 
-export type STYLESType = (typeof STYLES)[number];
-
-export const ORDER_TYPES = ["최신순", "인기순"] as const;
-
-export type ORDER_TYPETypes = (typeof ORDER_TYPES)[number];
+export const ORDERS = ["최신순", "인기순"] as const;

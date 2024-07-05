@@ -81,9 +81,9 @@ interface InputProps<T extends FieldValues>
 export const Input = <T extends FieldValues>({
   field,
   formState,
+  required,
   onChange,
   register,
-  required,
   ...props
 }: InputProps<T>) => {
   const errors = formState.errors;
@@ -96,18 +96,17 @@ export const Input = <T extends FieldValues>({
         aria-required={!!required}
         required={required}
         className={classNames(
-          "box-border pl-[8px] pr-[8px] pt-[16px] pb-[15px] text-body3 border-b-[1px] border-b-grey-01 focus:border-b-[2px] placeholder:text-button4 placeholder:text-grey-02",
+          "w-[100%] box-border pl-[8px] pr-[8px] pt-[16px] text-body3 border-b-[1px] border-b-grey-01 focus:border-b-[2px] focus:pb-[14px] placeholder:text-button4 placeholder:text-grey-02",
           isErrorExist
-            ? "border-b-[2px] border-b-rosepink-01 focus:border-b-rosepink-01"
-            : "focus:border-b-skyblue-01"
+            ? "border-b-[2px] border-b-rosepink-01 focus:border-b-rosepink-01 pb-[14px]"
+            : "focus:border-b-skyblue-01 pb-[15px]"
         )}
         id={field}
         {...register(field, { onChange })}
         {...props}
       />
       <strong
-        className="text-button6 text-rosepink-01 mt-[4px]"
-        hidden={!isErrorExist}
+        className="text-button6 text-rosepink-01 mt-[4px] h-[18px]"
         aria-live="assertive"
       >
         {errors[field]?.message?.toString()}
@@ -128,10 +127,10 @@ export const InputButton = ({ children, disabled, onClick }: ButtonProps) => {
   return (
     <button
       className={classNames(
-        "px-[8px] text-button4 rounded-[12px] h-[24px] absolute bottom-0 right-0 mb-[12px]",
+        "px-[8px] text-button4 rounded-[12px] h-[24px] absolute right-0 top-1/2 transform -translate-y-1/2",
         disabled
           ? variantWithDisabledStyleMap["primary"]
-          : variantToStyleMap["primary"]
+          : variantToStyleMap["ghost"]
       )}
       disabled={disabled}
       onClick={onClick}
@@ -148,7 +147,7 @@ export const InputText = ({ children, isShown }: TextProps) => {
   return (
     <>
       {isShown && (
-        <div className="absolute text-button6 bottom-0 right-0 mb-[17px] text-rosepink-01">
+        <div className="absolute text-button6 right-0 top-1/2 transform -translate-y-1/2 text-rosepink-01">
           {children}
         </div>
       )}

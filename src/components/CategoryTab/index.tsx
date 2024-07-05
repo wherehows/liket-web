@@ -23,17 +23,17 @@ const index = ({
         "flex w-[100%] px-[24px] border-b-[1px] border-grey-01",
         small ? "h-[32px]" : "h-[40px]"
       )}
-      onClick={(e: MouseEvent<HTMLUListElement>) => {
-        const target = e.target as HTMLUListElement;
+      // onClick={(e: MouseEvent<HTMLUListElement>) => {
+      //   const target = e.target as HTMLUListElement;
 
-        const textContent = target.textContent;
+      //   const textContent = target.textContent;
 
-        if (target.tagName !== "BUTTON" || !textContent) {
-          return;
-        }
+      //   if (target.tagName !== "BUTTON" || !textContent) {
+      //     return;
+      //   }
 
-        onClickTab(textContent);
-      }}
+      //   onClickTab(textContent);
+      // }}
     >
       {list.map((tab) => {
         return (

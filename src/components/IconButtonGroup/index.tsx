@@ -66,7 +66,7 @@ const IconButtonGroup = ({
                 alt={`${iconName} 아이콘`}
                 width={iconSize}
                 height={iconSize}
-                src={`/icons/${iconName}.svg`}
+                src={`/icons/stickers/${iconName}.svg`}
               />
             </button>
           </li>

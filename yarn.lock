@@ -4713,6 +4713,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tanstack/query-core@npm:5.49.1":
+  version: 5.49.1
+  resolution: "@tanstack/query-core@npm:5.49.1"
+  checksum: 10c0/96cd7a22f16f9014083d60b136d430714b84cb06cbd8de863a787ca4e3bd58d3ddfa06fa6390e78fabf62878fdf593e342b9c0210ab443c329e5460134dfa90b
+  languageName: node
+  linkType: hard
+
+"@tanstack/react-query@npm:^5.49.2":
+  version: 5.49.2
+  resolution: "@tanstack/react-query@npm:5.49.2"
+  dependencies:
+    "@tanstack/query-core": "npm:5.49.1"
+  peerDependencies:
+    react: ^18.0.0
+  checksum: 10c0/c69702487e5e1c0a9758b96c21a7ce3bace1336a61c01f260d7927724a441f01c7d8074d89d317c8001480ac65e7b5762327ff3b3c9fe6d568186488f0dad430
+  languageName: node
+  linkType: hard
+
 "@testing-library/dom@npm:^9.0.0":
   version: 9.3.4
   resolution: "@testing-library/dom@npm:9.3.4"
@@ -6224,6 +6242,17 @@ __metadata:
   version: 4.7.0
   resolution: "axe-core@npm:4.7.0"
   checksum: 10c0/89ac5712b5932ac7d23398b4cb5ba081c394a086e343acc68ba49c83472706e18e0799804e8388c779dcdacc465377deb29f2714241d3fbb389cf3a6b275c9ba
+  languageName: node
+  linkType: hard
+
+"axios@npm:^1.7.2":
+  version: 1.7.2
+  resolution: "axios@npm:1.7.2"
+  dependencies:
+    follow-redirects: "npm:^1.15.6"
+    form-data: "npm:^4.0.0"
+    proxy-from-env: "npm:^1.1.0"
+  checksum: 10c0/cbd47ce380fe045313364e740bb03b936420b8b5558c7ea36a4563db1258c658f05e40feb5ddd41f6633fdd96d37ac2a76f884dad599c5b0224b4c451b3fa7ae
   languageName: node
   linkType: hard
 
@@ -9247,6 +9276,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"follow-redirects@npm:^1.15.6":
+  version: 1.15.6
+  resolution: "follow-redirects@npm:1.15.6"
+  peerDependenciesMeta:
+    debug:
+      optional: true
+  checksum: 10c0/9ff767f0d7be6aa6870c82ac79cf0368cd73e01bbc00e9eb1c2a16fbb198ec105e3c9b6628bb98e9f3ac66fe29a957b9645bcb9a490bb7aa0d35f908b6b85071
+  languageName: node
+  linkType: hard
+
 "for-each@npm:^0.3.3":
   version: 0.3.3
   resolution: "for-each@npm:0.3.3"
@@ -11493,6 +11532,7 @@ __metadata:
     "@storybook/react": "npm:^7.5.1"
     "@storybook/testing-library": "npm:^0.2.2"
     "@svgr/webpack": "npm:^8.1.0"
+    "@tanstack/react-query": "npm:^5.49.2"
     "@testing-library/jest-dom": "npm:^6.1.5"
     "@testing-library/react": "npm:^14.1.2"
     "@testing-library/react-hooks": "npm:^8.0.1"
@@ -11501,6 +11541,7 @@ __metadata:
     "@types/react": "npm:^18"
     "@types/react-dom": "npm:^18"
     autoprefixer: "npm:^10"
+    axios: "npm:^1.7.2"
     chromatic: "npm:^10.1.0"
     dayjs: "npm:^1.11.10"
     dotenv-cli: "npm:^7.3.0"
@@ -11517,10 +11558,12 @@ __metadata:
     react-dom: "npm:^18"
     react-hook-form: "npm:^7.48.2"
     react-hot-toast: "npm:^2.4.1"
+    react-if: "npm:^4.1.5"
     react-indiana-drag-scroll: "npm:^2.2.0"
     react-konva: "npm:^18.2.10"
     react-spring-bottom-sheet: "npm:3.5.0-alpha.0"
     react-textarea-autosize: "npm:^8.5.3"
+    react-timer-hook: "npm:^3.0.7"
     storybook: "npm:^7.5.1"
     tailwindcss: "npm:^3"
     typescript: "npm:^5"
@@ -13335,7 +13378,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"proxy-from-env@npm:^1.0.0":
+"proxy-from-env@npm:^1.0.0, proxy-from-env@npm:^1.1.0":
   version: 1.1.0
   resolution: "proxy-from-env@npm:1.1.0"
   checksum: 10c0/fe7dd8b1bdbbbea18d1459107729c3e4a2243ca870d26d34c2c1bcd3e4425b7bcc5112362df2d93cc7fb9746f6142b5e272fd1cc5c86ddf8580175186f6ad42b
@@ -13653,6 +13696,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-if@npm:^4.1.5":
+  version: 4.1.5
+  resolution: "react-if@npm:4.1.5"
+  peerDependencies:
+    react: ^16.x || ^17.x || ^18.x
+  checksum: 10c0/9b2dccdb534461e2e71b45c42698e9ea9351ca493c64fed48325e88c9f8b8ec8a7743aaf5aea293ff9f42f096057ab266e13b00b7911f81499fa7c6ac1ba8e94
+  languageName: node
+  linkType: hard
+
 "react-indiana-drag-scroll@npm:^2.2.0":
   version: 2.2.0
   resolution: "react-indiana-drag-scroll@npm:2.2.0"
@@ -13827,6 +13879,15 @@ __metadata:
   peerDependencies:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
   checksum: 10c0/33d38a6d96cf584842695b50c341980944ece23a42155bf0bd1958f02396adb185c7720b88678dc677817fe111783059c0ebcdf7761644006892583b10e258ee
+  languageName: node
+  linkType: hard
+
+"react-timer-hook@npm:^3.0.7":
+  version: 3.0.7
+  resolution: "react-timer-hook@npm:3.0.7"
+  peerDependencies:
+    react: ">=16.8.0"
+  checksum: 10c0/76a6419e8471be18023b907cb65c894566501305002186e9fa5ec42614ef21f0310f8ea0bed88b61efb75fc9bdc0430dcb92dc8f9a0a3c3a1956b6c27f6c8e2d
   languageName: node
   linkType: hard
 

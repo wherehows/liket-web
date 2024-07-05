@@ -2,17 +2,18 @@
 
 import FrontBackSwitch from "@/components/FrontBackSwitch";
 import Header from "@/components/Header";
-import WriteTab from "@/components/WriteTab";
-import { CardSizeType } from "@/components/WriteTab/SizeEdit";
 import { StrictShapeConfig } from "@/types/konva";
-import { classNames, generateRandomId, getRefValue } from "@/utils/helpers";
-import { Stage } from "konva/lib/Stage";
+import { classNames } from "@/utils/helpers";
 import dynamic from "next/dynamic";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import CircleCross from "@/icons/circle-cross.svg";
 import TextEnteringModal from "@/components/TextEnteringModal";
 import { useRouter } from "next/navigation";
 import LiketBackSide from "@/components/LiketBackSide";
+import { Else, If, Then } from "react-if";
+import useWriteTab from "@/hooks/useWriteTab";
+import useCreateLiket from "@/hooks/useCreateLiket";
+import WriteTab from "@/components/WriteTab";
 
 const NoSSRLiketUploader = dynamic(() => import("@/components/LiketUploader"), {
   ssr: false,
@@ -20,61 +21,118 @@ const NoSSRLiketUploader = dynamic(() => import("@/components/LiketUploader"), {
 
 export default function Page() {
   const router = useRouter();
-  const [isImageUploaded, setIsImageUploaded] = useState(false);
-  const [selectedIndex, setSelectedIndex] = useState(0);
-  const [isTextEnteringOnFrontSide, setIsTextEnteringOnFrontSide] =
-    useState(false);
-  const [isTextEnteringOnBackSide, setIsTextEnteringOnBackSide] =
-    useState(false);
-  const [review, setReview] = useState("");
-  const [isFront, setIsFront] = useState(true);
-  const [selectedShapeId, setSelectedShapeId] = useState(" ");
+
   const [shapes, setShapes] = useState<StrictShapeConfig[]>([]);
-  const [size, setSize] = useState<CardSizeType>("LARGE");
-  const stageRef = useRef<Stage>(null);
-  const handleClickRemoveItem = () => {
-    const targetShape = shapes.find(({ id }) => id === selectedShapeId);
+  const [selectedShapeId, setSelectedShapeId] = useState(" ");
 
-    if (targetShape?.type === "text") {
-      setSelectedIndex(0);
-    }
+  const {
+    size,
+    selectedIndex,
+    isTextEnteringOnFrontSide,
+    handleClickFrontTextEnteringCheck,
+    handleClickRemoveItem,
+    handleChangeTab,
+    handleClickFrontTextEnteringClose,
+    handleChangeInsertedTextColor,
+    handleInsertTextTab,
+    handleChangeSize,
+    handleInsertSticker,
+  } = useWriteTab({ shapes, setShapes, selectedShapeId });
 
-    const newShapes = shapes.filter(({ id }) => id !== selectedShapeId);
-    setShapes(newShapes);
-  };
-  const isTextExist = shapes.some(({ type }) => type === "text");
-  const handleClickFrontTextEnteringClose = () => {
-    setSelectedIndex(0);
-    setIsTextEnteringOnFrontSide(false);
-  };
-  const handleClickFrontTextEnteringCheck = (text: string) => {
-    setShapes([
-      ...shapes,
-      {
-        type: "text",
-        id: generateRandomId(10),
-        fill: "black",
-        text,
-      },
-    ]);
-
-    setIsTextEnteringOnFrontSide(false);
-  };
-
-  const handleClickBackTextEnteringClose = () => {
-    setIsTextEnteringOnBackSide(false);
-  };
-
-  const handleClickBackTextEnteringCheck = (text: string) => {
-    setReview(text);
-    setIsTextEnteringOnBackSide(false);
-  };
+  const {
+    uploadedImage,
+    review,
+    stageRef,
+    isTextEnteringOnBackSide,
+    isFront,
+    handleUploadImage,
+    handleClickWriteReview,
+    handleClickBackTextEnteringCheck,
+    handleClickBackTextEnteringClose,
+    handleClickSwitchFrontBack,
+  } = useCreateLiket();
 
   const isTextEnteringOpen =
     isTextEnteringOnBackSide || isTextEnteringOnFrontSide;
 
+  const handleCreateLiket = () => {
+    // const dataURL = getRefValue(stageRef).toDataURL();
+    // const json = JSON.stringify(shapes);
+    // const bg = (uploadedImage as HTMLImageElement).src;
+    // console.log("😂", json);
+    // console.log("😍", bg);
+    // router.push("/mypage/likets/1");
+  };
+
   return (
     <>
+      <Header>
+        {!isTextEnteringOpen && (
+          <>
+            <Header.LeftOption
+              option={{
+                back: true,
+              }}
+            />
+            <Header.MiddleText text="라이켓 제작" />
+            <Header.RightOption
+              option={{
+                check: {
+                  disabled: !uploadedImage,
+                  onClick: handleCreateLiket,
+                },
+              }}
+            />
+          </>
+        )}
+      </Header>
+      <main>
+        <div className="center mt-[36px] mb-[24px]">
+          <FrontBackSwitch
+            isFront={isFront}
+            onClickSwitch={handleClickSwitchFrontBack}
+          />
+        </div>
+        <LiketBackSide
+          isFront={isFront}
+          review={review}
+          onClickReview={handleClickWriteReview}
+        />
+        <div className={classNames(!isFront && "hidden")}>
+          <NoSSRLiketUploader
+            uploadedImage={uploadedImage}
+            stageRef={stageRef}
+            size={size}
+            shapes={shapes}
+            selectedShapeId={selectedShapeId}
+            onSelectShape={setSelectedShapeId}
+            onChangeShape={setShapes}
+            onUploadImage={handleUploadImage}
+          />
+          <If condition={selectedShapeId.length > 1}>
+            <Then>
+              <button
+                className="absolute bottom-[34px] left-1/2 transform -translate-x-1/2"
+                onClick={handleClickRemoveItem}
+              >
+                <CircleCross width="36" height="36" />
+              </button>
+            </Then>
+            <Else>
+              <WriteTab
+                selectedIndex={selectedIndex}
+                onChangeTab={handleChangeTab}
+                hidden={selectedShapeId.length > 1}
+                enabled={!!uploadedImage}
+                onClickText={handleInsertTextTab}
+                onClickChangeSize={handleChangeSize}
+                onClickSticker={handleInsertSticker}
+                onClickColor={handleChangeInsertedTextColor}
+              />
+            </Else>
+          </If>
+        </div>
+      </main>
       <TextEnteringModal
         isOpen={isTextEnteringOnFrontSide}
         maxLength={18}
@@ -89,125 +147,6 @@ export default function Page() {
         onClickClose={handleClickBackTextEnteringClose}
         onClickCheck={handleClickBackTextEnteringCheck}
       />
-      <Header>
-        {!isTextEnteringOpen && (
-          <>
-            <Header.LeftOption
-              option={{
-                back: true,
-              }}
-            />
-            <Header.MiddleText text="라이켓 제작" />
-            <Header.RightOption
-              option={{
-                check: {
-                  disabled: !isImageUploaded,
-                  onClick: () => {
-                    // const dataURL = getRefValue(stageRef).toDataURL();
-                    router.push("/mypage/likets/1");
-                  },
-                },
-              }}
-            />
-          </>
-        )}
-      </Header>
-      <main>
-        <div className="center mt-[36px] mb-[24px]">
-          <FrontBackSwitch
-            isFront={isFront}
-            onClickSwitch={() => setIsFront(!isFront)}
-          />
-        </div>
-        <LiketBackSide
-          isFront={isFront}
-          review={review}
-          onClickReview={() => setIsTextEnteringOnBackSide(true)}
-        />
-        <div className={classNames(!isFront && "hidden")}>
-          <NoSSRLiketUploader
-            stageRef={stageRef}
-            size={size}
-            shapes={shapes}
-            selectedShapeId={selectedShapeId}
-            onSelectShape={(selectedShapeId: string) =>
-              setSelectedShapeId(selectedShapeId)
-            }
-            onChangeShape={(newShapes: StrictShapeConfig[]) => {
-              setShapes(newShapes);
-            }}
-            onUploadImage={() => setIsImageUploaded(true)}
-          />
-          {selectedShapeId.length > 1 && (
-            <button
-              className="absolute bottom-[34px] left-1/2 transform -translate-x-1/2"
-              onClick={handleClickRemoveItem}
-            >
-              <CircleCross />
-            </button>
-          )}
-          <WriteTab
-            selectedIndex={selectedIndex}
-            onChangeTab={(index) => setSelectedIndex(index)}
-            hidden={selectedShapeId.length > 1}
-            enabled={isImageUploaded}
-            onClickText={() =>
-              !isTextExist && setIsTextEnteringOnFrontSide(true)
-            }
-            onClickChangeSize={(size) => setSize(size)}
-            onClickSticker={async (sticker) => {
-              const num_of_images = shapes.map(
-                ({ type }) => type === "image"
-              ).length;
-
-              if (num_of_images > 10) {
-                return false;
-              }
-
-              try {
-                const response = await fetch(`/icons/${sticker}.svg`);
-                const blob = await response.blob();
-                const reader = new FileReader();
-                reader.onload = () => {
-                  const image = new window.Image();
-                  image.src = reader.result as string;
-                  image.onload = () => {
-                    setShapes([
-                      ...shapes,
-                      {
-                        type: "image",
-                        id: generateRandomId(10),
-                        image,
-                        width: 80,
-                        height: 80,
-                      },
-                    ]);
-                  };
-                };
-                reader.readAsDataURL(blob);
-              } catch (error) {
-                console.error(
-                  "스티커를 가져오는 도중 에러가 발생했습니다",
-                  error
-                );
-              }
-            }}
-            onClickColor={(fill) => {
-              const textShapeIdx = shapes.findIndex(
-                ({ type }) => type === "text"
-              );
-
-              const newShapes = [...shapes];
-              newShapes[textShapeIdx] = {
-                ...newShapes[textShapeIdx],
-                fill,
-              };
-
-              setShapes(newShapes);
-            }}
-          />
-        </div>
-      </main>
     </>
   );
 }

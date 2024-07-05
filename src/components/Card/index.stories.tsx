@@ -1,6 +1,6 @@
 import { StoryObj } from "@storybook/react";
 import ContentCard from "./ContentCard";
-import { CONTENT_STATUS, GENRES } from "@/utils/const";
+import { CONTENT_STATES, GENRES } from "@/utils/const";
 import ReviewCard from "./ReviewCard";
 
 const meta = {
@@ -12,7 +12,15 @@ export default meta;
 type IndexType = StoryObj<typeof ContentCard>;
 
 export const ContentCardIndex: IndexType = {
-  render: ({ genre, status, title, isLike, location, startDate, endDate }) => {
+  render: ({
+    genre,
+    status,
+    title,
+    likeState,
+    location,
+    startDate,
+    endDate,
+  }) => {
     return (
       <ContentCard
         idx={1}
@@ -22,7 +30,7 @@ export const ContentCardIndex: IndexType = {
         location={location}
         startDate={startDate}
         endDate={endDate}
-        isLike={isLike}
+        likeState={likeState}
       />
     );
   },
@@ -32,7 +40,7 @@ export const ContentCardIndex: IndexType = {
       control: "select",
     },
     status: {
-      options: CONTENT_STATUS,
+      options: CONTENT_STATES,
       control: "select",
     },
   },
@@ -43,7 +51,7 @@ export const ContentCardIndex: IndexType = {
     location: "서울 성동구",
     startDate: "2023.08.01",
     endDate: "2023.09.10",
-    isLike: false,
+    likeState: false,
   },
 };
 

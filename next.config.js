@@ -1,7 +1,25 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    remotePatterns: [{ protocol: "https", hostname: "picsum.photos" }],
+    remotePatterns: [
+      { protocol: "https", hostname: "picsum.photos" },
+      {
+        protocol: "https",
+        hostname: "liket-for-dev.s3.ap-northeast-2.amazonaws.com",
+      },
+      {
+        protocol: "https",
+        hostname: "liket.s3.ap-northeast-2.amazonaws.com",
+      },
+    ],
+  },
+  async rewrites() {
+    return [
+      {
+        source: "/apis/:path*",
+        destination: `${process.env.NEXT_PUBLIC_API_SERVER}/:path*`,
+      },
+    ];
   },
   webpack(config) {
     // Grab the existing rule that handles SVG imports

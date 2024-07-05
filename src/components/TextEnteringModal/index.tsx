@@ -25,7 +25,6 @@ const Index = ({
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     if (allowNewLine) {
-      console.log(e.target.value.replace(/\n/g, ""));
       setValue(e.target.value);
       setTextAreaHeight(e.target.scrollHeight - 5);
     } else {

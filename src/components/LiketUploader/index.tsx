@@ -6,22 +6,25 @@ import Konva from "konva";
 import { getRefValue } from "@/utils/helpers";
 import { CardSizeType } from "../WriteTab/SizeEdit";
 import { KonvaEventObject } from "konva/lib/Node";
-import CustomText from "../KonvoComponents/CustomText";
-import CustomImage from "../KonvoComponents/CustomImage";
+import KonvaText from "../KonvoComponents/KonvaText";
+import KonvaImage from "../KonvoComponents/KonvaImage";
 import { EmptyFunction } from "@/types/common";
 import { StrictShapeConfig } from "@/types/konva";
+import { BACKGROUND_CARD_SIZES, STAGE_SIZE } from "@/utils/create-liket";
 
 interface Props {
+  uploadedImage: HTMLImageElement | undefined;
   selectedShapeId: string;
   shapes: StrictShapeConfig[];
   stageRef: RefObject<Konva.Stage>;
   size: CardSizeType;
   onSelectShape: (shapeId: string) => void;
   onChangeShape: (shapes: StrictShapeConfig[]) => void;
-  onUploadImage: EmptyFunction;
+  onUploadImage: (dataUrl: HTMLImageElement) => void;
 }
 
 const LiketUploader = ({
+  uploadedImage,
   shapes,
   size = "LARGE",
   stageRef,
@@ -30,7 +33,6 @@ const LiketUploader = ({
   onChangeShape,
   onUploadImage,
 }: Props) => {
-  const [file, setFile] = useState<CanvasImageSource>();
   const inputRef = useRef<HTMLInputElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const { x, y, width, height } = BACKGROUND_CARD_SIZES[size];
@@ -73,7 +75,7 @@ const LiketUploader = ({
       ref={wrapperRef}
       className="liket-card center bg-[url(/icons/create-54.svg)] bg-[center_193px] bg-no-repeat"
     >
-      {file ? (
+      {uploadedImage ? (
         <Stage
           ref={stageRef}
           width={STAGE_SIZE.WIDTH}
@@ -84,7 +86,7 @@ const LiketUploader = ({
           <Layer>
             <Image
               id="bg-image"
-              image={file}
+              image={uploadedImage}
               x={x}
               y={y}
               width={width}
@@ -98,15 +100,9 @@ const LiketUploader = ({
 
               switch (type) {
                 case "text": {
-                  const rect = getRefValue(wrapperRef).getBoundingClientRect();
-
                   return (
-                    <CustomText
+                    <KonvaText
                       key={id}
-                      stagePos={{
-                        x: rect.left,
-                        y: rect.top,
-                      }}
                       isSelected={id === selectedShapeId}
                       shapeProps={shape}
                       onSelect={() => handleSelectItem(id)}
@@ -118,7 +114,7 @@ const LiketUploader = ({
                 }
                 case "image": {
                   return (
-                    <CustomImage
+                    <KonvaImage
                       key={id}
                       isSelected={id === selectedShapeId}
                       shapeProps={shape}
@@ -163,8 +159,7 @@ const LiketUploader = ({
                 const image = new window.Image();
                 image.src = reader.result as string;
                 image.onload = () => {
-                  setFile(image);
-                  onUploadImage();
+                  onUploadImage(image);
                 };
               };
 
@@ -178,26 +173,3 @@ const LiketUploader = ({
 };
 
 export default LiketUploader;
-
-const PADDING_BETWEEN_STAGE = 16;
-
-const STAGE_SIZE = {
-  WIDTH: 294,
-  HEIGHT: 468,
-};
-
-const BACKGROUND_CARD_SIZES = {
-  SMALL: {
-    x: PADDING_BETWEEN_STAGE,
-    y: PADDING_BETWEEN_STAGE,
-    width: STAGE_SIZE.WIDTH - PADDING_BETWEEN_STAGE * 2,
-    height: STAGE_SIZE.HEIGHT - 81,
-  },
-  MEDIUM: {
-    x: PADDING_BETWEEN_STAGE,
-    y: PADDING_BETWEEN_STAGE,
-    width: STAGE_SIZE.WIDTH - PADDING_BETWEEN_STAGE * 2,
-    height: STAGE_SIZE.HEIGHT - PADDING_BETWEEN_STAGE * 2,
-  },
-  LARGE: { x: 0, y: 0, width: STAGE_SIZE.WIDTH, height: STAGE_SIZE.HEIGHT },
-};

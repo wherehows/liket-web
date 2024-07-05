@@ -1,7 +1,7 @@
 import { EmptyFunction } from "@/types/common";
 import { StrictShapeConfig } from "@/types/konva";
+import { LIKET_CARD_HEIGHT, LIKET_CARD_WIDTH } from "@/utils/create-liket";
 import { getRefValue } from "@/utils/helpers";
-import { LIKET_CARD_HEIGHT, LIKET_CARD_WIDTH } from "@/utils/style";
 import Konva from "konva";
 import { useEffect, useRef } from "react";
 import { Transformer, Image } from "react-konva";
@@ -13,7 +13,7 @@ interface Props {
   onSelect: EmptyFunction;
 }
 
-const CustomImage = ({ shapeProps, isSelected, onSelect, onChange }: Props) => {
+const KonvaImage = ({ shapeProps, isSelected, onSelect, onChange }: Props) => {
   const imageRef = useRef<Konva.Image>(null);
   const trRef = useRef<Konva.Transformer>(null);
 
@@ -27,11 +27,12 @@ const CustomImage = ({ shapeProps, isSelected, onSelect, onChange }: Props) => {
   return (
     <>
       <Image
+        alt="스티커 이미지"
         x={+LIKET_CARD_WIDTH.replace("px", "") / 2 - 40}
         y={+LIKET_CARD_HEIGHT.replace("px", "") / 2 - 40}
-        onTouchStart={() => onSelect()}
-        onMouseDown={() => onSelect()}
         image={shapeProps.image}
+        onTouchStart={onSelect}
+        onMouseDown={onSelect}
         onClick={onSelect}
         onTap={onSelect}
         ref={imageRef}
@@ -42,6 +43,7 @@ const CustomImage = ({ shapeProps, isSelected, onSelect, onChange }: Props) => {
             ...shapeProps,
             x: e.target.x(),
             y: e.target.y(),
+            rotation: e.target.rotation(),
           });
         }}
         onTransformEnd={() => {
@@ -57,6 +59,7 @@ const CustomImage = ({ shapeProps, isSelected, onSelect, onChange }: Props) => {
             y: node.y(),
             width: Math.max(5, node.width() * scaleX),
             height: Math.max(node.height() * scaleY),
+            rotation: node.rotation(),
           });
         }}
       />
@@ -77,4 +80,4 @@ const CustomImage = ({ shapeProps, isSelected, onSelect, onChange }: Props) => {
   );
 };
 
-export default CustomImage;
+export default KonvaImage;
