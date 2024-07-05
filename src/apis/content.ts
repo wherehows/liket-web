@@ -1,6 +1,5 @@
-import { BannerListItem } from "@/types/banner";
 import { GenreType } from "@/types/const";
-import { ContentListItem } from "@/types/content";
+import { ContentDetailInformation, ContentListItem } from "@/types/content";
 import customFetch from "@/utils/fetch";
 
 export const getSoonOpenContents = async (): Promise<{
@@ -40,11 +39,11 @@ export const getHotPlaces = async (): Promise<
     })
   ).json();
 
-export const getBannerImages = async (): Promise<{
-  bannerList: BannerListItem[];
-}> =>
+export const getContentDetailInformation = async (
+  idx: string
+): Promise<ContentDetailInformation> =>
   (
-    await customFetch(`/banner/all`, {
+    await customFetch("/culture-content/" + idx, {
       next: {
         revalidate: false,
       },
