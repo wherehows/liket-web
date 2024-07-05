@@ -1,4 +1,4 @@
-import Carousel, { CAROUSEL_DUMMY } from "@/components/Carousel";
+import Carousel from "@/components/Carousel";
 import ContentCard, {
   ApiContentCard,
   ContentCardProps,
@@ -18,10 +18,12 @@ import {
 } from "@/apis/content";
 import { Else, If, Then } from "react-if";
 import HotPlaceListItem from "@/components/HotplaceListItem";
+import { getBannerList } from "@/apis/banner";
 
 export default async function Home() {
   const { contentList: soonOpenContents } = await getSoonOpenContents();
   const { contentList: soonEndContents } = await getSoonEndContents();
+  const { bannerList } = await getBannerList();
   const hotPlaces = await getHotPlaces();
 
   return (
@@ -31,7 +33,7 @@ export default async function Home() {
         <Header.RightOption option={{ search: true, like: true }} />
       </Header>
       <main>
-        <Carousel imgs={CAROUSEL_DUMMY} />
+        <Carousel list={bannerList.map(({ imgPath }) => imgPath)} />
         <section className="mb-[48px] mt-[24px]">
           <h2 className="pl-[24px] mb-[8px]">
             선선한 가을 날씨에 <span className="text-skyblue-01">#힐링</span>

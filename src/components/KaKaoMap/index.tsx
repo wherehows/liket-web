@@ -3,7 +3,7 @@
 import { ReactNode, useEffect } from "react";
 
 interface KaKaoMapProps {
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 declare const window: {

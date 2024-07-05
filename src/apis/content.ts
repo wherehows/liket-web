@@ -1,5 +1,5 @@
 import { GenreType } from "@/types/const";
-import { ContentListItem } from "@/types/content";
+import { ContentDetailInformation, ContentListItem } from "@/types/content";
 import customFetch from "@/utils/fetch";
 
 export const getSoonOpenContents = async (): Promise<{
@@ -33,6 +33,17 @@ export const getHotPlaces = async (): Promise<
 > =>
   (
     await customFetch(`/culture-content/hot/all`, {
+      next: {
+        revalidate: false,
+      },
+    })
+  ).json();
+
+export const getContentDetailInformation = async (
+  idx: string
+): Promise<ContentDetailInformation> =>
+  (
+    await customFetch("/culture-content/" + idx, {
       next: {
         revalidate: false,
       },
