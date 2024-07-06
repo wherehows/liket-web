@@ -1,5 +1,6 @@
 import { AxiosResponse } from "axios";
 
+
 export interface SendAuthenticationParam {
   email: string;
   type: 0 | 1;
