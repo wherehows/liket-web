@@ -2,8 +2,7 @@ import { useSignup } from "@/service/signup/hooks";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CalendarIcon, YearCalendar } from "@mui/x-date-pickers";
 import dayjs, { Dayjs } from "dayjs";
-import { useRouter } from "next/router";
-import { useContext, useState, MouseEvent } from "react";
+import { useState, MouseEvent } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import BottomButtonTabWrapper from "../BottomButtonTabWrapper";
@@ -13,6 +12,7 @@ import MediumSelectButton from "../SelectButton/MediumSelectButton";
 import Button from "../Button";
 import AvatarUploader from "../AvatarUploader";
 import Chip from "../Chip";
+import useSignupStore from "@/stores/signupStore";
 
 const profileScheme = z
   .object({
@@ -30,7 +30,7 @@ const profileScheme = z
   .required();
 
 const ProfileForm = () => {
-  const { funnelState, inputFunnelState } = useContext(FunnelStateContext);
+  const writtenFormState = useSignupStore(({ formState }) => formState);
 
   const { mutate } = useSignup({
     onSuccess: (res) => {
@@ -62,7 +62,7 @@ const ProfileForm = () => {
     const { file, birth, gender, nickname } = getValues();
 
     mutate({
-      ...funnelState,
+      ...writtenFormState,
       file,
       nickname,
       birth: +birth,

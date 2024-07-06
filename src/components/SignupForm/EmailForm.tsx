@@ -4,7 +4,7 @@ import {
 } from "@/service/signup/hooks";
 import customToast from "@/utils/customToast";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTimer } from "react-timer-hook";
 import BottomButtonTabWrapper from "../BottomButtonTabWrapper";
@@ -17,6 +17,7 @@ import {
 } from "../newInput";
 import Button from "../Button";
 import { z } from "zod";
+import useSignupStore from "@/stores/signupStore";
 
 const emailVerificationScheme = z.object({
   email: z.string().email("올바른 이메일을 입력해주세요."),
@@ -24,7 +25,7 @@ const emailVerificationScheme = z.object({
 });
 
 const EmailForm = () => {
-  const { funnelState, inputFunnelState } = useContext(FunnelStateContext);
+  const updateForm = useSignupStore((state) => state.updateForm);
 
   const time = new Date();
   time.setSeconds(time.getSeconds() + 180);
@@ -44,8 +45,7 @@ const EmailForm = () => {
 
   const { mutate: checkAuthenticationNumber } = useCheckAuthentication({
     onSuccess: ({ data }) => {
-      inputFunnelState({
-        ...funnelState,
+      updateForm({
         email: userEmail,
         emailToken: data.token,
       });

@@ -1,10 +1,10 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import BottomButtonTabWrapper from "../BottomButtonTabWrapper";
 import { Input, InputWrapper, Label } from "../newInput";
 import Button from "../Button";
+import useSignupStore from "@/stores/signupStore";
 
 const passwordScheme = z
   .object({
@@ -22,7 +22,7 @@ const passwordScheme = z
   });
 
 const PasswordForm = () => {
-  const { funnelState, inputFunnelState } = useContext(FunnelStateContext);
+  const updateForm = useSignupStore(({ updateForm }) => updateForm);
 
   const methods = useForm({
     mode: "onBlur",
@@ -37,7 +37,7 @@ const PasswordForm = () => {
   const { isValid, dirtyFields } = formState;
 
   const onClickNextButton = () => {
-    inputFunnelState({ ...funnelState, password: getValues("password") });
+    updateForm({ password: getValues("password") });
   };
 
   return (
