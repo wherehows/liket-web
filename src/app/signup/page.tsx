@@ -16,11 +16,12 @@ import { z } from "zod";
 import CalendarIcon from "@/icons/calendar.svg";
 import { YearCalendar } from "@mui/x-date-pickers";
 import CustomDrawer from "@/components/CustomDrawer";
-import dayjs from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
 import { useTimer } from "react-timer-hook";
 import {
   useCheckAuthentication,
   useSendAuthentication,
+  useSignup,
 } from "@/service/signup/hooks";
 import {
   Input,
@@ -31,16 +32,16 @@ import {
 } from "@/components/newInput";
 
 const INITIAL_FUNNEL_STATE = {
+  emailToken: "",
   email: "",
   password: "",
-  profileImage: "",
   nickname: "",
   gender: "",
-  birthday: "",
-} as const;
+  birth: "",
+  file: "",
+};
 
 const FunnelStateContext = createContext({
-  currentIndex: 0,
   funnelState: INITIAL_FUNNEL_STATE,
   inputFunnelState: (newState: typeof INITIAL_FUNNEL_STATE) => {
     newState;
@@ -50,7 +51,7 @@ const FunnelStateContext = createContext({
 const SignUpPage = () => {
   const router = useRouter();
   const [funnelState, setFunnelState] = useState(INITIAL_FUNNEL_STATE);
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(2);
   const inputFunnelState = (newState: typeof INITIAL_FUNNEL_STATE) => {
     setCurrentIndex(currentIndex + 1);
     setFunnelState(newState);
@@ -66,7 +67,7 @@ const SignUpPage = () => {
             },
           }}
         />
-        <Header.MiddleText text="회원가입" />
+        <Header.MiddleText text={currentIndex === 2 ? "프로필" : "회원가입"} />
       </Header>
       <main>
         <div className="my-[16px] gap-[8px] center">
@@ -80,9 +81,7 @@ const SignUpPage = () => {
             );
           })}
         </div>
-        <FunnelStateContext.Provider
-          value={{ currentIndex, funnelState, inputFunnelState }}
-        >
+        <FunnelStateContext.Provider value={{ funnelState, inputFunnelState }}>
           {currentIndex === 0 && <EmailForm />}
           {currentIndex === 1 && <PasswordForm />}
           {currentIndex === 2 && <ProfileForm />}
@@ -96,7 +95,7 @@ export default SignUpPage;
 
 const emailVerificationScheme = z.object({
   email: z.string().email("올바른 이메일을 입력해주세요."),
-  "auth-code": z.string().length(6, "6자를 입력해주세요"),
+  token: z.string().length(6, "6자를 입력해주세요"),
 });
 
 const passwordScheme = z
@@ -114,18 +113,20 @@ const passwordScheme = z
     path: ["confirm-password"],
   });
 
-const profileScheme = z.object({
-  nickname: z
-    .string()
-    .min(2, { message: "2~15자 이내로 입력해주세요." })
-    .max(15, { message: "2~15자 이내로 입력해주세요." })
-    .regex(/^[a-zA-Z0-9]+$/, {
-      message: "닉네임은 영문, 숫자만 입력할 수 있습니다.",
-    }),
-  gender: z.string().min(8, "8자 이상 입력해주세요."),
-  "profile-image": z.string(),
-  "birth-year": z.string(),
-});
+const profileScheme = z
+  .object({
+    nickname: z
+      .string()
+      .min(2, { message: "2~15자 이내로 입력해주세요." })
+      .max(15, { message: "2~15자 이내로 입력해주세요." })
+      .regex(/^[a-zA-Z0-9]+$/, {
+        message: "닉네임은 영문, 숫자만 입력할 수 있습니다.",
+      }),
+    gender: z.string().min(1),
+    file: z.string().min(1),
+    birth: z.string().min(1),
+  })
+  .required();
 
 const EmailForm = () => {
   const { funnelState, inputFunnelState } = useContext(FunnelStateContext);
@@ -147,8 +148,12 @@ const EmailForm = () => {
   });
 
   const { mutate: checkAuthenticationNumber } = useCheckAuthentication({
-    onSuccess: () => {
-      inputFunnelState({ ...funnelState });
+    onSuccess: ({ data }) => {
+      inputFunnelState({
+        ...funnelState,
+        email: userEmail,
+        emailToken: data.token,
+      });
     },
     onError: () => customToast("올바른 인증번호를 입력해주세요."),
   });
@@ -157,7 +162,7 @@ const EmailForm = () => {
     mode: "onBlur",
     defaultValues: {
       email: "",
-      "auth-code": "",
+      token: "",
     },
     resolver: zodResolver(emailVerificationScheme),
   });
@@ -169,7 +174,7 @@ const EmailForm = () => {
     checkAuthenticationNumber({
       email: userEmail,
       type: 0,
-      code: getValues("auth-code"),
+      code: getValues("token"),
     });
   };
 
@@ -214,9 +219,9 @@ const EmailForm = () => {
             </InputButton>
           </InputWrapper>
           <InputWrapper margin="0 0 47px 0">
-            <Label htmlFor="auth-code">인증번호</Label>
+            <Label htmlFor="token">인증번호</Label>
             <Input
-              field="auth-code"
+              field="token"
               maxLength={6}
               placeholder="인증번호 6자리"
               type="password"
@@ -256,10 +261,12 @@ const PasswordForm = () => {
     resolver: zodResolver(passwordScheme),
   });
 
-  const { formState, trigger, watch, register } = methods;
+  const { formState, trigger, watch, register, getValues } = methods;
   const { isValid, dirtyFields } = formState;
 
-  const onClickNextButton = () => inputFunnelState({ ...funnelState });
+  const onClickNextButton = () => {
+    inputFunnelState({ ...funnelState, password: getValues("password") });
+  };
 
   return (
     <>
@@ -312,32 +319,45 @@ const PasswordForm = () => {
 };
 
 const ProfileForm = () => {
+  const router = useRouter();
   const { funnelState, inputFunnelState } = useContext(FunnelStateContext);
 
-  const router = useRouter();
+  const { mutate } = useSignup({
+    onSuccess: (res) => {
+      console.log(res);
+    },
+  });
   const [selectedGender, setSelectedGender] = useState("");
   const [isYearSelectionDrawerOpen, setIsYearSelectionDrawerOpen] =
     useState(false);
+  const [tempYear, setTempYear] = useState<Dayjs>(dayjs(new Date()));
 
   const methods = useForm({
     mode: "onBlur",
     defaultValues: {
-      profileImage: "",
+      file: "",
       nickname: "",
       gender: "",
-      birthday: "",
+      birth: "",
     },
     resolver: zodResolver(profileScheme),
   });
 
-  const { formState, handleSubmit, register } = methods;
+  const { formState, handleSubmit, register, setValue, getValues, trigger } =
+    methods;
 
   const onSubmit = () => {};
 
-  const { isValid } = formState;
-
   const onClickNextButton = () => {
-    router.push("/");
+    const { file, birth, gender, nickname } = getValues();
+
+    mutate({
+      ...funnelState,
+      file,
+      nickname,
+      birth: +birth,
+      gender: gender === "남성" ? 1 : 2,
+    });
   };
 
   const handleClickGender = (e: MouseEvent<HTMLUListElement>) => {
@@ -345,7 +365,10 @@ const ProfileForm = () => {
 
     if (target.tagName === "BUTTON") {
       const targetGender = target.textContent as "남성" | "여성";
-      setSelectedGender(targetGender === selectedGender ? "" : targetGender);
+      const res = targetGender === selectedGender ? "" : targetGender;
+      setSelectedGender(res);
+      setValue("gender", res);
+      trigger();
     }
   };
 
@@ -357,11 +380,11 @@ const ProfileForm = () => {
       >
         <div className="grow">
           <div className="center mb-[34px]">
-            <AvatarUploader onUploadImage={() => {}} />
+            <AvatarUploader onUploadImage={(url) => setValue("file", url)} />
           </div>
           <InputWrapper margin="0 0 16px 0">
-            <Label htmlFor="email">
-              닉네임 <span className="text-top">*</span>
+            <Label htmlFor="email" required>
+              닉네임
             </Label>
             <Input
               field="nickname"
@@ -396,7 +419,7 @@ const ProfileForm = () => {
               연령
             </Label>
             <MediumSelectButton
-              text=""
+              text={getValues("birth")}
               placeholder="출생년도"
               onClick={() => setIsYearSelectionDrawerOpen(true)}
               Icon={<CalendarIcon />}
@@ -407,23 +430,36 @@ const ProfileForm = () => {
       <BottomButtonTabWrapper shadow>
         <Button
           fullWidth
-          disabled={!isValid}
+          disabled={!formState.isValid}
           height={48}
           onClick={onClickNextButton}
         >
           라이켓 시작하기
         </Button>
       </BottomButtonTabWrapper>
-      <CustomDrawer open={isYearSelectionDrawerOpen}>
+      <CustomDrawer
+        open={isYearSelectionDrawerOpen}
+        onClose={() => {
+          setIsYearSelectionDrawerOpen(false);
+        }}
+      >
         <YearCalendar
-          minDate={dayjs(`${new Date().getFullYear() - 100}`)}
-          maxDate={dayjs(`${new Date().getFullYear() - 1}`)}
+          value={dayjs(tempYear)}
+          minDate={dayjs(new Date().getFullYear() - 1)}
+          maxDate={dayjs(new Date())}
+          onChange={(date) => {
+            setTempYear(date);
+          }}
         />
         <div className="flex h-[98px] px-[24px]">
           <Button
             height={48}
             fullWidth
-            onClick={() => setIsYearSelectionDrawerOpen(false)}
+            onClick={() => {
+              setValue("birth", dayjs(tempYear).year() + "");
+              setIsYearSelectionDrawerOpen(false);
+              trigger();
+            }}
           >
             확인
           </Button>
