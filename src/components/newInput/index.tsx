@@ -37,6 +37,7 @@ interface LabelProps {
   htmlFor: string;
   children: ReactNode;
   style?: CSSProperties;
+  required?: boolean;
 }
 
 export const Label = ({
@@ -45,6 +46,7 @@ export const Label = ({
   htmlFor,
   children,
   style,
+  required = false,
 }: LabelProps) => {
   const labelTextClassName = "text-caption text-grey-04";
 
@@ -64,6 +66,7 @@ export const Label = ({
   return (
     <label className={labelTextClassName} htmlFor={htmlFor} style={style}>
       {children}
+      {required && <span className="text-top">*</span>}
     </label>
   );
 };
