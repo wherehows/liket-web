@@ -39,7 +39,7 @@ export default async function Home() {
             선선한 가을 날씨에 <span className="text-skyblue-01">#힐링</span>
             하기 좋은 곳 🍁
           </h2>
-          <CustomScrollContainer className="flex flex-row gap-[8px] overflow-x-hidden overflow-y-hidden w-[100%] cursor-grab touch-action-none [&>*:last-child]:mr-[24px] [&>*:first-child]:ml-[24px]">
+          <CustomScrollContainer className="flex flex-row gap-[8px] overflow-x-hidden overflow-y-hidden w-[100%] touch-action-none [&>*:last-child]:mr-[24px] [&>*:first-child]:ml-[24px]">
             {CONTENT_CARDS_DUMMY.map((data, index) => {
               return <ContentCard key={index} {...data} />;
             })}
@@ -70,7 +70,9 @@ export default async function Home() {
                     href="/category?type=팝업스토어&orderby=famous"
                     className="flex item-center"
                   >
-                    <div className="text-skyblue-01 text-body4">{name}</div>
+                    <div className="text-skyblue-01 text-body4 w-[200px]">
+                      {name}
+                    </div>
                     <RightArrow
                       fill={colors.skyblue["01"]}
                       style={{
@@ -78,21 +80,27 @@ export default async function Home() {
                       }}
                     />
                   </Link>
-                  <ul>
-                    {contentList.map((dummy, index) => {
-                      return (
-                        <li
-                          className="flex my-[13px] w-[256px]"
-                          key={dummy.idx}
-                        >
-                          <div className="text-numbering1 mr-[18px] center align-middle">
-                            {index + 1}
-                          </div>
-                          <HotPlaceListItem {...dummy} />
-                        </li>
-                      );
-                    })}
-                  </ul>
+                  {contentList.length === 0 ? (
+                    <div className="text-body5 text-grey-04 mt-[8px]">
+                      컨텐츠가 없습니다.
+                    </div>
+                  ) : (
+                    <ul>
+                      {contentList.map((dummy, index) => {
+                        return (
+                          <li
+                            className="flex my-[13px] w-[256px]"
+                            key={dummy.idx}
+                          >
+                            <div className="text-numbering1 mr-[18px] center align-middle">
+                              {index + 1}
+                            </div>
+                            <HotPlaceListItem {...dummy} />
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  )}
                 </div>
               );
             })}
@@ -112,17 +120,28 @@ export default async function Home() {
               </CustomScrollContainer>
             </Then>
             <Else>
-              <div className="text-body5 text-grey-04">컨텐츠가 없습니다.</div>
+              <div className="text-body5 text-grey-04 ml-[24px]">
+                컨텐츠가 없습니다.
+              </div>
             </Else>
           </If>
         </section>
         <section>
           <h2 className="pl-[24px] mb-[8px]">종료예정 컨텐츠</h2>
-          <CustomScrollContainer className="flex flex-row gap-[8px] overflow-x-hidden overflow-y-hidden w-[100%] [&>*:last-child]:mr-[24px] [&>*:first-child]:ml-[24px]">
-            {soonEndContents.map((data, index) => {
-              return <ApiContentCard key={index} {...data} />;
-            })}
-          </CustomScrollContainer>
+          <If condition={soonEndContents.length > 0}>
+            <Then>
+              <CustomScrollContainer className="flex flex-row gap-[8px] overflow-x-hidden overflow-y-hidden w-[100%] [&>*:last-child]:mr-[24px] [&>*:first-child]:ml-[24px]">
+                {soonEndContents.map((data, index) => {
+                  return <ApiContentCard key={index} {...data} />;
+                })}
+              </CustomScrollContainer>
+            </Then>
+            <Else>
+              <div className="text-body5 text-grey-04 ml-[24px]">
+                컨텐츠가 없습니다.
+              </div>
+            </Else>
+          </If>
         </section>
         <Divider height="8px" width="100%" margin="24px 0" />
         <section className="mb-[24px]">
