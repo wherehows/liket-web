@@ -85,7 +85,7 @@ export default function Page() {
             </Link>
           </div>
         </div>
-        <BottomButtonTabWrapper>
+        <BottomButtonTabWrapper shadow>
           <Button
             fullWidth
             disabled={!formState.isValid}
