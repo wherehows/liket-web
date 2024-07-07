@@ -5,7 +5,6 @@ import {
   SignupParam,
 } from "./model";
 
-
 class SignupService extends Service {
   send(param: SendAuthenticationParam) {
     return this.http.post("/apis/email-cert/send", param);
