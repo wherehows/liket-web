@@ -1,5 +1,5 @@
+import { ProfileFormData } from "@/types/signup";
 import { AxiosResponse } from "axios";
-
 
 export interface SendAuthenticationParam {
   email: string;
@@ -12,13 +12,9 @@ export interface CheckAuthenticationParam {
   code: string;
 }
 
-export interface SignupParam {
+export interface SignupParam extends ProfileFormData {
   emailToken: string;
   password: string;
-  gender: 1 | 2;
-  birth: number;
-  file: string;
-  nickname: string;
 }
 
 export type CheckAuthenticationResponse = AxiosResponse<{
