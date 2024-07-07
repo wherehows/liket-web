@@ -12,7 +12,7 @@ import MediumSelectButton from "../SelectButton/MediumSelectButton";
 import Button from "../Button";
 import AvatarUploader from "../AvatarUploader";
 import Chip from "../Chip";
-import useSignupStore from "@/stores/signupStore";
+import { ProfileFormData } from "@/types/signup";
 
 const profileScheme = z
   .object({
@@ -29,14 +29,24 @@ const profileScheme = z
   })
   .required();
 
-const ProfileForm = () => {
-  const writtenFormState = useSignupStore(({ formState }) => formState);
+const FORM_DEFAULT_VALUES = {
+  file: "",
+  nickname: "",
+  gender: "",
+  birth: "",
+};
 
-  const { mutate } = useSignup({
-    onSuccess: (res) => {
-      console.log(res);
-    },
-  });
+interface ProfileForm {
+  currentFormInformation?: typeof FORM_DEFAULT_VALUES;
+  nextButtonText: string;
+  onClickNextButton: (insertedFormData: ProfileFormData) => void;
+}
+
+const ProfileForm = ({
+  currentFormInformation = FORM_DEFAULT_VALUES,
+  nextButtonText,
+  onClickNextButton,
+}: ProfileForm) => {
   const [selectedGender, setSelectedGender] = useState("");
   const [isYearSelectionDrawerOpen, setIsYearSelectionDrawerOpen] =
     useState(false);
@@ -44,31 +54,11 @@ const ProfileForm = () => {
 
   const methods = useForm({
     mode: "onBlur",
-    defaultValues: {
-      file: "",
-      nickname: "",
-      gender: "",
-      birth: "",
-    },
+    defaultValues: currentFormInformation,
     resolver: zodResolver(profileScheme),
   });
 
-  const { formState, handleSubmit, register, setValue, getValues, trigger } =
-    methods;
-
-  const onSubmit = () => {};
-
-  const onClickNextButton = () => {
-    const { file, birth, gender, nickname } = getValues();
-
-    mutate({
-      ...writtenFormState,
-      file,
-      nickname,
-      birth: +birth,
-      gender: gender === "남성" ? 1 : 2,
-    });
-  };
+  const { formState, register, setValue, getValues, trigger } = methods;
 
   const handleClickGender = (e: MouseEvent<HTMLUListElement>) => {
     const target = e.target as HTMLUListElement;
@@ -82,12 +72,20 @@ const ProfileForm = () => {
     }
   };
 
+  const handleClickNextButton = () => {
+    const { file, birth, gender, nickname } = getValues();
+
+    onClickNextButton({
+      file,
+      nickname,
+      birth: +birth,
+      gender: gender === "남성" ? 1 : 2,
+    });
+  };
+
   return (
     <>
-      <form
-        className="flex flex-col grow pt-[16px] px-[24px]"
-        onSubmit={handleSubmit(onSubmit)}
-      >
+      <form className="flex flex-col grow pt-[16px] px-[24px]">
         <div className="grow">
           <div className="center mb-[34px]">
             <AvatarUploader onUploadImage={(url) => setValue("file", url)} />
@@ -142,9 +140,9 @@ const ProfileForm = () => {
           fullWidth
           disabled={!formState.isValid}
           height={48}
-          onClick={onClickNextButton}
+          onClick={handleClickNextButton}
         >
-          라이켓 시작하기
+          {nextButtonText}
         </Button>
       </BottomButtonTabWrapper>
       <CustomDrawer
