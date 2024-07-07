@@ -3,7 +3,7 @@ import ContentCard, {
   ApiContentCard,
   ContentCardProps,
 } from "@/components/Card/ContentCard";
-import ReviewCard, { REVIEW_CARDS_DUMMY } from "@/components/Card/ReviewCard";
+import ReviewCard from "@/components/Card/ReviewCard";
 import Divider from "@/components/Divider";
 import Header from "@/components/Header";
 import LinkableTab from "@/components/LinkableTab";
@@ -19,12 +19,14 @@ import {
 import { Else, If, Then } from "react-if";
 import HotPlaceListItem from "@/components/HotplaceListItem";
 import { getBannerList } from "@/apis/banner";
+import { getHotReviews } from "@/apis/review";
 
 export default async function Home() {
   const { contentList: soonOpenContents } = await getSoonOpenContents();
   const { contentList: soonEndContents } = await getSoonEndContents();
   const { bannerList } = await getBannerList();
   const hotPlaces = await getHotPlaces();
+  const hotReviews = await getHotReviews();
 
   return (
     <>
@@ -146,17 +148,27 @@ export default async function Home() {
         <Divider height="8px" width="100%" margin="24px 0" />
         <section className="mb-[24px]">
           <h2 className="pl-[24px] mb-[8px]">최근 인기 리뷰</h2>
-          <CustomScrollContainer className="flex flex-row gap-[8px] overflow-x-hidden overflow-y-hidden w-[100%] [&>*:last-child]:mr-[24px] [&>*:first-child]:ml-[24px]">
-            {REVIEW_CARDS_DUMMY.map((data, index) => {
-              return <ReviewCard key={index} {...data} />;
-            })}
-          </CustomScrollContainer>
+          <If condition={hotReviews.length > 1}>
+            <Then>
+              <CustomScrollContainer className="flex flex-row gap-[8px] overflow-x-hidden overflow-y-hidden w-[100%] [&>*:last-child]:mr-[24px] [&>*:first-child]:ml-[24px]">
+                {hotReviews.map((data, index) => {
+                  return <ReviewCard key={index} {...data} />;
+                })}
+              </CustomScrollContainer>
+            </Then>
+            <Else>
+              <div className="text-body5 text-grey-04 ml-[24px]">
+                컨텐츠가 없습니다.
+              </div>
+            </Else>
+          </If>
         </section>
       </main>
       <LinkableTab shadow />
     </>
   );
 }
+
 const CONTENT_CARDS_DUMMY: ContentCardProps[] = [
   {
     idx: 1,
