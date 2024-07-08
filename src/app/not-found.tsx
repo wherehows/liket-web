@@ -1,7 +1,7 @@
 import BottomButtonTabWrapper from "@/components/BottomButtonTabWrapper";
 import ButtonGroup from "@/components/ButtonGroup";
 import ExclamationIcon from "@/icons/circle-exclamation.svg";
-import NotFoundBottomButtons from "./components/NotFoundBottomButtons";
+import NotFoundBottomButtons from "../components/NotFoundBottomButtons";
 
 export default function Page() {
   return (

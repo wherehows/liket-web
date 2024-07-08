@@ -6,10 +6,19 @@ interface Props {
   label: string;
   size: "12px" | "14px" | "16px";
   isChecked: boolean;
-  onChange: () => void;
+  isBoard?: boolean;
+  marginBetweenTextAndCheckbox?: string;
+  onChange: (isChecked: boolean) => void;
 }
 
-const Index = ({ label, isChecked, size, onChange }: Props) => {
+const Index = ({
+  label,
+  isChecked,
+  isBoard = false,
+  size,
+  marginBetweenTextAndCheckbox = "0px",
+  onChange,
+}: Props) => {
   return (
     <label
       className={classNames(
@@ -24,16 +33,22 @@ const Index = ({ label, isChecked, size, onChange }: Props) => {
         className="appearance-none hidden"
         type="checkbox"
         checked={isChecked}
-        onChange={onChange}
+        onChange={(e) => {
+          onChange(e.target.checked);
+        }}
       />
-      <p className="ml-[6px]">
+      <p
+        style={{
+          marginRight: marginBetweenTextAndCheckbox,
+        }}
+      >
         {isChecked ? (
           <FilledCheckbox width="24" height="24" />
         ) : (
           <UnFilledCheckbox width="24" height="24" />
         )}
       </p>
-      {label}
+      <div className={classNames(isBoard && "text-body2")}>{label}</div>
     </label>
   );
 };
