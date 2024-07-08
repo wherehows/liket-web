@@ -26,7 +26,7 @@ const IconButtonGroup = ({
       className={`flex justify-between overflow-x-auto x-[100%] h-[100%]`}
     >
       {icons.map((icon: IconType) => {
-        let iconName = null;
+        let iconName: IconType | null = null;
         let status = {
           isDisabled: false,
           isActive: false,
@@ -45,7 +45,7 @@ const IconButtonGroup = ({
           <li key={iconName} className={`flex justify-center items-center`}>
             <button
               disabled={status.isDisabled}
-              onClick={() => onClickIcon(iconName)}
+              onClick={() => onClickIcon(iconName as IconType)}
               style={{
                 width: `${iconSize}px`,
                 height: `${iconSize}px`,
