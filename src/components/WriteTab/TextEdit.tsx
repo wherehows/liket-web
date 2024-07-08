@@ -22,31 +22,17 @@ const TextEdit = ({ onClickColor }: TextProps) => {
   const [clickedColor, setClickedColor] = useState<ColorTokensType>("#000");
 
   return (
-    <ul
-      className="flex justify-around w-[100%] h-[40px]"
-      onClick={(e) => {
-        if ((e.target as HTMLElement).tagName.toLowerCase() === "ul") {
-          return;
-        }
-
-        const color = (e.target as HTMLElement).closest("li")?.dataset.color;
-
-        if (color) {
-          setClickedColor(color as ColorTokensType);
-          onClickColor(color as ColorTokensType);
-        }
-      }}
-    >
+    <ul className="flex justify-around w-[100%] h-[40px]">
       {COLOR_TOKENS.map((color) => {
         return (
-          <li
-            key={color}
-            data-color={color}
-            className="flex justify-center items-center"
-          >
+          <li key={color} className="flex justify-center items-center">
             <button
               style={{
                 backgroundColor: color,
+              }}
+              onClick={() => {
+                setClickedColor(color);
+                onClickColor(color);
               }}
               className={classNames(
                 `w-[24px] h-[24px] rounded-[50%] border-[2px] border-solid`,
