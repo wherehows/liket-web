@@ -4,7 +4,6 @@ import { z } from "zod";
 import BottomButtonTabWrapper from "../BottomButtonTabWrapper";
 import { Input, InputWrapper, Label } from "../newInput";
 import Button from "../Button";
-import useSignupStore from "@/stores/signupStore";
 
 const passwordScheme = z
   .object({
@@ -21,9 +20,11 @@ const passwordScheme = z
     path: ["confirm-password"],
   });
 
-const PasswordForm = () => {
-  const updateForm = useSignupStore(({ updateForm }) => updateForm);
+interface PasswordFormProps {
+  updateForm: (insertedFormData: object) => void;
+}
 
+const PasswordForm = ({ updateForm }: PasswordFormProps) => {
   const methods = useForm({
     mode: "onBlur",
     defaultValues: {

@@ -5,12 +5,50 @@ import Header from "@/components/Header";
 import EmailForm from "@/components/SignupForm/EmailForm";
 import PasswordForm from "@/components/SignupForm/PasswordForm";
 import ProfileForm from "@/components/SignupForm/ProfileForm";
-import useSignupStore from "@/stores/signupStore";
+import { useSignup } from "@/service/signup/hooks";
+import { ProfileFormData } from "@/types/signup";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+
+const INITIAL_FORM_STATE = {
+  emailToken: "",
+  email: "",
+  password: "",
+  nickname: "",
+  gender: "",
+  birth: "",
+  file: "",
+};
 
 const SignUpPage = () => {
   const router = useRouter();
-  const formIndex = useSignupStore((state) => state.formIndex);
+  const [formInformation, setFormInformation] = useState(INITIAL_FORM_STATE);
+  const [formIndex, setFormIndex] = useState(0);
+  const updateForm = (insertedFormData: Partial<typeof INITIAL_FORM_STATE>) => {
+    setFormInformation({ ...formInformation, ...insertedFormData });
+    setFormIndex(formIndex + 1);
+  };
+
+  const { mutate } = useSignup({
+    onSuccess: (res) => {
+      console.log(res);
+    },
+  });
+
+  const onClickNextButtonInProfileForm = ({
+    file,
+    nickname,
+    birth,
+    gender,
+  }: ProfileFormData) => {
+    mutate({
+      ...formInformation,
+      file,
+      nickname,
+      birth: birth,
+      gender,
+    });
+  };
 
   return (
     <>
@@ -36,9 +74,14 @@ const SignUpPage = () => {
             );
           })}
         </div>
-        {formIndex === 0 && <EmailForm />}
-        {formIndex === 1 && <PasswordForm />}
-        {formIndex === 2 && <ProfileForm />}
+        {formIndex === 0 && <EmailForm updateForm={updateForm} />}
+        {formIndex === 1 && <PasswordForm updateForm={updateForm} />}
+        {formIndex === 2 && (
+          <ProfileForm
+            nextButtonText="라이켓 시작하기"
+            onClickNextButton={onClickNextButtonInProfileForm}
+          />
+        )}
       </main>
     </>
   );

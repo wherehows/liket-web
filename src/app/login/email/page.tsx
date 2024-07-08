@@ -3,11 +3,13 @@
 import BottomButtonTabWrapper from "@/components/BottomButtonTabWrapper";
 import Button from "@/components/Button";
 import Header from "@/components/Header";
-import Input from "@/components/Input";
+import { Input, InputWrapper, Label } from "@/components/newInput";
+import { useLogin } from "@/service/login/hooks";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import { FormProvider, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { z } from "zod";
+import Link from "next/link";
 
 const schema = z.object({
   email: z.string().email("올바른 이메일을 입력해주세요."),
@@ -15,6 +17,10 @@ const schema = z.object({
 });
 
 export default function Page() {
+  const { mutate } = useLogin({
+    onSuccess: () => {},
+  });
+
   const router = useRouter();
 
   const methods = useForm({
@@ -26,12 +32,16 @@ export default function Page() {
     resolver: zodResolver(schema),
   });
 
-  const {
-    handleSubmit,
-    formState: { isValid },
-  } = methods;
+  const { formState, handleSubmit, register, getValues } = methods;
 
-  const onSubmit = () => {};
+  const onSubmit = () => {
+    const { email, password } = getValues();
+
+    mutate({
+      email,
+      pw: password,
+    });
+  };
 
   return (
     <>
@@ -45,44 +55,49 @@ export default function Page() {
         />
         <Header.MiddleText text="로그인" />
       </Header>
-      <FormProvider {...methods}>
-        <form
-          className="flex flex-col grow pt-[16px] px-[24px]"
-          onSubmit={handleSubmit(onSubmit)}
-        >
-          <div className="grow">
-            <Input margin="0 0 34px 0">
-              <Input.Label htmlFor="email">이메일</Input.Label>
-              <Input.Content id="email" placeholder="이메일 입력" />
-            </Input>
-            <Input margin="0 0 47px 0">
-              <Input.Label htmlFor="password">비밀번호</Input.Label>
-              <Input.Content
-                id="password"
-                type="passwor"
-                placeholder="비밀번호 입력"
-              />
-            </Input>
-            <div className="flex flex-row-reverse">
-              <button className="text-button5 text-grey-02">
-                비밀번호 재설정
-              </button>
-            </div>
+      <form
+        className="flex flex-col grow pt-[16px] px-[24px]"
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        <div className="grow">
+          <InputWrapper margin="0 0 34px 0">
+            <Label htmlFor="email">이메일</Label>
+            <Input
+              field="email"
+              placeholder="이메일 입력"
+              formState={formState}
+              register={register}
+            />
+          </InputWrapper>
+          <InputWrapper margin="0 0 47px 0">
+            <Label htmlFor="password">비밀번호</Label>
+            <Input
+              field="password"
+              type="password"
+              placeholder="비밀번호 입력"
+              register={register}
+              formState={formState}
+            />
+          </InputWrapper>
+          <div className="flex flex-row-reverse">
+            <Link className="text-button5 text-grey-02" href="/find/password">
+              비밀번호 재설정
+            </Link>
           </div>
-          <BottomButtonTabWrapper>
-            <Button
-              fullWidth
-              disabled={!isValid}
-              height={48}
-              onClick={() => {
-                // 전혀 입력이 안된 경우
-              }}
-            >
-              저장
-            </Button>
-          </BottomButtonTabWrapper>
-        </form>
-      </FormProvider>
+        </div>
+        <BottomButtonTabWrapper shadow>
+          <Button
+            fullWidth
+            disabled={!formState.isValid}
+            height={48}
+            onClick={() => {
+              // 전혀 입력이 안된 경우
+            }}
+          >
+            로그인
+          </Button>
+        </BottomButtonTabWrapper>
+      </form>
     </>
   );
 }

@@ -17,16 +17,17 @@ import {
 } from "../newInput";
 import Button from "../Button";
 import { z } from "zod";
-import useSignupStore from "@/stores/signupStore";
 
 const emailVerificationScheme = z.object({
   email: z.string().email("올바른 이메일을 입력해주세요."),
   token: z.string().length(6, "6자를 입력해주세요"),
 });
 
-const EmailForm = () => {
-  const updateForm = useSignupStore((state) => state.updateForm);
+interface EmailFormProps {
+  updateForm: (insertedFormData: object) => void;
+}
 
+const EmailForm = ({ updateForm }: EmailFormProps) => {
   const time = new Date();
   time.setSeconds(time.getSeconds() + 180);
   const { minutes, seconds, isRunning, start } = useTimer({
