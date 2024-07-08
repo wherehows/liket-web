@@ -6,25 +6,38 @@ import Checkbox from "@/components/Checkbox";
 import CheckBoxWithLink from "@/components/CheckboxWithLink";
 import Divider from "@/components/Divider";
 import Header from "@/components/Header";
-import { useRouter } from "next/navigation";
+import { useGetDetailTos, useGetTosList } from "@/service/terms/hooks";
+import { classNames } from "@/utils/helpers";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 
 export default function Page() {
   const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
   const [agree, setAgree] = useState({
     "youth-protection": false,
     usage: false,
     privacy: false,
   });
+  const isTownSelectionModalOpen = searchParams.get("termIdx");
+  const [detailTosIdx, setDetailTosIdx] = useState<number | undefined>();
+  const { data: tosListData } = useGetTosList();
+  const { data: detailTosData } = useGetDetailTos({
+    tosIdx: detailTosIdx,
+  });
+
+  if (!tosListData) {
+    return null;
+  }
 
   const handleChangeCheckbox = (
     term: "youth-protection" | "usage" | "privacy",
     isChecked: boolean
-  ) => {
-    const newAgree = { ...agree, [term]: isChecked };
-    setAgree(newAgree);
-  };
+  ) => setAgree({ ...agree, [term]: isChecked });
 
+  const { tosList } = tosListData;
   const isAllAgreed = Object.values(agree).every((isAgree) => isAgree);
 
   return (
@@ -69,40 +82,24 @@ export default function Page() {
           />
         </div>
         <Divider width="100%" height="1px" margin="0 0 16px 0" />
-        <div className="my-[8px]">
-          <CheckBoxWithLink
-            isChecked={agree["youth-protection"]}
-            href="/terms/youth-protection"
-            onChangeCheckbox={(isChecked) =>
-              handleChangeCheckbox("youth-protection", isChecked)
-            }
-          >
-            [필수] 만 14세 이상입니다.
-          </CheckBoxWithLink>
-        </div>
-
-        <div className="my-[8px]">
-          <CheckBoxWithLink
-            isChecked={agree.usage}
-            href="/terms/usage"
-            onChangeCheckbox={(isChecked) =>
-              handleChangeCheckbox("usage", isChecked)
-            }
-          >
-            [필수] 서비스 이용 약관
-          </CheckBoxWithLink>
-        </div>
-        <div className="my-[8px]">
-          <CheckBoxWithLink
-            isChecked={agree["privacy"]}
-            href="/terms/privacy"
-            onChangeCheckbox={(isChecked) =>
-              handleChangeCheckbox("privacy", isChecked)
-            }
-          >
-            [필수] 개인정보 수집 및 이용
-          </CheckBoxWithLink>
-        </div>
+        {tosList.map(({ title, idx }) => {
+          return (
+            <div className="my-[8px]" key={idx}>
+              <CheckBoxWithLink
+                isChecked={agree["youth-protection"]}
+                onChangeCheckbox={(isChecked) =>
+                  handleChangeCheckbox("youth-protection", isChecked)
+                }
+                onClickListItem={() => {
+                  router.push(`${pathname}?termIdx=${idx}`);
+                  setDetailTosIdx(idx);
+                }}
+              >
+                {`[필수] ${title}`}
+              </CheckBoxWithLink>
+            </div>
+          );
+        })}
       </main>
       <BottomButtonTabWrapper shadow>
         <Button
@@ -114,6 +111,31 @@ export default function Page() {
           다음
         </Button>
       </BottomButtonTabWrapper>
+      <div
+        className={classNames(
+          "full-modal",
+          !isTownSelectionModalOpen && "hidden"
+        )}
+      >
+        <Header>
+          <Header.LeftOption
+            option={{
+              back: {
+                onClick: () => {
+                  setDetailTosIdx(undefined);
+                  router.back();
+                },
+              },
+            }}
+          />
+          <Header.MiddleText text={detailTosData?.title || ""} />
+        </Header>
+        <div className="full-modal-main">
+          <div className="flex grow h-[100%]">
+            <div>{detailTosData?.contents}</div>
+          </div>
+        </div>
+      </div>
     </>
   );
 }
