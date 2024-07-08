@@ -85,19 +85,19 @@ export default function Page() {
             </Link>
           </div>
         </div>
-        <BottomButtonTabWrapper shadow>
-          <Button
-            fullWidth
-            disabled={!formState.isValid}
-            height={48}
-            onClick={() => {
-              // 전혀 입력이 안된 경우
-            }}
-          >
-            로그인
-          </Button>
-        </BottomButtonTabWrapper>
       </form>
+      <BottomButtonTabWrapper shadow>
+        <Button
+          fullWidth
+          disabled={!formState.isValid}
+          height={48}
+          onClick={() => {
+            // 전혀 입력이 안된 경우
+          }}
+        >
+          로그인
+        </Button>
+      </BottomButtonTabWrapper>
     </>
   );
 }

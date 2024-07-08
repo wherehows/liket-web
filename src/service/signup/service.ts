@@ -13,7 +13,7 @@ class SignupService extends Service {
     return this.http.post("/apis/email-cert/check", param);
   }
   signup(param: SignupParam) {
-    return this.http.post("/user/local", param, {
+    return this.http.post("/apis/user/local", param, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
