@@ -1,6 +1,5 @@
 import { IconName } from "@/utils/icons";
 import Image from "next/image";
-import { MouseEvent } from "react";
 
 export type IconType =
   | IconName
@@ -25,16 +24,6 @@ const IconButtonGroup = ({
         gap: iconGap,
       }}
       className={`flex justify-between overflow-x-auto x-[100%] h-[100%]`}
-      onClick={(e: MouseEvent<HTMLUListElement>) => {
-        const target = e.target as HTMLElement;
-
-        if (target.tagName !== "IMG") {
-          return;
-        }
-
-        const iconName = target.dataset.icon;
-        iconName && onClickIcon(iconName as IconType);
-      }}
     >
       {icons.map((icon: IconType) => {
         let iconName = null;
@@ -56,13 +45,13 @@ const IconButtonGroup = ({
           <li key={iconName} className={`flex justify-center items-center`}>
             <button
               disabled={status.isDisabled}
+              onClick={() => onClickIcon(iconName)}
               style={{
                 width: `${iconSize}px`,
                 height: `${iconSize}px`,
               }}
             >
               <Image
-                data-icon={iconName}
                 alt={`${iconName} 아이콘`}
                 width={iconSize}
                 height={iconSize}
