@@ -5,15 +5,15 @@ import Link from "next/link";
 interface CheckBoxWithLinkProps {
   isChecked: boolean;
   children: string;
-  href: string;
   onChangeCheckbox: (isChecked: boolean) => void;
+  onClickListItem: () => void;
 }
 
 const CheckBoxWithLink = ({
   isChecked,
   children,
-  href,
   onChangeCheckbox,
+  onClickListItem,
 }: CheckBoxWithLinkProps) => {
   return (
     <div className="flex items-center">
@@ -23,14 +23,14 @@ const CheckBoxWithLink = ({
         size="14px"
         onChange={onChangeCheckbox}
       />
-      <Link className="flex grow ml-[8px]" href={href}>
-        <div className="text-body3 grow">{children}</div>
+      <button className="flex grow ml-[8px]" onClick={onClickListItem}>
+        <div className="text-body3 grow text-start">{children}</div>
         <RightArrow
           style={{
             display: "inline",
           }}
         />
-      </Link>
+      </button>
     </div>
   );
 };
