@@ -13,7 +13,7 @@ import { useState } from "react";
 const INITIAL_FORM_STATE = {
   emailToken: "",
   email: "",
-  password: "",
+  pw: "",
   nickname: "",
   gender: "",
   birth: "",

@@ -13,7 +13,7 @@ import Link from "next/link";
 
 const schema = z.object({
   email: z.string().email("올바른 이메일을 입력해주세요."),
-  password: z.string().min(8, "8자 이상 입력해주세요."),
+  pw: z.string().min(8, "8자 이상 입력해주세요."),
 });
 
 export default function Page() {
@@ -27,7 +27,7 @@ export default function Page() {
     mode: "onBlur",
     defaultValues: {
       email: "",
-      password: "",
+      pw: "",
     },
     resolver: zodResolver(schema),
   });
@@ -35,11 +35,11 @@ export default function Page() {
   const { formState, handleSubmit, register, getValues } = methods;
 
   const onSubmit = () => {
-    const { email, password } = getValues();
+    const { email, pw } = getValues();
 
     mutate({
       email,
-      pw: password,
+      pw,
     });
   };
 
@@ -70,9 +70,9 @@ export default function Page() {
             />
           </InputWrapper>
           <InputWrapper margin="0 0 47px 0">
-            <Label htmlFor="password">비밀번호</Label>
+            <Label htmlFor="pw">비밀번호</Label>
             <Input
-              field="password"
+              field="pw"
               type="password"
               placeholder="비밀번호 입력"
               register={register}

@@ -14,7 +14,7 @@ export interface CheckAuthenticationParam {
 
 export interface SignupParam extends ProfileFormData {
   emailToken: string;
-  password: string;
+  pw: string;
 }
 
 export type CheckAuthenticationResponse = AxiosResponse<{
