@@ -24,7 +24,7 @@ const emailVerificationScheme = z.object({
 });
 
 interface EmailFormProps {
-  updateForm: (insertedFormData: object) => void;
+  updateForm: (insertedFormData: { email: string; emailToken: string }) => void;
 }
 
 const EmailForm = ({ updateForm }: EmailFormProps) => {

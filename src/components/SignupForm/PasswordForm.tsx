@@ -21,10 +21,16 @@ const passwordScheme = z
   });
 
 interface PasswordFormProps {
-  updateForm: (insertedFormData: object) => void;
+  isResetForm: boolean;
+  nextButtonText: string;
+  onClickNextButton: (pw: string) => void;
 }
 
-const PasswordForm = ({ updateForm }: PasswordFormProps) => {
+const PasswordForm = ({
+  isResetForm,
+  nextButtonText,
+  onClickNextButton,
+}: PasswordFormProps) => {
   const methods = useForm({
     mode: "onBlur",
     defaultValues: {
@@ -37,16 +43,16 @@ const PasswordForm = ({ updateForm }: PasswordFormProps) => {
   const { formState, trigger, watch, register, getValues } = methods;
   const { isValid, dirtyFields } = formState;
 
-  const onClickNextButton = () => {
-    updateForm({ pw: getValues("pw") });
-  };
+  const handleClickNextButton = () => onClickNextButton(getValues("pw"));
 
   return (
     <>
       <form className="flex flex-col grow pt-[16px] px-[24px]">
         <div className="grow">
           <InputWrapper margin="0 0 34px 0">
-            <Label htmlFor="pw">비밀번호</Label>
+            <Label htmlFor="pw">
+              {isResetForm ? "새 비밀번호" : "비밀번호"}
+            </Label>
             <Input
               field="pw"
               type="password"
@@ -65,7 +71,9 @@ const PasswordForm = ({ updateForm }: PasswordFormProps) => {
             />
           </InputWrapper>
           <InputWrapper margin="0 0 47px 0">
-            <Label htmlFor="confirm-pw">비밀번호 확인</Label>
+            <Label htmlFor="confirm-pw">
+              {isResetForm ? "새 비밀번호 확인" : "비밀번호 확인"}
+            </Label>
             <Input
               field="confirm-pw"
               type="password"
@@ -82,9 +90,9 @@ const PasswordForm = ({ updateForm }: PasswordFormProps) => {
           fullWidth
           disabled={!isValid}
           height={48}
-          onClick={onClickNextButton}
+          onClick={handleClickNextButton}
         >
-          다음
+          {nextButtonText}
         </Button>
       </BottomButtonTabWrapper>
     </>

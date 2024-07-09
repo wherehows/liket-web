@@ -35,6 +35,9 @@ const SignUpPage = () => {
     },
   });
 
+  const handleClickNextButtonInPasswordForm = (pw: string) =>
+    updateForm({ pw });
+
   const onClickNextButtonInProfileForm = ({
     file,
     nickname,
@@ -75,7 +78,13 @@ const SignUpPage = () => {
           })}
         </div>
         {formIndex === 0 && <EmailForm updateForm={updateForm} />}
-        {formIndex === 1 && <PasswordForm updateForm={updateForm} />}
+        {formIndex === 1 && (
+          <PasswordForm
+            isResetForm={false}
+            nextButtonText="다음"
+            onClickNextButton={handleClickNextButtonInPasswordForm}
+          />
+        )}
         {formIndex === 2 && (
           <ProfileForm
             nextButtonText="라이켓 시작하기"
