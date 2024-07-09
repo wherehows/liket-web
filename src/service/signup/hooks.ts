@@ -8,7 +8,7 @@ import {
 } from "./model";
 
 export const useSendAuthentication = (
-  props: UseMutationOptions<unknown, Error, SendAuthenticationParam, unknown>
+  props?: UseMutationOptions<unknown, Error, SendAuthenticationParam, unknown>
 ) => useMutation({ ...queryOptions.send(), ...props });
 
 export const useCheckAuthentication = (
