@@ -106,7 +106,7 @@ export default function Page() {
           fullWidth
           height={48}
           disabled={!isAllAgreed}
-          onClick={() => {}}
+          onClick={() => router.replace("/signup/social")}
         >
           다음
         </Button>
