@@ -8,18 +8,9 @@ import Header from "@/components/Header";
 import Divider from "@/components/Divider";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useSignup } from "@/service/signup/hooks";
 
 export default function Page() {
   const router = useRouter();
-
-  const { mutate } = useSignup({
-    onSuccess: (res) => {
-      console.log(res);
-    },
-  });
-
-  const handleClickNextButtonInProfileForm = ({}) => {};
 
   return (
     <>

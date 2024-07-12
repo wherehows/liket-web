@@ -12,9 +12,13 @@ export interface CheckAuthenticationParam {
   code: string;
 }
 
-export interface SignupParam extends ProfileFormData {
+export interface LocalSignupParam extends ProfileFormData {
   emailToken: string;
   pw: string;
+}
+
+export interface SocialSignupParam extends ProfileFormData {
+  token: string;
 }
 
 export type CheckAuthenticationResponse = AxiosResponse<{
