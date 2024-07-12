@@ -54,12 +54,7 @@ const LeftOption = ({
     const { back, close } = option;
 
     const Back = back && (
-      <button
-        key={"back"}
-        onClick={() => {
-          router.back();
-        }}
-      >
+      <button key={"back"} onClick={() => back.onClick && back.onClick()}>
         <BackIcon />
       </button>
     );
