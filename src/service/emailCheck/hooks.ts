@@ -1,16 +1,9 @@
+import { ResponseError } from "@/types/api";
 import { useMutation, UseMutationOptions } from "@tanstack/react-query";
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 
 export const useCheckEmailDuplication = (
-  props: UseMutationOptions<
-    unknown,
-    AxiosError<{
-      error: string;
-      meesage: string;
-      statusCode: number;
-    }>,
-    { email: string }
-  >
+  props: UseMutationOptions<unknown, ResponseError, { email: string }>
 ) =>
   useMutation({
     ...props,
