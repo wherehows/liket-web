@@ -1,7 +1,8 @@
 import {
   CheckAuthenticationParam,
   SendAuthenticationParam,
-  SignupParam,
+  LocalSignupParam,
+  SocialSignupParam,
 } from "./model";
 
 import signupService from "./service";
@@ -13,8 +14,9 @@ const queryOptions = {
   check: () => ({
     mutationFn: (param: CheckAuthenticationParam) => signupService.check(param),
   }),
-  signup: () => ({
-    mutationFn: (param: SignupParam) => signupService.signup(param),
+  localSignup: () => ({
+    mutationFn: (param: LocalSignupParam) => signupService.localSignup(param),
+  }),
   }),
 };
 

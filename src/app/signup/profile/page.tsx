@@ -7,7 +7,7 @@ import Header from "@/components/Header";
 import EmailForm from "@/components/SignupForm/EmailForm";
 import PasswordForm from "@/components/SignupForm/PasswordForm";
 import ProfileForm from "@/components/SignupForm/ProfileForm";
-import { useSignup } from "@/service/signup/hooks";
+import { useLocalSignup } from "@/service/signup/hooks";
 import { ProfileFormData } from "@/types/signup";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -31,7 +31,7 @@ const SignUpPage = () => {
     setFormIndex(formIndex + 1);
   };
 
-  const { mutate } = useSignup({
+  const { mutate } = useLocalSignup({
     onSuccess: (res) => {
       console.log(res);
     },

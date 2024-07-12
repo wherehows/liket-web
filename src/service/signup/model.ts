@@ -12,7 +12,7 @@ export interface CheckAuthenticationParam {
   code: string;
 }
 
-export interface SignupParam extends ProfileFormData {
+export interface LocalSignupParam extends ProfileFormData {
   emailToken: string;
   pw: string;
 }

@@ -4,7 +4,8 @@ import {
   CheckAuthenticationParam,
   CheckAuthenticationResponse,
   SendAuthenticationParam,
-  SignupParam,
+  LocalSignupParam,
+  SocialSignupParam,
 } from "./model";
 
 export const useSendAuthentication = (
@@ -20,6 +21,7 @@ export const useCheckAuthentication = (
   >
 ) => useMutation({ ...queryOptions.check(), ...props });
 
-export const useSignup = (
-  props: UseMutationOptions<unknown, Error, SignupParam, unknown>
-) => useMutation({ ...queryOptions.signup(), ...props });
+export const useLocalSignup = (
+  props: UseMutationOptions<unknown, Error, LocalSignupParam, unknown>
+) => useMutation({ ...queryOptions.localSignup(), ...props });
+
