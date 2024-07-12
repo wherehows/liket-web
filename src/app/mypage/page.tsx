@@ -82,12 +82,12 @@ export default function Index() {
           </div>
         </div>
         <Divider width="100%" height="8px" margin="24px 0 0 0" />
-        <LinkItem text="계정 관리" href="/account" />
+        <LinkItem href="/account">계정 관리</LinkItem>
         <Divider width="100%" height="8px" />
-        <LinkItem text="컨텐츠 등록 요청" href="/requested-contents" />
-        <LinkItem text="1:1 문의" href="/inquires" />
+        <LinkItem href="/requested-contents">컨텐츠 등록 요청</LinkItem>
+        <LinkItem href="/inquires">1:1문의</LinkItem>
         <Divider width="100%" height="8px" />
-        <LinkItem text="약관/정책" href="/terms" />
+        <LinkItem href="/terms">약관/정책</LinkItem>
         <div className="flex justify-between items-center w-[100%] h-[48px] px-[24px]">
           <div className="text-h2">버전</div>
           <div className="text-body2 text-grey-04">1.0</div>

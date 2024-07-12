@@ -10,10 +10,9 @@ export default meta;
 export const Index = {
   render: () => {
     return (
-      <LinkItem
-        href="https://liket-web.vercel.app/"
-        text="라이켓 메인 페이지"
-      />
+      <LinkItem href="https://liket-web.vercel.app/">
+        라이켓 메인 페이지
+      </LinkItem>
     );
   },
 };
