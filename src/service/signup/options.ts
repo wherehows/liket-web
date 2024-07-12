@@ -17,6 +17,8 @@ const queryOptions = {
   localSignup: () => ({
     mutationFn: (param: LocalSignupParam) => signupService.localSignup(param),
   }),
+  socialSignup: () => ({
+    mutationFn: (param: SocialSignupParam) => signupService.socialSignup(param),
   }),
 };
 

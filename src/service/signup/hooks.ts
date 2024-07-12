@@ -25,3 +25,6 @@ export const useLocalSignup = (
   props: UseMutationOptions<unknown, Error, LocalSignupParam, unknown>
 ) => useMutation({ ...queryOptions.localSignup(), ...props });
 
+export const useSocialSignup = (
+  props: UseMutationOptions<unknown, Error, SocialSignupParam, unknown>
+) => useMutation({ ...queryOptions.socialSignup(), ...props });

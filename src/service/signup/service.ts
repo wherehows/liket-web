@@ -20,6 +20,13 @@ class SignupService extends Service {
       },
     });
   }
+  socialSignup(param: SocialSignupParam) {
+    return this.http.post("/apis/user/social", param, {
+      headers: {
+        "Content-Type": "multiple/form-data",
+      },
+    });
+  }
 }
 
 const signupService = new SignupService();
