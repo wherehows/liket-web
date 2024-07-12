@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import Link from "next/link";
+import authStore from "@/stores/authStore";
 
 const schema = z.object({
   email: z.string().email("올바른 이메일을 입력해주세요."),
@@ -17,8 +18,12 @@ const schema = z.object({
 });
 
 export default function Page() {
+  const setToken = authStore(({ setToken }) => setToken);
   const { mutate } = useLogin({
-    onSuccess: () => {},
+    onSuccess: ({ data }) => {
+      setToken(data.token);
+      router.push("/");
+    },
   });
 
   const router = useRouter();
@@ -85,19 +90,17 @@ export default function Page() {
             </Link>
           </div>
         </div>
+        <BottomButtonTabWrapper shadow>
+          <Button
+            type="submit"
+            fullWidth
+            disabled={!formState.isValid}
+            height={48}
+          >
+            로그인
+          </Button>
+        </BottomButtonTabWrapper>
       </form>
-      <BottomButtonTabWrapper shadow>
-        <Button
-          fullWidth
-          disabled={!formState.isValid}
-          height={48}
-          onClick={() => {
-            // 전혀 입력이 안된 경우
-          }}
-        >
-          로그인
-        </Button>
-      </BottomButtonTabWrapper>
     </>
   );
 }
