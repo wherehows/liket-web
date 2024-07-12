@@ -8,9 +8,18 @@ import Header from "@/components/Header";
 import Divider from "@/components/Divider";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useSignup } from "@/service/signup/hooks";
 
 export default function Page() {
   const router = useRouter();
+
+  const { mutate } = useSignup({
+    onSuccess: (res) => {
+      console.log(res);
+    },
+  });
+
+  const handleClickNextButtonInProfileForm = ({}) => {};
 
   return (
     <>
@@ -25,15 +34,24 @@ export default function Page() {
       </Header>
       <div className="flex grow flex-col items-center justify-center">
         <ColoredLogo />
-        <button className="mt-[48px] mb-[16px]">
+        <Link
+          className="mt-[48px] mb-[16px]"
+          href={process.env.NEXT_PUBLIC_API_SERVER + "/auth/kakao"}
+        >
           <KaKaoLogin />
-        </button>
-        <button className="mb-[16px]">
+        </Link>
+        <Link
+          className="mb-[16px]"
+          href={process.env.NEXT_PUBLIC_API_SERVER + "/auth/apple"}
+        >
           <AppleLogin />
-        </button>
-        <button className="mb-[29px]">
+        </Link>
+        <Link
+          className="mb-[29px]"
+          href={process.env.NEXT_PUBLIC_API_SERVER + "/auth/naver"}
+        >
           <NaverLogin />
-        </button>
+        </Link>
         <div className="flex items-center mb-[38px]">
           <Divider height="1px" width="48px" />
           <span className="text-body5 text-grey-04 ml-[16px] mr-[16px]">
