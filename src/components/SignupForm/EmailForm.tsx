@@ -25,10 +25,11 @@ const emailVerificationScheme = z.object({
 });
 
 interface EmailFormProps {
+  type: "password-reset" | "signup";
   updateForm: (insertedFormData: { email: string; emailToken: string }) => void;
 }
 
-const EmailForm = ({ updateForm }: EmailFormProps) => {
+const EmailForm = ({ updateForm, type }: EmailFormProps) => {
   const time = new Date();
   time.setSeconds(time.getSeconds() + 5);
   const { minutes, seconds, isRunning, start, restart } = useTimer({
@@ -49,7 +50,7 @@ const EmailForm = ({ updateForm }: EmailFormProps) => {
         start();
         sendAuthenticationNumber({
           email: userEmail,
-          type: 0,
+          type: type === "password-reset" ? 1 : 0,
         });
       }
     },

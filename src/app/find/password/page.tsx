@@ -39,7 +39,9 @@ export default function Page() {
         />
         <Header.MiddleText text="비밀번호 재설정" />
       </Header>
-      {formIndex === 0 && <EmailForm updateForm={updateForm} />}
+      {formIndex === 0 && (
+        <EmailForm type="password-reset" updateForm={updateForm} />
+      )}
       {formIndex === 1 && (
         <PasswordForm
           isResetForm

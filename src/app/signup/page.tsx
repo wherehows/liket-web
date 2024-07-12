@@ -77,7 +77,7 @@ const SignUpPage = () => {
             );
           })}
         </div>
-        {formIndex === 0 && <EmailForm updateForm={updateForm} />}
+        {formIndex === 0 && <EmailForm type="signup" updateForm={updateForm} />}
         {formIndex === 1 && (
           <PasswordForm
             isResetForm={false}
