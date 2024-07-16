@@ -1,5 +1,4 @@
 import authStore from "@/stores/authStore";
-import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
 export const middleware = async (request: NextRequest) => {
@@ -7,6 +6,7 @@ export const middleware = async (request: NextRequest) => {
   const pathname = request.nextUrl.pathname;
 
   if (!token && pathname.startsWith("/mypage")) {
+    console.log(pathname);
     return NextResponse.redirect(new URL("/login"));
   }
 
