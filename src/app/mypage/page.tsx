@@ -4,11 +4,33 @@ import Divider from "@/components/Divider";
 import LinkItem from "@/components/LinkItem";
 import LinkableTab from "@/components/LinkableTab";
 import RightArrow from "@/icons/right-arrow.svg";
+import { useMyPage } from "@/service/hooks";
+import profileStore from "@/stores/profileStore";
 import Image from "next/image";
 import Link from "next/link";
+import { If, Then, Else } from "react-if";
 import ScrollContainer from "react-indiana-drag-scroll";
 
-export default function Index() {
+export default function Page() {
+  const setProfile = profileStore(({ setProfile }) => setProfile);
+  const { data } = useMyPage({
+    onSuccess: (profile) => setProfile(profile),
+  });
+
+  if (!data) {
+    return <></>;
+  }
+
+  const {
+    reviewCount,
+    reviewList,
+    liketCount,
+    liketList,
+    profileImgPath,
+    nickname,
+    email,
+  } = data;
+
   return (
     <>
       <main className="grow">
@@ -17,26 +39,28 @@ export default function Index() {
             <div className="grow">
               <div className="flex flex-col">
                 <Link className="text-h1" href="/edit/profile">
-                  jjjuuu_a{" "}
+                  {nickname}
                   <RightArrow
                     style={{
                       display: "inline",
                     }}
                   />
                 </Link>
-                <div className="text-body5 text-grey-04 mt-[7px]">
-                  han6569h@naver.com
-                </div>
+                <div className="text-body5 text-grey-04 mt-[7px]">{email}</div>
                 <div className="flex text-body3 items-center mt-[15px]">
                   좋아요{" "}
-                  <p className="text-numbering1 text-skyblue-01 ml-[4px]">33</p>
+                  <p className="text-numbering1 text-skyblue-01 ml-[4px]">20</p>
                 </div>
               </div>
             </div>
             <div className="">
               <div className="w-[80px] h-[80px] rounded-full relative overflow-hidden">
                 <Image
-                  src={"https://picsum.photos/80/80?random="}
+                  src={
+                    profileImgPath
+                      ? process.env.NEXT_PUBLIC_IMAGE_SERVER + profileImgPath
+                      : "/icons/default-avatar.svg"
+                  }
                   alt="아바타 이미지"
                   fill
                   objectFit="cover"
@@ -47,38 +71,70 @@ export default function Index() {
           <div className="flex flex-col mt-[24px]">
             <Link className="flex items-center" href="/reviews">
               <div className="text-h2 mr-[4px]">리뷰</div>
-              <div className="text-numbering1 text-skyblue-01">30</div>
+              <div className="text-numbering1 text-skyblue-01">
+                {reviewCount}
+              </div>
               <RightArrow />
             </Link>
-            <ScrollContainer className="flex flex-row gap-[8px] overflow-x-hidden overflow-y-hidden w-[100%] mt-[8px]">
-              {REVIEW_DUMMY_DATA.map((src, index) => {
-                return (
-                  <Link href={`/reviews/${index}`} key={index}>
-                    <div className="relative w-[112px] h-[112px]">
-                      <Image src={src} alt="리뷰 이미지" fill />
-                    </div>
-                  </Link>
-                );
-              })}
-            </ScrollContainer>
+            <If condition={reviewList.length > 0}>
+              <Then>
+                <ScrollContainer className="flex flex-row gap-[8px] overflow-x-hidden overflow-y-hidden w-[100%] mt-[8px]">
+                  {reviewList.map(({ idx, thumbnail }) => {
+                    return (
+                      <Link href={`/likets/${idx}`} key={idx}>
+                        <div className="relative w-[112px] h-[178px]">
+                          <Image
+                            src={
+                              process.env.NEXT_PUBLIC_IMAGE_SERVER + thumbnail
+                            }
+                            fill
+                            alt="라이켓 이미지"
+                          />
+                        </div>
+                      </Link>
+                    );
+                  })}
+                </ScrollContainer>
+              </Then>
+              <Else>
+                <div className="text-body5 text-grey-04">
+                  컨텐츠가 없습니다.
+                </div>
+              </Else>
+            </If>
           </div>
           <div className="flex flex-col mt-[24px]">
             <Link className="flex items-center" href="/likets">
               <div className="text-h2 mr-[4px]">라이켓</div>
-              <div className="text-numbering1 text-skyblue-01">24</div>
+              <div className="text-numbering1 text-skyblue-01">
+                {liketCount}
+              </div>
               <RightArrow />
             </Link>
-            <ScrollContainer className="flex flex-row gap-[8px] overflow-x-hidden overflow-y-hidden w-[100%] mt-[8px]">
-              {LIKET_DUMMY_DATA.map((src, index) => {
-                return (
-                  <Link href={`/likets/${index}`} key={index}>
-                    <div className="relative w-[112px] h-[178px]">
-                      <Image src={src} fill alt="라이켓 이미지" />
-                    </div>
-                  </Link>
-                );
-              })}
-            </ScrollContainer>
+            <If condition={liketList.length > 0}>
+              <Then>
+                <ScrollContainer className="flex flex-row gap-[8px] overflow-x-hidden overflow-y-hidden w-[100%] mt-[8px]">
+                  {liketList.map(({ idx, imgPath }) => {
+                    return (
+                      <Link href={`/likets/${idx}`} key={idx}>
+                        <div className="relative w-[112px] h-[178px]">
+                          <Image
+                            src={process.env.NEXT_PUBLIC_IMAGE_SERVER + imgPath}
+                            fill
+                            alt="라이켓 이미지"
+                          />
+                        </div>
+                      </Link>
+                    );
+                  })}
+                </ScrollContainer>
+              </Then>
+              <Else>
+                <div className="text-body5 text-grey-04">
+                  컨텐츠가 없습니다.
+                </div>
+              </Else>
+            </If>
           </div>
         </div>
         <Divider width="100%" height="8px" margin="24px 0 0 0" />

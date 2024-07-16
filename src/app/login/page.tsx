@@ -7,10 +7,19 @@ import NaverLogin from "@/icons/logins/naver-login.svg";
 import Header from "@/components/Header";
 import Divider from "@/components/Divider";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect } from "react";
+import customToast from "@/utils/customToast";
 
 export default function Page() {
   const router = useRouter();
+  const searchParam = useSearchParams();
+
+  useEffect(() => {
+    if (searchParam.get("isTokenExpired")) {
+      customToast("장시간 미사용으로 로그아웃 되었습니다.");
+    }
+  }, [searchParam]);
 
   return (
     <>

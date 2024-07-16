@@ -11,6 +11,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import Link from "next/link";
 import authStore from "@/stores/authStore";
+import { setAuthToken } from "@/utils/axios";
 
 const schema = z.object({
   email: z.string().email("올바른 이메일을 입력해주세요."),
@@ -21,6 +22,7 @@ export default function Page() {
   const setToken = authStore(({ setToken }) => setToken);
   const { mutate } = useLogin({
     onSuccess: ({ data }) => {
+      setAuthToken(data.token);
       setToken(data.token);
       router.push("/");
     },
