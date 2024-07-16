@@ -38,7 +38,7 @@ export default function Page() {
           <div className="flex mt-[64px]">
             <div className="grow">
               <div className="flex flex-col">
-                <Link className="text-h1" href="/edit/profile">
+                <Link className="text-h1" href="/mypage/edit/profile">
                   {nickname}
                   <RightArrow
                     style={{

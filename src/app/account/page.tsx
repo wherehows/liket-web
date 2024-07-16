@@ -24,7 +24,7 @@ export default function Page() {
           </div>
         </div>
         <Divider width="100%" height="8px" margin="16px 0 0 0" />
-        <LinkItem href="/edit/password">비밀번호 변경</LinkItem>
+        <LinkItem href="/mypage/edit/password">비밀번호 변경</LinkItem>
         <button className="text-h2 w-[100%] h-[48px] flex items-center px-[24px]">
           로그아웃
         </button>
