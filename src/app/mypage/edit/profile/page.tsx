@@ -1,23 +1,36 @@
 "use client";
 
 import Header from "@/components/Header";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import ProfileForm from "@/components/SignupForm/ProfileForm";
+import { useEditProfile } from "@/service/profile";
 import profileStore from "@/stores/profileStore";
+import customToast from "@/utils/customToast";
 
 export default function Page() {
-  const router = useRouter();
-  const [isYearSelectionDrawerOpen, setIsYearSelectionDrawerOpen] =
-    useState(false);
-  const { nickname, profileImgPath } = profileStore({
-    nickname,
-    gender,
-    birth,
-    profileImgPath,
+  const { mutate } = useEditProfile({
+    onSuccess: () => {
+      customToast("저장되었습니다");
+    },
   });
+
+  const { nickname, profileImgPath, gender, birth } = profileStore(
+    ({ nickname, gender, birth, profileImgPath }) => ({
+      nickname,
+      gender,
+      birth,
+      profileImgPath,
+    })
+  );
+
+  // const handleClickNextButton = ({ file, nickname, gender, birth }) => {
+  //   const formData = new FormData();
+  //   formData.append("profileImg", file);
+  //   formData.append("nickname", nickname);
+  //   formData.append("gender", gender);
+  //   formData.append("birth", birth);
+
+  //   mutate({ profileImg: file, nickname, gender, birth });
+  // };
 
   return (
     <>
@@ -29,8 +42,8 @@ export default function Page() {
         <ProfileForm
           currentFormInformation={{
             nickname,
-            gender,
-            birth,
+            gender: "" + gender,
+            birth: "" + birth,
             file: profileImgPath,
           }}
           nextButtonText="저장하기"
