@@ -13,3 +13,6 @@ export const useLogin = (
     unknown
   >
 ) => useMutation({ ...queryOptions.login(), ...props });
+
+export const useLogout = (props: UseMutationOptions) =>
+  useMutation({ ...queryOptions.logout(), ...props });
