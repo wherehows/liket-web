@@ -3,7 +3,7 @@ import ContentCard, {
   ApiContentCard,
   ContentCardProps,
 } from "@/components/Card/ContentCard";
-import ReviewCard, { REVIEW_CARDS_DUMMY } from "@/components/Card/ReviewCard";
+// import ReviewCard, { REVIEW_CARDS_DUMMY } from "@/components/Card/ReviewCard";
 import Divider from "@/components/Divider";
 import Header from "@/components/Header";
 import LinkableTab from "@/components/LinkableTab";
@@ -143,7 +143,7 @@ export default async function Home() {
             </Else>
           </If>
         </section>
-        <Divider height="8px" width="100%" margin="24px 0" />
+        {/* <Divider height="8px" width="100%" margin="24px 0" />
         <section className="mb-[24px]">
           <h2 className="pl-[24px] mb-[8px]">최근 인기 리뷰</h2>
           <CustomScrollContainer className="flex flex-row gap-[8px] overflow-x-hidden overflow-y-hidden w-[100%] [&>*:last-child]:mr-[24px] [&>*:first-child]:ml-[24px]">
@@ -151,7 +151,7 @@ export default async function Home() {
               return <ReviewCard key={index} {...data} />;
             })}
           </CustomScrollContainer>
-        </section>
+        </section> */}
       </main>
       <LinkableTab shadow />
     </>
