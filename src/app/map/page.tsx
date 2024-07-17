@@ -251,7 +251,9 @@ export default function MapPage() {
 
                     return (
                       <li key={item}>
-                        <Chip isSelected={isSelected}>{item}</Chip>
+                        <Chip isSelected={isSelected} onClick={() => {}}>
+                          {item}
+                        </Chip>
                       </li>
                     );
                   })}

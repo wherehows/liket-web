@@ -149,7 +149,9 @@ export default function Page() {
           {STYLES.map((style) => {
             return (
               <li key={style} className="">
-                <Chip isSelected={false}>{style}</Chip>
+                <Chip isSelected={false} onClick={() => {}}>
+                  {style}
+                </Chip>
               </li>
             );
           })}

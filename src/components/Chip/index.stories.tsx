@@ -30,7 +30,9 @@ export const SingleSelectionChips = {
         {GENDER.map((gender) => {
           return (
             <li key={gender}>
-              <Chip isSelected={selectedGender === gender}>{gender}</Chip>
+              <Chip isSelected={selectedGender === gender} onClick={() => {}}>
+                {gender}
+              </Chip>
             </li>
           );
         })}
@@ -63,7 +65,12 @@ export const MultipleSelectionChips = {
         {GENRES.map((genre: (typeof GENRES)[number]) => {
           return (
             <li key={genre}>
-              <Chip isSelected={selectedGenres.includes(genre)}>{genre}</Chip>
+              <Chip
+                isSelected={selectedGenres.includes(genre)}
+                onClick={() => {}}
+              >
+                {genre}
+              </Chip>
             </li>
           );
         })}
