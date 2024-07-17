@@ -121,10 +121,7 @@ export default function Page() {
           <Header.LeftOption
             option={{
               back: {
-                onClick: () => {
-                  setDetailTosIdx(undefined);
-                  router.back();
-                },
+                onClick: () => setDetailTosIdx(undefined),
               },
             }}
           />
