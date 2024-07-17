@@ -57,6 +57,10 @@ const LeftOption = ({
       <button
         key={"back"}
         onClick={() => {
+          if (typeof back === "object") {
+            back.onClick && back.onClick();
+          }
+
           router.back();
         }}
       >
