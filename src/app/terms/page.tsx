@@ -8,6 +8,11 @@ export default async function Page() {
   return (
     <>
       <Header>
+        <Header.LeftOption
+          option={{
+            back: true,
+          }}
+        />
         <Header.MiddleText text="약관/정책" />
       </Header>
       <main>

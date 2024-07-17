@@ -12,6 +12,11 @@ export default async function Page({ params: { idx } }: PageProps) {
   return (
     <>
       <Header>
+        <Header.LeftOption
+          option={{
+            back: true,
+          }}
+        />
         <Header.MiddleText text={title} />
       </Header>
       <main>{contents}</main>
