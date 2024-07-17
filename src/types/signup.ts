@@ -1,5 +1,5 @@
 export interface ProfileFormData {
-  file: string;
+  file: File;
   nickname: string;
   birth: number;
   gender: 1 | 2;
