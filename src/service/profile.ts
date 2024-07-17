@@ -1,6 +1,11 @@
 import { ProfileStoreState } from "@/stores/profileStore";
+import { ResponseError } from "@/types/api";
 import axiosInstance from "@/utils/axios";
-import { useQuery } from "@tanstack/react-query";
+import {
+  useMutation,
+  UseMutationOptions,
+  useQuery,
+} from "@tanstack/react-query";
 import { AxiosError, AxiosResponse } from "axios";
 
 export interface MyPageInformation {
@@ -41,4 +46,18 @@ export const useMyPage = ({
       onSuccess({ gender, nickname, birth, email, profileImgPath });
       return data;
     },
+  });
+
+export const useEditProfile = (
+  props: UseMutationOptions<
+    unknown,
+    ResponseError,
+    Pick<MyPageInformation, "gender" | "nickname" | "birth"> & {
+      profileImg: string;
+    }
+  >
+) =>
+  useMutation({
+    mutationFn: (param) => axiosInstance.put("/apis/user/my/profile", param),
+    ...props,
   });

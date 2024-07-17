@@ -4,21 +4,21 @@ import { useRef, useState } from "react";
 
 interface AvatarUploaderProps {
   defaultAvatar?: string;
-  onUploadImage: (url: string) => void;
+  onUploadImage: (file: File, json: string) => void;
 }
 
 const AvatarUploader = ({
-  defaultAvatar = "",
+  defaultAvatar = "/icons/default-avatar.svg",
   onUploadImage,
 }: AvatarUploaderProps) => {
-  const [url, setUrl] = useState<string>(defaultAvatar);
+  const [ImgSrc, setImgSrc] = useState<string>(defaultAvatar);
   const inputRef = useRef<HTMLInputElement>(null);
 
   return (
     <div className="w-[80px] h-[80px] relative">
       <div className="w-[100%] h-[100%] rounded-full relative overflow-hidden">
         <Image
-          src={url ? url : "/icons/default-avatar.svg"}
+          src={ImgSrc}
           alt="아바타 이미지"
           fill
           style={{
@@ -34,9 +34,17 @@ const AvatarUploader = ({
           const files = e.target.files;
 
           if (files) {
-            const url = URL.createObjectURL(files[0]);
-            setUrl(url);
-            onUploadImage(url);
+            const reader = new FileReader();
+            const file = files[0];
+
+            reader.onloadend = () => {
+              if (typeof reader.result === "string") {
+                setImgSrc(reader.result);
+                onUploadImage(files[0], reader.result);
+              }
+            };
+
+            reader.readAsDataURL(file);
           }
         }}
       />

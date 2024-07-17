@@ -1,4 +1,4 @@
-import { MyPageInformation } from "@/service/hooks";
+import { MyPageInformation } from "@/service/profile";
 import { create } from "zustand";
 
 export type ProfileStoreState = Pick<
