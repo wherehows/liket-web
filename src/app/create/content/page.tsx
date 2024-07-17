@@ -346,33 +346,28 @@ export default function Page() {
         }}
       >
         <div className="center text-h2">스타일</div>
-        <ul
-          className="my-[16px] w-[100%] flex px-[34px] flex-wrap gap-[8px]"
-          onClick={(e) => {
-            const target = e.target as HTMLElement;
-
-            if (target.tagName === "BUTTON") {
-              const targetStyle = target.textContent as string;
-              let newStyles = null;
-
-              if (tempStyles.some((style) => style === "")) {
-                tempStyles.pop();
-              }
-
-              if (tempStyles.some((style) => style === targetStyle)) {
-                newStyles = tempStyles.filter((style) => style !== targetStyle);
-              } else {
-                newStyles = [...tempStyles, targetStyle];
-              }
-
-              setTempStyles(newStyles);
-            }
-          }}
-        >
+        <ul className="my-[16px] w-[100%] flex px-[34px] flex-wrap gap-[8px]">
           {STYLES.map((STYLE) => {
             return (
               <li key={STYLE} className="">
-                <Chip isSelected={tempStyles.some((style) => style === STYLE)}>
+                <Chip
+                  isSelected={tempStyles.some((style) => style === STYLE)}
+                  onClick={() => {
+                    let newStyles = null;
+
+                    if (tempStyles.some((style) => style === "")) {
+                      tempStyles.pop();
+                    }
+
+                    if (tempStyles.some((style) => style === STYLE)) {
+                      newStyles = tempStyles.filter((style) => style !== STYLE);
+                    } else {
+                      newStyles = [...tempStyles, STYLE];
+                    }
+
+                    setTempStyles(newStyles);
+                  }}
+                >
                   {STYLE}
                 </Chip>
               </li>
