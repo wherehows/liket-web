@@ -1,8 +1,7 @@
-import { useSignup } from "@/service/signup/hooks";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CalendarIcon, YearCalendar } from "@mui/x-date-pickers";
 import dayjs, { Dayjs } from "dayjs";
-import { useState, MouseEvent } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import BottomButtonTabWrapper from "../BottomButtonTabWrapper";
@@ -47,10 +46,10 @@ const ProfileForm = ({
   nextButtonText,
   onClickNextButton,
 }: ProfileForm) => {
-  const [selectedGender, setSelectedGender] = useState("");
   const [isYearSelectionDrawerOpen, setIsYearSelectionDrawerOpen] =
     useState(false);
   const [tempYear, setTempYear] = useState<Dayjs>(dayjs(new Date()));
+  const [uploadedImageFile, setUploadedImageFile] = useState<File>();
 
   const methods = useForm({
     mode: "onBlur",
@@ -60,27 +59,17 @@ const ProfileForm = ({
 
   const { formState, register, setValue, getValues, trigger } = methods;
 
-  const handleClickGender = (e: MouseEvent<HTMLUListElement>) => {
-    const target = e.target as HTMLUListElement;
-
-    if (target.tagName === "BUTTON") {
-      const targetGender = target.textContent as "남성" | "여성";
-      const res = targetGender === selectedGender ? "" : targetGender;
-      setSelectedGender(res);
-      setValue("gender", res);
-      trigger();
-    }
-  };
-
   const handleClickNextButton = () => {
-    const { file, birth, gender, nickname } = getValues();
+    const { birth, gender, nickname } = getValues();
 
-    onClickNextButton({
-      file,
-      nickname,
-      birth: +birth,
-      gender: gender === "남성" ? 1 : 2,
-    });
+    if (uploadedImageFile) {
+      onClickNextButton({
+        file: uploadedImageFile,
+        nickname,
+        birth: +birth,
+        gender: +gender as 1 | 2,
+      });
+    }
   };
 
   return (
@@ -88,7 +77,17 @@ const ProfileForm = ({
       <form className="flex flex-col grow pt-[16px] px-[24px]">
         <div className="grow">
           <div className="center mb-[34px]">
-            <AvatarUploader onUploadImage={(url) => setValue("file", url)} />
+            <AvatarUploader
+              defaultAvatar={
+                currentFormInformation.file &&
+                process.env.NEXT_PUBLIC_IMAGE_SERVER +
+                  currentFormInformation.file
+              }
+              onUploadImage={(file, base64String) => {
+                setValue("file", base64String);
+                setUploadedImageFile(file);
+              }}
+            />
           </div>
           <InputWrapper margin="0 0 16px 0">
             <Label htmlFor="email" required>
@@ -103,15 +102,31 @@ const ProfileForm = ({
           </InputWrapper>
           <InputWrapper margin="0 0 34px 0">
             <Label htmlFor="gender">성별</Label>
-            <ul
-              id="gender"
-              onClick={handleClickGender}
-              className="flex mt-[12px] gap-[8px]"
-            >
-              {["남자", "여자"].map((gender) => {
+            <ul id="gender" className="flex mt-[12px] gap-[8px]">
+              {["1", "2"].map((gender) => {
+                const currentGender = getValues("gender");
+                const genderMap = {
+                  "1": "남자",
+                  "2": "여자",
+                };
+
                 return (
                   <li key={gender}>
-                    <Chip isSelected={selectedGender === gender}>{gender}</Chip>
+                    <Chip
+                      isSelected={currentGender === gender}
+                      onClick={() => {
+                        trigger();
+
+                        if (currentGender === gender) {
+                          setValue("gender", "");
+                          return;
+                        }
+
+                        setValue("gender", gender);
+                      }}
+                    >
+                      {genderMap[gender as keyof typeof genderMap]}
+                    </Chip>
                   </li>
                 );
               })}
@@ -138,7 +153,8 @@ const ProfileForm = ({
       <BottomButtonTabWrapper shadow>
         <Button
           fullWidth
-          disabled={!formState.isValid}
+          // disabled={!formState.isValid}
+          disabled={false}
           height={48}
           onClick={handleClickNextButton}
         >

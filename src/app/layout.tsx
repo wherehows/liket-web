@@ -4,7 +4,7 @@ import localFont from "next/font/local";
 import ModalProvider from "@/components/Modal/ModalProvider";
 import { Toaster } from "react-hot-toast";
 import MuiLocalizationProvider from "@/components/MuiLocalizationProvider";
-import Provider from "@/components/Provider";
+import QueryProvider from "@/components/QueryProvider";
 import dayjs from "dayjs";
 import "dayjs/locale/ko";
 
@@ -65,7 +65,7 @@ export default function RootLayout({
     <html lang="ko">
       <ModalProvider>
         <body className={appleGothic.className}>
-          <Provider>
+          <QueryProvider>
             <MuiLocalizationProvider>
               <Toaster
                 position="bottom-center"
@@ -75,7 +75,7 @@ export default function RootLayout({
               />
               {children}
             </MuiLocalizationProvider>
-          </Provider>
+          </QueryProvider>
         </body>
       </ModalProvider>
     </html>

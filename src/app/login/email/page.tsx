@@ -10,15 +10,22 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import Link from "next/link";
+import authStore from "@/stores/authStore";
+import { setAuthToken } from "@/utils/axios";
 
 const schema = z.object({
   email: z.string().email("올바른 이메일을 입력해주세요."),
-  password: z.string().min(8, "8자 이상 입력해주세요."),
+  pw: z.string().min(8, "8자 이상 입력해주세요."),
 });
 
 export default function Page() {
+  const setToken = authStore(({ setToken }) => setToken);
   const { mutate } = useLogin({
-    onSuccess: () => {},
+    onSuccess: ({ data }) => {
+      setAuthToken(data.token);
+      setToken(data.token);
+      router.push("/");
+    },
   });
 
   const router = useRouter();
@@ -27,7 +34,7 @@ export default function Page() {
     mode: "onBlur",
     defaultValues: {
       email: "",
-      password: "",
+      pw: "",
     },
     resolver: zodResolver(schema),
   });
@@ -35,11 +42,11 @@ export default function Page() {
   const { formState, handleSubmit, register, getValues } = methods;
 
   const onSubmit = () => {
-    const { email, password } = getValues();
+    const { email, pw } = getValues();
 
     mutate({
       email,
-      pw: password,
+      pw,
     });
   };
 
@@ -70,9 +77,9 @@ export default function Page() {
             />
           </InputWrapper>
           <InputWrapper margin="0 0 47px 0">
-            <Label htmlFor="password">비밀번호</Label>
+            <Label htmlFor="pw">비밀번호</Label>
             <Input
-              field="password"
+              field="pw"
               type="password"
               placeholder="비밀번호 입력"
               register={register}
@@ -85,19 +92,17 @@ export default function Page() {
             </Link>
           </div>
         </div>
+        <BottomButtonTabWrapper shadow>
+          <Button
+            type="submit"
+            fullWidth
+            disabled={!formState.isValid}
+            height={48}
+          >
+            로그인
+          </Button>
+        </BottomButtonTabWrapper>
       </form>
-      <BottomButtonTabWrapper shadow>
-        <Button
-          fullWidth
-          disabled={!formState.isValid}
-          height={48}
-          onClick={() => {
-            // 전혀 입력이 안된 경우
-          }}
-        >
-          로그인
-        </Button>
-      </BottomButtonTabWrapper>
     </>
   );
 }

@@ -123,7 +123,7 @@ const Carousel = ({ list }: CarouselProps) => {
                   width: "100%",
                   height: "336px",
                 }}
-                alt="테스트 이미지"
+                alt="캐러셀 이미지"
                 loading="eager"
                 draggable={false}
                 className="select-none shrink-0"

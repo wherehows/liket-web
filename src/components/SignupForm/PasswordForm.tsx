@@ -7,29 +7,35 @@ import Button from "../Button";
 
 const passwordScheme = z
   .object({
-    password: z
+    pw: z
       .string()
       .min(8, "최소 8자리 이상 입력해야 합니다.")
       .regex(/[a-zA-Z]/, "영문, 숫자, 특수문자 모두 포함해야 합니다.")
       .regex(/[0-9]/, "영문, 숫자, 특수문자 모두 포함해야 합니다.")
       .regex(/[^a-zA-Z0-9]/, "영문, 숫자, 특수문자 모두 포함해야 합니다."),
-    "confirm-password": z.string(),
+    "confirm-pw": z.string(),
   })
-  .refine((data) => data.password === data["confirm-password"], {
+  .refine((data) => data.pw === data["confirm-pw"], {
     message: "비밀번호가 일치하지 않습니다.",
-    path: ["confirm-password"],
+    path: ["confirm-pw"],
   });
 
 interface PasswordFormProps {
-  updateForm: (insertedFormData: object) => void;
+  isResetForm: boolean;
+  nextButtonText: string;
+  onClickNextButton: (pw: string) => void;
 }
 
-const PasswordForm = ({ updateForm }: PasswordFormProps) => {
+const PasswordForm = ({
+  isResetForm,
+  nextButtonText,
+  onClickNextButton,
+}: PasswordFormProps) => {
   const methods = useForm({
     mode: "onBlur",
     defaultValues: {
-      password: "",
-      "confirm-password": "",
+      pw: "",
+      "confirm-pw": "",
     },
     resolver: zodResolver(passwordScheme),
   });
@@ -37,18 +43,18 @@ const PasswordForm = ({ updateForm }: PasswordFormProps) => {
   const { formState, trigger, watch, register, getValues } = methods;
   const { isValid, dirtyFields } = formState;
 
-  const onClickNextButton = () => {
-    updateForm({ password: getValues("password") });
-  };
+  const handleClickNextButton = () => onClickNextButton(getValues("pw"));
 
   return (
     <>
       <form className="flex flex-col grow pt-[16px] px-[24px]">
         <div className="grow">
           <InputWrapper margin="0 0 34px 0">
-            <Label htmlFor="password">비밀번호</Label>
+            <Label htmlFor="pw">
+              {isResetForm ? "새 비밀번호" : "비밀번호"}
+            </Label>
             <Input
-              field="password"
+              field="pw"
               type="password"
               placeholder="영문, 숫자, 특수문자 포함 8~15자"
               maxLength={15}
@@ -56,18 +62,20 @@ const PasswordForm = ({ updateForm }: PasswordFormProps) => {
               register={register}
               onChange={(e) => {
                 if (
-                  e.target.value !== watch("password") &&
-                  dirtyFields["confirm-password"]
+                  e.target.value !== watch("pw") &&
+                  dirtyFields["confirm-pw"]
                 ) {
-                  trigger("confirm-password");
+                  trigger("confirm-pw");
                 }
               }}
             />
           </InputWrapper>
           <InputWrapper margin="0 0 47px 0">
-            <Label htmlFor="confirm-password">비밀번호 확인</Label>
+            <Label htmlFor="confirm-pw">
+              {isResetForm ? "새 비밀번호 확인" : "비밀번호 확인"}
+            </Label>
             <Input
-              field="confirm-password"
+              field="confirm-pw"
               type="password"
               placeholder="비밀번호 입력"
               maxLength={15}
@@ -82,9 +90,9 @@ const PasswordForm = ({ updateForm }: PasswordFormProps) => {
           fullWidth
           disabled={!isValid}
           height={48}
-          onClick={onClickNextButton}
+          onClick={handleClickNextButton}
         >
-          다음
+          {nextButtonText}
         </Button>
       </BottomButtonTabWrapper>
     </>

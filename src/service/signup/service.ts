@@ -2,7 +2,8 @@ import Service from "../service";
 import {
   CheckAuthenticationParam,
   SendAuthenticationParam,
-  SignupParam,
+  LocalSignupParam,
+  SocialSignupParam,
 } from "./model";
 
 class SignupService extends Service {
@@ -12,10 +13,17 @@ class SignupService extends Service {
   check(param: CheckAuthenticationParam) {
     return this.http.post("/apis/email-cert/check", param);
   }
-  signup(param: SignupParam) {
+  localSignup(param: LocalSignupParam) {
     return this.http.post("/apis/user/local", param, {
       headers: {
         "Content-Type": "multipart/form-data",
+      },
+    });
+  }
+  socialSignup(param: SocialSignupParam) {
+    return this.http.post("/apis/user/social", param, {
+      headers: {
+        "Content-Type": "multiple/form-data",
       },
     });
   }

@@ -17,6 +17,7 @@ import {
 } from "../newInput";
 import Button from "../Button";
 import { z } from "zod";
+import { useCheckEmailDuplication } from "@/service/emailCheck/hooks";
 
 const emailVerificationScheme = z.object({
   email: z.string().email("올바른 이메일을 입력해주세요."),
@@ -24,13 +25,13 @@ const emailVerificationScheme = z.object({
 });
 
 interface EmailFormProps {
-  updateForm: (insertedFormData: object) => void;
+  updateForm: (insertedFormData: { email: string; emailToken: string }) => void;
 }
 
 const EmailForm = ({ updateForm }: EmailFormProps) => {
   const time = new Date();
-  time.setSeconds(time.getSeconds() + 180);
-  const { minutes, seconds, isRunning, start } = useTimer({
+  time.setSeconds(time.getSeconds() + 5);
+  const { minutes, seconds, isRunning, start, restart } = useTimer({
     expiryTimestamp: time,
     autoStart: false,
   });
@@ -39,9 +40,30 @@ const EmailForm = ({ updateForm }: EmailFormProps) => {
   const {
     mutate: sendAuthenticationNumber,
     isSuccess: isSendSuccess,
-    isPending,
-  } = useSendAuthentication({
-    onSuccess: () => start(),
+    isIdle,
+  } = useSendAuthentication();
+
+  const { mutate: checkIsMailDuplicated } = useCheckEmailDuplication({
+    onSuccess: () => {
+      {
+        start();
+        sendAuthenticationNumber({
+          email: userEmail,
+          type: 0,
+        });
+      }
+    },
+    onError: ({ response }) => {
+      if (response?.status === 409) {
+        setError("email", { message: "이미 존재하는 이메일입니다." });
+        return;
+      }
+
+      if (response?.status === 400) {
+        customToast("잘못된 이메일 정보가 전달됐습니다.");
+        return;
+      }
+    },
   });
 
   const { mutate: checkAuthenticationNumber } = useCheckAuthentication({
@@ -63,7 +85,7 @@ const EmailForm = ({ updateForm }: EmailFormProps) => {
     resolver: zodResolver(emailVerificationScheme),
   });
 
-  const { formState, getFieldState, register, getValues } = methods;
+  const { formState, getFieldState, register, getValues, setError } = methods;
   const { isValid, isValidating } = formState;
 
   const onClickNextButton = () => {
@@ -74,15 +96,18 @@ const EmailForm = ({ updateForm }: EmailFormProps) => {
     });
   };
 
-  const onClickSendAuthenticationNumber = () => {
-    if (isSendSuccess || isPending) {
-      return;
-    }
-
-    setUserEmail(getValues("email"));
+  const handleClickResendButton = () => {
     sendAuthenticationNumber({
-      email: getValues("email"),
+      email: userEmail,
       type: 0,
+    });
+    restart(time);
+  };
+
+  const onClickSendAuthenticationNumber = () => {
+    setUserEmail(getValues("email"));
+    checkIsMailDuplicated({
+      email: getValues("email"),
     });
   };
 
@@ -104,15 +129,21 @@ const EmailForm = ({ updateForm }: EmailFormProps) => {
               formState={formState}
               register={register}
             />
-            <InputButton
-              disabled={
-                (!isSendSuccess && isEmailFormatInvalid) ||
-                (isSendSuccess && isRunning)
-              }
-              onClick={onClickSendAuthenticationNumber}
-            >
-              {isSendSuccess ? "재발송" : "인증받기"}
-            </InputButton>
+            {!isIdle ? (
+              <InputButton
+                disabled={isRunning}
+                onClick={handleClickResendButton}
+              >
+                재발송
+              </InputButton>
+            ) : (
+              <InputButton
+                disabled={!isSendSuccess && isEmailFormatInvalid}
+                onClick={onClickSendAuthenticationNumber}
+              >
+                인증받기
+              </InputButton>
+            )}
           </InputWrapper>
           <InputWrapper margin="0 0 47px 0">
             <Label htmlFor="token">인증번호</Label>
@@ -124,7 +155,7 @@ const EmailForm = ({ updateForm }: EmailFormProps) => {
               formState={formState}
               register={register}
             />
-            <InputText isShown={isSendSuccess}>{`${String(minutes).padStart(
+            <InputText isShown={!isIdle}>{`${String(minutes).padStart(
               2,
               "0"
             )}분 ${String(seconds).padStart(2, "0")}초`}</InputText>
